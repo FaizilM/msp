@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 import { history } from '../_helpers';
 import { alertActions } from '../_actions';
-import { PrivateRoute } from '../_components';
+import { PrivateRoute} from '../_components';
+import { AdminDashboard } from '../AdminDashboard';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
@@ -16,13 +17,18 @@ class App extends React.Component {
         const { dispatch } = this.props;
         history.listen((location, action) => {
             // clear alert on location change
+            console.log("APP constrtauctor ");
+
+
             dispatch(alertActions.clear());
         });
     }
 
     render() {
         const { alert } = this.props;
+
         return (
+
             <div className="jumbotron">
                 <div className="container">
                     <div className="col-sm-8 col-sm-offset-2">
@@ -31,7 +37,8 @@ class App extends React.Component {
                         }
                         <Router history={history}>
                             <div>
-                                <PrivateRoute exact path="/" component={HomePage} />
+                                <PrivateRoute exact path="/" component={AdminDashboard} />
+                                <Route path="/customer" component={HomePage} />
                                 <Route path="/login" component={LoginPage} />
                                 <Route path="/register" component={RegisterPage} />
                             </div>
@@ -45,10 +52,13 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
     const { alert } = state;
+    const {authentication} = state.authentication
+
     return {
-        alert
+        alert,
+        authentication
     };
 }
 
 const connectedApp = connect(mapStateToProps)(App);
-export { connectedApp as App }; 
+export { connectedApp as App };

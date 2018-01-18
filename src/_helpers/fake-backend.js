@@ -1,8 +1,23 @@
+
+
 // array in local storage for registered users
-let users = JSON.parse(localStorage.getItem('users')) || [];
-    
+// let users = JSON.parse(localStorage.getItem('users')) || [];
+
+//Static users
+let users = [
+  {firstName: "MSP", lastName: "admin",
+   username: "admin", password: "password",
+    id: 1, role:"ROLE_ADMIN"},
+    {firstName: "MSP", lastName: "customer",
+     username: "customer", password: "password",
+      id: 2, role:"ROLE_USER"}
+]
+
+
+
 export function configureFakeBackend() {
     let realFetch = window.fetch;
+
     window.fetch = function (url, opts) {
         return new Promise((resolve, reject) => {
             // wrap in timeout to simulate server api call
@@ -10,6 +25,7 @@ export function configureFakeBackend() {
 
                 // authenticate
                 if (url.endsWith('/users/authenticate') && opts.method === 'POST') {
+
                     // get parameters from post request
                     let params = JSON.parse(opts.body);
 
@@ -26,7 +42,8 @@ export function configureFakeBackend() {
                             username: user.username,
                             firstName: user.firstName,
                             lastName: user.lastName,
-                            token: 'fake-jwt-token'
+                            token: 'fake-jwt-token',
+                            role:user.role
                         };
                         resolve({ ok: true, json: () => responseJson });
                     } else {

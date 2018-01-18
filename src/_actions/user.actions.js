@@ -17,18 +17,31 @@ function login(username, password) {
 
         userService.login(username, password)
             .then(
-                user => { 
+                user => {
+                    console.log("NAVIGATE INTO HOME PAGE ON SUCCESS " + user)
+
                     dispatch(success(user));
-                    history.push('/');
+
+                    if(user.role === "ROLE_USER") {
+                      history.push('/customer');
+                    } else {
+                      history.push('/');
+                    }
+
+
                 },
                 error => {
+                    console.log("ERROR" + error);
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
                 }
             );
     };
 
-    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
+    function request(user) {
+      console.log("Dispatch Request" + JSON.stringify(user))
+      return { type: userConstants.LOGIN_REQUEST, user }
+    }
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
@@ -44,7 +57,7 @@ function register(user) {
 
         userService.register(user)
             .then(
-                user => { 
+                user => {
                     dispatch(success());
                     history.push('/login');
                     dispatch(alertActions.success('Registration successful'));
@@ -84,7 +97,7 @@ function _delete(id) {
 
         userService.delete(id)
             .then(
-                user => { 
+                user => {
                     dispatch(success(id));
                 },
                 error => {
