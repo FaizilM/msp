@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { userActions } from '../_actions';
 
+import { Header } from '../_components'
+
 class HomePage extends React.Component {
     componentDidMount() {
         this.props.dispatch(userActions.getAll());
@@ -16,13 +18,11 @@ class HomePage extends React.Component {
     render() {
 
         const { user, users } = this.props;
+
         return (
-            <div className="col-md-6 col-md-offset-3">
-                <h1>Hi {user.firstName}!</h1>
-                <p>You're logged in as {user.firstName}{user.lastName}!!</p>
-                <p>
-                    <Link to="/login">Logout</Link>
-                </p>
+            <div>
+                <Header user={ user } />
+
             </div>
         );
     }
