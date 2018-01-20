@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 import { userActions } from '../_actions';
 
-import { Header } from '../_components'
+import { Header, Dashboard } from '../_components'
+
 
 class HomePage extends React.Component {
     componentDidMount() {
@@ -22,7 +23,7 @@ class HomePage extends React.Component {
         return (
             <div>
                 <Header user={ user } />
-
+                <Dashboard />
             </div>
         );
     }
