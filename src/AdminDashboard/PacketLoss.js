@@ -69,7 +69,7 @@ class PacketLoss extends Component {
         "enabled": true
       }
     };
-  
+
     return (
 
         <div name="testing1" className="element1" style={{width:'100%', height:'40%'}} >
