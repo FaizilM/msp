@@ -3,7 +3,6 @@ import './App.css';
 
 import { Link, Events } from 'react-scroll';
 
-
 class Sites extends Component {
     constructor(props) {
         super(props);
