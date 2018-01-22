@@ -14,8 +14,9 @@ class Header extends React.Component {
     </div>
 
     <ul className="nav navbar-nav navbar-right">
-      <p className="navbar-text">Signed in as {this.props.user.lastName}</p>
-      <li><Link to="/login">Logout</Link></li>
+      <p className="navbar-text">Signed in as<b> {this.props.user.lastName} </b></p>
+        <li><Link to="/login"><span className="glyphicon glyphicon-log-in"></span> Logout</Link></li>
+      <li></li>
       <p>
 
       </p>
