@@ -21,9 +21,12 @@ class AdminDashboard extends React.Component {
             <div>
             <Header user = { user } />
             <Container>
+              <Row className="well">
+                <h2>Dashboard</h2>
 
+                </Row>
 
-        <Row>
+        <Row className="well">
         <Col xs="6" md="6">
               <Inventory />
         </Col>
@@ -31,7 +34,7 @@ class AdminDashboard extends React.Component {
           <Sites />
           </Col>
 </Row>
-<Row>
+<Row className="well">
           <Col xs="6" md="6">
          <LinkCapacity />
           </Col>
