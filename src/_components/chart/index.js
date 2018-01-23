@@ -25,7 +25,7 @@ let config = {
       "title": "Packet Loss"
     }],
     "graphs": [{
-      "balloonText": "[[category]]: <b>[[value]]</b>",
+      "balloonText": "[[category]]: <b>[[value]]%</b>",
       "fillColorsField": "color",
       "fillAlphas": 1,
       "lineAlpha": 0.1,
@@ -42,7 +42,8 @@ let config = {
     "categoryField": "packet_loss",
     "categoryAxis": {
       "gridPosition": "start",
-      "labelRotation": 90
+      "labelRotation": 90,
+      "labelText":"[[value]]%"
     },
     "export": {
       "enabled": true
@@ -57,24 +58,27 @@ let config = {
       "text": "My Chart Title"
     }],
     "dataProvider": [{
-      "packet_loss": "<1%",
+      "packet_loss": 1,
       "percentage": 20,
       "color": "#FF0F00"
     }, {
-      "packet_loss": "<2.5%",
+      "packet_loss": 2.5,
       "percentage": 40,
       "color": "#0D8ECF"
     }, {
-      "packet_loss": ">2.5%",
+      "packet_loss": 2.6,
       "percentage": 80,
       "color": "#04D215"
     }],
     "valueAxes": [{
       "position": "left",
-      "title": "Packet Loss"
+      "title": "Packet Loss",
+      "labelFunction": function(value){
+        return value +"%";
+      }
     }],
     "graphs": [{
-      "balloonText": "[[category]]: <b>[[value]]</b>",
+      "balloonText": "[[category]]: <b>[[value]]%</b>",
       "fillColorsField": "color",
       "fillAlphas": 1,
       "lineAlpha": 0.1,
@@ -90,7 +94,15 @@ let config = {
     "rotate": true,
     "categoryField": "packet_loss",
     "categoryAxis": {
-      "gridPosition": "start"
+      "gridPosition": "start",
+      "labelFunction": function(value){
+        if(value == 1 || value == 2.5) {
+          return "<" + value +"%";
+        } else {
+          return ">" + 2.5 + "%";
+        }
+        
+      }
     },
     "export": {
       "enabled": true
