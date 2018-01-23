@@ -93,8 +93,8 @@ class LinkCapacity extends React.Component {
 
         return (
 
-            <div style={{ width: '70%', height: '100%', overflow:'auto'}}>
-                <ReactEchartsCore 
+            <div>
+                <ReactEchartsCore
                     echarts={echarts}
                     option={option}
                     notMerge={true}

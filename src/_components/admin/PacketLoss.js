@@ -3,7 +3,6 @@ import './App.css';
 import AmCharts from "@amcharts/amcharts3-react";
 import '../chart/chart';
 import config from '../chart/index';
-import Chart from '../chart/chart';
 import metricsDatas from '../../metricsData.json'
 
 let packetLossData = () => {
@@ -13,13 +12,13 @@ let packetLossData = () => {
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
-      let links = sites[site].links;  
+      let links = sites[site].links;
       for (let link = 0; link < links.length; link++) {
         let linkLosses = links[link];
         for (let [linkKey, linkValue] of Object.entries(linkLosses)) {
           packetLossSite += linkValue.packet_loss;
         }
-        
+
         if (packetLossSite <= 1) {
           loss[0] += 1;
         } else if (packetLossSite <= 2.5) {
@@ -40,21 +39,8 @@ let packetLossData = () => {
 return loss;
 }
 
-let removeAmchartTitle = () => {
-  //console.log("found");
-  var links = document.getElementsByTagName("a[href='http://www.amcharts.com']");
-  console.log(links);
-  
-for (var l = 0; l < links.length; l++){
-  if (links[l].href == "http://www.amcharts.com") {
-    console.log("found");
-    
-    links.remove(l);
-  }
-}
-}
-class PacketLoss extends Component {
 
+class PacketLoss extends Component {
 
   render() {
     const configValue = config.bar;
@@ -67,11 +53,16 @@ class PacketLoss extends Component {
       }
 
     }
-    
 
     return (
-          <Chart config={configValue} onLoad = {removeAmchartTitle()}/>
-         );
+
+      <div name="testing1" className="element1" >
+        <div>
+          <AmCharts.React options={configValue} style={{ height: "350px" }} />
+        </div>
+      </div>
+
+    );
   }
 }
 

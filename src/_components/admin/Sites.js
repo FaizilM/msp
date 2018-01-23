@@ -13,18 +13,18 @@ class Sites extends Component {
         Events.scrollEvent.register('begin', function () {
           console.log("begin", arguments);
         });
-    
+
         Events.scrollEvent.register('end', function () {
           console.log("end", arguments);
         });
-    
+
       }
-    
+
       componentWillUnmount() {
         Events.scrollEvent.remove('begin');
         Events.scrollEvent.remove('end');
       }
-    
+
 
     handleClick() {
         console.log("Event tiggered");
@@ -34,7 +34,7 @@ class Sites extends Component {
     render() {
 
         return (
-            <div style={{width:'30%',height:'2%', float: 'right',display: 'flex', justifyContent:'space-around',marginRight: '2%' }}>
+            <div style={{ display: 'flex', justifyContent:'space-around'}}>
                 <div style={{ float: 'left'}}>
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill="#32CD32" />
