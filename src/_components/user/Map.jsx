@@ -25,6 +25,7 @@ class Map extends React.Component {
           "text": "Your Sites"
           }, ],
         "dataProvider": {
+        "linkToObject": "paris",
         "map": "worldLow",
 
     "lines": [ {
@@ -38,14 +39,23 @@ class Map extends React.Component {
     {
       "latitudes": [11.0168,23 ],
       "longitudes": [ 76.9558, -82 ]
+    },
+    {
+      "latitudes": [11.0168,34.3 ],
+      "longitudes": [ 76.9558,-118.15 ]
     }
     ],
     "images": [ {
+      "id" : "paris",
       "label": "Paris",
       "svgPath": targetSVG,
       "title": "Paris",
       "latitude": 48.8567,
-      "longitude": 2.3510
+      "longitude": 2.3510,
+      "scale": 1.5,
+        "zoomLevel": 2.74,
+        "zoomLongitude": -20.1341,
+        "zoomLatitude": 49.1712,
     }, {
     "label": "Toronto",
       "svgPath": targetSVG,

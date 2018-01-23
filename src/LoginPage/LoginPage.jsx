@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { userActions } from '../_actions';
+import '../assets/css/main.css';
+import '../assets/css/util.css';
+
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -41,44 +44,61 @@ class LoginPage extends React.Component {
     render() {
         const { loggingIn } = this.props;
 
+        const { alert } = this.props;
         const { username, password, submitted } = this.state;
         return (
+        <div className="limiter">
 
+           <div className="container-login100">
 
-<div className="container">
-    <div className="row">
-        <div className="col-md-4 col-md-offset-4">
-            <div className="login-panel panel panel-default" style={{marginTop : '25%'}}>
-                <div className="panel-heading">
-                    <h3 className="panel-title">Please Sign In</h3>
-                </div>
-                <div className="panel-body">
-                    <form name="form" onSubmit={this.handleSubmit}>
-                        <fieldset>
-                            <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-                    <label htmlFor="username">Username</label>
-                    <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
-                    {submitted && !username &&
-                        <div className="help-block">Username is required</div>
-                    }
-                </div>
-                           <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
-                    {submitted && !password &&
-                        <div className="help-block">Password is required</div>
-                    }
-                </div>
+              <div className="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+              {alert.message &&
+                  <div className={`alert ${alert.type}`} col-sm-4 col-sm-offset-4>{alert.message}</div>
+              }
+                 <form className="login100-form validate-form flex-sb flex-w" onSubmit={this.handleSubmit}>
+                    <span className="login100-form-title p-b-32">
+                    Account Login
+                    </span>
+                    <span className="txt1 p-b-11">
+                    Username
+                    </span>
+                    <div className="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
+                       <input type="text" className="input100" name="username" value={username} onChange={this.handleChange} />
+                       {submitted && !username &&
+                       <div className="alert-danger">Username is required</div>
+                       }
+                       <span className="focus-input100"></span>
+                    </div>
+                    <span className="txt1 p-b-11">
+                    Password
+                    </span>
+                    <div className="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+                       <span className="btn-show-pass">
+                       <i className="fa fa-eye"></i>
+                       </span>
+                       <input type="password" className="input100" name="password" value={password} onChange={this.handleChange} />
+                       {submitted && !password &&
+                       <div className="alert-danger">Password is required</div>
+                       }
+                       <span className="focus-input100"></span>
+                    </div>
+                    <div className="flex-sb-m w-full p-b-48">
+                       <div className="contact100-form-checkbox">
 
-
-                    <button className="btn btn-lg btn-success btn-block">Login</button>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
+                       </div>
+                       <div>
+                       </div>
+                    </div>
+                    <div className="container-login100-form-btn">
+                       <button className="login100-form-btn">
+                       Login
+                       </button>
+                    </div>
+                 </form>
+              </div>
+           </div>
         </div>
-    </div>
-</div>
+
         );
     }
 }
@@ -87,9 +107,10 @@ class LoginPage extends React.Component {
 
 function mapStateToProps(state) {
 
-
+    const { alert } = state;
     const { loggingIn } = state.authentication;
     return {
+        alert,
         loggingIn
     };
 }

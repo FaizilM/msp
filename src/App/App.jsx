@@ -25,13 +25,11 @@ class App extends React.Component {
     }
 
     render() {
-        const { alert } = this.props;
+          const { alert } = this.props;
 
         return (
                   <div>
-                        {alert.message &&
-                            <div className={`alert ${alert.type}`} col-sm-4 col-sm-offset-4>{alert.message}</div>
-                        }
+
                         <Router history={history}>
                             <div>
                                 <PrivateRoute exact path="/" component={AdminDashboard} />

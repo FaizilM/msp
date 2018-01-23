@@ -29,16 +29,18 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "@amcharts/amcharts3-react": "^3.0.0",
     "babel-core": "^6.21.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-3": "^6.24.1",
     "html-webpack-plugin": "^2.26.0",
+    "image-webpack-loader": "^3.4.2",
     "path": "^0.12.7",
+    "react-scripts": "1.0.14",
+    "react-svg-loader": "^2.1.0",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.8.2",
-    "@amcharts/amcharts3-react": "^3.0.0",
-    "react-scripts": "1.0.14"
+    "webpack-dev-server": "^2.8.2"
   }
 }
