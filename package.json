@@ -24,6 +24,7 @@
     "react-router-dom": "^4.1.2",
     "react-scroll": "^1.7.6",
     "react-table": "^6.7.6",
+    "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"

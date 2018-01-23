@@ -7,8 +7,10 @@ import Sites from '../_components/admin/Sites';
 import PacketLoss from '../_components/admin/PacketLoss';
 import LinkCapacity from '../_components/admin/LinkCapacity';
 import { userActions } from '../_actions';
-import { Grid, Row, Col, Input, Button } from 'react-bootstrap';
+
 import {Header} from '../_components/Header';
+import { Container, Row, Col } from 'reactstrap';
+
 
 class AdminDashboard extends React.Component {
 
@@ -18,21 +20,31 @@ class AdminDashboard extends React.Component {
         return (
             <div>
             <Header user = { user } />
+            <Container>
 
-                <h1>Dashboard</h1>
-                <div style={{ width: '100%', height: '60%', marginRight: '5%', marginTop: '3%' }}>
-                    <div style={{ width: '45%', height: '100%', display: 'inline-block', float: 'left' }}>
-                        <Inventory />
-                    </div>
-                    <Sites />
-                </div>
-                <LinkCapacity />
-                <div>
-                    <PacketLoss />
-                </div>
-                <p>
-                    <Link to="/login">Logout</Link>
-                </p>
+
+        <Row>
+        <Col xs="6" md="6">
+              <Inventory />
+        </Col>
+          <Col xs="6" md="6">
+          <Sites />
+          </Col>
+</Row>
+<Row>
+          <Col xs="6" md="6">
+         <LinkCapacity />
+          </Col>
+
+
+          <Col xs="6" md="6">
+           <PacketLoss />
+          </Col>
+
+          </Row>
+
+      </Container>
+
             </div>
         );
     }

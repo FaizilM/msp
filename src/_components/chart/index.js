@@ -90,8 +90,7 @@ let config = {
     "rotate": true,
     "categoryField": "packet_loss",
     "categoryAxis": {
-      "gridPosition": "start",
-      "labelRotation": 90,
+      "gridPosition": "start"
     },
     "export": {
       "enabled": true
