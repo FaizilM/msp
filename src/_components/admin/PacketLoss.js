@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import AmCharts from "@amcharts/amcharts3-react";
-import '../chart/chart';
 import config from '../chart/index';
 import Chart from '../chart/chart';
-import metricsDatas from '../../metricsData.json'
+import metricsDatas from '../../metricsData.json';
 
 let packetLossData = () => {
   let loss = [0, 0, 0];
@@ -40,24 +39,11 @@ let packetLossData = () => {
 return loss;
 }
 
-let removeAmchartTitle = () => {
-  //console.log("found");
-  var links = document.getElementsByTagName("a[href='http://www.amcharts.com']");
-  console.log(links);
-  
-for (var l = 0; l < links.length; l++){
-  if (links[l].href == "http://www.amcharts.com") {
-    console.log("found");
-    
-    links.remove(l);
-  }
-}
-}
 class PacketLoss extends Component {
 
 
-  render() {
-    const configValue = config.bar;
+  render() {  
+    const configValue = config.bar3D;
     const packetLoss = packetLossData();
     for (let [packetLossKey, packetLossValue] of Object.entries(configValue)) {
       if (packetLossKey == "dataProvider") {
@@ -67,10 +53,9 @@ class PacketLoss extends Component {
       }
 
     }
-    
-
+   
     return (
-          <Chart config={configValue} onLoad = {removeAmchartTitle()}/>
+          <Chart config={configValue}/>
          );
   }
 }
