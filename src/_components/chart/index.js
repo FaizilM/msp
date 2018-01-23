@@ -1,54 +1,53 @@
 import React, { Component } from 'react';
 let config = {
   bar: {
+    "theme": "light",
     "type": "serial",
-    "depth3D": 20,
-    "angle": 60,
-    "legend": {
-      "horizontalGap": 1000,
-      "useGraphSettings": true,
-      "markerSize": 10
-    },
+	"startDuration": 2,
+  "titles": [{
+    "text": "My Chart Title"
+  }],
     "dataProvider": [{
       "packet_loss": "<1%",
       "percentage": 20,
-      "color": "red"
+      "color": "#FF0F00"
     }, {
       "packet_loss": "<2.5%",
       "percentage": 40,
-      "color": "blue"
+      "color": "#0D8ECF"
     }, {
       "packet_loss": ">2.5%",
       "percentage": 80,
-      "color": "green"
+      "color": "#04D215"
     }],
     "valueAxes": [{
-      "stackType": "regular",
-      // "axisAlpha": 0,
-      // "gridAlpha": 0
+        "position": "left",
+        "title": "Packet Loss"
     }],
     "graphs": [{
-      "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
-      "fillAlphas": 0.7,
-      "labelText": "[[value]]",
-      "lineAlpha": 0.3,
-      "title": "PacketLoss",
-      "type": "column",
-      "lineColorField": "color",
-      "fillColorsField": "color",
-      "valueField": "percentage"
+        "balloonText": "[[category]]: <b>[[value]]</b>",
+        "fillColorsField": "color",
+        "fillAlphas": 1,
+        "lineAlpha": 0.1,
+        "type": "column",
+        "valueField": "percentage"
     }],
-    "plotAreaFillAlphas": 0.3,
+    "depth3D": 20,
+	"angle": 30,
+    "chartCursor": {
+        "categoryBalloonEnabled": false,
+        "cursorAlpha": 0,
+        "zoomable": false
+    },
     "categoryField": "packet_loss",
     "categoryAxis": {
-      "gridPosition": "start",
-      "axisAlpha": '20px',
-      "gridAlpha": '20px',
-      "position": "left"
+        "gridPosition": "start",
+        "labelRotation": 90
     },
     "export": {
-      "enabled": true
-    }
+    	"enabled": true
+     }
+
   }
 };
 

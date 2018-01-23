@@ -12,13 +12,13 @@ let packetLossData = () => {
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
-      let links = sites[site].links;  
+      let links = sites[site].links;
       for (let link = 0; link < links.length; link++) {
         let linkLosses = links[link];
         for (let [linkKey, linkValue] of Object.entries(linkLosses)) {
           packetLossSite += linkValue.packet_loss;
         }
-        
+
         if (packetLossSite <= 1) {
           loss[0] += 1;
         } else if (packetLossSite <= 2.5) {
