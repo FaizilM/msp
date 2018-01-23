@@ -1,0 +1,350 @@
+[
+    {
+        "Customer": "ABC",
+        "sites": [
+            {
+                "id": 1,
+                "name": "site_ABC",
+                "app_route_policy": 1,
+                "app_routes": [
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "live_app_routes": [
+                    2,
+                    5
+                ],
+                "app_route_change": 0,
+                "bandwidth": 10.7,
+                "links": [
+                    {
+                        "broadband": {
+                            "utilization": 20,
+                            "latency": 40,
+                            "jitter": 20,
+                            "packet_loss": 0
+                        },
+                        "mpls": {
+                            "utilization": 20,
+                            "latency": 4,
+                            "jitter": 5,
+                            "packet_loss": 0.2
+                        },
+                        "t1_lines": {
+                            "utilization": 20,
+                            "latency": 0,
+                            "ljitter": 3,
+                            "packet_loss": 0.1
+                        },
+                        "4G": {
+                            "utilization": 20,
+                            "latency": 2,
+                            "jitter": 4,
+                            "packet_loss": 0.2
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "video": 29,
+                        "voice": 27,
+                        "class3": 3,
+                        "class4": 34
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Customer": "DEF",
+         "sites": [
+            {
+                "id": 1,
+                "name": "site_DEF",
+                "app_route_policy": 1,
+                "app_routes": [
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "live_app_routes": [
+                    2,
+                    5
+                ],
+                "app_route_change": 0,
+                "bandwidth": 10.7,
+                "links": [
+                    {
+                        "broadband": {
+                            "utilization": 20,
+                            "latency": 40,
+                            "jitter": 20,
+                            "packet_loss": 0
+                        },
+                        "mpls": {
+                            "utilization": 20,
+                            "latency": 4,
+                            "jitter": 5,
+                            "packet_loss": 0.2
+                        },
+                        "t1_lines": {
+                            "utilization": 20,
+                            "latency": 0,
+                            "ljitter": 3,
+                            "packet_loss": 0.7
+                        },
+                        "4G": {
+                            "utilization": 20,
+                            "latency": 2,
+                            "jitter": 4,
+                            "packet_loss": 1.0
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "video": 29,
+                        "voice": 27,
+                        "class3": 3,
+                        "class4": 34
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Customer": "GHI",
+        "sites": [
+            {
+                "id": 1,
+                "name": "site_GHI",
+                "app_route_policy": 1,
+                "app_routes": [
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "live_app_routes": [
+                    2,
+                    5
+                ],
+                "app_route_change": 0,
+                "bandwidth": 10.7,
+                "links": [
+                    {
+                        "broadband": {
+                            "utilization": 20,
+                            "latency": 40,
+                            "jitter": 20,
+                            "packet_loss": 0.1
+                        },
+                        "mpls": {
+                            "utilization": 20,
+                            "latency": 4,
+                            "jitter": 5,
+                            "packet_loss": 0.2
+                        },
+                        "t1_lines": {
+                            "utilization": 20,
+                            "latency": 0,
+                            "ljitter": 3,
+                            "packet_loss": 0.7
+                        },
+                        "4G": {
+                            "utilization": 20,
+                            "latency": 2,
+                            "jitter": 4,
+                            "packet_loss": 1.0
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "video": 29,
+                        "voice": 27,
+                        "class3": 3,
+                        "class4": 34
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Customer": "JKL",
+        "sites": [
+            {
+                "id": 1,
+                "name": "site_JKL",
+                "app_route_policy": 1,
+                "app_routes": [
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "live_app_routes": [
+                    2,
+                    5
+                ],
+                "app_route_change": 0,
+                "bandwidth": 10.7,
+                "links": [
+                    {
+                        "broadband": {
+                            "utilization": 20,
+                            "latency": 40,
+                            "jitter": 20,
+                            "packet_loss": 3.9
+                        },
+                        "mpls": {
+                            "utilization": 20,
+                            "latency": 4,
+                            "jitter": 5,
+                            "packet_loss": 1.9
+                        },
+                        "t1_lines": {
+                            "utilization": 20,
+                            "latency": 0,
+                            "ljitter": 3,
+                            "packet_loss": 2.5
+                        },
+                        "4G": {
+                            "utilization": 20,
+                            "latency": 2,
+                            "jitter": 4,
+                            "packet_loss": 0.2
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "video": 29,
+                        "voice": 27,
+                        "class3": 3,
+                        "class4": 34
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Customer": "MNO",
+         "sites": [
+            {
+                "id": 1,
+                "name": "site_MNO",
+                "app_route_policy": 1,
+                "app_routes": [
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "live_app_routes": [
+                    2,
+                    5
+                ],
+                "app_route_change": 0,
+                "bandwidth": 10.7,
+                "links": [
+                    {
+                        "broadband": {
+                            "utilization": 20,
+                            "latency": 40,
+                            "jitter": 20,
+                            "packet_loss": 3.9
+                        },
+                        "mpls": {
+                            "utilization": 20,
+                            "latency": 4,
+                            "jitter": 5,
+                            "packet_loss": 1.9
+                        },
+                        "t1_lines": {
+                            "utilization": 20,
+                            "latency": 0,
+                            "ljitter": 3,
+                            "packet_loss": 2.5
+                        },
+                        "4G": {
+                            "utilization": 20,
+                            "latency": 2,
+                            "jitter": 4,
+                            "packet_loss": 0.2
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "video": 29,
+                        "voice": 27,
+                        "class3": 3,
+                        "class4": 34
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Customer": "PQR",
+        "sites": [
+            {
+                "id": 1,
+                "name": "site_PQR",
+                "app_route_policy": 1,
+                "app_routes": [
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "live_app_routes": [
+                    2,
+                    5
+                ],
+                "app_route_change": 0,
+                "bandwidth": 10.7,
+                "links": [
+                    {
+                        "broadband": {
+                            "utilization": 20,
+                            "latency": 40,
+                            "jitter": 20,
+                            "packet_loss": 3.9
+                        },
+                        "mpls": {
+                            "utilization": 20,
+                            "latency": 4,
+                            "jitter": 5,
+                            "packet_loss": 1.9
+                        },
+                        "t1_lines": {
+                            "utilization": 20,
+                            "latency": 0,
+                            "ljitter": 3,
+                            "packet_loss": 2.5
+                        },
+                        "4G": {
+                            "utilization": 20,
+                            "latency": 2,
+                            "jitter": 4,
+                            "packet_loss": 0.2
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "video": 29,
+                        "voice": 27,
+                        "class3": 3,
+                        "class4": 34
+                    }
+                ]
+            }
+        ]
+    }
+]
