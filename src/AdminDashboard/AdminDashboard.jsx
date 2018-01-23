@@ -18,6 +18,9 @@ class AdminDashboard extends React.Component {
         return (
             <div>
             <Header user = { user } />
+
+
+
                 <Grid style={{border:'1px solid blue',  gridColumnGap: '50px'}} >
                 <Row>
                      <Col style={{border:'1px solid red', gridColumnGap: '50px'}} lg={1} >
@@ -29,13 +32,13 @@ class AdminDashboard extends React.Component {
                     <Col style={{border:'1px solid yellow'}} lg={1}>
                     "third"
                     </Col>
-                
+
                     <Col style={{border:'1px solid orange'}}
                         lg={1}>
                         "four"
                     </Col>
                     </Row>
-                    
+
                 </Grid>
                 <h1>Hi {user.firstName} - {user.lastName}!</h1>
                 <div style={{ width: '100%', height: '60%', marginRight: '5%', marginTop: '3%' }}>
