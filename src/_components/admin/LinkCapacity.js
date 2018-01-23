@@ -11,14 +11,33 @@ import Chart from '../chart/chart';
 import metricsDatas from '../../metricsData.json';
 class LinkCapacity extends React.Component {
 
+
+    constructor(props) {
+        super(props);
+    
+    
+        
+        this.state = {
+            test : props
+      // color: props.initialColor
+          // color: props.initialColor
+        };
+    
+    
+        console.log("Link capacity state", this.state)
+        
+      }
+
     render() {
 
-        let option = config.bar;
+        let configValue = config.bar;
+        
+        
         return (
 
-            <div style={{ width: '70%', height: '100%', overflow:'auto'}}>
-        
-                 <AmCharts.React options={option} style={{ width: "50%", height: "350px" }}/>
+            <div>
+
+                <Chart config={configValue} />
             </div>
 
 

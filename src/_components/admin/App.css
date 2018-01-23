@@ -19,7 +19,5 @@ table {
 tr:nth-child(odd) {
   background-color: #00bfff;
 }
-a {
-  visibility: hidden;
-}
+
 

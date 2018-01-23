@@ -8,9 +8,9 @@ class PacketLoss extends Component {
     let config = [];
     return (
 
-        <div name="testing1" className="element1" style={{width:'100%', height:'40%'}} >
-          <div style={{ width: "50%", height: "100%", display: "inline-block" }}>
-            <AmCharts.React options={this.props.config} style={{ width: "50%", height: "350px" }}/>
+        <div >
+          <div >
+            <AmCharts.React options={this.props.config} style={{ width: "100%", height: "350px" }}/>
           </div>
         </div>
 

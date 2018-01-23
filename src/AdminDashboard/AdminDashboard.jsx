@@ -11,12 +11,18 @@ import { userActions } from '../_actions';
 import {Header} from '../_components/Header';
 import { Container, Row, Col } from 'reactstrap';
 
+import config from '../_components/chart/index';
 
 class AdminDashboard extends React.Component {
 
     render() {
 
         const { user, users } = this.props;
+
+        const configValue = config.bar;
+        console.log("ADMIN DASHBOARD", configValue)
+
+
         return (
             <div>
             <Header user = { user } />
@@ -36,12 +42,12 @@ class AdminDashboard extends React.Component {
 </Row>
 <Row className="well">
           <Col xs="6" md="6">
-         <LinkCapacity />
+         <LinkCapacity config={configValue}/>
           </Col>
 
 
           <Col xs="6" md="6">
-           <PacketLoss />
+           <PacketLoss config={configValue}/>
           </Col>
 
           </Row>
