@@ -28,14 +28,14 @@ class Inventory extends Component {
       tableData.push(<tr key={k}><td>{k}</td><td>{value}</td></tr>);
     }
     return (
-      <div>
-        <table style={{ border: '1px solid', position: 'relative', height: '50%', width: '70%', marginLeft: '5%', marginTop: '1%' }}>
-          <tbody>
-            {tableData}
-          </tbody>
-        </table>
-      </div>
+      <div className="table-responsive">
+ <table className="table">
 
+   <tbody>
+     {tableData}
+   </tbody>
+ </table>
+ </div>
     );
   }
 }
