@@ -4,11 +4,9 @@ import metricsData from '../../metricsData.json';
 import { indexOf } from 'lodash';
 import '../../assets/css/App.css';
 
-
 let linkCapacityData = () => {
     let capacity = [];
     let totalSite = [];
-    let sitePerLink = [0, 0, 0, 0];
     let key = [];
     let i = 0;
     for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {

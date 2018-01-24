@@ -5,19 +5,9 @@
             {
                 "id": 1,
                 "name": "site_ABC",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    3,
-                    4,
-                    5
-                ],
-                "app_route_change": 0,
+                "app_route_policy": false,
+                "app_route_change": true,
+                "no_app_route":false,
                 "bandwidth": 10.7,
                 "links": [
                     {
@@ -64,20 +54,9 @@
             {
                 "id": 1,
                 "name": "site_DEF",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "app_route_change": 0,
+                "app_route_policy": true,
+                "app_route_change": false,
+                "no_app_route":false,
                 "bandwidth": 10.7,
                 "links": [
                     {
@@ -123,19 +102,9 @@
         "sites": [
             {
                 "id": 1,
-                "name": "site_GHI",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    2,
-                    5
-                ],
-                "app_route_change": 2,
+                "app_route_policy": true,
+                "app_route_change": false,
+                "no_app_route":false,
                 "bandwidth": 10.7,
                 "links": [
                     {
@@ -182,19 +151,9 @@
             {
                 "id": 1,
                 "name": "site_JKL",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    2,
-                    3,
-                    4,
-                    5                ],
-                "app_route_change": 0,
+                "app_route_policy": false,
+                "app_route_change": true,
+                "no_app_route":false,
                 "bandwidth": 10.7,
                 "links": [
                     {
@@ -241,20 +200,9 @@
             {
                 "id": 1,
                 "name": "site_MNO",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "app_route_change": 1,
+                "app_route_policy": false,
+                "app_route_change": false,
+                "no_app_route":true,
                 "bandwidth": 10.7,
                 "links": [
                     {
@@ -301,20 +249,9 @@
             {
                 "id": 1,
                 "name": "site_PQR",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "app_route_change": 0,
+                "app_route_policy": true,
+                "app_route_change": false,
+                "no_app_route":false,
                 "bandwidth": 10.7,
                 "links": [
                     {

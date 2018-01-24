@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
 import '../../assets/css/App.css';
-
+import metricsDatas from '../../metricsData.json';
 import { Link, Events } from 'react-scroll';
 
+let siteAvailabilityData = () => {
+    let totalSite = 0;
+    let availability = [0, 0, 0];
+    for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
+      totalSite += metricsDataValue.sites.length;
+      let sites = metricsDataValue.sites;
+      for (let site = 0; site < sites.length; site++) {
+        if (sites[site].app_route_policy == true) {
+            availability[0] += 1;
+        }
+        
+        if (sites[site].app_route_change == true) {
+          availability[1] += 1;
+      }
+      if (sites[site].no_app_route == true) {
+        availability[2] += 1;
+    }
+        console.log(availability);
+  
+      }
+    }
+   
+  console.log(availability);
+    return availability;
+  };
 class Sites extends Component {
     constructor(props) {
         super(props);
@@ -32,14 +57,14 @@ class Sites extends Component {
 
 
     render() {
-
+        let availability = siteAvailabilityData();
         return (
             <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <div style={{ float: 'left' }}>
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill="#32CD32" />
                         <Link activeClass="active" className="testing1" to="testing1" spy={true} smooth={true} duration={500} >
-                            <text x="45" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>12485</text>
+                            <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[0]}</text>
                         </Link>
                     </svg>
                 </div>
@@ -47,7 +72,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill="#FFD700" />
                         <Link activeClass="active" className="testing1" to="testing1" spy={true} smooth={true} duration={500} >
-                            <text x="50" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>56</text>
+                            <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[1]}</text>
                         </Link>
                     </svg>
                 </div>
@@ -55,7 +80,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill="#FF4500" />
                         <Link activeClass="active" className="testing1" to="testing1" spy={true} smooth={true} duration={500} >
-                            <text x="55" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>1</text>
+                            <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[2]}</text>
                         </Link>
                     </svg>
                 </div>

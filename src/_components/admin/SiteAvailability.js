@@ -4,11 +4,28 @@ import metricsDatas from '../../metricsData.json';
 
 let siteAvailabilityData = () => {
   let totalSite = 0;
+  let availability = [0, 0, 0];
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
-    totalSite += metricsDataValue.sites.length;    
+    totalSite += metricsDataValue.sites.length;
+    let sites = metricsDataValue.sites;
+    for (let site = 0; site < sites.length; site++) {
+      if (sites[site].app_route_policy == true) {
+          availability[0] += 1;
+      }
+      
+      if (sites[site].app_route_change == true) {
+        availability[1] += 1;
+    }
+    if (sites[site].no_app_route == true) {
+      availability[2] += 1;
   }
+      console.log(availability);
 
-  return 0;
+    }
+  }
+ 
+console.log(availability);
+  return availability;
 };
 
 class SiteAvailability extends React.Component {
@@ -20,24 +37,22 @@ class SiteAvailability extends React.Component {
         "type": "serial",
         "startDuration": 2,
         "dataProvider": [{
-          "latency_ratio": 150,
+          "availability": 99.9,
           "percentage": 0,
-          "color": "#FF0F00"
+          "color": "#04D215"
         }, {
-          "latency_ratio": 50,
+          "availability": 98,
           "percentage": 0,
           "color": "#0D8ECF"
         }, {
-          "latency_ratio": 30,
+          "availability": 96,
           "percentage": 0,
-          "color": "#04D215"
+          "color": "#FF0F00"
         }],
         "valueAxes": [{
           "position": "left",
           "title": "Percentage",
-          "labelFunction": function (value) {
-            return value / 100;
-          }
+         
         }],
         "depth3D": 20,
         "angle": 30,
@@ -48,7 +63,6 @@ class SiteAvailability extends React.Component {
           "lineAlpha": 0.1,
           "type": "column",
           "valueField": "percentage"
-          // "labelFunction": 
         }],
         "chartCursor": {
           "categoryBalloonEnabled": false,
@@ -56,18 +70,12 @@ class SiteAvailability extends React.Component {
           "zoomable": false
         },
         "rotate": false,
-        "categoryField": "latency_ratio",
+        "categoryField": "availability",
         "categoryAxis": {
           "gridPosition": "start",
           "title": "Site Availability",
           "labelFunction": function (value) {
-
-            if (value == 30 || value == 50) {
-              return "<" + value + "ms";
-            } else {
-              return ">" + 150 + "ms";
-            }
-
+            return "<" + value + "%";
           }
         }
 
@@ -75,15 +83,14 @@ class SiteAvailability extends React.Component {
     };
     let configValue = config.bar;
 
-    const latencyRatio = siteAvailabilityData();
+    const availability = siteAvailabilityData();
 
     for (let [Key, Value] of Object.entries(configValue)) {
       if (Key == "dataProvider") {
         for (let data = 0; data < Value.length; data++) {
-          Value[data].percentage = latencyRatio[data];
+          Value[data].percentage = availability[data];
         }
       }
-
     }
 
     return (
