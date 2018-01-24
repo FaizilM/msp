@@ -3,10 +3,10 @@
   height: 100%;
 }
 #container, #sliders {
-  min-width: 310px; 
+  min-width: 310px;
   max-width: 800px;
   margin: 0 0;
-  height: 400px; 
+  height: 400px;
 }
 .amchart {
   display: inline-block;
@@ -16,7 +16,6 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
-tr:nth-child(odd) {
+.inventory tr:nth-child(odd) {
   background-color: #00bfff;
 }
-

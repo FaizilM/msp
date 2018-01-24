@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import './App.css';
+
 import AmCharts from "@amcharts/amcharts3-react";
 import '../chart/chart';
 import config from '../chart/index';
 import metricsDatas from '../../metricsData.json'
+import '../../assets/css/App.css';
+
 
 let packetLossData = () => {
   let loss = [0, 0, 0];

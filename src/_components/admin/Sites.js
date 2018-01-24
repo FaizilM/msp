@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../../assets/css/App.css';
 
 import { Link, Events } from 'react-scroll';
 

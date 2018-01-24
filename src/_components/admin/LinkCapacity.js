@@ -6,6 +6,7 @@ import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/bar';
 import 'echarts/lib/component/tooltip';
 import ReactBootstrap from 'react-bootstrap';
+import '../../assets/css/App.css';
 
 class LinkCapacity extends React.Component {
 
