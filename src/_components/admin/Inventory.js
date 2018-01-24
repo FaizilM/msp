@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../../assets/css/App.css';
 
 
 class Inventory extends Component {
@@ -32,7 +32,7 @@ class Inventory extends Component {
       <div>
 
       <div className="table-responsive">
- <table className="table">
+ <table className="inventory table">
 
    <tbody>
      {tableData}

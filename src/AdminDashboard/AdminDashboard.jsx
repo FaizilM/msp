@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import './App.css';
+import '../assets/css/App.css';
 import Inventory from '../_components/admin/Inventory';
 import Sites from '../_components/admin/Sites';
 import PacketLoss from '../_components/admin/PacketLoss';

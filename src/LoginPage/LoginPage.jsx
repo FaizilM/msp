@@ -6,6 +6,8 @@ import { userActions } from '../_actions';
 import '../assets/css/main.css';
 import '../assets/css/util.css';
 
+import footerLogo from '../assets/images/logo-footer.png';
+
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -52,10 +54,12 @@ class LoginPage extends React.Component {
            <div className="container-login100">
 
               <div className="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+
               {alert.message &&
                   <div className={`alert ${alert.type}`} col-sm-4 col-sm-offset-4>{alert.message}</div>
               }
                  <form className="login100-form validate-form flex-sb flex-w" onSubmit={this.handleSubmit}>
+
                     <span className="login100-form-title p-b-32">
                     Account Login
                     </span>

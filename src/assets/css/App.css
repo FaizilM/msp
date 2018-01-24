@@ -1,0 +1,40 @@
+.AdminDashboard {
+  width: 100%;
+  height: 100%;
+}
+#container, #sliders {
+  min-width: 310px;
+  max-width: 800px;
+  margin: 0 0;
+  height: 400px;
+}
+.amchart {
+  display: inline-block;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.inventory tr:nth-child(odd) {
+  background-color: #00bfff;
+}
+
+
+
+.buss_impact_eve_table {
+  padding: 20px !important;
+  color: white;
+}
+
+.green_color {
+  background-color: #009933;
+}
+
+.yellow_color {
+  background-color: #b3b300;
+}
+
+.red_color {
+  background-color: #ff6633;
+}

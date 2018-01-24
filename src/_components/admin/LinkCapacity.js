@@ -9,6 +9,7 @@ import ReactBootstrap from 'react-bootstrap';
 import Chart from '../chart/chart';
 import metricsData from '../../metricsData.json';
 import { indexOf, replace } from 'lodash';
+import '../../assets/css/App.css';
 
 
 let linkCapacityData = () => {
