@@ -1,14 +1,7 @@
 import React from 'react';
-// import the core library.
-import ReactEchartsCore from 'echarts-for-react/lib/core';
-// then import echarts modules those you have used manually.
-import echarts from 'echarts/lib/echarts';
-import 'echarts/lib/chart/bar';
-import 'echarts/lib/component/tooltip';
-import ReactBootstrap from 'react-bootstrap';
 import Chart from '../chart/chart';
 import metricsData from '../../metricsData.json';
-import { indexOf, replace } from 'lodash';
+import { indexOf } from 'lodash';
 import '../../assets/css/App.css';
 
 
@@ -29,13 +22,13 @@ let linkCapacityData = () => {
                         key.push(linkKey);
                     }
                     let index = indexOf(key, linkKey);
-                   
+
                     if (capacity[index] == undefined) {
                         capacity.splice(index, 0, linkValue.utilization);
                         totalSite.splice(index, 0, 1);
                     } else {
                         capacity[index] = capacity[index] + linkValue.utilization;
-                        totalSite[index] +=1;
+                        totalSite[index] += 1;
                     }
 
                 }
@@ -43,8 +36,8 @@ let linkCapacityData = () => {
         }
 
     }
-    for(let index = 0; index < capacity.length; index++) {
-        capacity[index] = capacity[index]/totalSite[index];
+    for (let index = 0; index < capacity.length; index++) {
+        capacity[index] = capacity[index] / totalSite[index];
     }
 
 

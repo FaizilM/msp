@@ -11,19 +11,19 @@ class Sites extends Component {
     componentDidMount() {
 
         Events.scrollEvent.register('begin', function () {
-          console.log("begin", arguments);
+            console.log("begin", arguments);
         });
 
         Events.scrollEvent.register('end', function () {
-          console.log("end", arguments);
+            console.log("end", arguments);
         });
 
-      }
+    }
 
-      componentWillUnmount() {
+    componentWillUnmount() {
         Events.scrollEvent.remove('begin');
         Events.scrollEvent.remove('end');
-      }
+    }
 
 
     handleClick() {
@@ -34,8 +34,8 @@ class Sites extends Component {
     render() {
 
         return (
-            <div style={{ display: 'flex', justifyContent:'space-around'}}>
-                <div style={{ float: 'left'}}>
+            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                <div style={{ float: 'left' }}>
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill="#32CD32" />
                         <Link activeClass="active" className="testing1" to="testing1" spy={true} smooth={true} duration={500} >
@@ -51,7 +51,7 @@ class Sites extends Component {
                         </Link>
                     </svg>
                 </div>
-                <div style={{ float: 'right'}}>
+                <div style={{ float: 'right' }}>
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill="#FF4500" />
                         <Link activeClass="active" className="testing1" to="testing1" spy={true} smooth={true} duration={500} >

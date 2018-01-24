@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-import AmCharts from "@amcharts/amcharts3-react";
 import metricsData from '../../metricsData.json'
 import '../../assets/css/App.css';
 import Chart from '../chart/chart';
@@ -28,7 +26,7 @@ let packetLossData = () => {
         }
         totalSite++;
         packetLossSite = 0;
-        }
+      }
     }
   }
 
@@ -36,7 +34,7 @@ let packetLossData = () => {
   loss[1] = parseInt((loss[1] / totalSite) * 100);
   loss[2] = parseInt((loss[2] / totalSite) * 100);
 
-return loss;
+  return loss;
 }
 
 
@@ -64,8 +62,8 @@ class PacketLoss extends Component {
         "valueAxes": [{
           "position": "left",
           "title": "Percentage",
-          "labelFunction": function(value){
-            return value +"%";
+          "labelFunction": function (value) {
+            return value + "%";
           }
         }],
         "depth3D": 20,
@@ -89,16 +87,16 @@ class PacketLoss extends Component {
         "categoryAxis": {
           "gridPosition": "start",
           "title": "Packet Loss",
-          "labelFunction": function(value){
-            if(value == 1 || value == 2.5) {
-              return "<" + value +"%";
+          "labelFunction": function (value) {
+            if (value == 1 || value == 2.5) {
+              return "<" + value + "%";
             } else {
               return ">" + 2.5 + "%";
             }
-            
+
           }
         }
-    
+
       }
     };
     const configValue = config.bar;
@@ -110,11 +108,11 @@ class PacketLoss extends Component {
         }
       }
 
-    }    
+    }
 
     return (
-          <Chart config={configValue}/>
-         );
+      <Chart config={configValue} />
+    );
   }
 }
 

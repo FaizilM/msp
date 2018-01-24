@@ -8,9 +8,10 @@ import PacketLoss from '../_components/admin/PacketLoss';
 import LinkCapacity from '../_components/admin/LinkCapacity';
 import LatencyRatio from '../_components/admin/LatencyRatio';
 import JitterRatio from '../_components/admin/JitterRatio';
+import SiteAvailability from '../_components/admin/SiteAvailability';
 import { userActions } from '../_actions';
 
-import {Header} from '../_components/Header';
+import { Header } from '../_components/Header';
 import { Container, Row, Col } from 'reactstrap';
 
 
@@ -21,45 +22,55 @@ class AdminDashboard extends React.Component {
         const { user, users } = this.props;
         return (
             <div>
-            <Header user = { user } />
-            <Container>
-              <Row className="well">
-                <h2>Dashboard</h2>
+                <Header user={user} />
+                <Container>
+                    <Row className="well">
+                        <h2>Dashboard</h2>
 
-                </Row>
+                    </Row>
 
-        <Row className="well">
-        <Col xs="6" md="6">
-              <Inventory />
-        </Col>
-          <Col xs="6" md="6">
-          <Sites />
-          </Col>
-</Row>
-<Row className="well">
-          <Col xs="6" md="6">
-         <LinkCapacity />
-          </Col>
-
-
-          <Col xs="6" md="6">
-           <PacketLoss />
-          </Col>
-
-          </Row>
-          <Row className="well">
-          <Col xs="6" md="6">
-         <LatencyRatio />
-          </Col>
+                    <Row className="well">
+                        <Col xs="6" md="6">
+                            <Inventory />
+                        </Col>
+                        <Col xs="6" md="6">
+                            <Sites />
+                        </Col>
+                    </Row>
+                    <Row className="well">
+                        <Col xs="6" md="6">
+                            <LinkCapacity />
+                        </Col>
 
 
-          <Col xs="6" md="6">
-          <JitterRatio />
-          </Col>
+                        <Col xs="6" md="6">
+                            <PacketLoss />
+                        </Col>
 
-          </Row>
+                    </Row>
+                    <Row className="well">
+                        <Col xs="6" md="6">
+                            <LatencyRatio />
+                        </Col>
 
-      </Container>
+
+                        <Col xs="6" md="6">
+                            <JitterRatio />
+                        </Col>
+
+                    </Row>
+                    <Row className="well">
+                        <Col xs="6" md="6">
+                            <SiteAvailability />
+                        </Col>
+
+
+                        <Col xs="6" md="6">
+                        </Col>
+
+                    </Row>
+
+                </Container>
 
             </div>
         );

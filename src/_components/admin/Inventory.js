@@ -31,15 +31,15 @@ class Inventory extends Component {
 
       <div>
 
-      <div className="table-responsive">
- <table className="inventory table">
+        <div className="table-responsive">
+          <table className="inventory table">
 
-   <tbody>
-     {tableData}
-   </tbody>
- </table>
- </div>
- </div>
+            <tbody>
+              {tableData}
+            </tbody>
+          </table>
+        </div>
+      </div>
     );
   }
 }
