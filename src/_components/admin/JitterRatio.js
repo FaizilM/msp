@@ -56,11 +56,11 @@ class JitterRatio extends React.Component {
               "dataProvider": [{
                 "jitter_ratio": 4.5,
                 "percentage": 0,
-                "color": "#FF0F00"
+                "color": color.ORANGE_COLOR
               }, {
                 "jitter_ratio": 7.5,
                 "percentage": 0,
-                "color": "#0D8ECF"
+                "color": color.YELLOW_COLOR
               }, {
                 "jitter_ratio": 7.6,
                 "percentage": 0,

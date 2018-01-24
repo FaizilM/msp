@@ -10,6 +10,7 @@ import Chart from '../chart/chart';
 import metricsData from '../../metricsData.json';
 import { indexOf, replace } from 'lodash';
 import '../../assets/css/App.css';
+import { color } from '../../_constants';
 
 
 let linkCapacityData = () => {
@@ -29,7 +30,7 @@ let linkCapacityData = () => {
                         key.push(linkKey);
                     }
                     let index = indexOf(key, linkKey);
-                   
+
                     if (capacity[index] == undefined) {
                         capacity.splice(index, 0, linkValue.utilization);
                         totalSite.splice(index, 0, 1);
@@ -62,23 +63,23 @@ class LinkCapacity extends React.Component {
                     "link_capacity": "Broadband",
                     "capacity": "18Gbps",
                     "percentage": 0,
-                    "color": "#0D8ECF"
+                    "color": color.BLUE_COLOR
                 }, {
                     "link_capacity": "MPLS",
                     "capacity": "45Gbps",
                     "percentage": 0,
-                    "color": "#0D8ECF"
+                    "color": color.BLUE_COLOR
                 }, {
                     "link_capacity": "T1 Lines",
                     "capacity": "4Gbps",
                     "percentage": 0,
-                    "color": "#0D8ECF"
+                    "color": color.BLUE_COLOR
                 },
                 {
                     "link_capacity": "4G/LTE",
                     "capacity": "29Gbps",
                     "percentage": 0,
-                    "color": "#0D8ECF"
+                    "color": color.BLUE_COLOR
                 }],
                 "valueAxes": [{
                     "position": "left",
@@ -96,7 +97,7 @@ class LinkCapacity extends React.Component {
                     "lineAlpha": 0.1,
                     "type": "column",
                     "valueField": "percentage"
-                    // "labelFunction": 
+                    // "labelFunction":
                 }],
                 "chartCursor": {
                     "categoryBalloonEnabled": false,

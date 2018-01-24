@@ -52,11 +52,11 @@ class PacketLoss extends Component {
         "dataProvider": [{
           "packet_loss": 1,
           "percentage": 0,
-          "color": "#FF0F00"
+          "color": color.ORANGE_COLOR
         }, {
           "packet_loss": 2.5,
           "percentage": 0,
-          "color": "#0D8ECF"
+          "color": color.YELLOW_COLOR
         }, {
           "packet_loss": 2.6,
           "percentage": 0,

@@ -46,7 +46,7 @@ class Sites extends Component {
                 </div>
                 <div style={{ float: 'right' }}>
                     <svg height="120" width="120">
-                        <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill="#FFD700" />
+                        <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill={color.YELLOW_COLOR} />
                         <Link activeClass="active" className="testing1" to="testing1" spy={true} smooth={true} duration={500} >
                             <text x="50" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>56</text>
                         </Link>
@@ -54,7 +54,7 @@ class Sites extends Component {
                 </div>
                 <div style={{ float: 'right'}}>
                     <svg height="120" width="120">
-                        <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill="#FF4500" />
+                        <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill={color.ORANGE_COLOR} />
                         <Link activeClass="active" className="testing1" to="testing1" spy={true} smooth={true} duration={500} >
                             <text x="55" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>1</text>
                         </Link>

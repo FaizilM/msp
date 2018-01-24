@@ -56,11 +56,11 @@ class LatencyRatio extends React.Component {
               "dataProvider": [{
                 "latency_ratio": 150,
                 "percentage": 0,
-                "color": "#FF0F00"
+                "color": color.ORANGE_COLOR
               }, {
                 "latency_ratio": 50,
                 "percentage": 0,
-                "color": "#0D8ECF"
+                "color": color.YELLOW_COLOR
               }, {
                 "latency_ratio": 30,
                 "percentage": 0,
