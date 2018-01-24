@@ -101,9 +101,6 @@ class LatencyRatio extends React.Component {
                   }
                   
                 }
-              },
-              "export": {
-                "enabled": true
               }
           
             }

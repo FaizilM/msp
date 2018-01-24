@@ -99,9 +99,6 @@ class JitterRatio extends React.Component {
                   }
                   
                 }
-              },
-              "export": {
-                "enabled": true
               }
           
             }

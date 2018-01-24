@@ -96,9 +96,6 @@ class PacketLoss extends Component {
             }
             
           }
-        },
-        "export": {
-          "enabled": true
         }
     
       }

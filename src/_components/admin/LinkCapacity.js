@@ -107,9 +107,6 @@ class LinkCapacity extends React.Component {
                 "categoryAxis": {
                     "gridPosition": "start",
                     "title": "Link Capacity"
-                },
-                "export": {
-                    "enabled": true
                 }
 
             }
