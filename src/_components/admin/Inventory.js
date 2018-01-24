@@ -28,6 +28,9 @@ class Inventory extends Component {
       tableData.push(<tr key={k}><td>{k}</td><td>{value}</td></tr>);
     }
     return (
+
+      <div>
+
       <div className="table-responsive">
  <table className="table">
 
@@ -35,6 +38,7 @@ class Inventory extends Component {
      {tableData}
    </tbody>
  </table>
+ </div>
  </div>
     );
   }
