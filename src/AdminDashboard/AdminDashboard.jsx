@@ -6,23 +6,19 @@ import Inventory from '../_components/admin/Inventory';
 import Sites from '../_components/admin/Sites';
 import PacketLoss from '../_components/admin/PacketLoss';
 import LinkCapacity from '../_components/admin/LinkCapacity';
+import LatencyRatio from '../_components/admin/LatencyRatio';
+import JitterRatio from '../_components/admin/JitterRatio';
 import { userActions } from '../_actions';
 
 import {Header} from '../_components/Header';
 import { Container, Row, Col } from 'reactstrap';
 
-import config from '../_components/chart/index';
 
 class AdminDashboard extends React.Component {
 
     render() {
 
         const { user, users } = this.props;
-
-        const configValue = config.bar;
-        console.log("ADMIN DASHBOARD", configValue)
-
-
         return (
             <div>
             <Header user = { user } />
@@ -42,12 +38,23 @@ class AdminDashboard extends React.Component {
 </Row>
 <Row className="well">
           <Col xs="6" md="6">
-         <LinkCapacity config={configValue}/>
+         <LinkCapacity />
           </Col>
 
 
           <Col xs="6" md="6">
-           <PacketLoss config={configValue}/>
+           <PacketLoss />
+          </Col>
+
+          </Row>
+          <Row className="well">
+          <Col xs="6" md="6">
+         <LatencyRatio />
+          </Col>
+
+
+          <Col xs="6" md="6">
+          <JitterRatio />
           </Col>
 
           </Row>
