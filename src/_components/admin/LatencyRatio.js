@@ -8,14 +8,16 @@ import 'echarts/lib/component/tooltip';
 import ReactBootstrap from 'react-bootstrap';
 import Chart from '../chart/chart';
 import metricsDatas from '../../metricsData.json';
+import { color } from '../../_constants';
+
 
 let latencyRatioData = () => {
     let latency = [0, 0, 0];
     let totalSite = 0;
     let latencySite = 0;
-   
+
     for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
-      let sites = metricsDataValue.sites;  
+      let sites = metricsDataValue.sites;
       for (let site = 0; site < sites.length; site++) {
         let links = sites[site].links;
         for (let link = 0; link < links.length; link++) {
@@ -23,7 +25,7 @@ let latencyRatioData = () => {
           for (let [linkKey, linkValue] of Object.entries(linkLatency)) {
             latencySite += linkValue.latency;
           }
-          
+
           if (latencySite <= 30) {
             latency[0] += 1;
           } else if (latencySite <= 50) {
@@ -39,7 +41,7 @@ let latencyRatioData = () => {
     latency[0] = parseInt((latency[0] / totalSite) * 100);
     latency[1] = parseInt((latency[1] / totalSite) * 100);
     latency[2] = parseInt((latency[2] / totalSite) * 100);
-  
+
   return latency;
   };
 
@@ -62,7 +64,7 @@ class LatencyRatio extends React.Component {
               }, {
                 "latency_ratio": 30,
                 "percentage": 0,
-                "color": "#04D215"
+                "color": color.GREEN_COLOR
               }],
               "valueAxes": [{
                 "position": "left",
@@ -80,7 +82,7 @@ class LatencyRatio extends React.Component {
                 "lineAlpha": 0.1,
                 "type": "column",
                 "valueField": "percentage"
-                // "labelFunction": 
+                // "labelFunction":
               }],
               "chartCursor": {
                 "categoryBalloonEnabled": false,
@@ -93,22 +95,22 @@ class LatencyRatio extends React.Component {
                 "gridPosition": "start",
                 "title":"Latency Ratio",
                 "labelFunction": function(value){
-                    
+
                   if(value == 30 || value == 50) {
                     return "<" + value +"ms";
                   } else {
                     return ">" + 150 + "ms";
                   }
-                  
+
                 }
               }
-          
+
             }
           };
         let configValue = config.bar;
 
     const latencyRatio = latencyRatioData();
-    
+
     for (let [Key, Value] of Object.entries(configValue)) {
       if (Key == "dataProvider") {
         for (let data = 0; data < Value.length; data++) {
@@ -116,7 +118,7 @@ class LatencyRatio extends React.Component {
         }
       }
 
-    }    
+    }
 
         return (
 

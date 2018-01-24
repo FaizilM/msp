@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../assets/css/App.css';
 
 import { Link, Events } from 'react-scroll';
+import { color } from '../../_constants';
 
 class Sites extends Component {
     constructor(props) {
@@ -37,7 +38,7 @@ class Sites extends Component {
             <div style={{ display: 'flex', justifyContent:'space-around'}}>
                 <div style={{ float: 'left'}}>
                     <svg height="120" width="120">
-                        <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill="#32CD32" />
+                        <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill={color.GREEN_COLOR} />
                         <Link activeClass="active" className="testing1" to="testing1" spy={true} smooth={true} duration={500} >
                             <text x="45" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>12485</text>
                         </Link>

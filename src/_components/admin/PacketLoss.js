@@ -4,6 +4,7 @@ import AmCharts from "@amcharts/amcharts3-react";
 import metricsData from '../../metricsData.json'
 import '../../assets/css/App.css';
 import Chart from '../chart/chart';
+import { color } from '../../_constants';
 
 let packetLossData = () => {
   let loss = [0, 0, 0];
@@ -59,7 +60,7 @@ class PacketLoss extends Component {
         }, {
           "packet_loss": 2.6,
           "percentage": 0,
-          "color": "#04D215"
+          "color": color.GREEN_COLOR
         }],
         "valueAxes": [{
           "position": "left",
@@ -77,7 +78,7 @@ class PacketLoss extends Component {
           "lineAlpha": 0.1,
           "type": "column",
           "valueField": "percentage"
-          // "labelFunction": 
+          // "labelFunction":
         }],
         "chartCursor": {
           "categoryBalloonEnabled": false,
@@ -95,10 +96,10 @@ class PacketLoss extends Component {
             } else {
               return ">" + 2.5 + "%";
             }
-            
+
           }
         }
-    
+
       }
     };
     const configValue = config.bar;
@@ -110,7 +111,7 @@ class PacketLoss extends Component {
         }
       }
 
-    }    
+    }
 
     return (
           <Chart config={configValue}/>
