@@ -93,7 +93,6 @@ class LatencyRatio extends React.Component {
                 "gridPosition": "start",
                 "title":"Latency Ratio",
                 "labelFunction": function(value){
-                    console.log(value);
                     
                   if(value == 30 || value == 50) {
                     return "<" + value +"ms";
@@ -112,7 +111,6 @@ class LatencyRatio extends React.Component {
         let configValue = config.bar;
 
     const latencyRatio = latencyRatioData();
-    console.log(latencyRatio);
     
     for (let [Key, Value] of Object.entries(configValue)) {
       if (Key == "dataProvider") {

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import AmCharts from "@amcharts/amcharts3-react";
 import Chart from '../chart/chart';
-import metricsDatas from '../../metricsData.json';
+import metricsData from '../../metricsData.json';
 
 let packetLossData = () => {
   let loss = [0, 0, 0];
   let totalSite = 0;
   let packetLossSite = 0;
-  for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
+  for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
       let links = sites[site].links;

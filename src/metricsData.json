@@ -21,25 +21,25 @@
                 "links": [
                     {
                         "broadband": {
-                            "utilization": 20,
+                            "utilization": 50,
                             "latency": 1,
                             "jitter": 2,
                             "packet_loss": 0
                         },
                         "mpls": {
-                            "utilization": 20,
+                            "utilization": 77,
                             "latency": 4,
                             "jitter": 0.5,
                             "packet_loss": 0.2
                         },
                         "t1_lines": {
-                            "utilization": 20,
+                            "utilization": 97,
                             "latency": 0,
                             "jitter": 0.3,
                             "packet_loss": 0.1
                         },
                         "4G": {
-                            "utilization": 20,
+                            "utilization": 67,
                             "latency": 2,
                             "jitter": 0.4,
                             "packet_loss": 0.2
@@ -79,25 +79,25 @@
                 "links": [
                     {
                         "broadband": {
-                            "utilization": 20,
+                            "utilization": 90,
                             "latency": 40,
                             "jitter": 20,
                             "packet_loss": 0
                         },
                         "mpls": {
-                            "utilization": 20,
+                            "utilization": 80,
                             "latency": 20,
                             "jitter": 5,
                             "packet_loss": 0.2
                         },
                         "t1_lines": {
-                            "utilization": 20,
+                            "utilization": 70,
                             "latency": 0,
                             "jitter": 3,
                             "packet_loss": 0.7
                         },
                         "4G": {
-                            "utilization": 20,
+                            "utilization": 90,
                             "latency": 2,
                             "jitter": 4,
                             "packet_loss": 1.0
@@ -137,25 +137,25 @@
                 "links": [
                     {
                         "broadband": {
-                            "utilization": 20,
+                            "utilization": 90,
                             "latency": 40,
                             "jitter": 20,
                             "packet_loss": 0.1
                         },
                         "mpls": {
-                            "utilization": 20,
+                            "utilization": 98,
                             "latency": 10,
                             "jitter": 5,
                             "packet_loss": 0.2
                         },
                         "t1_lines": {
-                            "utilization": 20,
+                            "utilization": 97,
                             "latency": 0,
                             "jitter": 3,
                             "packet_loss": 0.7
                         },
                         "4G": {
-                            "utilization": 20,
+                            "utilization": 60,
                             "latency": 2,
                             "jitter": 4,
                             "packet_loss": 1.0
@@ -195,25 +195,25 @@
                 "links": [
                     {
                         "broadband": {
-                            "utilization": 20,
+                            "utilization": 60,
                             "latency": 40,
                             "jitter": 0.2,
                             "packet_loss": 3.9
                         },
                         "mpls": {
-                            "utilization": 20,
+                            "utilization": 57,
                             "latency": 4,
                             "jitter": 0.5,
                             "packet_loss": 1.9
                         },
                         "t1_lines": {
-                            "utilization": 20,
+                            "utilization": 84,
                             "latency": 0,
                             "jitter": 0.3,
                             "packet_loss": 2.5
                         },
                         "4G": {
-                            "utilization": 20,
+                            "utilization": 92,
                             "latency": 2,
                             "jitter": 0.4,
                             "packet_loss": 0.2
@@ -253,25 +253,25 @@
                 "links": [
                     {
                         "broadband": {
-                            "utilization": 20,
+                            "utilization": 98,
                             "latency": 0.4,
                             "jitter": 20,
                             "packet_loss": 3.9
                         },
                         "mpls": {
-                            "utilization": 20,
+                            "utilization": 92,
                             "latency": 0.9,
                             "jitter": 5,
                             "packet_loss": 1.9
                         },
                         "t1_lines": {
-                            "utilization": 20,
+                            "utilization": 91,
                             "latency": 0,
                             "jitter": 3,
                             "packet_loss": 2.5
                         },
                         "4G": {
-                            "utilization": 20,
+                            "utilization": 89,
                             "latency": 2,
                             "jitter": 2,
                             "packet_loss": 0.2
@@ -311,25 +311,25 @@
                 "links": [
                     {
                         "broadband": {
-                            "utilization": 20,
+                            "utilization": 95,
                             "latency": 10,
                             "jitter": 2,
                             "packet_loss": 3.9
                         },
                         "mpls": {
-                            "utilization": 20,
+                            "utilization": 82,
                             "latency": 4,
                             "jitter": 1,
                             "packet_loss": 1.9
                         },
                         "t1_lines": {
-                            "utilization": 20,
+                            "utilization": 76,
                             "latency": 0,
                             "jitter": 1,
                             "packet_loss": 2.5
                         },
                         "4G": {
-                            "utilization": 20,
+                            "utilization": 92,
                             "latency": 2,
                             "jitter": 0.7,
                             "packet_loss": 0.2

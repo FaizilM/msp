@@ -39,7 +39,6 @@ let jitterRatioData = () => {
     jitter[0] = parseInt((jitter[0] / totalSite) * 100);
     jitter[1] = parseInt((jitter[1] / totalSite) * 100);
     jitter[2] = parseInt((jitter[2] / totalSite) * 100);
-  console.log("Jitter", jitter);
   
   return jitter;
   };
@@ -93,8 +92,6 @@ class JitterRatio extends React.Component {
                 "gridPosition": "start",
                 "title":"Jitter Ratio",
                 "labelFunction": function(value){
-                    console.log(value);
-                    
                   if(value == 4.5 || value == 7.5) {
                     return "<" + value +"ms";
                   } else {
@@ -112,7 +109,6 @@ class JitterRatio extends React.Component {
         let configValue = config.bar;
 
     const jitterRatio = jitterRatioData();
-    console.log(jitterRatio);
     
     for (let [Key, Value] of Object.entries(configValue)) {
       if (Key == "dataProvider") {
