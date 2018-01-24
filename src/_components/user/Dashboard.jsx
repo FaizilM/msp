@@ -16,12 +16,12 @@ class Dashboard extends React.Component {
  <Container>
     <Row>
      <Col xs="12" md="12">
-    <div class="panel panel-default">
-    <div class="panel-heading">
-       <i class="fa fa-bell fa-fw"></i> <h3>Dashboard</h3>
+    <div className="panel panel-default">
+    <div className="panel-heading">
+       <i className="fa fa-bell fa-fw"></i> <h3>Dashboard</h3>
     </div>
-    <div class="panel-body">
-       <div class="list-group">
+    <div className="panel-body">
+       <div className="list-group">
         <Map />
 
        </div>
@@ -33,12 +33,12 @@ class Dashboard extends React.Component {
 
        <Col xs="6" md="6">
 
-<div class="panel panel-default">
-<div class="panel-heading">
-   <i class="fa fa-bell fa-fw"></i> <h4> Bussiness Impacting Events</h4>
+<div className="panel panel-default">
+<div className="panel-heading">
+   <i className="fa fa-bell fa-fw"></i> <h4> Bussiness Impacting Events</h4>
 </div>
-<div class="panel-body">
-   <div class="list-group">
+<div className="panel-body">
+   <div className="list-group">
       <BussinessImpactEvent />
    </div>
 </div>
