@@ -14,14 +14,39 @@ class Dashboard extends React.Component {
         return (
 
  <Container>
-    <Row className="well">
-       <Map />
+    <Row>
+     <Col xs="12" md="12">
+    <div class="panel panel-default">
+    <div class="panel-heading">
+       <i class="fa fa-bell fa-fw"></i> <h3>Dashboard</h3>
+    </div>
+    <div class="panel-body">
+       <div class="list-group">
+        <Map />
+
+       </div>
+    </div>
+    </div>
+    </Col>
     </Row>
-    <Row className="well">
+    <Row>
+
        <Col xs="6" md="6">
-        <BussinessImpactEvent />
-       </Col>
-       <Col xs="6" md="6">
+
+<div class="panel panel-default">
+<div class="panel-heading">
+   <i class="fa fa-bell fa-fw"></i> <h4> Bussiness Impacting Events</h4>
+</div>
+<div class="panel-body">
+   <div class="list-group">
+      <BussinessImpactEvent />
+   </div>
+</div>
+</div>
+<Col xs="6" md="6">
+
+</Col>
+
        </Col>
     </Row>
  </Container>

@@ -19,3 +19,22 @@ table {
 .inventory tr:nth-child(odd) {
   background-color: #00bfff;
 }
+
+
+
+.buss_impact_eve_table {
+  padding: 20px !important;
+  color: white;
+}
+
+.green_color {
+  background-color: #009933;
+}
+
+.yellow_color {
+  background-color: #b3b300;
+}
+
+.red_color {
+  background-color: #ff6633;
+}

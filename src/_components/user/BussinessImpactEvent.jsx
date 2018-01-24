@@ -13,19 +13,20 @@ class BussinessImpactEvent extends React.Component {
         return (
         <div className="table-responsive">
           <table className="table table-bordered">
+          
             <thead>
               <tr>
-                <th>Number of Application Paths</th>
-                <th>Degraded Paths</th>
-                <th>No Viable Paths</th>
+                <th className="buss_impact_eve_table green_color">Number of Application Paths</th>
+                <th className="buss_impact_eve_table yellow_color">Degraded Paths</th>
+                <th className="buss_impact_eve_table red_color">No Viable Paths</th>
 
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>75412</td>
-                <td>5487</td>
-                <td>54</td>
+                <td className="buss_impact_eve_table green_color">45638</td>
+                <td className="buss_impact_eve_table yellow_color">12545</td>
+                <td className="buss_impact_eve_table red_color">6</td>
 
               </tr>
             </tbody>
