@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 
 import AmCharts from "@amcharts/amcharts3-react";
-import '../chart/chart';
-import config from '../chart/index';
-import metricsDatas from '../../metricsData.json'
+import metricsData from '../../metricsData.json'
 import '../../assets/css/App.css';
-
+import Chart from '../chart/chart';
 
 let packetLossData = () => {
   let loss = [0, 0, 0];
   let totalSite = 0;
   let packetLossSite = 0;
-  for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
+  for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
       let links = sites[site].links;
@@ -45,6 +43,64 @@ return loss;
 class PacketLoss extends Component {
 
   render() {
+    let config = {
+      "bar": {
+        "theme": "light",
+        "type": "serial",
+        "startDuration": 2,
+        "dataProvider": [{
+          "packet_loss": 1,
+          "percentage": 0,
+          "color": "#FF0F00"
+        }, {
+          "packet_loss": 2.5,
+          "percentage": 0,
+          "color": "#0D8ECF"
+        }, {
+          "packet_loss": 2.6,
+          "percentage": 0,
+          "color": "#04D215"
+        }],
+        "valueAxes": [{
+          "position": "left",
+          "title": "Percentage",
+          "labelFunction": function(value){
+            return value +"%";
+          }
+        }],
+        "depth3D": 20,
+        "angle": 30,
+        "graphs": [{
+          "balloonText": "Percentage: <b>[[value]]%</b>",
+          "fillColorsField": "color",
+          "fillAlphas": 1,
+          "lineAlpha": 0.1,
+          "type": "column",
+          "valueField": "percentage"
+          // "labelFunction": 
+        }],
+        "chartCursor": {
+          "categoryBalloonEnabled": false,
+          "cursorAlpha": 0,
+          "zoomable": false
+        },
+        "rotate": false,
+        "categoryField": "packet_loss",
+        "categoryAxis": {
+          "gridPosition": "start",
+          "title": "Packet Loss",
+          "labelFunction": function(value){
+            if(value == 1 || value == 2.5) {
+              return "<" + value +"%";
+            } else {
+              return ">" + 2.5 + "%";
+            }
+            
+          }
+        }
+    
+      }
+    };
     const configValue = config.bar;
     const packetLoss = packetLossData();
     for (let [packetLossKey, packetLossValue] of Object.entries(configValue)) {
@@ -54,17 +110,11 @@ class PacketLoss extends Component {
         }
       }
 
-    }
+    }    
 
     return (
-
-      <div name="testing1" className="element1" >
-        <div>
-          <AmCharts.React options={configValue} style={{ height: "350px" }} />
-        </div>
-      </div>
-
-    );
+          <Chart config={configValue}/>
+         );
   }
 }
 

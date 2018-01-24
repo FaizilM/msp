@@ -6,102 +6,126 @@ import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/bar';
 import 'echarts/lib/component/tooltip';
 import ReactBootstrap from 'react-bootstrap';
+import Chart from '../chart/chart';
+import metricsData from '../../metricsData.json';
+import { indexOf, replace } from 'lodash';
 import '../../assets/css/App.css';
 
+
+let linkCapacityData = () => {
+    let capacity = [];
+    let totalSite = [];
+    let sitePerLink = [0, 0, 0, 0];
+    let key = [];
+    let i = 0;
+    for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
+        let sites = metricsDataValue.sites;
+        for (let site = 0; site < sites.length; site++) {
+            let links = sites[site].links;
+            for (let link = 0; link < links.length; link++) {
+                let linkCapacity = links[link];
+                for (let [linkKey, linkValue] of Object.entries(linkCapacity)) {
+                    if (indexOf(key, linkKey) == -1) {
+                        key.push(linkKey);
+                    }
+                    let index = indexOf(key, linkKey);
+                   
+                    if (capacity[index] == undefined) {
+                        capacity.splice(index, 0, linkValue.utilization);
+                        totalSite.splice(index, 0, 1);
+                    } else {
+                        capacity[index] = capacity[index] + linkValue.utilization;
+                        totalSite[index] +=1;
+                    }
+
+                }
+            }
+        }
+
+    }
+    for(let index = 0; index < capacity.length; index++) {
+        capacity[index] = capacity[index]/totalSite[index];
+    }
+
+
+    return capacity;
+};
 class LinkCapacity extends React.Component {
 
     render() {
-
-        let option = {
-
-            title: {
-                text: 'Bar chart'
-            },
-            tooltip: {
-                trigger: 'axis',
-                formatter : function (params) {
-                 return '<div><div>Latency Time: '+params[0].name+'</div><div> Latency Percentage: '+(params[0].value*100)+'%</div></div>';
-                }
-            },
-            legend: {
-                data: ['<30ms', '<50ms', '>150ms'],
-                show: true,
-                align: 'left',
-                left: 10
-            },
-            toolbox: {
-                show: true,
-                feature: {
-                    mark: { show: true },
-                    dataView: { show: true, readOnly: false },
-                    magicType: { show: true, type: ['bar'] },
-                    restore: { show: true },
-                    saveAsImage: { show: true }
-                }
-            },
-            calculable: true,
-            //     type: 'value',
-            //     axisLabel: {
-            //         formatter: '{value} %'
-            //     }
-            // }
-            xAxis: [
+        let config = {
+            "bar": {
+                "theme": "light",
+                "type": "serial",
+                "startDuration": 2,
+                "dataProvider": [{
+                    "link_capacity": "Broadband",
+                    "capacity": "18Gbps",
+                    "percentage": 0,
+                    "color": "#0D8ECF"
+                }, {
+                    "link_capacity": "MPLS",
+                    "capacity": "45Gbps",
+                    "percentage": 0,
+                    "color": "#0D8ECF"
+                }, {
+                    "link_capacity": "T1 Lines",
+                    "capacity": "4Gbps",
+                    "percentage": 0,
+                    "color": "#0D8ECF"
+                },
                 {
-                    name: 'Latency Ratio',
-                    show: true,
-                    type: 'value',
-                    boundaryGap: [0, 0.05],
-                    min: 0,
-                    max: 1,
-                    axisTick: {
-                        show: false
+                    "link_capacity": "4G/LTE",
+                    "capacity": "29Gbps",
+                    "percentage": 0,
+                    "color": "#0D8ECF"
+                }],
+                "valueAxes": [{
+                    "position": "left",
+                    "title": "Percentage",
+                    "labelFunction": function (value) {
+                        return value + "%";
                     }
-                }
-            ],
-            yAxis: [
-                {
-                    name: 'Percentage',
-                    show: true,
-                    type: 'category',
-                    data: ['<30ms', '<50ms', '>150ms'],
-                    axisTick: {
-                        show: false
-                    }
-                }
-            ],
-
-            series: [
-                {
-                    name: 'utility',
-                    type: 'bar',
-                    data: ['0.27', '0.67', '0.06'],
-                    itemStyle: {
-                        normal: {
-                            color: function (params) {
-                                // build a color map as your need.
-                                var colorList = [
-                                    'blue', 'green', 'red'
-                                ];
-                                return colorList[params.dataIndex]
-                            },
-
-                        }
-                    },
+                }],
+                "depth3D": 20,
+                "angle": 30,
+                "graphs": [{
+                    "balloonText": "[[category]]: <b>[[value]]%</b>",
+                    "fillColorsField": "color",
+                    "fillAlphas": 1,
+                    "lineAlpha": 0.1,
+                    "type": "column",
+                    "valueField": "percentage"
+                    // "labelFunction": 
+                }],
+                "chartCursor": {
+                    "categoryBalloonEnabled": false,
+                    "cursorAlpha": 0,
+                    "zoomable": false
+                },
+                "rotate": true,
+                "categoryField": "link_capacity",
+                "categoryAxis": {
+                    "gridPosition": "start",
+                    "title": "Link Capacity"
                 }
 
-            ]
+            }
         };
+        let configValue = config.bar;
+        const packetLoss = linkCapacityData();
+        for (let [packetLossKey, packetLossValue] of Object.entries(configValue)) {
+            if (packetLossKey == "dataProvider") {
+                for (let data = 0; data < packetLossValue.length; data++) {
+                    packetLossValue[data].percentage = packetLoss[data];
+                }
+            }
 
+        }
         return (
 
             <div>
-                <ReactEchartsCore
-                    echarts={echarts}
-                    option={option}
-                    notMerge={true}
-                    lazyUpdate={true}
-                    theme={"theme_name"}
-                />
+                <Chart config={configValue} />
             </div>
 
 
