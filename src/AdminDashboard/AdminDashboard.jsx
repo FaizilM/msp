@@ -8,9 +8,11 @@ import PacketLoss from '../_components/admin/PacketLoss';
 import LinkCapacity from '../_components/admin/LinkCapacity';
 import LatencyRatio from '../_components/admin/LatencyRatio';
 import JitterRatio from '../_components/admin/JitterRatio';
+import SiteAvailability from '../_components/admin/SiteAvailability';
+import CustomerMetricsDashboard from '../_components/admin/CustomerMetricsDashboard';
 import { userActions } from '../_actions';
 
-import {Header} from '../_components/Header';
+import { Header } from '../_components/Header';
 import { Container, Row, Col } from 'reactstrap';
 
 
@@ -113,7 +115,35 @@ class AdminDashboard extends React.Component {
             </div>
              </Col>
             </Row>
-            
+            <Row>
+            <Col xs="6" md="6">
+            <div className="panel panel-default">
+               <div className="panel-heading">
+                  <i className="fa fa-bell fa-fw"></i>
+                  <h3>Site Availability</h3>
+               </div>
+               <div className="panel-body">
+                  <div className="list-group">
+                      <SiteAvailability />
+                  </div>
+               </div>
+            </div>
+             </Col>
+             <Col xs="6" md="6">
+            <div className="panel panel-default">
+               <div className="panel-heading">
+                  <i className="fa fa-bell fa-fw"></i>
+                  <h3></h3>
+               </div>
+               <div className="panel-body">
+                  <div className="list-group">
+                    
+                  </div>
+               </div>
+            </div>
+             </Col>
+            </Row>
+            <CustomerMetricsDashboard/>
           </Container>
           </div>
         );

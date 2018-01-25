@@ -1,22 +1,13 @@
 import React from 'react';
-// import the core library.
-import ReactEchartsCore from 'echarts-for-react/lib/core';
-// then import echarts modules those you have used manually.
-import echarts from 'echarts/lib/echarts';
-import 'echarts/lib/chart/bar';
-import 'echarts/lib/component/tooltip';
-import ReactBootstrap from 'react-bootstrap';
 import Chart from '../chart/chart';
 import metricsData from '../../metricsData.json';
-import { indexOf, replace } from 'lodash';
+import { indexOf } from 'lodash';
 import '../../assets/css/App.css';
 import { color } from '../../_constants';
-
 
 let linkCapacityData = () => {
     let capacity = [];
     let totalSite = [];
-    let sitePerLink = [0, 0, 0, 0];
     let key = [];
     let i = 0;
     for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
@@ -36,7 +27,7 @@ let linkCapacityData = () => {
                         totalSite.splice(index, 0, 1);
                     } else {
                         capacity[index] = capacity[index] + linkValue.utilization;
-                        totalSite[index] +=1;
+                        totalSite[index] += 1;
                     }
 
                 }
@@ -44,8 +35,8 @@ let linkCapacityData = () => {
         }
 
     }
-    for(let index = 0; index < capacity.length; index++) {
-        capacity[index] = capacity[index]/totalSite[index];
+    for (let index = 0; index < capacity.length; index++) {
+        capacity[index] = capacity[index] / totalSite[index];
     }
 
 
@@ -83,7 +74,6 @@ class LinkCapacity extends React.Component {
                 }],
                 "valueAxes": [{
                     "position": "left",
-                    "title": "Percentage",
                     "labelFunction": function (value) {
                         return value + "%";
                     }
@@ -107,8 +97,7 @@ class LinkCapacity extends React.Component {
                 "rotate": true,
                 "categoryField": "link_capacity",
                 "categoryAxis": {
-                    "gridPosition": "start",
-                    "title": "Link Capacity"
+                    "gridPosition": "start"
                 }
 
             }
