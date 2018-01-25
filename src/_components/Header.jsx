@@ -8,6 +8,15 @@ class Header extends React.Component {
 
         const { user } = this.props;
         console.log(user)
+        var home;
+
+        if(user.role == "ROLE_ADMIN") {
+            home = <li className="active"><Link to="/">Home</Link></li>
+        } else {
+            home = <li className="active"><Link to="/customer">Home</Link></li>
+        }
+
+
         return (
             <div>
             <nav className="navbar navbar-default">
@@ -16,7 +25,11 @@ class Header extends React.Component {
       <a className="navbar-brand" href="#">SevOne</a>
     </div>
     <ul className="nav navbar-nav">
-          <li className="active"><a href="#">Home</a></li>
+          { home }
+
+          {
+            (user.role == "ROLE_ADMIN") ? <li><Link to="/customer_metrics">Customer Metrics</Link></li> : ""
+          }
 
 
         </ul>

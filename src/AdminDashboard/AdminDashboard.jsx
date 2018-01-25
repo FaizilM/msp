@@ -21,7 +21,7 @@ class AdminDashboard extends React.Component {
         const { user, users } = this.props;
         return (
         <div>
-          <Header user = { user } />
+          
           <Container>
             <Row>
             <Col xs="12" md="12">
@@ -113,7 +113,7 @@ class AdminDashboard extends React.Component {
             </div>
              </Col>
             </Row>
-            
+
           </Container>
           </div>
         );

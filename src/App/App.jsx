@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { history } from '../_helpers';
 import { alertActions } from '../_actions';
-import { PrivateRoute} from '../_components';
+import { PrivateRoute, Header } from '../_components';
 import { AdminDashboard } from '../AdminDashboard';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
@@ -28,13 +28,17 @@ class App extends React.Component {
 
     render() {
           const { alert } = this.props;
-          console.log("*************", this.props)
+          console.log("IN APP RENDER", this.props)
         return (
                   <div>
 
                         <Router history={history}>
                             <div>
 
+                            {
+                              (this.props.authentication && this.props.authentication.user && this.props.authentication.user.role) ?
+                              <Header user = { this.props.authentication.user } /> : ""
+                            }
 
 
                             { this.props.authentication && this.props.authentication.user && (this.props.authentication.user.role == "ROLE_ADMIN") ?
