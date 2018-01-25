@@ -50,6 +50,13 @@ class LinkCapacity extends React.Component {
                 "theme": "light",
                 "type": "serial",
                 "startDuration": 0,
+                "legend": {
+                    "horizontalGap":400,
+                    "markerSize": 10,
+                    "data": [
+                      { "title": "Utilization", "color": color.BLUE_COLOR },
+                      ]
+                  },
                 "dataProvider": [{
                     "link_capacity": "Broadband",
                     "capacity": "18Gbps",

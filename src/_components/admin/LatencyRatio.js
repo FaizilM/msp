@@ -45,6 +45,15 @@ class LatencyRatio extends React.Component {
         "theme": "light",
         "type": "serial",
         "startDuration": 0,
+        "legend": {
+          "horizontalGap":70,
+          "markerSize": 10,
+          "data": [
+            { "title": "<30ms", "color": color.GREEN_COLOR },
+            { "title": "<50ms", "color": color.YELLOW_COLOR },
+            { "title": ">150ms", "color": color.ORANGE_COLOR }
+          ]
+        },
         "dataProvider": [{
           "latency_ratio": 150,
           "percentage": 0,

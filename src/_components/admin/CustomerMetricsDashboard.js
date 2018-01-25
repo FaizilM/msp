@@ -73,17 +73,17 @@ class CustomerMetricsDashboard extends Component {
     let tableData;
     for (let index = 0; index < customerData.length; index++) {
       tableData = [];
-      for (let [k, value] of Object.entries(customerData[index])) {
+      for (let [key, value] of Object.entries(customerData[index])) {
         if (value == 0) {
           value = "-";
         }
-        tableData.push(<td>{value}</td>);
+        tableData.push(<td key={key}>{value}</td>);
       }
       customerMetricsData.push(<tr key={index}>{tableData}</tr>);
     }
 
     return (
-                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <table width="100%" className="table table-striped table-bordered table-hover" id="customerData">
                       <thead>
                           <tr>
                           <th>Customer</th>
@@ -103,18 +103,6 @@ class CustomerMetricsDashboard extends Component {
 
                       </tbody>
                   </table>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     );
