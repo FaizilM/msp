@@ -22,21 +22,21 @@ class Dashboard extends React.Component {
 
 
             <Container>
-            <Row className="well">
-                <Col xs="12" md="12">
-                </Col>
-            </Row>
-            <Row>
-                <Col xs="12" md="12">
-                    <h3 className="page-header" style={{ textAlign: 'center' }}>Service Overview </h3>
-                </Col>
-            </Row>
+                <Row className="well">
+                    <Col xs="12" sm="12" md="12" lg="6" xl="12">
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                        <h3 className="page-header" style={{ textAlign: 'left' }}>Dashboard</h3>
+                    </Col>
+                </Row>
 
                 <Row>
-                    <Col xs="12" md="12">
+                    <Col xs="12" sm="12" md="12" lg="12" xl="12">
                         <div className="panel panel-default">
                             <div className="panel-heading">
-                                <i className="fa fa-bell fa-fw"></i> <h3>Dashboard</h3>
+                                <i className="fa fa-bell fa-fw"></i> <h3>Sites</h3>
                             </div>
                             <div className="panel-body">
                                 <div className="list-group">
@@ -48,27 +48,7 @@ class Dashboard extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-
-                    <Col xs="6" md="6">
-
-                        <div className="panel panel-default">
-                            <div className="panel-heading">
-                                <i className="fa fa-bell fa-fw"></i> <h4> Bussiness Impacting Events</h4>
-                            </div>
-                            <div className="panel-body">
-                                <div className="list-group">
-                                    <BussinessImpactEvent />
-                                </div>
-                            </div>
-                        </div>
-                        <Col xs="6" md="6">
-
-                        </Col>
-
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs="6" md="6">
+                    <Col xs="12" sm="12" md="6" lg="6" xl="6">
                         <div className="panel panel-default">
                             <div className="panel-heading">
                                 <i className="fa fa-bell fa-fw"></i>
@@ -81,7 +61,7 @@ class Dashboard extends React.Component {
                             </div>
                         </div>
                     </Col>
-                    <Col xs="6" md="6">
+                    <Col xs="12" sm="12" md="6" lg="6" xl="6">
                         <div className="panel panel-default">
                             <div className="panel-heading">
                                 <i className="fa fa-bell fa-fw"></i>
@@ -96,7 +76,7 @@ class Dashboard extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs="6" md="6">
+                    <Col xs="12" sm="12" md="6" lg="6" xl="6">
                         <div className="panel panel-default">
                             <div className="panel-heading">
                                 <i className="fa fa-bell fa-fw"></i>
@@ -109,7 +89,7 @@ class Dashboard extends React.Component {
                             </div>
                         </div>
                     </Col>
-                    <Col xs="6" md="6">
+                    <Col xs="12" sm="12" md="6" lg="6" xl="6">
                         <div className="panel panel-default">
                             <div className="panel-heading">
                                 <i className="fa fa-bell fa-fw"></i>
@@ -121,6 +101,26 @@ class Dashboard extends React.Component {
                                 </div>
                             </div>
                         </div>
+                    </Col>
+                </Row>
+                <Row>
+
+                    <Col xs="12" sm="12" md="6" lg="6" xl="6">
+
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <i className="fa fa-bell fa-fw"></i> <h4> Bussiness Impacting Events</h4>
+                            </div>
+                            <div className="panel-body">
+                                <div className="list-group">
+                                    <BussinessImpactEvent />
+                                </div>
+                            </div>
+                        </div>
+                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
+
+                        </Col>
+
                     </Col>
                 </Row>
             </Container>

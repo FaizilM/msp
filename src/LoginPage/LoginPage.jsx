@@ -49,59 +49,61 @@ class LoginPage extends React.Component {
         const { alert } = this.props;
         const { username, password, submitted } = this.state;
         return (
-        <div className="limiter">
+            <div className="limiter">
 
-           <div className="container-login100">
+                <div className="container-login100">
 
-              <div className="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+                    <div className="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
 
-              {alert.message &&
-                  <div className={`alert ${alert.type}`} col-sm-4 col-sm-offset-4>{alert.message}</div>
-              }
-                 <form className="login100-form validate-form flex-sb flex-w" onSubmit={this.handleSubmit}>
-
-                    <span className="login100-form-title p-b-32">
-                    Account Login
+                        {alert.message &&
+                            <div className={`alert ${alert.type}`} col-sm-4 col-sm-offset-4>{alert.message}</div>
+                        }
+                        <form className="login100-form validate-form flex-sb flex-w" onSubmit={this.handleSubmit}>
+                            <div class="login_logo">
+                                <img src="src/assets/images/logo.png" alt="logo" style={{ width: "200px" }}></img>
+                            </div>
+                            <span className="login100-form-title p-b-32">
+                              
                     </span>
-                    <span className="txt1 p-b-11">
-                    Username
+                            <span className="txt1 p-b-11">
+                                Username
                     </span>
-                    <div className="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-                       <input type="text" className="input100" name="username" value={username} onChange={this.handleChange} />
-                       {submitted && !username &&
-                       <div className="alert-danger">Username is required</div>
-                       }
-                       <span className="focus-input100"></span>
-                    </div>
-                    <span className="txt1 p-b-11">
-                    Password
+                            <div className="wrap-input100 validate-input m-b-36" data-validate="Username is required">
+                                <input type="text" className="input100" name="username" value={username} onChange={this.handleChange} />
+                                {submitted && !username &&
+                                    <div className="alert-danger">Username is required</div>
+                                }
+                                <span className="focus-input100"></span>
+                            </div>
+                            <span className="txt1 p-b-11">
+                                Password
                     </span>
-                    <div className="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
-                       <span className="btn-show-pass">
-                       <i className="fa fa-eye"></i>
-                       </span>
-                       <input type="password" className="input100" name="password" value={password} onChange={this.handleChange} />
-                       {submitted && !password &&
-                       <div className="alert-danger">Password is required</div>
-                       }
-                       <span className="focus-input100"></span>
-                    </div>
-                    <div className="flex-sb-m w-full p-b-48">
-                       <div className="contact100-form-checkbox">
+                            <div className="wrap-input100 validate-input m-b-12" data-validate="Password is required">
+                                <span className="btn-show-pass">
+                                    <i className="fa fa-eye"></i>
+                                </span>
+                                <input type="password" className="input100" name="password" value={password} onChange={this.handleChange} />
+                                {submitted && !password &&
+                                    <div className="alert-danger">Password is required</div>
+                                }
+                                <span className="focus-input100"></span>
+                            </div>
+                            <div className="flex-sb-m w-full p-b-48">
+                                <div className="contact100-form-checkbox">
 
-                       </div>
-                       <div>
-                       </div>
-                    </div>
-                    <div className="container-login100-form-btn">
-                       <button className="login100-form-btn">
-                       Login
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                            <div className="container-login100-form-btn">
+                                <button className="login100-form-btn">
+                                    Login
                        </button>
+                            </div>
+                        </form>
                     </div>
-                 </form>
-              </div>
-           </div>
-        </div>
+                </div>
+            </div>
 
         );
     }

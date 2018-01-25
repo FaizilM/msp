@@ -21,7 +21,7 @@ class HomePage extends React.Component {
         const { user, users } = this.props;
 
         return (
-            <div style={{ backgroundColor:"lightgray"}}>
+            <div style={{ backgroundColor:"#F3F2F2"}}>
 
                 <Dashboard />
             </div>

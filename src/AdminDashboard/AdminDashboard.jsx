@@ -22,20 +22,20 @@ class AdminDashboard extends React.Component {
 
         const { user, users } = this.props;
         return (
-            <div style={{ backgroundColor: "lightgray" }}>
+            <div style={{ backgroundColor: "#F3F2F2" }}>
 
                 <Container>
                     <Row className="well">
-                        <Col xs="12" md="12">
+                        <Col xs="12" sm="12" md="12" lg="12" xl="12">
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs="12" md="12">
-                            <h3 className="page-header" style={{ textAlign: 'center' }}>Service Overview Across all Enterprise Customers</h3>
+                        <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                            <h3 className="page-header" style={{ textAlign: 'left' }}>Dashboard</h3>
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs="6" md="6">
+                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <i className="fa fa-bell fa-fw"></i>
@@ -48,7 +48,7 @@ class AdminDashboard extends React.Component {
                                 </div>
                             </div>
                         </Col>
-                        <Col xs="6" md="6">
+                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <i className="fa fa-bell fa-fw"></i>
@@ -59,7 +59,7 @@ class AdminDashboard extends React.Component {
                                         <Sites />
                                     </div>
 
-                                    <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%" }}>
+                                    <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%",marginTop: "8.5%" }}>
                                         <a href="#customerData" style={{ color: "white" }}><label>View All Sites</label></a>
                                     </button>
                                 </div>
@@ -67,7 +67,7 @@ class AdminDashboard extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs="6" md="6">
+                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <i className="fa fa-bell fa-fw"></i>
@@ -81,7 +81,7 @@ class AdminDashboard extends React.Component {
                             </div>
 
                         </Col>
-                        <Col xs="6" md="6">
+                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <i className="fa fa-bell fa-fw"></i>
@@ -97,7 +97,7 @@ class AdminDashboard extends React.Component {
                     </Row>
 
                     <Row>
-                        <Col xs="6" md="6">
+                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <i className="fa fa-bell fa-fw"></i>
@@ -110,7 +110,7 @@ class AdminDashboard extends React.Component {
                                 </div>
                             </div>
                         </Col>
-                        <Col xs="6" md="6">
+                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <i className="fa fa-bell fa-fw"></i>
@@ -125,7 +125,7 @@ class AdminDashboard extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs="12" md="12">
+                        <Col xs="12" sm="12" md="12" lg="12" xl="12">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <i className="fa fa-bell fa-fw"></i>
@@ -141,7 +141,7 @@ class AdminDashboard extends React.Component {
 
                     </Row>
                     <Row>
-                        <Col xs="12" md="12">
+                        <Col xs="12" sm="12" md="12" lg="12" xl="12">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <i className="fa fa-bell fa-fw"></i>
