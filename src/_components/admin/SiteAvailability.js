@@ -33,7 +33,7 @@ class SiteAvailability extends React.Component {
       "bar": {
         "theme": "light",
         "type": "serial",
-        "startDuration": 2,
+        "startDuration": 0,
         "dataProvider": [{
           "availability": 99.9,
           "site": 0,
@@ -59,6 +59,7 @@ class SiteAvailability extends React.Component {
           "fillAlphas": 1,
           "lineAlpha": 0.1,
           "type": "column",
+          "fixedColumnWidth": 50,
           "valueField": "site"
         }],
         "chartCursor": {

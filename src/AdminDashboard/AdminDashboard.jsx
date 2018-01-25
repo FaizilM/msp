@@ -70,7 +70,7 @@ class AdminDashboard extends React.Component {
                                     <div className="list-group">
                                         <Sites />
                                     </div>
-                                    <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%" }}> <Link activeClass="active" className="customerData" to="customerData" spy={true} smooth={true} offset={50} duration={500}>
+                                    <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%", marginTop:"44px" }}> <Link activeClass="active" className="customerData" to="customerData" spy={true} smooth={true} offset={50} duration={500}>
                                         <label style={{ color: "white" }}> View All</label>
                                     </Link>
                                     </button>

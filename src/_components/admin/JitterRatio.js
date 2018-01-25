@@ -45,7 +45,7 @@ class JitterRatio extends React.Component {
       "bar": {
         "theme": "light",
         "type": "serial",
-        "startDuration": 2,
+        "startDuration": 0,
         "dataProvider": [{
           "jitter_ratio": 4.5,
           "percentage": 0,
@@ -73,6 +73,7 @@ class JitterRatio extends React.Component {
           "fillAlphas": 1,
           "lineAlpha": 0.1,
           "type": "column",
+          "fixedColumnWidth": 50,
           "valueField": "percentage"
         }],
         "chartCursor": {

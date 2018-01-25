@@ -49,7 +49,7 @@ class LinkCapacity extends React.Component {
             "bar": {
                 "theme": "light",
                 "type": "serial",
-                "startDuration": 2,
+                "startDuration": 0,
                 "dataProvider": [{
                     "link_capacity": "Broadband",
                     "capacity": "18Gbps",
@@ -86,6 +86,7 @@ class LinkCapacity extends React.Component {
                     "fillAlphas": 1,
                     "lineAlpha": 0.1,
                     "type": "column",
+                    "fixedColumnWidth": 50,
                     "valueField": "percentage"
                     // "labelFunction":
                 }],

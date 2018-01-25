@@ -46,7 +46,7 @@ class PacketLoss extends Component {
       "bar": {
         "theme": "light",
         "type": "serial",
-        "startDuration": 2,
+        "startDuration": 0,
         "dataProvider": [{
           "packet_loss": 1,
           "percentage": 0,
@@ -74,6 +74,7 @@ class PacketLoss extends Component {
           "fillAlphas": 1,
           "lineAlpha": 0.1,
           "type": "column",
+          "fixedColumnWidth": 50,
           "valueField": "percentage"
           // "labelFunction":
         }],
