@@ -85,7 +85,7 @@ class CustomerMetricsDashboard extends Component {
     return (
 
 
-      <div name="customerData">
+      <div name="customerData" id="customerData">
         <table border="1px solid">
           <tr>
             <th>Customer</th>

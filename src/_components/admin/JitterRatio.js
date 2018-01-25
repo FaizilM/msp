@@ -46,10 +46,16 @@ class JitterRatio extends React.Component {
         "theme": "light",
         "type": "serial",
         "startDuration": 2,
+        "legend": {
+          "useGraphSettings": true,
+          "data": [{ "title": "< 4.5%", "color": "red", "rollOverColor":"red" },
+          { "title": "< 7.5%", "markerBorderColor": "color".YELLOW_COLOR, "backgroundAlpha":"0.6"},
+          { "title": "> 7.5%", "color": color.ORANGE_COLOR }]
+        },
         "dataProvider": [{
           "jitter_ratio": 4.5,
           "percentage": 0,
-          "color": color.ORANGE_COLOR
+          "color": color.GREEN_COLOR
         }, {
           "jitter_ratio": 7.5,
           "percentage": 0,
@@ -57,7 +63,7 @@ class JitterRatio extends React.Component {
         }, {
           "jitter_ratio": 7.6,
           "percentage": 0,
-          "color": color.GREEN_COLOR
+          "color": color.ORANGE_COLOR
         }],
         "valueAxes": [{
           "position": "left",
