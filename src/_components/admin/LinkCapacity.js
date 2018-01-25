@@ -3,6 +3,7 @@ import Chart from '../chart/chart';
 import metricsData from '../../metricsData.json';
 import { indexOf } from 'lodash';
 import '../../assets/css/App.css';
+import { color } from '../../_constants';
 
 let linkCapacityData = () => {
     let capacity = [];
@@ -53,27 +54,26 @@ class LinkCapacity extends React.Component {
                     "link_capacity": "Broadband",
                     "capacity": "18Gbps",
                     "percentage": 0,
-                    "color": "#0D8ECF"
+                    "color": color.BLUE_COLOR
                 }, {
                     "link_capacity": "MPLS",
                     "capacity": "45Gbps",
                     "percentage": 0,
-                    "color": "#0D8ECF"
+                    "color": color.BLUE_COLOR
                 }, {
                     "link_capacity": "T1 Lines",
                     "capacity": "4Gbps",
                     "percentage": 0,
-                    "color": "#0D8ECF"
+                    "color": color.BLUE_COLOR
                 },
                 {
                     "link_capacity": "4G/LTE",
                     "capacity": "29Gbps",
                     "percentage": 0,
-                    "color": "#0D8ECF"
+                    "color": color.BLUE_COLOR
                 }],
                 "valueAxes": [{
                     "position": "left",
-                    "title": "Percentage",
                     "labelFunction": function (value) {
                         return value + "%";
                     }
@@ -87,7 +87,7 @@ class LinkCapacity extends React.Component {
                     "lineAlpha": 0.1,
                     "type": "column",
                     "valueField": "percentage"
-                    // "labelFunction": 
+                    // "labelFunction":
                 }],
                 "chartCursor": {
                     "categoryBalloonEnabled": false,
@@ -97,8 +97,7 @@ class LinkCapacity extends React.Component {
                 "rotate": true,
                 "categoryField": "link_capacity",
                 "categoryAxis": {
-                    "gridPosition": "start",
-                    "title": "Link Capacity"
+                    "gridPosition": "start"
                 }
 
             }

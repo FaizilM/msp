@@ -9,6 +9,7 @@ import LinkCapacity from '../_components/admin/LinkCapacity';
 import LatencyRatio from '../_components/admin/LatencyRatio';
 import JitterRatio from '../_components/admin/JitterRatio';
 import SiteAvailability from '../_components/admin/SiteAvailability';
+import CustomerMetricsDashboard from '../_components/admin/CustomerMetricsDashboard';
 import { userActions } from '../_actions';
 
 import { Header } from '../_components/Header';
@@ -142,7 +143,7 @@ class AdminDashboard extends React.Component {
             </div>
              </Col>
             </Row>
-
+            <CustomerMetricsDashboard/>
           </Container>
           </div>
         );

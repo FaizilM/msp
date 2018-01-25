@@ -19,9 +19,9 @@ table {
 .inventory tr:nth-child(odd) {
   background-color: #00bfff;
 }
-
-
-
+.amcharts-chart-div a{
+  visibility: hidden;
+}
 .buss_impact_eve_table {
   padding: 20px !important;
   color: white;

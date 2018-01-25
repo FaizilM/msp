@@ -1,6 +1,8 @@
 import React from 'react';
 import Chart from '../chart/chart';
 import metricsDatas from '../../metricsData.json';
+import { color } from '../../_constants';
+
 
 let jitterRatioData = () => {
   let jitter = [0, 0, 0];
@@ -47,19 +49,18 @@ class JitterRatio extends React.Component {
         "dataProvider": [{
           "jitter_ratio": 4.5,
           "percentage": 0,
-          "color": "#FF0F00"
+          "color": color.ORANGE_COLOR
         }, {
           "jitter_ratio": 7.5,
           "percentage": 0,
-          "color": "#0D8ECF"
+          "color": color.YELLOW_COLOR
         }, {
           "jitter_ratio": 7.6,
           "percentage": 0,
-          "color": "#04D215"
+          "color": color.GREEN_COLOR
         }],
         "valueAxes": [{
           "position": "left",
-          "title": "Percentage",
           "labelFunction": function (value) {
             return value + "%";
           }
@@ -83,7 +84,6 @@ class JitterRatio extends React.Component {
         "categoryField": "jitter_ratio",
         "categoryAxis": {
           "gridPosition": "start",
-          "title": "Jitter Ratio",
           "labelFunction": function (value) {
             if (value == 4.5 || value == 7.5) {
               return "<" + value + "ms";
@@ -95,28 +95,28 @@ class JitterRatio extends React.Component {
         }
 
       }
-    };
-    let configValue = config.bar;
+  };
+let configValue = config.bar;
 
-    const jitterRatio = jitterRatioData();
+const jitterRatio = jitterRatioData();
 
-    for (let [Key, Value] of Object.entries(configValue)) {
-      if (Key == "dataProvider") {
-        for (let data = 0; data < Value.length; data++) {
-          Value[data].percentage = jitterRatio[data];
-        }
-      }
-
+for (let [Key, Value] of Object.entries(configValue)) {
+  if (Key == "dataProvider") {
+    for (let data = 0; data < Value.length; data++) {
+      Value[data].percentage = jitterRatio[data];
     }
+  }
 
-    return (
+}
 
-      <div>
-        <Chart config={configValue} />
-      </div>
+return (
+
+  <div>
+    <Chart config={configValue} />
+  </div>
 
 
-    );
+);
   }
 }
 

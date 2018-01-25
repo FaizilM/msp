@@ -1,6 +1,6 @@
 [
     {
-        "Customer": "ABC",
+        "customer": "ABC",
         "sites": [
             {
                 "id": 1,
@@ -9,6 +9,7 @@
                 "app_route_change": true,
                 "no_app_route":false,
                 "bandwidth": 10.7,
+                "managed_CPE":6,
                 "links": [
                     {
                         "broadband": {
@@ -49,7 +50,7 @@
         ]
     },
     {
-        "Customer": "DEF",
+        "customer": "DEF",
          "sites": [
             {
                 "id": 1,
@@ -58,6 +59,7 @@
                 "app_route_change": false,
                 "no_app_route":false,
                 "bandwidth": 10.7,
+                "managed_CPE":1,
                 "links": [
                     {
                         "broadband": {
@@ -98,7 +100,7 @@
         ]
     },
     {
-        "Customer": "GHI",
+        "customer": "GHI",
         "sites": [
             {
                 "id": 1,
@@ -106,6 +108,7 @@
                 "app_route_change": false,
                 "no_app_route":false,
                 "bandwidth": 10.7,
+                "managed_CPE":4,
                 "links": [
                     {
                         "broadband": {
@@ -146,7 +149,7 @@
         ]
     },
     {
-        "Customer": "JKL",
+        "customer": "JKL",
         "sites": [
             {
                 "id": 1,
@@ -155,6 +158,7 @@
                 "app_route_change": true,
                 "no_app_route":false,
                 "bandwidth": 10.7,
+                "managed_CPE":3,
                 "links": [
                     {
                         "broadband": {
@@ -195,7 +199,7 @@
         ]
     },
     {
-        "Customer": "MNO",
+        "customer": "MNO",
          "sites": [
             {
                 "id": 1,
@@ -204,6 +208,7 @@
                 "app_route_change": false,
                 "no_app_route":true,
                 "bandwidth": 10.7,
+                "managed_CPE":5,
                 "links": [
                     {
                         "broadband": {
@@ -244,7 +249,7 @@
         ]
     },
     {
-        "Customer": "PQR",
+        "customer": "PQR",
         "sites": [
             {
                 "id": 1,
@@ -253,6 +258,7 @@
                 "app_route_change": false,
                 "no_app_route":false,
                 "bandwidth": 10.7,
+                "managed_CPE":2,
                 "links": [
                     {
                         "broadband": {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import metricsData from '../../metricsData.json'
 import '../../assets/css/App.css';
 import Chart from '../chart/chart';
+import { color } from '../../_constants';
 
 let packetLossData = () => {
   let loss = [0, 0, 0];
@@ -49,19 +50,18 @@ class PacketLoss extends Component {
         "dataProvider": [{
           "packet_loss": 1,
           "percentage": 0,
-          "color": "#FF0F00"
+          "color": color.ORANGE_COLOR
         }, {
           "packet_loss": 2.5,
           "percentage": 0,
-          "color": "#0D8ECF"
+          "color": color.YELLOW_COLOR
         }, {
           "packet_loss": 2.6,
           "percentage": 0,
-          "color": "#04D215"
+          "color": color.GREEN_COLOR
         }],
         "valueAxes": [{
           "position": "left",
-          "title": "Percentage",
           "labelFunction": function (value) {
             return value + "%";
           }
@@ -75,7 +75,7 @@ class PacketLoss extends Component {
           "lineAlpha": 0.1,
           "type": "column",
           "valueField": "percentage"
-          // "labelFunction": 
+          // "labelFunction":
         }],
         "chartCursor": {
           "categoryBalloonEnabled": false,
@@ -86,7 +86,6 @@ class PacketLoss extends Component {
         "categoryField": "packet_loss",
         "categoryAxis": {
           "gridPosition": "start",
-          "title": "Packet Loss",
           "labelFunction": function (value) {
             if (value == 1 || value == 2.5) {
               return "<" + value + "%";

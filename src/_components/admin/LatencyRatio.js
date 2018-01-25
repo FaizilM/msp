@@ -1,6 +1,7 @@
 import React from 'react';
 import Chart from '../chart/chart';
 import metricsDatas from '../../metricsData.json';
+import { color } from '../../_constants';
 
 let latencyRatioData = () => {
   let latency = [0, 0, 0];
@@ -47,19 +48,18 @@ class LatencyRatio extends React.Component {
         "dataProvider": [{
           "latency_ratio": 150,
           "percentage": 0,
-          "color": "#FF0F00"
+          "color": color.ORANGE_COLOR
         }, {
           "latency_ratio": 50,
           "percentage": 0,
-          "color": "#0D8ECF"
+          "color": color.YELLOW_COLOR
         }, {
           "latency_ratio": 30,
           "percentage": 0,
-          "color": "#04D215"
+          "color": color.GREEN_COLOR
         }],
         "valueAxes": [{
           "position": "left",
-          "title": "Percentage",
           "labelFunction": function (value) {
             return value / 100;
           }
@@ -73,7 +73,7 @@ class LatencyRatio extends React.Component {
           "lineAlpha": 0.1,
           "type": "column",
           "valueField": "percentage"
-          // "labelFunction": 
+          // "labelFunction":
         }],
         "chartCursor": {
           "categoryBalloonEnabled": false,
@@ -84,7 +84,6 @@ class LatencyRatio extends React.Component {
         "categoryField": "latency_ratio",
         "categoryAxis": {
           "gridPosition": "start",
-          "title": "Latency Ratio",
           "labelFunction": function (value) {
 
             if (value == 30 || value == 50) {
