@@ -22,7 +22,7 @@ class HomePage extends React.Component {
 
         return (
             <div>
-                <Header user={ user } />
+                
                 <Dashboard />
             </div>
         );

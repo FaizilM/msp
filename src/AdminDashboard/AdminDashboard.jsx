@@ -39,7 +39,7 @@ class AdminDashboard extends React.Component {
         const { user, users } = this.props;
         return (
             <div>
-                <Header user={user} />
+
                 <Container>
                     <Row>
                         <Col xs="12" md="12">
@@ -57,7 +57,6 @@ class AdminDashboard extends React.Component {
                                     <div className="list-group">
                                         <Inventory />
                                     </div>
-
                                 </div>
                             </div>
                         </Col>
@@ -71,16 +70,15 @@ class AdminDashboard extends React.Component {
                                     <div className="list-group">
                                         <Sites />
                                     </div>
-                                        <button className="btn btn-primary btn-block" style={{width:"50%",marginLeft:"25%"}}> <Link activeClass="active" className="customerData" to="customerData" spy={true} smooth={true} offset={50} duration={500}>
-                                        <label style={{color:"white"}}> View All</label>
-                                        </Link>
-                                       </button>
+                                    <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%" }}> <Link activeClass="active" className="customerData" to="customerData" spy={true} smooth={true} offset={50} duration={500}>
+                                        <label style={{ color: "white" }}> View All</label>
+                                    </Link>
+                                    </button>
                                 </div>
                             </div>
                         </Col>
                     </Row>
                     <Row>
-                        
                         <Col xs="6" md="6">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
@@ -98,11 +96,11 @@ class AdminDashboard extends React.Component {
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <i className="fa fa-bell fa-fw"></i>
-                                    <h3>Packet Loss</h3>
+                                    <h3>Latency Ratio</h3>
                                 </div>
                                 <div className="panel-body">
                                     <div className="list-group">
-                                        <PacketLoss />
+                                        <LatencyRatio />
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +108,8 @@ class AdminDashboard extends React.Component {
                     </Row>
 
                     <Row>
-                   
+
+
                         <Col xs="6" md="6">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
@@ -120,6 +119,19 @@ class AdminDashboard extends React.Component {
                                 <div className="panel-body">
                                     <div className="list-group">
                                         <JitterRatio />
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col xs="6" md="6">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Packet Loss</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <PacketLoss />
                                     </div>
                                 </div>
                             </div>
@@ -154,6 +166,7 @@ class AdminDashboard extends React.Component {
                         </Col>
                     </Row>
                     <CustomerMetricsDashboard />
+
                 </Container>
             </div>
         );

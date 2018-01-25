@@ -13,7 +13,7 @@ class CustomerMetrics extends Component {
 
       <div>
 
- </div>
+      </div>
     );
   }
 }

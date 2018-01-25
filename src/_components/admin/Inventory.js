@@ -15,11 +15,11 @@ let inventoryData = () => {
     managedsites = metricsDataValue.sites.length;
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
-      
+
       links += sites[site].links.length;
       managedCPE += sites[site].managed_CPE;
     }
-   }
+  }
   inventory["managed_sites"] = managedsites;
   inventory["links"] = links;
   inventory["managed_CPE"] = managedCPE;
