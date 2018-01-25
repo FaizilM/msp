@@ -165,7 +165,23 @@ class AdminDashboard extends React.Component {
                             </div>
                         </Col>
                     </Row>
-                    <CustomerMetricsDashboard />
+                    <Row>
+                        <Col xs="12" md="12">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <i className="fa fa-bell fa-fw"></i>
+                                <h3>Customer Metrics Dashboard</h3>
+                            </div>
+                            <div className="panel-body">
+                                <div className="list-group">
+                                    <CustomerMetricsDashboard />
+                                </div>
+                            </div>
+                        </div>
+
+                        </Col>
+                    </Row>
+
 
                 </Container>
             </div>

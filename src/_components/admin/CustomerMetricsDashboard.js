@@ -83,27 +83,40 @@ class CustomerMetricsDashboard extends Component {
     }
 
     return (
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                      <thead>
+                          <tr>
+                          <th>Customer</th>
+                          <th>No of Sites</th>
+                          <th>Sites with App Route Policy</th>
+                          <th>Sites with No App Route</th>
+                          <th>Sites with App Route Change</th>
+                          <th>Sites with Utilization below 75%</th>
+                          <th>Sites with Packet Loss above 2.5%</th>
+                          <th>Sites with Jitter above 22ms</th>
+                          <th>Sites with Latency above 250ms</th>
+                          <th>Sites with Availability above 96%</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {customerMetricsData}
+
+                      </tbody>
+                  </table>
 
 
-      <div name="customerData">
-        <table border="1px solid">
-          <tr>
-            <th>Customer</th>
-            <th>No of Sites</th>
-            <th>Sites with App Route Policy</th>
-            <th>Sites with No App Route</th>
-            <th>Sites with App Route Change</th>
-            <th>Sites with Utilization below 75%</th>
-            <th>Sites with Packet Loss above 2.5%</th>
-            <th>Sites with Jitter above 22ms</th>
-            <th>Sites with Latency above 250ms</th>
-            <th>Sites with Availability above 96%</th>
-          </tr>
-          <tbody>
-            {customerMetricsData}
-          </tbody>
-        </table>
-      </div>
+
+
+
+
+
+
+
+
+
+
+
+
     );
   }
 };
