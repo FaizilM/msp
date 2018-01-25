@@ -59,7 +59,7 @@ class LoginPage extends React.Component {
                             <div className={`alert ${alert.type}`} col-sm-4 col-sm-offset-4>{alert.message}</div>
                         }
                         <form className="login100-form validate-form flex-sb flex-w" onSubmit={this.handleSubmit}>
-                            <div class="login_logo">
+                            <div className="login_logo">
                                 <img src="src/assets/images/logo.png" alt="logo" style={{ width: "200px" }}></img>
                             </div>
                             <span className="login100-form-title p-b-32">
