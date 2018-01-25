@@ -8,25 +8,25 @@ let siteAvailabilityData = () => {
     let totalSite = 0;
     let availability = [0, 0, 0];
     for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
-      totalSite += metricsDataValue.sites.length;
-      let sites = metricsDataValue.sites;
-      for (let site = 0; site < sites.length; site++) {
-        if (sites[site].app_route_policy == true) {
-            availability[0] += 1;
+        totalSite += metricsDataValue.sites.length;
+        let sites = metricsDataValue.sites;
+        for (let site = 0; site < sites.length; site++) {
+            if (sites[site].app_route_policy == true) {
+                availability[0] += 1;
+            }
+
+            if (sites[site].app_route_change == true) {
+                availability[1] += 1;
+            }
+            if (sites[site].no_app_route == true) {
+                availability[2] += 1;
+            }
+
         }
-        
-        if (sites[site].app_route_change == true) {
-          availability[1] += 1;
-      }
-      if (sites[site].no_app_route == true) {
-        availability[2] += 1;
     }
-  
-      }
-    }
-   
+
     return availability;
-  };
+};
 class Sites extends Component {
     constructor(props) {
         super(props);
@@ -66,6 +66,7 @@ class Sites extends Component {
                             <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[0]}</text>
                         </Link>
                     </svg>
+                    <div><h4>App Route Policy</h4></div>
                 </div>
                 <div style={{ float: 'right' }}>
                     <svg height="120" width="120">
@@ -74,6 +75,7 @@ class Sites extends Component {
                             <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[1]}</text>
                         </Link>
                     </svg>
+                    <div><h4>App Route Change</h4></div>
                 </div>
                 <div style={{ float: 'right' }}>
                     <svg height="120" width="120">
@@ -82,9 +84,10 @@ class Sites extends Component {
                             <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[2]}</text>
                         </Link>
                     </svg>
+                    <div><h4>No App Route</h4></div>
                 </div>
+                
             </div>
-
         );
     }
 }
