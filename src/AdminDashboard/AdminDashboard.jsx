@@ -22,9 +22,9 @@ class AdminDashboard extends React.Component {
 
         const { user, users } = this.props;
         return (
-            <div>
+            <div style={{ backgroundColor: "lightgray" }}>
 
-                <Container style={{ backgroundColor: "lightgray" }}>
+                <Container>
                     <Row className="well">
                         <Col xs="12" md="12">
                         </Col>

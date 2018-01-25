@@ -21,7 +21,7 @@ class Dashboard extends React.Component {
         return (
 
 
-            <Container style={{ backgroundColor:"lightgray"}}>
+            <Container>
             <Row className="well">
                 <Col xs="12" md="12">
                 </Col>
