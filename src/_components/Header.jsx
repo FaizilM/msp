@@ -7,7 +7,6 @@ class Header extends React.Component {
     render() {
 
         const { user } = this.props;
-        console.log(user)
         var home;
 
         if (user.role == "ROLE_ADMIN") {
@@ -19,7 +18,7 @@ class Header extends React.Component {
 
         return (
             <div>
-                <nav className="navbar navbar-default">
+                <nav className="navbar navbar-default navbar-fixed-top">
                     <div className="container-fluid">
                         <div className="navbar-header">
                             <a className="navbar-brand" href="#">SevOne</a>

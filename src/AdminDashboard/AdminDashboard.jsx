@@ -17,22 +17,6 @@ import { Container, Row, Col } from 'reactstrap';
 
 
 class AdminDashboard extends React.Component {
-    componentDidMount() {
-
-        Events.scrollEvent.register('begin', function () {
-            console.log("begin", arguments);
-        });
-
-        Events.scrollEvent.register('end', function () {
-            console.log("end", arguments);
-        });
-
-    }
-
-    componentWillUnmount() {
-        Events.scrollEvent.remove('begin');
-        Events.scrollEvent.remove('end');
-    }
 
     render() {
 
@@ -40,7 +24,11 @@ class AdminDashboard extends React.Component {
         return (
             <div>
 
-                <Container style={{ backgroundColor:"lightgray"}}>
+                <Container style={{ backgroundColor: "lightgray" }}>
+                    <Row className="well">
+                        <Col xs="12" md="12">
+                        </Col>
+                    </Row>
                     <Row>
                         <Col xs="12" md="12">
                             <h3 className="page-header" style={{ textAlign: 'center' }}>Service Overview Across all Enterprise Customers</h3>
@@ -70,9 +58,9 @@ class AdminDashboard extends React.Component {
                                     <div className="list-group">
                                         <Sites />
                                     </div>
-                                    <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%", marginTop:"44px" }}> <Link activeClass="active" className="customerData" to="customerData" spy={true} smooth={true} offset={50} duration={500}>
-                                        <label style={{ color: "white" }}> View All</label>
-                                    </Link>
+
+                                    <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%" }}>
+                                        <a href="#customerData" style={{ color: "white" }}><label>View All Sites</label></a>
                                     </button>
                                 </div>
                             </div>
@@ -80,17 +68,17 @@ class AdminDashboard extends React.Component {
                     </Row>
                     <Row>
                         <Col xs="6" md="6">
-                        <div className="panel panel-default">
-                            <div className="panel-heading">
-                                <i className="fa fa-bell fa-fw"></i>
-                                <h3>Site Availability</h3>
-                            </div>
-                            <div className="panel-body">
-                                <div className="list-group">
-                                    <SiteAvailability />
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Site Availability</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <SiteAvailability />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                         </Col>
                         <Col xs="6" md="6">
@@ -109,8 +97,6 @@ class AdminDashboard extends React.Component {
                     </Row>
 
                     <Row>
-
-
                         <Col xs="6" md="6">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
@@ -140,33 +126,33 @@ class AdminDashboard extends React.Component {
                     </Row>
                     <Row>
                         <Col xs="12" md="12">
-                        <div className="panel panel-default">
-                            <div className="panel-heading">
-                                <i className="fa fa-bell fa-fw"></i>
-                                <h3>Link Capacity Utilization</h3>
-                            </div>
-                            <div className="panel-body">
-                                <div className="list-group">
-                                    <LinkCapacity />
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Link Capacity Utilization</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <LinkCapacity />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </Col>
 
                     </Row>
                     <Row>
                         <Col xs="12" md="12">
-                        <div className="panel panel-default">
-                            <div className="panel-heading">
-                                <i className="fa fa-bell fa-fw"></i>
-                                <h3>Customer Metrics Dashboard</h3>
-                            </div>
-                            <div className="panel-body">
-                                <div className="list-group">
-                                    <CustomerMetricsDashboard />
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Customer Metrics Dashboard</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <CustomerMetricsDashboard />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                         </Col>
                     </Row>
