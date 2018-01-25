@@ -95,28 +95,28 @@ class JitterRatio extends React.Component {
         }
 
       }
-  };
-let configValue = config.bar;
+    };
+    let configValue = config.bar;
 
-const jitterRatio = jitterRatioData();
+    const jitterRatio = jitterRatioData();
 
-for (let [Key, Value] of Object.entries(configValue)) {
-  if (Key == "dataProvider") {
-    for (let data = 0; data < Value.length; data++) {
-      Value[data].percentage = jitterRatio[data];
+    for (let [Key, Value] of Object.entries(configValue)) {
+      if (Key == "dataProvider") {
+        for (let data = 0; data < Value.length; data++) {
+          Value[data].percentage = jitterRatio[data];
+        }
+      }
+
     }
-  }
 
-}
+    return (
 
-return (
-
-  <div>
-    <Chart config={configValue} />
-  </div>
+      <div>
+        <Chart config={configValue} />
+      </div>
 
 
-);
+    );
   }
 }
 

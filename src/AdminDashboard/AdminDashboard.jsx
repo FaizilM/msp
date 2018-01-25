@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../assets/css/App.css';
 import Inventory from '../_components/admin/Inventory';
@@ -11,142 +10,165 @@ import JitterRatio from '../_components/admin/JitterRatio';
 import SiteAvailability from '../_components/admin/SiteAvailability';
 import CustomerMetricsDashboard from '../_components/admin/CustomerMetricsDashboard';
 import { userActions } from '../_actions';
+import { Link, Events } from 'react-scroll';
 
 import { Header } from '../_components/Header';
 import { Container, Row, Col } from 'reactstrap';
 
 
 class AdminDashboard extends React.Component {
+    componentDidMount() {
+
+        Events.scrollEvent.register('begin', function () {
+            console.log("begin", arguments);
+        });
+
+        Events.scrollEvent.register('end', function () {
+            console.log("end", arguments);
+        });
+
+    }
+
+    componentWillUnmount() {
+        Events.scrollEvent.remove('begin');
+        Events.scrollEvent.remove('end');
+    }
 
     render() {
 
         const { user, users } = this.props;
         return (
-        <div>
+            <div>
 
-          <Container>
-            <Row>
-            <Col xs="12" md="12">
-              <h3 className="page-header" style={{textAlign:'center'}}>Service Overview Across all Enterprise Customers</h3>
-            </Col>
-            </Row>
-            <Row>
-               <Col xs="6" md="6">
-               <div className="panel panel-default">
-                  <div className="panel-heading">
-                     <i className="fa fa-bell fa-fw"></i>
-                     <h3>Inventory</h3>
-                  </div>
-                  <div className="panel-body">
-                     <div className="list-group">
-                        <Inventory />
-                     </div>
-                  </div>
-               </div>
-               </Col>
-               <Col xs="6" md="6">
-               <div className="panel panel-default">
-                  <div className="panel-heading">
-                     <i className="fa fa-bell fa-fw"></i>
-                     <h3>Sites</h3>
-                  </div>
-                  <div className="panel-body">
-                     <div className="list-group">
-                        <Sites />
-                     </div>
-                  </div>
-               </div>
-               </Col>
-            </Row>
-            <Row>
-            <Col xs="6" md="6">
-            <div className="panel panel-default">
-               <div className="panel-heading">
-                  <i className="fa fa-bell fa-fw"></i>
-                  <h3>Link Capacity Utilization</h3>
-               </div>
-               <div className="panel-body">
-                  <div className="list-group">
-                      <LinkCapacity />
-                  </div>
-               </div>
-            </div>
-             </Col>
-             <Col xs="6" md="6">
-            <div className="panel panel-default">
-               <div className="panel-heading">
-                  <i className="fa fa-bell fa-fw"></i>
-                  <h3>Packet Loss</h3>
-               </div>
-               <div className="panel-body">
-                  <div className="list-group">
-                      <PacketLoss />
-                  </div>
-               </div>
-            </div>
-             </Col>
-            </Row>
+                <Container>
+                    <Row>
+                        <Col xs="12" md="12">
+                            <h3 className="page-header" style={{ textAlign: 'center' }}>Service Overview Across all Enterprise Customers</h3>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs="6" md="6">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Inventory</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <Inventory />
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col xs="6" md="6">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Sites</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <Sites />
+                                    </div>
+                                    <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%" }}> <Link activeClass="active" className="customerData" to="customerData" spy={true} smooth={true} offset={50} duration={500}>
+                                        <label style={{ color: "white" }}> View All</label>
+                                    </Link>
+                                    </button>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs="6" md="6">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Link Capacity Utilization</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <LinkCapacity />
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col xs="6" md="6">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Latency Ratio</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <LatencyRatio />
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
 
-            <Row>
-            <Col xs="6" md="6">
-            <div className="panel panel-default">
-               <div className="panel-heading">
-                  <i className="fa fa-bell fa-fw"></i>
-                  <h3>Latency Ratio</h3>
-               </div>
-               <div className="panel-body">
-                  <div className="list-group">
-                      <LatencyRatio />
-                  </div>
-               </div>
-            </div>
-             </Col>
-             <Col xs="6" md="6">
-            <div className="panel panel-default">
-               <div className="panel-heading">
-                  <i className="fa fa-bell fa-fw"></i>
-                  <h3>Jitter Ratio</h3>
-               </div>
-               <div className="panel-body">
-                  <div className="list-group">
-                    <JitterRatio />
-                  </div>
-               </div>
-            </div>
-             </Col>
-            </Row>
-            <Row>
-            <Col xs="6" md="6">
-            <div className="panel panel-default">
-               <div className="panel-heading">
-                  <i className="fa fa-bell fa-fw"></i>
-                  <h3>Site Availability</h3>
-               </div>
-               <div className="panel-body">
-                  <div className="list-group">
-                      <SiteAvailability />
-                  </div>
-               </div>
-            </div>
-             </Col>
-             <Col xs="6" md="6">
-            <div className="panel panel-default">
-               <div className="panel-heading">
-                  <i className="fa fa-bell fa-fw"></i>
-                  <h3></h3>
-               </div>
-               <div className="panel-body">
-                  <div className="list-group">
+                    <Row>
 
-                  </div>
-               </div>
-            </div>
-             </Col>
-            </Row>
-            <CustomerMetricsDashboard/>
 
-          </Container>
-          </div>
+                        <Col xs="6" md="6">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Jitter Ratio</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <JitterRatio />
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col xs="6" md="6">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Packet Loss</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <PacketLoss />
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs="6" md="6">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Site Availability</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <SiteAvailability />
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col xs="6" md="6">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3></h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                    <CustomerMetricsDashboard />
+
+                </Container>
+            </div>
         );
     }
 }

@@ -8,11 +8,11 @@ class PacketLoss extends Component {
     let config = [];
     return (
 
+      <div >
         <div >
-          <div >
-            <AmCharts.React options={this.props.config} style={{ width: "100%", height: "350px"}}/>
-          </div>
+          <AmCharts.React options={this.props.config} style={{ width: "100%", height: "350px" }} />
         </div>
+      </div>
 
     );
   }
