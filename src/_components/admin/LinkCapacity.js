@@ -51,7 +51,7 @@ class LinkCapacity extends React.Component {
                 "type": "serial",
                 "startDuration": 0,
                 "legend": {
-                    "horizontalGap":100,
+                    "horizontalGap":400,
                     "markerSize": 10,
                     "data": [
                       { "title": "Utilization", "color": color.BLUE_COLOR },

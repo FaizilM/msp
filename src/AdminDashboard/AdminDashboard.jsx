@@ -24,7 +24,7 @@ class AdminDashboard extends React.Component {
         return (
             <div>
 
-                <Container>
+                <Container style={{ backgroundColor: "lightgray" }}>
                     <Row className="well">
                         <Col xs="12" md="12">
                         </Col>
@@ -71,14 +71,15 @@ class AdminDashboard extends React.Component {
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <i className="fa fa-bell fa-fw"></i>
-                                    <h3>Link Capacity Utilization</h3>
+                                    <h3>Site Availability</h3>
                                 </div>
                                 <div className="panel-body">
                                     <div className="list-group">
-                                        <LinkCapacity />
+                                        <SiteAvailability />
                                     </div>
                                 </div>
                             </div>
+
                         </Col>
                         <Col xs="6" md="6">
                             <div className="panel panel-default">
@@ -124,32 +125,20 @@ class AdminDashboard extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs="6" md="6">
+                        <Col xs="12" md="12">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <i className="fa fa-bell fa-fw"></i>
-                                    <h3>Site Availability</h3>
+                                    <h3>Link Capacity Utilization</h3>
                                 </div>
                                 <div className="panel-body">
                                     <div className="list-group">
-                                        <SiteAvailability />
+                                        <LinkCapacity />
                                     </div>
                                 </div>
                             </div>
                         </Col>
-                        <Col xs="6" md="6">
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
-                                    <h3></h3>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="list-group">
 
-                                    </div>
-                                </div>
-                            </div>
-                        </Col>
                     </Row>
                     <Row>
                         <Col xs="12" md="12">
