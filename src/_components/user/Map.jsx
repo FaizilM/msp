@@ -20,10 +20,6 @@ class Map extends React.Component {
     var config = {
       "type": "map",
       "theme": "light",
-
-      "titles": [{
-        "text": "Your Sites"
-      },],
       "dataProvider": {
         "linkToObject": "paris",
         "map": "worldLow",

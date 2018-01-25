@@ -18,7 +18,8 @@
 
 body, html {
 	height: 100%;
-	font-family: Raleway-Regular, sans-serif;
+  font-family: Raleway-Regular, sans-serif;
+  color:"#DDDDDD";
 }
 
 /*---------------------------------------------*/
@@ -384,7 +385,7 @@ iframe {
   padding: 0 20px;
   min-width: 150px;
   height: 55px;
-  background-color: #333333;
+  background-color: #30649b;
   border-radius: 27px;
 
   -webkit-transition: all 0.4s;
@@ -394,7 +395,7 @@ iframe {
 }
 
 .login100-form-btn:hover {
-  background-color: #57b846;
+  background-color: #ED8B00;
 }
 
 

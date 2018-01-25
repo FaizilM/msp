@@ -39,7 +39,7 @@ class Sites extends Component {
             <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <div style={{ float: 'left' }}>
                     <svg height="120" width="120">
-                        <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill={color.GREEN_COLOR} />
+                        <circle cx="60" cy="60" r="50" stroke={color.GREEN_COLOR} strokeWidth="5" fill="white"/>
                         <a href="#customerData" style={{ color: "white", textDecoration: 'underline' }}>
                             <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[0]}</text>
                         </a>
@@ -48,7 +48,7 @@ class Sites extends Component {
                 </div>
                 <div style={{ float: 'right' }}>
                     <svg height="120" width="120">
-                        <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill={color.YELLOW_COLOR} />
+                        <circle cx="60" cy="60" r="50" stroke="#FFFF00" strokeWidth="5" fill="white"/>
                         <a href="#customerData" style={{ color: "white", textDecoration: 'underline' }}>
                             <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[1]}</text>
                         </a>
@@ -57,7 +57,7 @@ class Sites extends Component {
                 </div>
                 <div style={{ float: 'right' }}>
                     <svg height="120" width="120">
-                        <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill={color.ORANGE_COLOR} />
+                        <circle cx="60" cy="60" r="50" stroke="#ff0011" strokeWidth="5" fill="white"/>
                         <a href="#customerData" style={{ color: "white", textDecoration: 'underline' }}>
                             <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[2]}</text>
                         </a>
