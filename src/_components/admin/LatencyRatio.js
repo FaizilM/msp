@@ -44,7 +44,16 @@ class LatencyRatio extends React.Component {
       "bar": {
         "theme": "light",
         "type": "serial",
-        "startDuration": 2,
+        "startDuration": 0,
+        "legend": {
+          "horizontalGap":70,
+          "markerSize": 10,
+          "data": [
+            { "title": "<30ms", "color": color.GREEN_COLOR },
+            { "title": "<50ms", "color": color.YELLOW_COLOR },
+            { "title": ">150ms", "color": color.ORANGE_COLOR }
+          ]
+        },
         "dataProvider": [{
           "latency_ratio": 150,
           "percentage": 0,
@@ -72,6 +81,7 @@ class LatencyRatio extends React.Component {
           "fillAlphas": 1,
           "lineAlpha": 0.1,
           "type": "column",
+          "fixedColumnWidth": 50,
           "valueField": "percentage"
           // "labelFunction":
         }],

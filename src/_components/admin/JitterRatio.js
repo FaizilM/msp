@@ -45,12 +45,15 @@ class JitterRatio extends React.Component {
       "bar": {
         "theme": "light",
         "type": "serial",
-        "startDuration": 2,
+        "startDuration": 0,
         "legend": {
-          "useGraphSettings": true,
-          "data": [{ "title": "< 4.5%", "color": "red", "rollOverColor":"red" },
-          { "title": "< 7.5%", "markerBorderColor": "color".YELLOW_COLOR, "backgroundAlpha":"0.6"},
-          { "title": "> 7.5%", "color": color.ORANGE_COLOR }]
+          "markerSize": 10,
+          "horizontalGap":70,
+          "data": [
+            { "title": "<4.5ms", "color": color.GREEN_COLOR },
+            { "title": "<7.5ms", "color": color.YELLOW_COLOR },
+            { "title": ">7.5ms", "color": color.ORANGE_COLOR }
+          ]
         },
         "dataProvider": [{
           "jitter_ratio": 4.5,
@@ -79,6 +82,7 @@ class JitterRatio extends React.Component {
           "fillAlphas": 1,
           "lineAlpha": 0.1,
           "type": "column",
+          "fixedColumnWidth": 50,
           "valueField": "percentage"
         }],
         "chartCursor": {
@@ -94,7 +98,7 @@ class JitterRatio extends React.Component {
             if (value == 4.5 || value == 7.5) {
               return "<" + value + "ms";
             } else {
-              return ">" + 22 + "ms";
+              return ">" + 7.5 + "ms";
             }
 
           }

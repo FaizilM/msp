@@ -73,37 +73,38 @@ class CustomerMetricsDashboard extends Component {
     let tableData;
     for (let index = 0; index < customerData.length; index++) {
       tableData = [];
-      for (let [k, value] of Object.entries(customerData[index])) {
+      for (let [key, value] of Object.entries(customerData[index])) {
         if (value == 0) {
           value = "-";
         }
-        tableData.push(<td>{value}</td>);
+        tableData.push(<td key={key}>{value}</td>);
       }
       customerMetricsData.push(<tr key={index}>{tableData}</tr>);
     }
 
     return (
+                    <table width="100%" className="table table-striped table-bordered table-hover" id="customerData">
+                      <thead>
+                          <tr>
+                          <th>Customer</th>
+                          <th>No of Sites</th>
+                          <th>Sites with App Route Policy</th>
+                          <th>Sites with No App Route</th>
+                          <th>Sites with App Route Change</th>
+                          <th>Sites with Utilization below 75%</th>
+                          <th>Sites with Packet Loss above 2.5%</th>
+                          <th>Sites with Jitter above 22ms</th>
+                          <th>Sites with Latency above 250ms</th>
+                          <th>Sites with Availability above 96%</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {customerMetricsData}
+
+                      </tbody>
+                  </table>
 
 
-      <div name="customerData" id="customerData">
-        <table border="1px solid">
-          <tr>
-            <th>Customer</th>
-            <th>No of Sites</th>
-            <th>Sites with App Route Policy</th>
-            <th>Sites with No App Route</th>
-            <th>Sites with App Route Change</th>
-            <th>Sites with Utilization below 75%</th>
-            <th>Sites with Packet Loss above 2.5%</th>
-            <th>Sites with Jitter above 22ms</th>
-            <th>Sites with Latency above 250ms</th>
-            <th>Sites with Availability above 96%</th>
-          </tr>
-          <tbody>
-            {customerMetricsData}
-          </tbody>
-        </table>
-      </div>
     );
   }
 };

@@ -19,6 +19,7 @@ table {
 .inventory tr:nth-child(odd) {
   background-color: #00bfff;
 }
+
 .amcharts-chart-div a{
   visibility: hidden;
 }

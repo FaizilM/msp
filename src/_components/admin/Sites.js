@@ -41,7 +41,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill={color.GREEN_COLOR} />
                         <a href="#customerData" style={{ color: "white", textDecoration: 'underline' }}>
-                            <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[2]}</text>
+                            <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[0]}</text>
                         </a>
                     </svg>
                     <div><h4>App Route Policy</h4></div>
@@ -50,7 +50,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="black" strokeWidth="3" fill={color.YELLOW_COLOR} />
                         <a href="#customerData" style={{ color: "white", textDecoration: 'underline' }}>
-                            <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[2]}</text>
+                            <text x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{availability[1]}</text>
                         </a>
                     </svg>
                     <div><h4>App Route Change</h4></div>

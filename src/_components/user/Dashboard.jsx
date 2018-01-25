@@ -21,6 +21,10 @@ class Dashboard extends React.Component {
         return (
 
             <Container>
+                <Row className="well">
+                    <Col xs="12" md="12">
+                    </Col>
+                </Row>
                 <Row>
                     <Col xs="12" md="12">
                         <div className="panel panel-default">
@@ -57,61 +61,61 @@ class Dashboard extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                        <Col xs="6" md="6">
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
-                                    <h3>Jitter Ratio</h3>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="list-group">
-                                        <JitterRatio />
-                                    </div>
-                                </div>
-                            </div>
-                        </Col>
-                        <Col xs="6" md="6">
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
-                                    <h3>Site Availability</h3>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="list-group">
-                                        <SiteAvailability />
-                                    </div>
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row>
                     <Col xs="6" md="6">
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
-                                    <h3>Latency Ratio</h3>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="list-group">
-                                        <LatencyRatio />
-                                    </div>
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <i className="fa fa-bell fa-fw"></i>
+                                <h3>Jitter Ratio</h3>
+                            </div>
+                            <div className="panel-body">
+                                <div className="list-group">
+                                    <JitterRatio />
                                 </div>
                             </div>
-                        </Col>
-                        <Col xs="6" md="6">
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
-                                    <h3>Packet Loss</h3>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="list-group">
-                                        <PacketLoss />
-                                    </div>
+                        </div>
+                    </Col>
+                    <Col xs="6" md="6">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <i className="fa fa-bell fa-fw"></i>
+                                <h3>Site Availability</h3>
+                            </div>
+                            <div className="panel-body">
+                                <div className="list-group">
+                                    <SiteAvailability />
                                 </div>
                             </div>
-                        </Col>
-                        </Row>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs="6" md="6">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <i className="fa fa-bell fa-fw"></i>
+                                <h3>Latency Ratio</h3>
+                            </div>
+                            <div className="panel-body">
+                                <div className="list-group">
+                                    <LatencyRatio />
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col xs="6" md="6">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <i className="fa fa-bell fa-fw"></i>
+                                <h3>Packet Loss</h3>
+                            </div>
+                            <div className="panel-body">
+                                <div className="list-group">
+                                    <PacketLoss />
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
             </Container>
 
         );

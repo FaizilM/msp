@@ -46,11 +46,20 @@ class PacketLoss extends Component {
       "bar": {
         "theme": "light",
         "type": "serial",
-        "startDuration": 2,
+        "startDuration": 0,
+        "legend": {
+          "horizontalGap":70,
+          "markerSize": 10,
+          "data": [
+            { "title": "<1%", "color": color.GREEN_COLOR },
+            { "title": "<2.5%", "color": color.YELLOW_COLOR },
+            { "title": ">2.5%", "color": color.ORANGE_COLOR }
+          ]
+        },
         "dataProvider": [{
           "packet_loss": 1,
           "percentage": 0,
-          "color": color.ORANGE_COLOR
+          "color": color.GREEN_COLOR
         }, {
           "packet_loss": 2.5,
           "percentage": 0,
@@ -58,7 +67,7 @@ class PacketLoss extends Component {
         }, {
           "packet_loss": 2.6,
           "percentage": 0,
-          "color": color.GREEN_COLOR
+          "color": color.ORANGE_COLOR
         }],
         "valueAxes": [{
           "position": "left",
@@ -74,6 +83,7 @@ class PacketLoss extends Component {
           "fillAlphas": 1,
           "lineAlpha": 0.1,
           "type": "column",
+          "fixedColumnWidth": 50,
           "valueField": "percentage"
           // "labelFunction":
         }],

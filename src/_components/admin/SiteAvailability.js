@@ -33,7 +33,16 @@ class SiteAvailability extends React.Component {
       "bar": {
         "theme": "light",
         "type": "serial",
-        "startDuration": 2,
+        "startDuration": 0,
+        "legend": {
+          "horizontalGap":70,
+          "markerSize": 10,
+          "data": [
+            { "title": ">99.9%", "color": color.GREEN_COLOR },
+            { "title": ">98%", "color": color.YELLOW_COLOR },
+            { "title": ">96%", "color": color.ORANGE_COLOR }
+          ]
+        },
         "dataProvider": [{
           "availability": 99.9,
           "site": 0,
@@ -59,6 +68,7 @@ class SiteAvailability extends React.Component {
           "fillAlphas": 1,
           "lineAlpha": 0.1,
           "type": "column",
+          "fixedColumnWidth": 50,
           "valueField": "site"
         }],
         "chartCursor": {
@@ -71,7 +81,7 @@ class SiteAvailability extends React.Component {
         "categoryAxis": {
           "gridPosition": "start",
           "labelFunction": function (value) {
-            return "<" + value + "%";
+            return ">" + value + "%";
           }
         }
 

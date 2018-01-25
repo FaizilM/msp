@@ -17,7 +17,7 @@ import { Container, Row, Col } from 'reactstrap';
 
 
 class AdminDashboard extends React.Component {
-  
+
     render() {
 
         const { user, users } = this.props;
@@ -25,6 +25,10 @@ class AdminDashboard extends React.Component {
             <div>
 
                 <Container>
+                    <Row className="well">
+                        <Col xs="12" md="12">
+                        </Col>
+                    </Row>
                     <Row>
                         <Col xs="12" md="12">
                             <h3 className="page-header" style={{ textAlign: 'center' }}>Service Overview Across all Enterprise Customers</h3>
@@ -54,9 +58,9 @@ class AdminDashboard extends React.Component {
                                     <div className="list-group">
                                         <Sites />
                                     </div>
-                                    
+
                                     <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%" }}>
-                                    <a href="#customerData" style={{color:"white"}}><label>View All Sites</label></a>
+                                        <a href="#customerData" style={{ color: "white" }}><label>View All Sites</label></a>
                                     </button>
                                 </div>
                             </div>
@@ -147,7 +151,23 @@ class AdminDashboard extends React.Component {
                             </div>
                         </Col>
                     </Row>
-                    <CustomerMetricsDashboard />
+                    <Row>
+                        <Col xs="12" md="12">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
+                                    <i className="fa fa-bell fa-fw"></i>
+                                    <h3>Customer Metrics Dashboard</h3>
+                                </div>
+                                <div className="panel-body">
+                                    <div className="list-group">
+                                        <CustomerMetricsDashboard />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </Col>
+                    </Row>
+
 
                 </Container>
             </div>
