@@ -13,7 +13,12 @@ class Dashboard extends React.Component {
     render() {
         return (
 
-            <Container>
+            <Container style={{ backgroundColor:"lightgray"}}>
+            <Row>
+                <Col xs="12" md="12">
+                    <h3 className="page-header" style={{ textAlign: 'center' }}>Service Overview </h3>
+                </Col>
+            </Row>
                 <Row>
                     <Col xs="12" md="12">
                         <div className="panel panel-default">
