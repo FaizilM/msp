@@ -9,12 +9,14 @@ import { AdminDashboard } from '../AdminDashboard';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
+import CustomerMetrics from '../_components/admin/CustomerMetrics'
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
         const { dispatch } = this.props;
+
         history.listen((location, action) => {
             // clear alert on location change
             console.log("APP constrtauctor ");
@@ -26,18 +28,28 @@ class App extends React.Component {
 
     render() {
           const { alert } = this.props;
-
+          console.log("*************", this.props)
         return (
                   <div>
 
                         <Router history={history}>
                             <div>
+
+
+
+                            { this.props.authentication && this.props.authentication.user && (this.props.authentication.user.role == "ROLE_ADMIN") ?
+                                <PrivateRoute path="/customer_metrics" component={ CustomerMetrics } /> : ""
+                            }
+
                                 <PrivateRoute exact path="/" component={AdminDashboard} />
                                 <PrivateRoute path="/customer" component={HomePage} />
+
                                 <Route path="/login" component={LoginPage} />
-                                <Route path="/register" component={RegisterPage} />
+
                             </div>
                         </Router>
+
+
                     </div>
 
         );
@@ -45,8 +57,8 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { alert } = state;
-    const {authentication} = state.authentication
+    const { alert, authentication } = state;
+
 
     return {
         alert,
