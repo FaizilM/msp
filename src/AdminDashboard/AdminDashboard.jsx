@@ -59,7 +59,7 @@ class AdminDashboard extends React.Component {
                                         <Sites />
                                     </div>
 
-                                    <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%" }}>
+                                    <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%", marginTop:"8.5%" }}>
                                         <a href="#customerData" style={{ color: "white" }}><label>View All Sites</label></a>
                                     </button>
                                 </div>
