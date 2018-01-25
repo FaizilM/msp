@@ -10,7 +10,7 @@ class PacketLoss extends Component {
 
         <div >
           <div >
-            <AmCharts.React options={this.props.config} style={{ width: "100%", height: "350px" }}/>
+            <AmCharts.React options={this.props.config} style={{ width: "100%", height: "350px"}}/>
           </div>
         </div>
 

@@ -1,23 +1,15 @@
 [
     {
-        "Customer": "ABC",
+        "customer": "ABC",
         "sites": [
             {
                 "id": 1,
                 "name": "site_ABC",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    2,
-                    5
-                ],
-                "app_route_change": 0,
+                "app_route_policy": false,
+                "app_route_change": true,
+                "no_app_route":false,
                 "bandwidth": 10.7,
+                "managed_CPE":6,
                 "links": [
                     {
                         "broadband": {
@@ -58,24 +50,16 @@
         ]
     },
     {
-        "Customer": "DEF",
+        "customer": "DEF",
          "sites": [
             {
                 "id": 1,
                 "name": "site_DEF",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    2,
-                    5
-                ],
-                "app_route_change": 0,
+                "app_route_policy": true,
+                "app_route_change": false,
+                "no_app_route":false,
                 "bandwidth": 10.7,
+                "managed_CPE":1,
                 "links": [
                     {
                         "broadband": {
@@ -116,24 +100,15 @@
         ]
     },
     {
-        "Customer": "GHI",
+        "customer": "GHI",
         "sites": [
             {
                 "id": 1,
-                "name": "site_GHI",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    2,
-                    5
-                ],
-                "app_route_change": 0,
+                "app_route_policy": true,
+                "app_route_change": false,
+                "no_app_route":false,
                 "bandwidth": 10.7,
+                "managed_CPE":4,
                 "links": [
                     {
                         "broadband": {
@@ -174,24 +149,16 @@
         ]
     },
     {
-        "Customer": "JKL",
+        "customer": "JKL",
         "sites": [
             {
                 "id": 1,
                 "name": "site_JKL",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    2,
-                    5
-                ],
-                "app_route_change": 0,
+                "app_route_policy": false,
+                "app_route_change": true,
+                "no_app_route":false,
                 "bandwidth": 10.7,
+                "managed_CPE":3,
                 "links": [
                     {
                         "broadband": {
@@ -232,24 +199,16 @@
         ]
     },
     {
-        "Customer": "MNO",
+        "customer": "MNO",
          "sites": [
             {
                 "id": 1,
                 "name": "site_MNO",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    2,
-                    5
-                ],
-                "app_route_change": 0,
+                "app_route_policy": false,
+                "app_route_change": false,
+                "no_app_route":true,
                 "bandwidth": 10.7,
+                "managed_CPE":5,
                 "links": [
                     {
                         "broadband": {
@@ -290,24 +249,16 @@
         ]
     },
     {
-        "Customer": "PQR",
+        "customer": "PQR",
         "sites": [
             {
                 "id": 1,
                 "name": "site_PQR",
-                "app_route_policy": 1,
-                "app_routes": [
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "live_app_routes": [
-                    2,
-                    5
-                ],
-                "app_route_change": 0,
+                "app_route_policy": true,
+                "app_route_change": false,
+                "no_app_route":false,
                 "bandwidth": 10.7,
+                "managed_CPE":2,
                 "links": [
                     {
                         "broadband": {
