@@ -46,7 +46,7 @@ class LatencyRatio extends React.Component {
         "type": "serial",
         "startDuration": 0,
         "legend": {
-          "horizontalGap":70,
+          "horizontalGap": 70,
           "markerSize": 10,
           "data": [
             { "title": "<30ms", "color": color.GREEN_COLOR },
@@ -69,6 +69,8 @@ class LatencyRatio extends React.Component {
         }],
         "valueAxes": [{
           "position": "left",
+          "minimum": 0,
+          "maximum": 100,
           "labelFunction": function (value) {
             return value / 100;
           }
@@ -78,6 +80,7 @@ class LatencyRatio extends React.Component {
         "graphs": [{
           "balloonText": "Percentage: <b>[[value]]%</b>",
           "fillColorsField": "color",
+          "precision": 0,
           "fillAlphas": 1,
           "lineAlpha": 0.1,
           "type": "column",

@@ -71,6 +71,12 @@ class PacketLoss extends Component {
         }],
         "valueAxes": [{
           "position": "left",
+          "minimum":0,
+          "maximum":100,
+          "autoGridCount":false,
+          "gridCount":5,
+          "gridAlpha":0.2,
+          "step":10,
           "labelFunction": function (value) {
             return value + "%";
           }
@@ -82,6 +88,7 @@ class PacketLoss extends Component {
           "fillColorsField": "color",
           "fillAlphas": 1,
           "lineAlpha": 0.1,
+          "precision":0,
           "type": "column",
           "fixedColumnWidth": 50,
           "valueField": "percentage"
@@ -96,6 +103,7 @@ class PacketLoss extends Component {
         "categoryField": "packet_loss",
         "categoryAxis": {
           "gridPosition": "start",
+          "gridAlpha":0.2,
           "labelFunction": function (value) {
             if (value == 1 || value == 2.5) {
               return "<" + value + "%";
