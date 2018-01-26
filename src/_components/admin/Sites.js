@@ -41,7 +41,6 @@ class Sites extends Component {
             }
     };
 
-
     render() {
         let availability = siteAvailabilityData();
         return (
@@ -50,7 +49,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke={color.GREEN_COLOR} strokeWidth="5" fill="white" />
                         <a href="#customerData" style={{ color: "white", textDecoration: 'underline' }}>
-                            <text text-anchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.data.app_route_policy}</text>
+                            <text textAnchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.data.app_route_policy}</text>
                         </a>
                     </svg>
                     <div><h4>App Route Policy</h4></div>
@@ -59,7 +58,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="#FFFF00" strokeWidth="5" fill="white" />
                         <a href="#customerData" style={{ color: "white", textDecoration: 'underline' }}>
-                            <text text-anchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{this.state.data.app_route_change}</text>
+                            <text textAnchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{this.state.data.app_route_change}</text>
                         </a>
                     </svg>
                     <div><h4>App Route Change</h4></div>
@@ -68,7 +67,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="#ff0011" strokeWidth="5" fill="white" />
                         <a href="#customerData" style={{ color: "white", textDecoration: 'underline' }}>
-                            <text text-anchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{this.state.data.no_app_route}</text>
+                            <text textAnchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{this.state.data.no_app_route}</text>
                         </a>
                     </svg>
                     <div><h4>No App Route</h4></div>

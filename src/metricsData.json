@@ -7,9 +7,54 @@
                 "name": "site_ABC",
                 "app_route_policy": false,
                 "app_route_change": true,
-                "no_app_route":false,
+                "no_app_route": false,
                 "bandwidth": 10.7,
-                "managed_CPE":6,
+                "managed_CPE": 6,
+                "links": [
+                    {
+                        "broadband": {
+                            "utilization": 50,
+                            "latency": 1,
+                            "jitter": 2,
+                            "packet_loss": 0
+                        },
+                        "mpls": {
+                            "utilization": 77,
+                            "latency": 4,
+                            "jitter": 0.5,
+                            "packet_loss": 0.2
+                        },
+                        "t1_lines": {
+                            "utilization": 97,
+                            "latency": 0,
+                            "jitter": 0.3,
+                            "packet_loss": 0.1
+                        },
+                        "4G": {
+                            "utilization": 67,
+                            "latency": 2,
+                            "jitter": 0.4,
+                            "packet_loss": 0.2
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "video": 29,
+                        "voice": 27,
+                        "class3": 3,
+                        "class4": 34
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "name": "site_ABC",
+                "app_route_policy": false,
+                "app_route_change": true,
+                "no_app_route": false,
+                "bandwidth": 10.7,
+                "managed_CPE": 6,
                 "links": [
                     {
                         "broadband": {
@@ -51,15 +96,15 @@
     },
     {
         "customer": "DEF",
-         "sites": [
+        "sites": [
             {
                 "id": 1,
                 "name": "site_DEF",
                 "app_route_policy": true,
                 "app_route_change": false,
-                "no_app_route":false,
+                "no_app_route": false,
                 "bandwidth": 10.7,
-                "managed_CPE":1,
+                "managed_CPE": 1,
                 "links": [
                     {
                         "broadband": {
@@ -106,9 +151,9 @@
                 "id": 1,
                 "app_route_policy": true,
                 "app_route_change": false,
-                "no_app_route":false,
+                "no_app_route": false,
                 "bandwidth": 10.7,
-                "managed_CPE":4,
+                "managed_CPE": 4,
                 "links": [
                     {
                         "broadband": {
@@ -156,9 +201,9 @@
                 "name": "site_JKL",
                 "app_route_policy": false,
                 "app_route_change": true,
-                "no_app_route":false,
+                "no_app_route": false,
                 "bandwidth": 10.7,
-                "managed_CPE":3,
+                "managed_CPE": 3,
                 "links": [
                     {
                         "broadband": {
@@ -200,15 +245,15 @@
     },
     {
         "customer": "MNO",
-         "sites": [
+        "sites": [
             {
                 "id": 1,
                 "name": "site_MNO",
                 "app_route_policy": false,
                 "app_route_change": false,
-                "no_app_route":true,
+                "no_app_route": true,
                 "bandwidth": 10.7,
-                "managed_CPE":5,
+                "managed_CPE": 5,
                 "links": [
                     {
                         "broadband": {
@@ -256,9 +301,9 @@
                 "name": "site_PQR",
                 "app_route_policy": true,
                 "app_route_change": false,
-                "no_app_route":false,
+                "no_app_route": false,
                 "bandwidth": 10.7,
-                "managed_CPE":2,
+                "managed_CPE": 2,
                 "links": [
                     {
                         "broadband": {
