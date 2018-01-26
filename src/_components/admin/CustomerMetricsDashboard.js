@@ -91,7 +91,7 @@ class CustomerMetricsDashboard extends Component {
                           <th>Sites with App Route Policy</th>
                           <th>Sites with No App Route</th>
                           <th>Sites with App Route Change</th>
-                          <th>Sites with Utilization below 75%</th>
+                          <th>Sites with Utilization above 75%</th>
                           <th>Sites with Packet Loss above 2.5%</th>
                           <th>Sites with Jitter above 22ms</th>
                           <th>Sites with Latency above 250ms</th>

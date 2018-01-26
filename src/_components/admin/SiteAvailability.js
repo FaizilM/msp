@@ -58,7 +58,8 @@ class SiteAvailability extends React.Component {
         }],
         "valueAxes": [{
           "position": "left",
-
+          "minimum":0,
+          "maximum":0
         }],
         "depth3D": 20,
         "angle": 30,
@@ -67,6 +68,7 @@ class SiteAvailability extends React.Component {
           "fillColorsField": "color",
           "fillAlphas": 1,
           "lineAlpha": 0.1,
+          "precision":0,
           "type": "column",
           "fixedColumnWidth": 50,
           "valueField": "site"
@@ -88,17 +90,18 @@ class SiteAvailability extends React.Component {
       }
     };
     let configValue = config.bar;
-
+   
     const availability = siteAvailabilityData();
-
+    let totalSite = 0;
     for (let [Key, Value] of Object.entries(configValue)) {
       if (Key == "dataProvider") {
         for (let data = 0; data < Value.length; data++) {
           Value[data].site = availability[data];
+          totalSite += availability[data];
         }
       }
     }
-
+    configValue.valueAxes[0].maximum = totalSite;
     return (
 
       <div>

@@ -70,6 +70,12 @@ class JitterRatio extends React.Component {
         }],
         "valueAxes": [{
           "position": "left",
+          "minimum":0,
+          "maximum":100,
+          "autoGridCount":false,
+          "gridCount":5,
+          "gridAlpha":0.2,
+          "step":10,
           "labelFunction": function (value) {
             return value + "%";
           }
@@ -80,6 +86,7 @@ class JitterRatio extends React.Component {
           "balloonText": "Percentage: <b>[[value]]%</b>",
           "fillColorsField": "color",
           "fillAlphas": 1,
+          "precision":0,
           "lineAlpha": 0.1,
           "type": "column",
           "fixedColumnWidth": 50,
@@ -94,6 +101,7 @@ class JitterRatio extends React.Component {
         "categoryField": "jitter_ratio",
         "categoryAxis": {
           "gridPosition": "start",
+          "gridAlpha":0.2,
           "labelFunction": function (value) {
             if (value == 4.5 || value == 7.5) {
               return "<" + value + "ms";
