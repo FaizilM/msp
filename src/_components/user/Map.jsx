@@ -121,7 +121,7 @@ var config = {
     <Col xs="12" sm="12" md="12" lg="12" xl="12">
         <div className="panel panel-default">
             <div className="panel-heading">
-                <i className="fa fa-bell fa-fw"></i> <h3>Sites</h3>
+                <i className=""></i> <h3>Sites</h3>
             </div>
             <div className="panel-body">
                 <div className="list-group">

@@ -58,3 +58,13 @@ table {
 #customerData:active {
   background-color: yellow;
 }
+
+.sortable-table .table thead th{
+background-color: #2E77B8 !important;
+
+}
+
+
+#customer_metrics_table > table {
+  background-color: red;
+}

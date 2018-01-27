@@ -137,7 +137,7 @@ class PacketLoss extends Component {
       <Col xs="12" sm="12" md="6" lg="6" xl="6">
           <div className="panel panel-default">
               <div className="panel-heading">
-                  <i className="fa fa-bell fa-fw"></i>
+                  <i className=""></i>
                   <h3>Packet Loss</h3>
               </div>
               <div className="panel-body">
