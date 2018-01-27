@@ -66,62 +66,15 @@ class AdminDashboard extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
-                                    <h3>Site Availability</h3>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="list-group">
-                                        <SiteAvailability />
-                                    </div>
-                                </div>
-                            </div>
+                      <SiteAvailability />
+                        <LatencyRatio />
 
-                        </Col>
-                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
-                                    <h3>Latency Ratio</h3>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="list-group">
-                                        <LatencyRatio />
-                                    </div>
-                                </div>
-                            </div>
-                        </Col>
                     </Row>
 
                     <Row>
-                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
-                                    <h3>Jitter Ratio</h3>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="list-group">
-                                        <JitterRatio />
-                                    </div>
-                                </div>
-                            </div>
-                        </Col>
-                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
-                                    <h3>Packet Loss</h3>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="list-group">
-                                        <PacketLoss />
-                                    </div>
-                                </div>
-                            </div>
-                        </Col>
+                    <JitterRatio />
+                          <PacketLoss />
+                        
                     </Row>
                     <Row>
                         <Col xs="12" sm="12" md="12" lg="12" xl="12">
