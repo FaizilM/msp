@@ -17,7 +17,7 @@ import SiteAvailability from '../admin/SiteAvailability';
 import Filter from './Filter';
 import ApplicationClassMetrics from './ApplicationClassMetrics';
 import {Tabs, TabList,DragTabList,Tab, DragTab, PanelList, Panel, ExtraButton} from 'react-tabtab';
-
+import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
 
 
 class Dashboard extends React.Component {
@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
   <Col xs="12" sm="12" md="12" lg="6" xl="12">
   </Col>
 </Row>
-<Tabs>
+<Tabs customStyle={customStyle}>
   <TabList>
      <Tab>Dashboard</Tab>
      <Tab>Filter</Tab>
