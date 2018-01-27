@@ -18,7 +18,6 @@ function login(username, password) {
         userService.login(username, password)
             .then(
                 user => {
-                    console.log("NAVIGATE INTO HOME PAGE ON SUCCESS " + user)
 
                     dispatch(success(user));
 
@@ -31,7 +30,6 @@ function login(username, password) {
 
                 },
                 error => {
-                    console.log("ERROR" + error);
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
                 }
@@ -39,7 +37,6 @@ function login(username, password) {
     };
 
     function request(user) {
-      console.log("Dispatch Request" + JSON.stringify(user))
       return { type: userConstants.LOGIN_REQUEST, user }
     }
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }

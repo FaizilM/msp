@@ -15,7 +15,7 @@ import LatencyRatio from '../admin/LatencyRatio';
 import JitterRatio from '../admin/JitterRatio';
 import SiteAvailability from '../admin/SiteAvailability';
 import Filter from './Filter';
-import ApplicationClassMetrics from './ApplicationClassMetrics';
+
 class Dashboard extends React.Component {
 
     render() {
@@ -132,22 +132,7 @@ class Dashboard extends React.Component {
                         </div>
                     </Col>
                 </Row>
-                <Row>
-
-<Col xs="12" sm="12" md="6" lg="6" xl="6">
-
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <i className="fa fa-bell fa-fw"></i> <h4> Application Class Metrics </h4>
-        </div>
-        <div className="panel-body">
-            <div className="list-group">
-                <ApplicationClassMetrics />
-            </div>
-        </div>
-    </div>
-</Col>
-</Row>
+              
             </div>
 
 
