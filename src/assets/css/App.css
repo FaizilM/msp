@@ -18,7 +18,7 @@ table {
 }
 .inventory tr:nth-child(odd) {
   background-color: #2E77B8;
-  color:"#FFFFFF";
+  color:#FFFFFF;
 }
 
 .amcharts-chart-div a{

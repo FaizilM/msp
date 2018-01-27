@@ -17,6 +17,7 @@ var config = {
 
   "theme": "none",
   "map": "worldLow",
+
   "imagesSettings": {
     "rollOverColor": "#089282",
     "rollOverScale": 3,
@@ -28,12 +29,13 @@ var config = {
 
   "areasSettings": {
     "unlistedAreasColor": "#15A892",
-      outlineThickness:0.1
+      outlineThickness:0.1,
+
   },
 
   "dataProvider": {
     "map": "worldLow",
-
+    
 
     "images": [ {
 
