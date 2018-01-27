@@ -17,7 +17,7 @@ table {
   width: 100%;
 }
 .inventory tr:nth-child(odd) {
-  background-color: #ED8B00;
+  background-color: #2E77B8;
   color:"#FFFFFF";
 }
 
