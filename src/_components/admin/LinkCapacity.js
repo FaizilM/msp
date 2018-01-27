@@ -51,12 +51,12 @@ class LinkCapacity extends React.Component {
                 "type": "serial",
                 "startDuration": 0,
                 "legend": {
-                    "horizontalGap":300,
+                    "horizontalGap": 300,
                     "markerSize": 10,
                     "data": [
-                      { "title": "Utilization", "color": color.BLUE_COLOR },
-                      ]
-                  },
+                        { "title": "Utilization", "color": color.BLUE_COLOR },
+                    ]
+                },
                 "dataProvider": [{
                     "link_capacity": "Broadband",
                     "capacity": "18Gbps",
@@ -81,21 +81,27 @@ class LinkCapacity extends React.Component {
                 }],
                 "valueAxes": [{
                     "position": "left",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "autoGridCount": false,
+                    "gridCount": 5,
+                    "gridAlpha": 0.2,
+                    "step": 10,
                     "labelFunction": function (value) {
                         return value + "%";
                     }
                 }],
-                "depth3D": 20,
+                "depth3D": 22,
                 "angle": 30,
                 "graphs": [{
                     "balloonText": "[[category]]: <b>[[value]]%</b>",
                     "fillColorsField": "color",
                     "fillAlphas": 1,
                     "lineAlpha": 0.1,
+                    "precision": 0,
                     "type": "column",
                     "fixedColumnWidth": 50,
                     "valueField": "percentage"
-                    // "labelFunction":
                 }],
                 "chartCursor": {
                     "categoryBalloonEnabled": false,
@@ -104,8 +110,11 @@ class LinkCapacity extends React.Component {
                 },
                 "rotate": true,
                 "categoryField": "link_capacity",
+                "offset": 0.9,
+                "gridAlpha": 0.2,
                 "categoryAxis": {
-                    "gridPosition": "start"
+                    "gridPosition": "start",
+                    "fillAlpha": 0.05
                 }
 
             }
