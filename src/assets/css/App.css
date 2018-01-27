@@ -50,8 +50,11 @@ table {
   margin-right: auto;
 }
 
-
 .app_container {
   width: 100%;
   padding: 0.5%;
+}
+
+#customerData:active {
+  background-color: yellow;
 }

@@ -9,7 +9,7 @@ import { AdminDashboard } from '../AdminDashboard';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
-import CustomerMetrics from '../_components/admin/CustomerMetrics'
+import CustomerMetrics from '../_components/admin/CustomerMetrics';
 
 class App extends React.Component {
     constructor(props) {

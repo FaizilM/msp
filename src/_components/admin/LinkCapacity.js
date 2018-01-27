@@ -120,11 +120,11 @@ class LinkCapacity extends React.Component {
             }
         };
         let configValue = config.bar;
-        const packetLoss = linkCapacityData();
-        for (let [packetLossKey, packetLossValue] of Object.entries(configValue)) {
-            if (packetLossKey == "dataProvider") {
-                for (let data = 0; data < packetLossValue.length; data++) {
-                    packetLossValue[data].percentage = packetLoss[data];
+        const linkCapacity = linkCapacityData();
+        for (let [linkCapacityKey, linkCapacityValue] of Object.entries(configValue)) {
+            if (linkCapacityKey == "dataProvider") {
+                for (let data = 0; data < linkCapacityValue.length; data++) {
+                    linkCapacityValue[data].percentage = linkCapacity[data];
                 }
             }
 

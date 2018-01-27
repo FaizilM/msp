@@ -6,23 +6,26 @@ import { color } from '../../_constants';
 let siteAvailabilityData = () => {
   let totalSite = 0;
   let availability = [0, 0, 0];
+  let count =0;
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
     totalSite += metricsDataValue.sites.length;
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
       if (sites[site].app_route_policy == true) {
+        count++;
         availability[0] += 1;
       }
 
       if (sites[site].app_route_change == true) {
+        count++;
         availability[1] += 1;
       }
       if (sites[site].no_app_route == true) {
+        count++;
         availability[2] += 1;
       }
     }
   }
-
   return availability;
 };
 
