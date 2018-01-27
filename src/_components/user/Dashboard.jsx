@@ -14,7 +14,8 @@ import LinkCapacity from '../admin/LinkCapacity';
 import LatencyRatio from '../admin/LatencyRatio';
 import JitterRatio from '../admin/JitterRatio';
 import SiteAvailability from '../admin/SiteAvailability';
-
+import Filter from './Filter';
+import ApplicationClassMetrics from './ApplicationClassMetrics';
 class Dashboard extends React.Component {
 
     render() {
@@ -24,6 +25,20 @@ class Dashboard extends React.Component {
             <Container>
                 <Row className="well">
                     <Col xs="12" sm="12" md="12" lg="6" xl="12">
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <i className="fa fa-bell fa-fw"></i> <h4> Filter</h4>
+                            </div>
+                            <div className="panel-body">
+                                <div className="list-group">
+                                    <Filter />
+                                </div>
+                            </div>
+                        </div>
                     </Col>
                 </Row>
                 <Row>
@@ -117,12 +132,24 @@ class Dashboard extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
-
-                        </Col>
-
                     </Col>
                 </Row>
+                <Row>
+
+<Col xs="12" sm="12" md="6" lg="6" xl="6">
+
+    <div className="panel panel-default">
+        <div className="panel-heading">
+            <i className="fa fa-bell fa-fw"></i> <h4> Application Class Metrics </h4>
+        </div>
+        <div className="panel-body">
+            <div className="list-group">
+                <ApplicationClassMetrics />
+            </div>
+        </div>
+    </div>
+</Col>
+</Row>
             </Container>
 
         );

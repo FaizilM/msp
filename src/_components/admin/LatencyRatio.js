@@ -7,7 +7,7 @@ let latencyRatioData = () => {
   let latency = [0, 0, 0];
   let totalSite = 0;
   let latencySite = 0;
-
+  let totalLink = 0;
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
@@ -16,20 +16,24 @@ let latencyRatioData = () => {
         let linkLatency = links[link];
         for (let [linkKey, linkValue] of Object.entries(linkLatency)) {
           latencySite += linkValue.latency;
+          totalLink++;
         }
-
-        if (latencySite <= 30) {
-          latency[0] += 1;
-        } else if (latencySite <= 50) {
-          latency[1] += 1;
-        } else {
-          latency[2] += 1;
-        }
-        totalSite++;
-        latencySite = 0;
       }
+    
+      if (latencySite > 0 && latencySite / totalLink <= 30) {
+        latency[2] += 1;
+      } else if (latencySite > 0 && latencySite / totalLink <= 50) {
+        latency[1] += 1;
+      } else {
+        latency[0] += 1;
+      }
+      totalLink = 0;
+      totalSite++;
+      latencySite = 0;
+     
     }
   }
+
   latency[0] = parseInt((latency[0] / totalSite) * 100);
   latency[1] = parseInt((latency[1] / totalSite) * 100);
   latency[2] = parseInt((latency[2] / totalSite) * 100);
