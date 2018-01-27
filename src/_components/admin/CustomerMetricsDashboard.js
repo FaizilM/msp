@@ -32,7 +32,7 @@ let customerMetricsDashboardData = () => {
       if (metricsDataValue.no_app_route) {
         customerData["no_app_route"] = customerData["no_app_route"] + 1;
         customerData["availability"] = customerData["availability"]  + 1;
-       
+
       }
       let loss = 0;
       let latency = 0;
@@ -98,7 +98,64 @@ let customerMetricsDashboardData = () => {
 
   return customerMetricsData;
 };
+
+
 class CustomerMetricsDashboard extends Component {
+
+    sorting (column) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("dataTables-example");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc";
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[column];
+      y = rows[i + 1].getElementsByTagName("TD")[column];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+    };
 
   render() {
     let customerData = customerMetricsDashboardData();
@@ -116,27 +173,35 @@ class CustomerMetricsDashboard extends Component {
       customerMetricsData.push(<tr key={index}>{tableData}</tr>);
     }
 
-    return (
-      <table width="100%" className="table table-striped table-bordered table-hover" id="customerData">
-        <thead>
-          <tr>
-            <th>Customer</th>
-            <th>No of Sites</th>
-            <th>Sites with App Route Policy</th>
-            <th>Sites with No App Route</th>
-            <th>Sites with App Route Change</th>
-            <th>Sites with Utilization above 75%</th>
-            <th>Sites with Packet Loss above 2.5%</th>
-            <th>Sites with Jitter above 22ms</th>
-            <th>Sites with Latency above 250ms</th>
-            <th>Sites with Availability above 96%</th>
-          </tr>
-        </thead>
-        <tbody>
-          {customerMetricsData}
 
-        </tbody>
-      </table>
+
+    return (
+
+      <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
+
+<thead>
+<tr>
+
+            <th onClick={ () => this.sorting(0)}>Customer</th>
+            <th onClick={ () => this.sorting(1)}>No of Sites</th>
+            <th onClick={ () => this.sorting(2)}>Sites with App Route Policy</th>
+            <th onClick={ () => this.sorting(3)}>Sites with No App Route</th>
+            <th onClick={ () => this.sorting(4)}>Sites with App Route Change</th>
+            <th onClick={ () => this.sorting(5)}>Sites with Utilization above 75%</th>
+            <th onClick={ () => this.sorting(6)}>Sites with Packet Loss above 2.5%</th>
+            <th onClick={ () => this.sorting(7)}>Sites with Jitter above 22ms</th>
+            <th onClick={ () => this.sorting(8)}>Sites with Latency above 250ms</th>
+            <th onClick={ () => this.sorting(9)}>Sites with Availability above 96%</th>
+          </tr>
+
+
+
+</thead>
+
+<tbody>
+{customerMetricsData}
+</tbody>
+</table>
 
 
     );
