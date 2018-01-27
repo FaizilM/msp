@@ -3,6 +3,8 @@ import metricsData from '../../metricsData.json'
 import '../../assets/css/App.css';
 import Chart from '../chart/chart';
 import { color } from '../../_constants';
+import { Container, Row, Col } from 'reactstrap';
+
 
 let packetLossData = () => {
   let loss = [0, 0, 0];
@@ -33,7 +35,7 @@ let packetLossData = () => {
 
     }
   }
-  
+
   loss[0] = parseInt((loss[0] / totalSite) * 100);
   loss[1] = parseInt((loss[1] / totalSite) * 100);
   loss[2] = parseInt((loss[2] / totalSite) * 100);
@@ -132,7 +134,20 @@ class PacketLoss extends Component {
     }
 
     return (
-      <Chart config={configValue} />
+      <Col xs="12" sm="12" md="6" lg="6" xl="6">
+          <div className="panel panel-default">
+              <div className="panel-heading">
+                  <i className="fa fa-bell fa-fw"></i>
+                  <h3>Packet Loss</h3>
+              </div>
+              <div className="panel-body">
+                  <div className="list-group">
+                        <Chart config={configValue} />
+                  </div>
+              </div>
+          </div>
+      </Col>
+
     );
   }
 }

@@ -6,16 +6,16 @@ import { indexOf } from 'lodash';
 
 class Filter extends Component {
 
-  
+
   render() {
-    
+
 
 let sitesName = (selectedSite) => {
   let siteName = [];
   let sitekey = [];
   for (let index = 0; index < metricsData.length; index++) {
     for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-      
+
       let sitename = metricsDataValue.name;
       if (sitekey.indexOf(sitename) == -1) {
         sitekey.push(sitename);
@@ -39,16 +39,16 @@ let sitesName = (selectedSite) => {
       }
       return sitesgroup;
     }
-   
+
 
     let linksData = () => {
-     
+
       let linkName = [];
       let linkkey = [];
-      
+
       for (let index = 0; index < metricsData.length; index++) {
         for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-          
+
           let links = metricsDataValue.links
           for (let link = 0; link < links.length; link++) {
             let linkData = links[link];
@@ -64,12 +64,12 @@ let sitesName = (selectedSite) => {
       }
     }
     let applicationsData = () => {
- 
+
       let applicationName = [];
       let applicationkey = [];
       for (let index = 0; index < metricsData.length; index++) {
         for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-        
+
           let application = metricsDataValue.application
           for (let index = 0; index < application.length; application++) {
             let applicationData = application[index];

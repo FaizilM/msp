@@ -3,18 +3,19 @@ import metricsData from '../../metricsData.json'
 import '../../assets/css/App.css';
 import Chart from '../chart/chart';
 import { color } from '../../_constants';
+import { Container, Row, Col } from 'reactstrap';
 
 let packetLossData = () => {
 
   if(metricsData != null && metricsData !=undefined) {
     for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
-        if(metricsDataValue.sites != null && metricsDataValue.sites != undefined) {            
+        if(metricsDataValue.sites != null && metricsDataValue.sites != undefined) {
             let sites = metricsDataValue.sites;
             for (let site = 0; site < sites.length; site++) {
                 // if(metricsDataValue.application != null && metricsDataValue.application != undefined) {
                 //     let applications = sites[site].application;
                 //    // console.log("=====>>>>>>>>>>>>>>Application", applications);
-                    
+
                 // }
             }
         }
@@ -93,18 +94,31 @@ class ApplicationClassMetrics extends Component {
               } else {
                 return ">" + 7.5 + "ms";
               }
-  
+
             }
           }
-  
+
         }
       };
       let configValue = config.bar;
     const packetLoss = packetLossData();
-  
+
 
     return (
-      <Chart config={configValue} />
+      <Col xs="12" sm="12" md="6" lg="6" xl="6">
+
+          <div className="panel panel-default">
+              <div className="panel-heading">
+                  <i className="fa fa-bell fa-fw"></i> <h4> Application Class Metrics </h4>
+              </div>
+              <div className="panel-body">
+                  <div className="list-group">
+                      <Chart config={configValue} />
+                  </div>
+              </div>
+          </div>
+      </Col>
+
     );
   }
 }
