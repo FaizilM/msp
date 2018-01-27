@@ -24,7 +24,7 @@ class AdminDashboard extends React.Component {
         return (
             <div style={{ backgroundColor: "#F3F2F2" }}>
 
-                <Container>
+                <div className="app_container">
                     <Row className="well">
                         <Col xs="12" sm="12" md="12" lg="12" xl="12">
                         </Col>
@@ -158,7 +158,7 @@ class AdminDashboard extends React.Component {
                     </Row>
 
 
-                </Container>
+                </div>
             </div>
         );
     }
