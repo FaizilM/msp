@@ -8,7 +8,7 @@ let jitterRatioData = () => {
   let jitter = [0, 0, 0];
   let totalSite = 0;
   let jitterSite = 0;
-
+  let totalLink = 0;
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
@@ -17,20 +17,24 @@ let jitterRatioData = () => {
         let linkJitter = links[link];
         for (let [linkKey, linkValue] of Object.entries(linkJitter)) {
           jitterSite += linkValue.jitter;
+          totalLink++;
         }
-
-        if (jitterSite <= 4.5) {
+      }
+        if (jitterSite > 0 && jitterSite / totalLink <= 4.5) {
           jitter[0] += 1;
-        } else if (jitterSite <= 7.5) {
+        } else if (jitterSite > 0 && jitterSite / totalLink <= 7.5) {
           jitter[1] += 1;
         } else {
           jitter[2] += 1;
         }
+        totalLink = 0;
         totalSite++;
         jitterSite = 0;
-      }
+
     }
   }
+
+
   jitter[0] = parseInt((jitter[0] / totalSite) * 100);
   jitter[1] = parseInt((jitter[1] / totalSite) * 100);
   jitter[2] = parseInt((jitter[2] / totalSite) * 100);

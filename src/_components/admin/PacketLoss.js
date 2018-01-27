@@ -7,7 +7,8 @@ import { color } from '../../_constants';
 let packetLossData = () => {
   let loss = [0, 0, 0];
   let totalSite = 0;
-  let packetLossSite = 0;
+  let packetLossLink = 0;
+  let totalLink = 0;
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
@@ -15,25 +16,28 @@ let packetLossData = () => {
       for (let link = 0; link < links.length; link++) {
         let linkLosses = links[link];
         for (let [linkKey, linkValue] of Object.entries(linkLosses)) {
-          packetLossSite += linkValue.packet_loss;
+          packetLossLink += linkValue.packet_loss;
+          totalLink++;
         }
-
-        if (packetLossSite <= 1) {
-          loss[0] += 1;
-        } else if (packetLossSite <= 2.5) {
-          loss[1] += 1;
-        } else {
-          loss[2] += 1;
-        }
-        totalSite++;
-        packetLossSite = 0;
       }
+      if (packetLossLink > 0 && packetLossLink / totalLink <= 1) {
+        loss[0] += 1;
+      } else if (packetLossLink > 0 && packetLossLink / totalLink <= 2.5) {
+        loss[1] += 1;
+      } else {
+        loss[2] += 1;
+      }
+      totalLink = 0;
+      totalSite++;
+      packetLossLink = 0;
+
     }
   }
-
+  
   loss[0] = parseInt((loss[0] / totalSite) * 100);
   loss[1] = parseInt((loss[1] / totalSite) * 100);
   loss[2] = parseInt((loss[2] / totalSite) * 100);
+
 
   return loss;
 }
@@ -48,7 +52,7 @@ class PacketLoss extends Component {
         "type": "serial",
         "startDuration": 0,
         "legend": {
-          "horizontalGap":70,
+          "horizontalGap": 70,
           "markerSize": 10,
           "data": [
             { "title": "<1%", "color": color.GREEN_COLOR },
@@ -71,12 +75,12 @@ class PacketLoss extends Component {
         }],
         "valueAxes": [{
           "position": "left",
-          "minimum":0,
-          "maximum":100,
-          "autoGridCount":false,
-          "gridCount":5,
-          "gridAlpha":0.2,
-          "step":10,
+          "minimum": 0,
+          "maximum": 100,
+          "autoGridCount": false,
+          "gridCount": 5,
+          "gridAlpha": 0.2,
+          "step": 10,
           "labelFunction": function (value) {
             return value + "%";
           }
@@ -88,7 +92,7 @@ class PacketLoss extends Component {
           "fillColorsField": "color",
           "fillAlphas": 1,
           "lineAlpha": 0.1,
-          "precision":0,
+          "precision": 0,
           "type": "column",
           "fixedColumnWidth": 50,
           "valueField": "percentage"
@@ -103,7 +107,7 @@ class PacketLoss extends Component {
         "categoryField": "packet_loss",
         "categoryAxis": {
           "gridPosition": "start",
-          "gridAlpha":0.2,
+          "gridAlpha": 0.2,
           "labelFunction": function (value) {
             if (value == 1 || value == 2.5) {
               return "<" + value + "%";
