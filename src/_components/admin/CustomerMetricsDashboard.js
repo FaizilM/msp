@@ -3,6 +3,10 @@ import '../../assets/css/App.css';
 import metricsData from '../../metricsData.json';
 import { indexOf } from 'lodash';
 
+import  SortableTbl  from 'react-sort-search-table'
+import ImageLoader from 'react-imageloader';
+
+
 let customerMetricsDashboardData = () => {
   let customerMetricsData = [];
 
@@ -100,112 +104,52 @@ let customerMetricsDashboardData = () => {
 };
 
 
+
+
+let col = [
+
+      "customer",
+      "sites",
+      "app_route_policy",
+      "no_app_route",
+      "app_route_change",
+      "utilization",
+      "packet_loss",
+      "jitter",
+      "latency",
+      "availability",
+
+];
+let tHead = [
+
+      "Customer",
+      "No of Sites",
+      "Sites with App Route Policy",
+      "Sites with No App Route",
+      "Sites with App Route Change",
+      "Sites with Utilization above 75%",
+      "Sites with Packet Loss above 2.5%",
+      "Sites with Jitter above 22ms",
+      "Sites with Latency above 250ms",
+      "Sites with Availability above 96%",
+];
+
 class CustomerMetricsDashboard extends Component {
-
-    sorting (column) {
-      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("dataTables-example");
-  switching = true;
-  //Set the sorting direction to ascending:
-  dir = "asc";
-  /*Make a loop that will continue until
-  no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.getElementsByTagName("TR");
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-      one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[column];
-      y = rows[i + 1].getElementsByTagName("TD")[column];
-      /*check if the two rows should switch place,
-      based on the direction, asc or desc:*/
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
-        }
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-      //Each time a switch is done, increase this count by 1:
-      switchcount ++;
-    } else {
-      /*If no switching has been done AND the direction is "asc",
-      set the direction to "desc" and run the while loop again.*/
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
-    }
-  }
-    };
-
   render() {
+
     let customerData = customerMetricsDashboardData();
-    let index = 0;
-    let customerMetricsData = [];
-    let tableData;
-    for (let index = 0; index < customerData.length; index++) {
-      tableData = [];
-      for (let [key, value] of Object.entries(customerData[index])) {
-        if (value == 0) {
-          value = "-";
-        }
-        tableData.push(<td key={key}>{value}</td>);
-      }
-      customerMetricsData.push(<tr key={index}>{tableData}</tr>);
-    }
 
 
+      return (
+		      <SortableTbl tblData={customerData}
+			       tHead={tHead}
+             
+			          dKey={col}
+		/>
+  );}
 
-    return (
-
-      <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
-
-<thead>
-<tr>
-
-            <th onClick={ () => this.sorting(0)}>Customer</th>
-            <th onClick={ () => this.sorting(1)}>No of Sites</th>
-            <th onClick={ () => this.sorting(2)}>Sites with App Route Policy</th>
-            <th onClick={ () => this.sorting(3)}>Sites with No App Route</th>
-            <th onClick={ () => this.sorting(4)}>Sites with App Route Change</th>
-            <th onClick={ () => this.sorting(5)}>Sites with Utilization above 75%</th>
-            <th onClick={ () => this.sorting(6)}>Sites with Packet Loss above 2.5%</th>
-            <th onClick={ () => this.sorting(7)}>Sites with Jitter above 22ms</th>
-            <th onClick={ () => this.sorting(8)}>Sites with Latency above 250ms</th>
-            <th onClick={ () => this.sorting(9)}>Sites with Availability above 96%</th>
-          </tr>
-
-
-
-</thead>
-
-<tbody>
-{customerMetricsData}
-</tbody>
-</table>
-
-
-    );
-  }
 };
+
+
 
 export default CustomerMetricsDashboard;

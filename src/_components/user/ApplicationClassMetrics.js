@@ -109,7 +109,7 @@ class ApplicationClassMetrics extends Component {
 
           <div className="panel panel-default">
               <div className="panel-heading">
-                  <i className="fa fa-bell fa-fw"></i> <h4> Application Class Metrics </h4>
+                  <i className=""></i> <h4> Application Class Metrics </h4>
               </div>
               <div className="panel-body">
                   <div className="list-group">

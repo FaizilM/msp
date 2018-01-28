@@ -39,7 +39,7 @@ class AdminDashboard extends React.Component {
                         <Col xs="12" sm="12" md="6" lg="6" xl="6">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
+                                    <i className=""></i>
                                     <h3>Inventory</h3>
                                 </div>
                                 <div className="panel-body">
@@ -52,7 +52,7 @@ class AdminDashboard extends React.Component {
                         <Col xs="12" sm="12" md="6" lg="6" xl="6">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
+                                    <i className=""></i>
                                     <h3>Sites</h3>
                                 </div>
                                 <div className="panel-body">
@@ -76,13 +76,13 @@ class AdminDashboard extends React.Component {
                     <Row>
                     <JitterRatio />
                           <PacketLoss />
-                        
+
                     </Row>
                     <Row>
                         <Col xs="12" sm="12" md="12" lg="12" xl="12">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
+                                    <i className=""></i>
                                     <h3>Link Capacity Utilization</h3>
                                 </div>
                                 <div className="panel-body">
@@ -98,11 +98,11 @@ class AdminDashboard extends React.Component {
                         <Col xs="12" sm="12" md="12" lg="12" xl="12">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i>
+                                    <i className=""></i>
                                     <h3>Customer Metrics Dashboard</h3>
                                 </div>
                                 <div className="panel-body">
-                                    <div className="list-group">
+                                    <div className="list-group" id="customer_metrics_table">
                                         <CustomerMetricsDashboard />
                                     </div>
                                 </div>
