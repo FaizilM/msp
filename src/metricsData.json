@@ -8,9 +8,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -27,7 +26,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 1.9,
                             "packet_loss": 0.3
                         },
@@ -106,9 +105,8 @@
                 "app_route_policy": false,
                 "app_route_change": true,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -125,7 +123,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0.7,
                             "packet_loss": 0.3
                         },
@@ -204,9 +202,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -223,7 +220,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0.9,
                             "packet_loss": 0.3
                         },
@@ -302,9 +299,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"Regional HQ",
+                "sitesgroup": "Regional HQ",
                 "links": [
                     {
                         "broadband": {
@@ -321,7 +317,7 @@
                         },
                         "t1_lines": {
                             "utilization": 56,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 0.3
                         },
@@ -400,9 +396,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"Regional HQ",
+                "sitesgroup": "Regional HQ",
                 "links": [
                     {
                         "broadband": {
@@ -419,7 +414,7 @@
                         },
                         "t1_lines": {
                             "utilization": 26,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 0.3
                         },
@@ -498,9 +493,8 @@
                 "app_route_policy": false,
                 "app_route_change": false,
                 "no_app_route": true,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -596,9 +590,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -694,9 +687,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -797,9 +789,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -816,7 +807,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0.9,
                             "packet_loss": 0.3
                         },
@@ -895,9 +886,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"Regional HQ",
+                "sitesgroup": "Regional HQ",
                 "links": [
                     {
                         "broadband": {
@@ -914,7 +904,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0.9,
                             "packet_loss": 0.3
                         },
@@ -993,9 +983,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -1012,7 +1001,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0.9,
                             "packet_loss": 0.3
                         },
@@ -1091,9 +1080,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -1189,9 +1177,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -1287,9 +1274,8 @@
                 "app_route_policy": false,
                 "app_route_change": true,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -1306,7 +1292,7 @@
                         },
                         "t1_lines": {
                             "utilization": 51,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 0.3
                         },
@@ -1385,9 +1371,8 @@
                 "app_route_policy": false,
                 "app_route_change": true,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -1404,7 +1389,7 @@
                         },
                         "t1_lines": {
                             "utilization": 81,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0.3,
                             "packet_loss": 0.3
                         },
@@ -1488,9 +1473,8 @@
                 "app_route_policy": false,
                 "app_route_change": true,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -1507,7 +1491,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 1.9,
                             "packet_loss": 0.3
                         },
@@ -1586,9 +1570,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -1605,7 +1588,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 1.9,
                             "packet_loss": 0.3
                         },
@@ -1684,9 +1667,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -1703,7 +1685,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 1.9,
                             "packet_loss": 0.3
                         },
@@ -1782,9 +1764,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"Regional HQ",
+                "sitesgroup": "Regional HQ",
                 "links": [
                     {
                         "broadband": {
@@ -1801,7 +1782,7 @@
                         },
                         "t1_lines": {
                             "utilization": 67,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 0.3
                         },
@@ -1880,9 +1861,8 @@
                 "app_route_policy": false,
                 "app_route_change": true,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -1899,7 +1879,7 @@
                         },
                         "t1_lines": {
                             "utilization": 67,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0.1,
                             "packet_loss": 0.3
                         },
@@ -1978,9 +1958,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -1997,7 +1976,7 @@
                         },
                         "t1_lines": {
                             "utilization": 51,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 1.9,
                             "packet_loss": 0.3
                         },
@@ -2076,9 +2055,8 @@
                 "app_route_policy": false,
                 "app_route_change": true,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -2095,7 +2073,7 @@
                         },
                         "t1_lines": {
                             "utilization": 91,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 1.9,
                             "packet_loss": 0.3
                         },
@@ -2174,9 +2152,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -2193,7 +2170,7 @@
                         },
                         "t1_lines": {
                             "utilization": 61,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 1.6,
                             "packet_loss": 0.3
                         },
@@ -2272,9 +2249,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"Regional HQ",
+                "sitesgroup": "Regional HQ",
                 "links": [
                     {
                         "broadband": {
@@ -2370,9 +2346,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -2468,9 +2443,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -2487,7 +2461,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 1.6,
                             "packet_loss": 0.3
                         },
@@ -2566,9 +2540,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -2664,9 +2637,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -2762,9 +2734,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"Regional HQ",
+                "sitesgroup": "Regional HQ",
                 "links": [
                     {
                         "broadband": {
@@ -2781,7 +2752,7 @@
                         },
                         "t1_lines": {
                             "utilization": 65,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 0.3
                         },
@@ -2860,9 +2831,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -2879,7 +2849,7 @@
                         },
                         "t1_lines": {
                             "utilization": 65,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 0.3
                         },
@@ -2958,9 +2928,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -2977,7 +2946,7 @@
                         },
                         "t1_lines": {
                             "utilization": 51,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 4.5,
                             "packet_loss": 0.3
                         },
@@ -3056,9 +3025,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"Regional HQ",
+                "sitesgroup": "Regional HQ",
                 "links": [
                     {
                         "broadband": {
@@ -3075,7 +3043,7 @@
                         },
                         "t1_lines": {
                             "utilization": 41,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 4.5,
                             "packet_loss": 0
                         },
@@ -3154,9 +3122,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -3173,7 +3140,7 @@
                         },
                         "t1_lines": {
                             "utilization": 81,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 4.5,
                             "packet_loss": 0.3
                         },
@@ -3252,9 +3219,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -3271,7 +3237,7 @@
                         },
                         "t1_lines": {
                             "utilization": 66,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 0.3
                         },
@@ -3350,9 +3316,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -3369,7 +3334,7 @@
                         },
                         "t1_lines": {
                             "utilization": 66,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 7
                         },
@@ -3448,9 +3413,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -3467,7 +3431,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 4.5,
                             "packet_loss": 7
                         },
@@ -3546,9 +3510,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"Regional HQ",
+                "sitesgroup": "Regional HQ",
                 "links": [
                     {
                         "broadband": {
@@ -3565,7 +3528,7 @@
                         },
                         "t1_lines": {
                             "utilization": 45,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 4.5,
                             "packet_loss": 0
                         },
@@ -3644,9 +3607,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -3663,7 +3625,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0.3,
                             "packet_loss": 0
                         },
@@ -3742,9 +3704,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -3761,7 +3722,7 @@
                         },
                         "t1_lines": {
                             "utilization": 36,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 7
                         },
@@ -3840,9 +3801,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -3859,7 +3819,7 @@
                         },
                         "t1_lines": {
                             "utilization": 16,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 0
                         },
@@ -3938,9 +3898,8 @@
                 "app_route_policy": false,
                 "app_route_change": false,
                 "no_app_route": true,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"Regional HQ",
+                "sitesgroup": "Regional HQ",
                 "links": [
                     {
                         "broadband": {
@@ -3957,7 +3916,7 @@
                         },
                         "t1_lines": {
                             "utilization": 41,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 4.5,
                             "packet_loss": 0.3
                         },
@@ -4036,9 +3995,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -4055,7 +4013,7 @@
                         },
                         "t1_lines": {
                             "utilization": 86,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 4.5,
                             "packet_loss": 0.3
                         },
@@ -4134,9 +4092,8 @@
                 "app_route_policy": false,
                 "app_route_change": true,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -4153,7 +4110,7 @@
                         },
                         "t1_lines": {
                             "utilization": 21,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0,
                             "packet_loss": 0.5
                         },
@@ -4232,9 +4189,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -4251,7 +4207,7 @@
                         },
                         "t1_lines": {
                             "utilization": 62,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 1.3
                         },
@@ -4330,9 +4286,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -4349,7 +4304,7 @@
                         },
                         "t1_lines": {
                             "utilization": 46,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0.1,
                             "packet_loss": 0.9
                         },
@@ -4433,9 +4388,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -4452,7 +4406,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0.3,
                             "packet_loss": 0
                         },
@@ -4531,9 +4485,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"ATM",
+                "sitesgroup": "ATM",
                 "links": [
                     {
                         "broadband": {
@@ -4550,7 +4503,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 4.5,
                             "packet_loss": 9.0
                         },
@@ -4629,9 +4582,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 4,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -4648,7 +4600,7 @@
                         },
                         "t1_lines": {
                             "utilization": 52,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 1.6,
                             "packet_loss": 0.3
                         },
@@ -4727,9 +4679,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"Regional HQ",
+                "sitesgroup": "Regional HQ",
                 "links": [
                     {
                         "broadband": {
@@ -4746,7 +4697,7 @@
                         },
                         "t1_lines": {
                             "utilization": 36,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 0,
                             "packet_loss": 0.5
                         },
@@ -4825,9 +4776,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 2,
-                "sitesgroup":"Domestic sites",
+                "sitesgroup": "Domestic sites",
                 "links": [
                     {
                         "broadband": {
@@ -4844,7 +4794,7 @@
                         },
                         "t1_lines": {
                             "utilization": 16,
-                          "latency": 56,
+                            "latency": 56,
                             "jitter": 10,
                             "packet_loss": 0.4
                         },
@@ -4923,9 +4873,8 @@
                 "app_route_policy": true,
                 "app_route_change": false,
                 "no_app_route": false,
-                "bandwidth": 10.7,
                 "managed_CPE": 5,
-                "sitesgroup":"International sites",
+                "sitesgroup": "International sites",
                 "links": [
                     {
                         "broadband": {
@@ -4933,480 +4882,476 @@
                             "latency": 0.4,
                             "jitter": 0.6,
                             "packet_loss": 0.1
-                          },
-                          "mpls": {
-                              "utilization": 92,
-                              "latency": 0.9,
-                              "jitter": 0,
-                              "packet_loss": 0
-                          },
-                          "t1_lines": {
-                              "utilization": 91,
+                        },
+                        "mpls": {
+                            "utilization": 92,
+                            "latency": 0.9,
+                            "jitter": 0,
+                            "packet_loss": 0
+                        },
+                        "t1_lines": {
+                            "utilization": 91,
                             "latency": 56,
-                              "jitter": 0,
-                              "packet_loss": 0.3
-                          },
-                          "4G": {
-                              "utilization": 59,
-                              "latency": 30,
-                              "jitter": 0.2,
-                              "packet_loss": 7
-                          }
-                      }
-                  ],
-                  "application": [
-                      {
-                          "voice": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "video": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class3": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class4": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class5": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class6": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class7": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class8": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ]
-                      }
-                  ]
-              },
-              {
-                  "id": 7,
-                  "name": "Chicago",
-                  "app_route_policy": false,
-                  "app_route_change": false,
-                  "no_app_route": true,
-                  "bandwidth": 10.7,
-                  "managed_CPE": 5,
-                  "sitesgroup":"Regional HQ",
-                  "links": [
-                      {
-                          "broadband": {
-                              "utilization": 49,
-                              "latency": 0.4,
-                              "jitter": 1.6,
-                              "packet_loss": 0
-                          },
-                          "mpls": {
-                              "utilization": 52,
-                              "latency": 0.9,
-                              "jitter": 0.6,
-                              "packet_loss": 0.4
-                          },
-                          "t1_lines": {
-                              "utilization": 21,
-                              "latency": 30,
-                              "jitter": 0.3,
-                              "packet_loss": 0
-                          },
-                          "4G": {
-                              "utilization": 39,
+                            "jitter": 0,
+                            "packet_loss": 0.3
+                        },
+                        "4G": {
+                            "utilization": 59,
+                            "latency": 30,
+                            "jitter": 0.2,
+                            "packet_loss": 7
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "voice": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "video": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class3": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class4": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class5": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class6": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class7": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class8": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 7,
+                "name": "Chicago",
+                "app_route_policy": false,
+                "app_route_change": false,
+                "no_app_route": true,
+                "managed_CPE": 5,
+                "sitesgroup": "Regional HQ",
+                "links": [
+                    {
+                        "broadband": {
+                            "utilization": 49,
+                            "latency": 0.4,
+                            "jitter": 1.6,
+                            "packet_loss": 0
+                        },
+                        "mpls": {
+                            "utilization": 52,
+                            "latency": 0.9,
+                            "jitter": 0.6,
+                            "packet_loss": 0.4
+                        },
+                        "t1_lines": {
+                            "utilization": 21,
+                            "latency": 30,
+                            "jitter": 0.3,
+                            "packet_loss": 0
+                        },
+                        "4G": {
+                            "utilization": 39,
                             "latency": 56,
-                              "jitter": 1.6,
-                              "packet_loss": 0.3
-                          }
-                      }
-                  ],
-                  "application": [
-                      {
-                          "voice": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "video": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class3": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class4": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class5": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class6": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class7": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class8": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ]
-                      }
-                  ]
-              },
-              {
-                  "id": 8,
-                  "name": "Denver",
-                  "app_route_policy": false,
-                  "app_route_change": true,
-                  "no_app_route": false,
-                  "bandwidth": 10.7,
-                  "managed_CPE": 5,
-                  "sitesgroup":"Domestic sites",
-                  "links": [
-                      {
-                          "broadband": {
-                              "utilization": 49,
-                              "latency": 0.4,
-                              "jitter": 0.4,
-                              "packet_loss": 0
-                          },
-                          "mpls": {
-                              "utilization": 42,
-                              "latency": 0.9,
-                              "jitter": 1.7,
-                              "packet_loss": 0
-                          },
-                          "t1_lines": {
-                              "utilization": 51,
-                              "latency": 30,
-                              "jitter": 0,
-                              "packet_loss": 0
-                          },
-                          "4G": {
-                              "utilization": 49,
+                            "jitter": 1.6,
+                            "packet_loss": 0.3
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "voice": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "video": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class3": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class4": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class5": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class6": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class7": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class8": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 8,
+                "name": "Denver",
+                "app_route_policy": false,
+                "app_route_change": true,
+                "no_app_route": false,
+                "managed_CPE": 5,
+                "sitesgroup": "Domestic sites",
+                "links": [
+                    {
+                        "broadband": {
+                            "utilization": 49,
+                            "latency": 0.4,
+                            "jitter": 0.4,
+                            "packet_loss": 0
+                        },
+                        "mpls": {
+                            "utilization": 42,
+                            "latency": 0.9,
+                            "jitter": 1.7,
+                            "packet_loss": 0
+                        },
+                        "t1_lines": {
+                            "utilization": 51,
+                            "latency": 30,
+                            "jitter": 0,
+                            "packet_loss": 0
+                        },
+                        "4G": {
+                            "utilization": 49,
                             "latency": 56,
-                              "jitter": 0,
-                              "packet_loss": 0.3
-                          }
-                      }
-                  ],
-                  "application": [
-                      {
-                          "voice": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "video": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class3": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class4": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class5": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class6": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class7": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class8": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ]
-                      }
-                  ]
-              },
-              {
-                  "id": 9,
-                  "name": "Everglade",
-                  "app_route_policy": true,
-                  "app_route_change": false,
-                  "no_app_route": false,
-                  "bandwidth": 10.7,
-                  "managed_CPE": 2,
-                  "sitesgroup":"International sites",
-                  "links": [
-                      {
-                          "broadband": {
-                              "utilization": 35,
-                              "latency": 60,
-                              "jitter": 1.6,
-                              "packet_loss": 1
-                          },
-                          "mpls": {
-                              "utilization": 62,
-                              "latency": 4,
-                              "jitter": 10,
-                              "packet_loss": 3
-                          },
-                          "t1_lines": {
-                              "utilization": 65,
+                            "jitter": 0,
+                            "packet_loss": 0.3
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "voice": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "video": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class3": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class4": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class5": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class6": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class7": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class8": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 9,
+                "name": "Everglade",
+                "app_route_policy": true,
+                "app_route_change": false,
+                "no_app_route": false,
+                "managed_CPE": 2,
+                "sitesgroup": "International sites",
+                "links": [
+                    {
+                        "broadband": {
+                            "utilization": 35,
+                            "latency": 60,
+                            "jitter": 1.6,
+                            "packet_loss": 1
+                        },
+                        "mpls": {
+                            "utilization": 62,
+                            "latency": 4,
+                            "jitter": 10,
+                            "packet_loss": 3
+                        },
+                        "t1_lines": {
+                            "utilization": 65,
                             "latency": 56,
-                              "jitter": 10,
-                              "packet_loss": 1
-                          },
-                          "4G": {
-                              "utilization": 52,
-                              "latency": 30,
-                              "jitter": 1.6,
-                              "packet_loss": 1
-                          }
-                      }
-                  ],
-                  "application": [
-                      {
-                          "voice": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "video": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class3": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class4": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class5": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class6": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class7": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class8": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ]
-                      }
-                  ]
-              },
-              {
-                  "id": 10,
-                  "name": "Frankfurt",
-                  "app_route_policy": true,
-                  "app_route_change": false,
-                  "no_app_route": false,
-                  "bandwidth": 10.7,
-                  "managed_CPE": 2,
-                  "sitesgroup":"ATM",
-                  "links": [
-                      {
-                          "broadband": {
-                              "utilization": 55,
-                              "latency": 60,
-                              "jitter": 1.6,
-                              "packet_loss": 0.3
-                          },
-                          "mpls": {
-                              "utilization": 42,
-                              "latency": 60,
-                              "jitter": 10,
-                              "packet_loss": 1.3
-                          },
-                          "t1_lines": {
-                              "utilization": 26,
+                            "jitter": 10,
+                            "packet_loss": 1
+                        },
+                        "4G": {
+                            "utilization": 52,
+                            "latency": 30,
+                            "jitter": 1.6,
+                            "packet_loss": 1
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "voice": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "video": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class3": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class4": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class5": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class6": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class7": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class8": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 10,
+                "name": "Frankfurt",
+                "app_route_policy": true,
+                "app_route_change": false,
+                "no_app_route": false,
+                "managed_CPE": 2,
+                "sitesgroup": "ATM",
+                "links": [
+                    {
+                        "broadband": {
+                            "utilization": 55,
+                            "latency": 60,
+                            "jitter": 1.6,
+                            "packet_loss": 0.3
+                        },
+                        "mpls": {
+                            "utilization": 42,
+                            "latency": 60,
+                            "jitter": 10,
+                            "packet_loss": 1.3
+                        },
+                        "t1_lines": {
+                            "utilization": 26,
                             "latency": 56,
-                              "jitter": 10,
-                              "packet_loss": 3
-                          },
-                          "4G": {
-                              "utilization": 62,
-                              "latency": 30,
-                              "jitter": 1.6,
-                              "packet_loss": 0.1
-                          }
-                      }
-                  ],
-                  "application": [
-                      {
-                          "voice": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "video": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class3": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class4": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class5": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class6": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class7": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ],
-                          "class8": [
-                              {
-                                  "bandwidth": 22.6,
-                                  "route_change": 9,
-                                  "route_fail": 2
-                              }
-                          ]
-                      }
-                  ]
-              }
-          ]
-      }
-  ]
+                            "jitter": 10,
+                            "packet_loss": 3
+                        },
+                        "4G": {
+                            "utilization": 62,
+                            "latency": 30,
+                            "jitter": 1.6,
+                            "packet_loss": 0.1
+                        }
+                    }
+                ],
+                "application": [
+                    {
+                        "voice": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "video": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class3": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class4": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class5": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class6": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class7": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ],
+                        "class8": [
+                            {
+                                "bandwidth": 22.6,
+                                "route_change": 9,
+                                "route_fail": 2
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

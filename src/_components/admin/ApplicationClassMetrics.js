@@ -6,11 +6,8 @@ import { color } from '../../_constants';
 import { indexOf } from 'lodash';
 
 let customerClassMetrics = () => {
-    let applicationTypeKey = [];
-    let applicationClassKey = [];
-    let applicationSite = [];
-    let applicationCustomer = [];
-
+    let classMetrics = [];
+    let customerClassMetricsData = [];
     if (metricsData != null && metricsData != undefined) {
         for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
             let count = 0;
@@ -18,16 +15,22 @@ let customerClassMetrics = () => {
                 let sites = metricsDataValue.sites;
                 for (let site = 0; site < 1; site++) {
                     let application = sites[site].application;
+
                     if (application != null && application != undefined) {
                         for (let [applicationKey, applicationValue] of Object.entries(application)) {
                             if (applicationValue != null && applicationValue != undefined) {
                                 for (let [applicationDataKey, applicationDataValue] of Object.entries(applicationValue)) {
-                                    if (applicationDataValue != null && applicationDataValue != undefined) {
-                                        for (let [classKey, classValue] of Object.entries(applicationDataValue)) {
-                                            if (classValue != null && classValue != undefined) {
-                                                for (let [classDataKey, classDataValue] of Object.entries(classValue)) {
-                                                    console.log(classDataKey, classDataValue);
-                                                    
+                                    if (applicationDataValue != null && applicationDataValue != undefined && applicationDataKey != null && applicationDataKey != undefined) {
+                                        if (classMetrics[applicationDataKey] == undefined) {
+                                            classMetrics[applicationDataKey] = [];
+                                        }
+                                        let valueMetrics = [];
+                                        for (let [metricsKey, metricsValue] of Object.entries(applicationDataValue)) {
+                                            for (let [key, value] of Object.entries(metricsValue)) {
+                                                if (classMetrics[applicationDataKey][key] == undefined) {
+                                                    classMetrics[applicationDataKey][key] = value;
+                                                } else {
+                                                    classMetrics[applicationDataKey][key] += value;
                                                 }
                                             }
                                         }
@@ -36,23 +39,11 @@ let customerClassMetrics = () => {
                             }
                         }
                     }
-                   // console.log(applicationTypeKey);
-                    
-
-                    for (let [key, value] of Object.entries(applicationTypeKey)) {
-                        if (key != null && value != null && key != undefined && value != undefined)
-                            if (indexOf(applicationSite[key], key) == -1) {
-                                applicationSite[key] = value;
-                            } else {
-                                applicationSite[key] += value;
-                            }
-
-                    }
                 }
             }
-           
         }
     }
+    return classMetrics;
 }
 
 
@@ -73,31 +64,7 @@ class ApplicationClassMetrics extends Component {
                         { "title": ">7.5ms", "color": color.ORANGE_COLOR }
                     ]
                 },
-                "dataProvider": [{
-                    "jitter_ratio": 4.5,
-                    "percentage": 0,
-                    "color": color.GREEN_COLOR
-                }, {
-                    "jitter_ratio": 7.5,
-                    "percentage": 0,
-                    "color": color.YELLOW_COLOR
-                }, {
-                    "jitter_ratio": 7.6,
-                    "percentage": 0,
-                    "color": color.ORANGE_COLOR
-                }],
-                "valueAxes": [{
-                    "position": "left",
-                    "minimum": 0,
-                    "maximum": 100,
-                    "autoGridCount": false,
-                    "gridCount": 5,
-                    "gridAlpha": 0.2,
-                    "step": 10,
-                    "labelFunction": function (value) {
-                        return value + "%";
-                    }
-                }],
+                "dataProvider": [],
                 "depth3D": 20,
                 "angle": 30,
                 "graphs": [{
@@ -108,7 +75,7 @@ class ApplicationClassMetrics extends Component {
                     "lineAlpha": 0.1,
                     "type": "column",
                     "fixedColumnWidth": 50,
-                    "valueField": "percentage"
+                    "valueField": "bandwidth"
                 }],
                 "chartCursor": {
                     "categoryBalloonEnabled": false,
@@ -116,25 +83,29 @@ class ApplicationClassMetrics extends Component {
                     "zoomable": false
                 },
                 "rotate": false,
-                "categoryField": "jitter_ratio",
+                "categoryField": "name",
                 "categoryAxis": {
                     "gridPosition": "start",
-                    "gridAlpha": 0.2,
-                    "labelFunction": function (value) {
-                        if (value == 4.5 || value == 7.5) {
-                            return "<" + value + "ms";
-                        } else {
-                            return ">" + 7.5 + "ms";
-                        }
-
-                    }
+                    "gridAlpha": 0.2
                 }
 
             }
         };
         let configValue = config.bar;
         const customerClass = customerClassMetrics();
-
+        for (let [key, value] of Object.entries(configValue)) {
+            if (key == "dataProvider") {
+                for (let [customerClassKey, customerClassValue] of Object.entries(customerClass)) {
+                    let metricsData = [];
+                    let data = [];
+                    data={"name":customerClassKey};
+                    for (let [classKey, classValue] of Object.entries(customerClassValue)) {
+                       data[classKey] = classValue;
+                    }
+                    value.push(data);
+                }
+            }
+        }
 
         return (
             <Chart config={configValue} />

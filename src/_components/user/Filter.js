@@ -6,25 +6,37 @@ import { indexOf } from 'lodash';
 
 class Filter extends Component {
 
-  
-  render() {
-    
 
-let sitesName = (selectedSite) => {
-  let siteName = [];
-  let sitekey = [];
-  for (let index = 0; index < metricsData.length; index++) {
-    for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-      
-      let sitename = metricsDataValue.name;
-      if (sitekey.indexOf(sitename) == -1) {
-        sitekey.push(sitename);
-        siteName.push(<option key={sitename}>{sitename}</option>);
+  constructor(props) {
+    super(props);
+
+
+    // This binding is necessary to make `this` work in the callback
+    this.change = this.change.bind(this);
+  }
+
+
+  change(selectedSite) {
+    console.log("sdfsfsdsdsfdfsdf")
+    let siteName = [];
+    let sitekey = [];
+    for (let index = 0; index < metricsData.length; index++) {
+      for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
+
+        let sitename = metricsDataValue.name;
+        if (sitekey.indexOf(sitename) == -1) {
+          sitekey.push(sitename);
+          siteName.push(<option key={sitename}>{sitename}</option>);
+        }
       }
     }
+    return siteName;
   }
-  return siteName;
-}
+
+  render() {
+
+
+
     let siteGroup = () => {
       let sitesgroup = [];
       let sitegroupkey = [];
@@ -39,16 +51,16 @@ let sitesName = (selectedSite) => {
       }
       return sitesgroup;
     }
-   
+
 
     let linksData = () => {
-     
+
       let linkName = [];
       let linkkey = [];
-      
+
       for (let index = 0; index < metricsData.length; index++) {
         for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-          
+
           let links = metricsDataValue.links
           for (let link = 0; link < links.length; link++) {
             let linkData = links[link];
@@ -64,12 +76,12 @@ let sitesName = (selectedSite) => {
       }
     }
     let applicationsData = () => {
- 
+
       let applicationName = [];
       let applicationkey = [];
       for (let index = 0; index < metricsData.length; index++) {
         for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-        
+
           let application = metricsDataValue.application
           for (let index = 0; index < application.length; application++) {
             let applicationData = application[index];
@@ -102,7 +114,7 @@ let sitesName = (selectedSite) => {
         </Col>
         <Col xs="6" sm="6" md="2" lg="2" xl="2">
           <div className="form-group">
-            <select className="form-control" id="siteGroup" onChange ={() =>this.sitesName(this.itemSelected)}>
+            <select className="form-control" id="siteGroup" onChange={this.change}>
               <option>All Site Group</option>
               {siteGroup()}
             </select>
@@ -112,7 +124,7 @@ let sitesName = (selectedSite) => {
           <div className="form-group">
             <select className="form-control" id="site">
               <option>All Sites</option>
-              {sitesName()}
+
             </select>
           </div>
         </Col>

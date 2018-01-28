@@ -110,10 +110,9 @@ class Bandwidth extends Component {
             }
         };
         let configValue = config.bar;
-        const customerClass = bandwidthData();
         for (let [key, value] of Object.entries(configValue)) {
             if (key == "dataProvider") {
-                for (let [bandwidthKey, bandwidthValue] of Object.entries(customerClass)) {
+                for (let [bandwidthKey, bandwidthValue] of Object.entries( bandwidthData())) {
                    let jsonBandwidthData = {"name":bandwidthKey,"bandwidth":bandwidthValue}
                     value.push(jsonBandwidthData);
                 }

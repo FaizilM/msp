@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Redirect, Link } from 'react-router-dom';
 import AmCharts from '@amcharts/amcharts3-react';
 import 'ammap3/ammap/ammap.js';
+import { Container, Row, Col } from 'reactstrap';
 
 class Map extends React.Component {
 
@@ -17,6 +18,7 @@ var config = {
 
   "theme": "none",
   "map": "worldLow",
+
   "imagesSettings": {
     "rollOverColor": "#089282",
     "rollOverScale": 3,
@@ -28,7 +30,8 @@ var config = {
 
   "areasSettings": {
     "unlistedAreasColor": "#15A892",
-      outlineThickness:0.1
+      outlineThickness:0.1,
+
   },
 
   "dataProvider": {
@@ -113,9 +116,22 @@ var config = {
 }
 
     return (
-      <div style={{ width: "100%", height: "450px", backgroundColor: "lightblue" }} >
-        <AmCharts.React options={config} style={{ width: "100%", height: "350px" }} />
-      </div>
+    <Col xs="12" sm="12" md="12" lg="12" xl="12">
+        <div className="panel panel-default">
+            <div className="panel-heading">
+                <i className="fa fa-bell fa-fw"></i> <h3>Sites</h3>
+            </div>
+            <div className="panel-body">
+                <div className="list-group">
+                <div style={{ width: "100%", height: "450px", backgroundColor: "lightblue" }} >
+                  <AmCharts.React options={config} style={{ width: "100%", height: "350px" }} />
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </Col>
+
     );
   }
 }

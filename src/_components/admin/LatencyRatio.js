@@ -2,6 +2,8 @@ import React from 'react';
 import Chart from '../chart/chart';
 import metricsDatas from '../../metricsData.json';
 import { color } from '../../_constants';
+import { Container, Row, Col } from 'reactstrap';
+
 
 let latencyRatioData = () => {
   let latency = [0, 0, 0];
@@ -19,7 +21,7 @@ let latencyRatioData = () => {
           totalLink++;
         }
       }
-    
+
       if (latencySite > 0 && latencySite / totalLink <= 30) {
         latency[2] += 1;
       } else if (latencySite > 0 && latencySite / totalLink <= 50) {
@@ -30,7 +32,7 @@ let latencyRatioData = () => {
       totalLink = 0;
       totalSite++;
       latencySite = 0;
-     
+
     }
   }
 
@@ -128,10 +130,22 @@ class LatencyRatio extends React.Component {
     }
 
     return (
+      <Col xs="12" sm="12" md="6" lg="6" xl="6">
+          <div className="panel panel-default">
+              <div className="panel-heading">
+                  <i className="fa fa-bell fa-fw"></i>
+                  <h3>Latency Ratio</h3>
+              </div>
+              <div className="panel-body">
+                  <div className="list-group">
+                  <div>
+                    <Chart config={configValue} />
+                  </div>
+                  </div>
+              </div>
+          </div>
+      </Col>
 
-      <div>
-        <Chart config={configValue} />
-      </div>
 
 
     );

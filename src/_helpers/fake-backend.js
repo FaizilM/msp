@@ -5,10 +5,10 @@
 
 //Static users
 let users = [
-  {firstName: "MSP", lastName: "admin",
+  {firstName: "msp", lastName: "admin",
    username: "admin", password: "password",
     id: 1, role:"ROLE_ADMIN"},
-    {firstName: "MSP", lastName: "customer",
+    {firstName: "msp", lastName: "customer",
      username: "customer", password: "password",
       id: 2, role:"ROLE_USER"}
 ]
