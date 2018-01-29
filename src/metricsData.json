@@ -1,6 +1,11 @@
 [
   {
     "customer": "John",
+    "username" : "john",
+    "firstName" : "John",
+    "lastName": "Edison",
+    "password": "password",
+    "role":"ROLE_USER",
     "sites": [
       {
         "id": 1,
