@@ -15,7 +15,6 @@ let customerClassMetrics = () => {
                 let sites = metricsDataValue.sites;
                 for (let site = 0; site < 1; site++) {
                     let application = sites[site].application;
-
                     if (application != null && application != undefined) {
                         for (let [applicationKey, applicationValue] of Object.entries(application)) {
                             if (applicationValue != null && applicationValue != undefined) {
@@ -52,43 +51,61 @@ class ApplicationClassMetrics extends Component {
     render() {
         let config = {
             "bar": {
-                "theme": "light",
                 "type": "serial",
-                "startDuration": 0,
+                "theme": "light",
+
                 "legend": {
-                    "markerSize": 10,
-                    "horizontalGap": 70,
-                    "data": [
-                        { "title": "<4.5ms", "color": color.GREEN_COLOR },
-                        { "title": "<7.5ms", "color": color.YELLOW_COLOR },
-                        { "title": ">7.5ms", "color": color.ORANGE_COLOR }
-                    ]
+                    "horizontalGap": 10,
+                    "useGraphSettings": true,
+                    "markerSize": 10
                 },
                 "dataProvider": [],
+                "valueAxes": [{
+                    "stackType": "regular",
+                    "axisAlpha": 0.5,
+                    "gridAlpha": 0.2
+                }],
                 "depth3D": 20,
                 "angle": 30,
                 "graphs": [{
-                    "balloonText": "Percentage: <b>[[value]]%</b>",
-                    "fillColorsField": "color",
-                    "fillAlphas": 1,
-                    "precision": 0,
-                    "lineAlpha": 0.1,
+                    "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                    "fillAlphas": 0.8,
+                    "labelText": "[[value]]",
+                    "lineAlpha": 0.3,
+                    "title": "Bandwidth",
                     "type": "column",
-                    "fixedColumnWidth": 50,
+                    "color": "#000000",
                     "valueField": "bandwidth"
+                }, {
+                    "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                    "fillAlphas": 0.8,
+                    "labelText": "[[value]]",
+                    "lineAlpha": 0.3,
+                    "title": "Route Change",
+                    "type": "column",
+                    "color": "#000000",
+                    "valueField": "route_change"
+                }, {
+                    "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                    "fillAlphas": 0.8,
+                    "labelText": "[[value]]",
+                    "lineAlpha": 0.3,
+                    "title": "Route Fail",
+                    "type": "column",
+                    "color": "#000000",
+                    "valueField": "route_fail"
                 }],
-                "chartCursor": {
-                    "categoryBalloonEnabled": false,
-                    "cursorAlpha": 0,
-                    "zoomable": false
-                },
                 "rotate": false,
                 "categoryField": "name",
                 "categoryAxis": {
                     "gridPosition": "start",
-                    "gridAlpha": 0.2
+                    "gridAlpha": 0.2,
+                    "axisAlpha": 0.2,
+                    "position": "left"
+                },
+                "export": {
+                    "enabled": false
                 }
-
             }
         };
         let configValue = config.bar;
@@ -98,9 +115,9 @@ class ApplicationClassMetrics extends Component {
                 for (let [customerClassKey, customerClassValue] of Object.entries(customerClass)) {
                     let metricsData = [];
                     let data = [];
-                    data={"name":customerClassKey};
+                    data = { "name": customerClassKey };
                     for (let [classKey, classValue] of Object.entries(customerClassValue)) {
-                       data[classKey] = classValue;
+                        data[classKey] = classValue;
                     }
                     value.push(data);
                 }

@@ -45,7 +45,7 @@ let bandwidthData = () => {
                     bandwidth = bandwidth / applicationSize;
                     applicationSize = 0;
                   
-                    if (indexOf(applicationSite, sites[site].name) == -1) {
+                    if (applicationSite[sites[site].name] == undefined) {
                         applicationSite[sites[site].name] = bandwidth;
                     } else {
                         applicationSite[sites[site].name] = (applicationSite[sites[site].name] + bandwidth) / 2;
@@ -54,6 +54,7 @@ let bandwidthData = () => {
             }
         }
     }
+    
     return applicationSite;
 }
 

@@ -3,65 +3,111 @@ import '../../assets/css/App.css';
 import { Container, Row, Col, select } from 'reactstrap';
 import metricsData from '../../metricsData.json';
 import { indexOf } from 'lodash';
+import PacketLossPerSite from './PacketLossPerSite';
+import LinkCapacityPerSite from './LinkCapacityPerSite';
 
 class Filter extends Component {
 
-
   constructor(props) {
     super(props);
+    this.state = {
+      all_site: [],
+      all_link: [],
+      all_application: [],
+      siteGroup: "",
+      siteName: "",
+      linkName: "",
+      applicationName: "",
+      duration: "",
+      toFilter:""
+    }
+
+    this.siteGroup = this.siteGroup.bind(this);
+    this.allSites = this.allSites.bind(this);
+    this.linksData = this.linksData.bind(this);
+    this.applicationsData = this.applicationsData.bind(this);
+    this.changeData = this.changeData.bind(this);
+    this.handlePrint = this.handlePrint.bind(this);
+    this.changeLink = this.changeLink.bind(this);
+    this.changeApplication = this.changeApplication.bind(this);
+    this.changeDuration = this.changeDuration.bind(this);
+  }
+  componentDidMount() {
 
 
-    // This binding is necessary to make `this` work in the callback
-    this.change = this.change.bind(this);
+    if (this.state.all_site.length == 0) {
+      this.allSites();
+    }
+    if (this.state.all_link.length == 0) {
+      this.linksData();
+    }
+    if (this.state.all_application.length == 0) {
+      this.applicationsData();
+    }
   }
 
-
-  change(selectedSite) {
-    console.log("sdfsfsdsdsfdfsdf")
-    let siteName = [];
-    let sitekey = [];
+  siteGroup() {
+    let sitesgroup = [];
+    let sitegroupkey = [];
     for (let index = 0; index < metricsData.length; index++) {
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
+        let site = metricsDataValue.sitesgroup;
+        if (sitegroupkey.indexOf(site) == -1) {
+          sitegroupkey.push(site);
+          sitesgroup.push(<option key={site}>{site}</option>);
+        }
+      }
+    }
 
-        let sitename = metricsDataValue.name;
-        if (sitekey.indexOf(sitename) == -1) {
+
+    return sitesgroup;
+  }
+
+  allSites(selectedSite) {
+
+    let siteName = [];
+    let sitekey = [];
+    let metrics = [];
+    let siteGroup;
+    if (selectedSite != undefined) {
+      this.setState({ siteGroup: selectedSite.target.value });
+      siteGroup = selectedSite.target.value;
+      metrics.push(metricsData[0]);
+    } else {
+      metrics.push(metricsData[0]);
+    }
+    for (let index = 0; index < metrics.length; index++) {
+      for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics[index].sites)) {
+        let sitename;
+        if (siteGroup == undefined) {
+          sitename = metricsDataValue.name;
+        }
+        else if (metricsDataValue.sitesgroup == siteGroup) {
+          sitename = metricsDataValue.name;
+        }
+        if (sitename != undefined && sitekey.indexOf(sitename) == -1) {
           sitekey.push(sitename);
           siteName.push(<option key={sitename}>{sitename}</option>);
         }
       }
     }
-    return siteName;
+    this.setState({ all_site: siteName });
   }
-
-  render() {
-
-
-
-    let siteGroup = () => {
-      let sitesgroup = [];
-      let sitegroupkey = [];
-      for (let index = 0; index < metricsData.length; index++) {
-        for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-          let site = metricsDataValue.sitesgroup;
-          if (sitegroupkey.indexOf(site) == -1) {
-            sitegroupkey.push(site);
-            sitesgroup.push(<option key={site}>{site}</option>);
-          }
-        }
-      }
-      return sitesgroup;
+  linksData(selectedSite) {
+    let linkName = [];
+    let linkkey = [];
+    let metrics = [];
+    let siteName;
+    if (selectedSite != undefined) {
+      siteName = selectedSite.target.value;
+      metrics.push(metricsData[0]);
+    } else {
+      metrics.push(metricsData[0]);
     }
-
-
-    let linksData = () => {
-
-      let linkName = [];
-      let linkkey = [];
-
-      for (let index = 0; index < metricsData.length; index++) {
-        for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-
-          let links = metricsDataValue.links
+    for (let index = 0; index < metrics.length; index++) {
+      for (let [metricsKey, metricsValue] of Object.entries(metrics[index].sites)) {
+        if ((siteName == undefined) || (siteName != undefined && metricsValue.name == siteName)) {
+          let links = metricsValue.links
           for (let link = 0; link < links.length; link++) {
             let linkData = links[link];
             for (let [linkKey, linkValue] of Object.entries(linkData)) {
@@ -72,16 +118,28 @@ class Filter extends Component {
             }
           }
         }
-        return linkName;
+
       }
+
     }
-    let applicationsData = () => {
+    this.setState({ all_link: linkName });
+  }
 
-      let applicationName = [];
-      let applicationkey = [];
-      for (let index = 0; index < metricsData.length; index++) {
-        for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
+  applicationsData(selectedSite) {
 
+    let applicationName = [];
+    let applicationkey = [];
+    let metrics = [];
+    let siteName;
+    if (selectedSite != undefined) {
+      siteName = selectedSite.target.value;
+      metrics.push(metricsData[0]);
+    } else {
+      metrics.push(metricsData[0]);
+    }
+    for (let index = 0; index < metricsData.length; index++) {
+      for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
+        if ((siteName == undefined) || (siteName != undefined && metricsDataValue.name == siteName)) {
           let application = metricsDataValue.application
           for (let index = 0; index < application.length; application++) {
             let applicationData = application[index];
@@ -94,64 +152,111 @@ class Filter extends Component {
           }
         }
       }
-      return applicationName;
     }
+    this.setState({ all_application: applicationName });
+    return applicationName;
+  }
+
+  changeData(selectedSite) {
+    this.linksData(selectedSite);
+    this.applicationsData(selectedSite);
+    this.setState({ siteName: selectedSite.target.value });
+  }
+  changeLink(selectedSite) {
+    this.setState({ linkName: selectedSite.target.value });
+  }
+  changeApplication(selectedSite) {
+    this.setState({ applicationName: selectedSite.target.value });
+  }
+
+  changeDuration(selectedSite) {
+    this.setState({ duration: selectedSite.target.value });
+  }
+  handlePrint() {
+    let toFilter = { 
+      "duration": this.state.duration,
+       "siteName": this.state.siteName,
+      "siteGroup":this.state.siteGroup,
+      "linkName":this.state.linkName,
+      "applicationName":this.state.applicationName
+      }
+      this.setState({toFilter:toFilter});
+  }
+  render() {
 
     return (
+      <div>
+        <Row>
+          <Col lg="1"></Col>
+          <Col xs="6" sm="6" md="2" lg="2" xl="2">
+            <div className="form-group">
+              <select className="form-control" id="time" onChange={this.changeDuration}>
+                <option>1Hour</option>
+                <option>1Day</option>
+                <option>1Week</option>
+                <option>1Month</option>
+                <option>1Year</option>
+              </select>
+            </div>
+          </Col>
+          <Col xs="6" sm="6" md="2" lg="2" xl="2">
+            <div className="form-group">
+              <select className="form-control" id="siteGroup" onChange={this.allSites}>
+                <option>All Site Group</option>
+                {this.siteGroup()}
+              </select>
+            </div>
+          </Col>
+          <Col xs="6" sm="6" md="2" lg="2" xl="2">
+            <div className="form-group">
+              <select className="form-control" id="site" onChange={this.changeData}>
+                <option>All Sites</option>
+                {this.state.all_site}
+              </select>
+            </div>
+          </Col>
+          <Col xs="6" sm="6" md="2" lg="2" xl="2">
+            <div className="form-group">
+              <select className="form-control" id="link" onChange={this.changeLink}>
+                <option>All Links</option>
+                {this.state.all_link}
+              </select>
+            </div>
+          </Col>
+          <Col xs="6" sm="6" md="2" lg="2" xl="2">
+            <div className="form-group">
+              <select className="form-control" id="application" onChange={this.changeApplication}>
+                <option>All Applications</option>
+                {this.state.all_application}
+              </select>
+            </div>
+          </Col>
 
-      <Row>
-        <Col lg="1"></Col>
-        <Col xs="6" sm="6" md="2" lg="2" xl="2">
-          <div className="form-group">
-            <select className="form-control" id="time">
-              <option>1Hour</option>
-              <option>1Day</option>
-              <option>1Week</option>
-              <option>1Month</option>
-              <option>1Year</option>
-            </select>
-          </div>
-        </Col>
-        <Col xs="6" sm="6" md="2" lg="2" xl="2">
-          <div className="form-group">
-            <select className="form-control" id="siteGroup" onChange={this.change}>
-              <option>All Site Group</option>
-              {siteGroup()}
-            </select>
-          </div>
-        </Col>
-        <Col xs="6" sm="6" md="2" lg="2" xl="2">
-          <div className="form-group">
-            <select className="form-control" id="site">
-              <option>All Sites</option>
+          <Col lg="1">
+            <button className="uk-button uk-button-mini" onClick={this.handlePrint}>Filter Data</button>
+          </Col>
 
-            </select>
-          </div>
-        </Col>
-        <Col xs="6" sm="6" md="2" lg="2" xl="2">
-          <div className="form-group">
-            <select className="form-control" id="link">
-              <option>All Links</option>
-              {linksData()}
-            </select>
-          </div>
-        </Col>
-        <Col xs="6" sm="6" md="2" lg="2" xl="2">
-          <div className="form-group">
-            <select className="form-control" id="application">
-              <option>All Applications</option>
-              {applicationsData()}
-            </select>
-          </div>
-        </Col>
-        <Col lg="1"></Col>
-      </Row>
+        </Row>
+        <Row>
+          <Col>
+            <PacketLossPerSite filter={this.state.toFilter} />
+          </Col>
+          <Col>
+            <LinkCapacityPerSite filter={this.state.toFilter} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <PacketLossPerSite filter={this.state.toFilter} />
+          </Col>
+          <Col>
+            <LinkCapacityPerSite filter={this.state.toFilter} />
+          </Col>
+        </Row>
+      </div>
 
     );
   }
 }
 
 export default Filter;
-
-
-//India,Paris,Havana,Loss Angeles,Toronto
