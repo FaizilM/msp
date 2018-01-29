@@ -9,8 +9,6 @@ import LatencyRatio from '../_components/admin/LatencyRatio';
 import JitterRatio from '../_components/admin/JitterRatio';
 import SiteAvailability from '../_components/admin/SiteAvailability';
 import CustomerMetricsDashboard from '../_components/admin/CustomerMetricsDashboard';
-import ApplicationClassMetrics from '../_components/admin/ApplicationClassMetrics';
-import Bandwidth from '../_components/admin/Bandwidth';
 import { userActions } from '../_actions';
 import { Link, Events } from 'react-scroll';
 import { Header } from '../_components/Header';
@@ -110,38 +108,7 @@ class AdminDashboard extends React.Component {
 
                         </Col>
                     </Row>
-                    <Row>
-
-                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
-
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i> <h4> Application Class Metrics </h4>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="list-group">
-                                        <ApplicationClassMetrics />
-                                    </div>
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row>
-
-                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
-
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <i className="fa fa-bell fa-fw"></i> <h4>Bandwidth </h4>
-                                </div>
-                                <div className="panel-body">
-                                    <div className="list-group">
-                                        <Bandwidth />
-                                    </div>
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
+                   
                 </div>
             </div>
         );

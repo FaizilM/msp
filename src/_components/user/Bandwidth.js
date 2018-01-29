@@ -4,6 +4,7 @@ import '../../assets/css/App.css';
 import Chart from '../chart/chart';
 import { color } from '../../_constants';
 import { indexOf } from 'lodash';
+import { Container, Row, Col, select } from 'reactstrap';
 
 let bandwidthData = () => {
     let applicationSite = [];
@@ -44,7 +45,7 @@ let bandwidthData = () => {
                     }
                     bandwidth = bandwidth / applicationSize;
                     applicationSize = 0;
-                  
+
                     if (applicationSite[sites[site].name] == undefined) {
                         applicationSite[sites[site].name] = bandwidth;
                     } else {
@@ -54,7 +55,7 @@ let bandwidthData = () => {
             }
         }
     }
-    
+
     return applicationSite;
 }
 
@@ -113,8 +114,8 @@ class Bandwidth extends Component {
         let configValue = config.bar;
         for (let [key, value] of Object.entries(configValue)) {
             if (key == "dataProvider") {
-                for (let [bandwidthKey, bandwidthValue] of Object.entries( bandwidthData())) {
-                   let jsonBandwidthData = {"name":bandwidthKey,"bandwidth":bandwidthValue}
+                for (let [bandwidthKey, bandwidthValue] of Object.entries(bandwidthData())) {
+                    let jsonBandwidthData = { "name": bandwidthKey, "bandwidth": bandwidthValue }
                     value.push(jsonBandwidthData);
                 }
             }
@@ -122,7 +123,21 @@ class Bandwidth extends Component {
         }
 
         return (
-            <Chart config={configValue} />
+            <Col xs="12" sm="12" md="6" lg="6" xl="6">
+                <div className="panel panel-default">
+                    <div className="panel-heading">
+                        <i className=""></i>
+                        <h3> Bandwidth </h3>
+                    </div>
+                    <div className="panel-body">
+                        <div className="list-group">
+                            <div>
+                                <Chart config={configValue} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Col>
         );
     }
 }
