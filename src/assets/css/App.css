@@ -64,7 +64,6 @@ background-color: #2E77B8 !important;
 
 }
 
-
-#customer_metrics_table > table {
-  background-color: red;
+.sortable-table .search-box input.search {
+  border: 2px solid #2E77B8 !important;
 }

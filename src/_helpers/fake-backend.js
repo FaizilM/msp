@@ -1,18 +1,15 @@
-
+import metricsData from '../metricsData.json'
 
 // array in local storage for registered users
 // let users = JSON.parse(localStorage.getItem('users')) || [];
 
 //Static users
-let users = [
+let users = metricsData;
+
+let admin =
   {firstName: "msp", lastName: "admin",
    username: "admin", password: "password",
-    id: 1, role:"ROLE_ADMIN"},
-    {firstName: "msp", lastName: "customer",
-     username: "customer", password: "password",
-      id: 2, role:"ROLE_USER"}
-]
-
+    id: 123, role:"ROLE_ADMIN"}
 
 
 export function configureFakeBackend() {
@@ -30,11 +27,25 @@ export function configureFakeBackend() {
                     let params = JSON.parse(opts.body);
 
                     // find if any user matches login credentials
-                    let filteredUsers = users.filter(user => {
-                        return user.username === params.username && user.password === params.password;
-                    });
 
-                    if (filteredUsers.length) {
+                    let filteredUsers;
+
+                    if (users.length) {
+                      if(params.username.toUpperCase() === admin.username.toUpperCase() && admin.password === params.password) {
+
+                              filteredUsers =  [admin];
+                          } else {
+                            users.filter(user => {
+
+                                if(user.username === params.username && user.password === params.password){
+
+                                    filteredUsers = [user]
+                                }
+                              })
+                          }
+
+
+
                         // if login details are valid return user details and fake jwt token
                         let user = filteredUsers[0];
                         let responseJson = {
