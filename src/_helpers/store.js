@@ -23,6 +23,6 @@ export const store = createStore(
     applyMiddleware(
         thunkMiddleware,
         // logger,
-        loggerMiddleware
+        // loggerMiddleware
     )
 );

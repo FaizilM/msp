@@ -96,8 +96,6 @@ var config = {
   "listeners": [{
     "event": "clickMapObject",
     "method": function(event) {
-
-        console.log("event.mapObject", event.mapObject)
         if(event.mapObject && event.mapObject.lines) {
 
             var object =  {

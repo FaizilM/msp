@@ -5,9 +5,6 @@ const Authorization = (allowedRoles) =>
   return class WithAuthorization extends React.Component {
     constructor(props) {
       super(props)
-
-      console.log("INSIDE AUTHORIZATION CONSTRUCTOR")
-
         user: {
           name: 'vcarl',
           role: 'admin'
