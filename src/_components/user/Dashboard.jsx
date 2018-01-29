@@ -50,9 +50,6 @@ class Dashboard extends React.Component {
         <Row>
            <BussinessImpactEvent />
         </Row>
-        <Row>
-           <ApplicationClassMetrics />
-        </Row>
      </Panel>
      <Panel>
         <Row>

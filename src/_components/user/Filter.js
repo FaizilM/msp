@@ -3,9 +3,12 @@ import '../../assets/css/App.css';
 import { Container, Row, Col, select } from 'reactstrap';
 import metricsData from '../../metricsData.json';
 import { indexOf } from 'lodash';
-import PacketLossPerSite from './PacketLossPerSite';
-import LinkCapacityPerSite from './LinkCapacityPerSite';
-
+import PacketLoss from '../admin/PacketLoss';
+import LinkCapacity from '../admin/LinkCapacity';
+import LatencyRatio from '../admin/LatencyRatio';
+import JitterRatio from '../admin/JitterRatio';
+import ApplicationClassMetrics from './ApplicationClassMetrics';
+import Bandwidth from './Bandwidth';
 class Filter extends Component {
 
   constructor(props) {
@@ -19,7 +22,7 @@ class Filter extends Component {
       linkName: "",
       applicationName: "",
       duration: "",
-      toFilter:""
+      toFilter: ""
     }
 
     this.siteGroup = this.siteGroup.bind(this);
@@ -79,12 +82,13 @@ class Filter extends Component {
     for (let index = 0; index < metrics.length; index++) {
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics[index].sites)) {
         let sitename;
-        if (siteGroup == undefined) {
+        if (siteGroup == undefined || siteGroup == "All Site Group") {
           sitename = metricsDataValue.name;
         }
         else if (metricsDataValue.sitesgroup == siteGroup) {
           sitename = metricsDataValue.name;
         }
+
         if (sitename != undefined && sitekey.indexOf(sitename) == -1) {
           sitekey.push(sitename);
           siteName.push(<option key={sitename}>{sitename}</option>);
@@ -106,7 +110,7 @@ class Filter extends Component {
     }
     for (let index = 0; index < metrics.length; index++) {
       for (let [metricsKey, metricsValue] of Object.entries(metrics[index].sites)) {
-        if ((siteName == undefined) || (siteName != undefined && metricsValue.name == siteName)) {
+        if ((siteName == undefined || siteName == "All Sites") || (siteName != undefined && metricsValue.name == siteName)) {
           let links = metricsValue.links
           for (let link = 0; link < links.length; link++) {
             let linkData = links[link];
@@ -139,7 +143,7 @@ class Filter extends Component {
     }
     for (let index = 0; index < metricsData.length; index++) {
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-        if ((siteName == undefined) || (siteName != undefined && metricsDataValue.name == siteName)) {
+        if ((siteName == undefined || siteName == "All Sites") || (siteName != undefined && metricsDataValue.name == siteName)) {
           let application = metricsDataValue.application
           for (let index = 0; index < application.length; application++) {
             let applicationData = application[index];
@@ -173,21 +177,22 @@ class Filter extends Component {
     this.setState({ duration: selectedSite.target.value });
   }
   handlePrint() {
-    let toFilter = { 
+    let filter = {
       "duration": this.state.duration,
-       "siteName": this.state.siteName,
-      "siteGroup":this.state.siteGroup,
-      "linkName":this.state.linkName,
-      "applicationName":this.state.applicationName
-      }
-      this.setState({toFilter:toFilter});
+      "siteName": this.state.siteName,
+      "siteGroup": this.state.siteGroup,
+      "linkName": this.state.linkName,
+      "applicationName": this.state.applicationName
+    }
+
+    this.setState({ toFilter: filter });
+
   }
   render() {
 
     return (
       <div>
         <Row>
-          <Col lg="1"></Col>
           <Col xs="6" sm="6" md="2" lg="2" xl="2">
             <div className="form-group">
               <select className="form-control" id="time" onChange={this.changeDuration}>
@@ -231,28 +236,23 @@ class Filter extends Component {
               </select>
             </div>
           </Col>
-
-          <Col lg="1">
-            <button className="uk-button uk-button-mini" onClick={this.handlePrint}>Filter Data</button>
-          </Col>
-
-        </Row>
-        <Row>
-          <Col>
-            <PacketLossPerSite filter={this.state.toFilter} />
-          </Col>
-          <Col>
-            <LinkCapacityPerSite filter={this.state.toFilter} />
+          <Col lg="2">
+            <button className="btn btn-primary btn-block"
+              onClick={this.handlePrint}>Filter Data</button>
           </Col>
         </Row>
         <Row>
-          <Col>
-            <PacketLossPerSite filter={this.state.toFilter} />
-          </Col>
-          <Col>
-            <LinkCapacityPerSite filter={this.state.toFilter} />
-          </Col>
+             <ApplicationClassMetrics />
+             <Bandwidth />
         </Row>
+        <Row>
+            <LinkCapacity filter={this.state.toFilter} customer="customer" />
+            <LatencyRatio filter={this.state.toFilter} customer="customer" />
+         </Row>
+        <Row>
+             <JitterRatio filter={this.state.toFilter} customer="customer" />
+        </Row>
+
       </div>
 
     );

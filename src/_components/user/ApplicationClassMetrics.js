@@ -3,124 +3,147 @@ import metricsData from '../../metricsData.json'
 import '../../assets/css/App.css';
 import Chart from '../chart/chart';
 import { color } from '../../_constants';
-import { Container, Row, Col } from 'reactstrap';
+import { indexOf } from 'lodash';
+import { Container, Row, Col, select } from 'reactstrap';
 
-let packetLossData = () => {
-
-  if(metricsData != null && metricsData !=undefined) {
-    for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
-        if(metricsDataValue.sites != null && metricsDataValue.sites != undefined) {
-            let sites = metricsDataValue.sites;
-            for (let site = 0; site < sites.length; site++) {
-                // if(metricsDataValue.application != null && metricsDataValue.application != undefined) {
-                //     let applications = sites[site].application;
-                //    // console.log("=====>>>>>>>>>>>>>>Application", applications);
-
-                // }
+let customerClassMetrics = () => {
+    let classMetrics = [];
+    let customerClassMetricsData = [];
+    if (metricsData != null && metricsData != undefined) {
+        for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
+            let count = 0;
+            if (metricsDataValue.sites != null && metricsDataValue.sites != undefined) {
+                let sites = metricsDataValue.sites;
+                for (let site = 0; site < 1; site++) {
+                    let application = sites[site].application;
+                    if (application != null && application != undefined) {
+                        for (let [applicationKey, applicationValue] of Object.entries(application)) {
+                            if (applicationValue != null && applicationValue != undefined) {
+                                for (let [applicationDataKey, applicationDataValue] of Object.entries(applicationValue)) {
+                                    if (applicationDataValue != null && applicationDataValue != undefined && applicationDataKey != null && applicationDataKey != undefined) {
+                                        if (classMetrics[applicationDataKey] == undefined) {
+                                            classMetrics[applicationDataKey] = [];
+                                        }
+                                        let valueMetrics = [];
+                                        for (let [metricsKey, metricsValue] of Object.entries(applicationDataValue)) {
+                                            for (let [key, value] of Object.entries(metricsValue)) {
+                                                if (classMetrics[applicationDataKey][key] == undefined) {
+                                                    classMetrics[applicationDataKey][key] = value;
+                                                } else {
+                                                    classMetrics[applicationDataKey][key] += value;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
-  }
+    return classMetrics;
 }
 
 
 class ApplicationClassMetrics extends Component {
 
-  render() {
-    let config = {
-        "bar": {
-          "theme": "light",
-          "type": "serial",
-          "startDuration": 0,
-          "legend": {
-            "markerSize": 10,
-            "horizontalGap":70,
-            "data": [
-              { "title": "<4.5ms", "color": color.GREEN_COLOR },
-              { "title": "<7.5ms", "color": color.YELLOW_COLOR },
-              { "title": ">7.5ms", "color": color.ORANGE_COLOR }
-            ]
-          },
-          "dataProvider": [{
-            "jitter_ratio": 4.5,
-            "percentage": 0,
-            "color": color.GREEN_COLOR
-          }, {
-            "jitter_ratio": 7.5,
-            "percentage": 0,
-            "color": color.YELLOW_COLOR
-          }, {
-            "jitter_ratio": 7.6,
-            "percentage": 0,
-            "color": color.ORANGE_COLOR
-          }],
-          "valueAxes": [{
-            "position": "left",
-            "minimum":0,
-            "maximum":100,
-            "autoGridCount":false,
-            "gridCount":5,
-            "gridAlpha":0.2,
-            "step":10,
-            "labelFunction": function (value) {
-              return value + "%";
-            }
-          }],
-          "depth3D": 20,
-          "angle": 30,
-          "graphs": [{
-            "balloonText": "Percentage: <b>[[value]]%</b>",
-            "fillColorsField": "color",
-            "fillAlphas": 1,
-            "precision":0,
-            "lineAlpha": 0.1,
-            "type": "column",
-            "fixedColumnWidth": 50,
-            "valueField": "percentage"
-          }],
-          "chartCursor": {
-            "categoryBalloonEnabled": false,
-            "cursorAlpha": 0,
-            "zoomable": false
-          },
-          "rotate": false,
-          "categoryField": "jitter_ratio",
-          "categoryAxis": {
-            "gridPosition": "start",
-            "gridAlpha":0.2,
-            "labelFunction": function (value) {
-              if (value == 4.5 || value == 7.5) {
-                return "<" + value + "ms";
-              } else {
-                return ">" + 7.5 + "ms";
-              }
+    render() {
+        let config = {
+            "bar": {
+                "type": "serial",
+                "theme": "light",
 
+                "legend": {
+                    "horizontalGap": 10,
+                    "useGraphSettings": true,
+                    "markerSize": 10
+                },
+                "dataProvider": [],
+                "valueAxes": [{
+                    "stackType": "regular",
+                    "axisAlpha": 0.5,
+                    "gridAlpha": 0.2
+                }],
+                "depth3D": 20,
+                "angle": 30,
+                "graphs": [{
+                    "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                    "fillAlphas": 0.8,
+                    "labelText": "[[value]]",
+                    "lineAlpha": 0.3,
+                    "title": "Bandwidth",
+                    "type": "column",
+                    "color": "#000000",
+                    "valueField": "bandwidth"
+                }, {
+                    "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                    "fillAlphas": 0.8,
+                    "labelText": "[[value]]",
+                    "lineAlpha": 0.3,
+                    "title": "Route Change",
+                    "type": "column",
+                    "color": "#000000",
+                    "valueField": "route_change"
+                }, {
+                    "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                    "fillAlphas": 0.8,
+                    "labelText": "[[value]]",
+                    "lineAlpha": 0.3,
+                    "title": "Route Fail",
+                    "type": "column",
+                    "color": "#000000",
+                    "valueField": "route_fail"
+                }],
+                "rotate": false,
+                "categoryField": "name",
+                "categoryAxis": {
+                    "gridPosition": "start",
+                    "gridAlpha": 0.2,
+                    "axisAlpha": 0.2,
+                    "position": "left"
+                },
+                "export": {
+                    "enabled": false
+                }
             }
-          }
-
+        };
+        let configValue = config.bar;
+        const customerClass = customerClassMetrics();
+        for (let [key, value] of Object.entries(configValue)) {
+            if (key == "dataProvider") {
+                for (let [customerClassKey, customerClassValue] of Object.entries(customerClass)) {
+                    let metricsData = [];
+                    let data = [];
+                    data = { "name": customerClassKey };
+                    for (let [classKey, classValue] of Object.entries(customerClassValue)) {
+                        data[classKey] = classValue;
+                    }
+                    value.push(data);
+                }
+            }
         }
-      };
-      let configValue = config.bar;
-    const packetLoss = packetLossData();
 
-
-    return (
-      <Col xs="12" sm="12" md="6" lg="6" xl="6">
-
-          <div className="panel panel-default">
-              <div className="panel-heading">
-                  <i className=""></i> <h4> Application Class Metrics </h4>
-              </div>
-              <div className="panel-body">
-                  <div className="list-group">
-                      <Chart config={configValue} />
-                  </div>
-              </div>
-          </div>
-      </Col>
-
-    );
-  }
+        return (
+            <Col xs="12" sm="12" md="6" lg="6" xl="6">
+            <div className="panel panel-default">
+                <div className="panel-heading">
+                    <i className=""></i>
+                    <h3> Application Class Metrics </h3>
+                </div>
+                <div className="panel-body">
+                    <div className="list-group">
+                        <div>
+                        <Chart config={configValue} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Col>
+           
+        );
+    }
 }
 
 export default ApplicationClassMetrics;
