@@ -7,22 +7,22 @@ const loggerMiddleware = createLogger();
 
 
 // function logger({ getState }) {
-  // return next => action => {
-    // console.log('will dispatch', action)
-
-    // Call the next dispatch method in the middleware chain.
-    // let returnValue = next(action)
-
-    // console.log('state after dispatch', getState())
-
-  // }
+//   return next => action => {
+//     console.log('will dispatch', action)
+//
+//     // Call the next dispatch method in the middleware chain.
+//     let returnValue = next(action)
+//
+//     console.log('state after dispatch', getState())
+//
+//   }
 // }
 
 export const store = createStore(
     rootReducer,
     applyMiddleware(
         thunkMiddleware,
-        // logger,
+        // logger
         // loggerMiddleware
     )
 );

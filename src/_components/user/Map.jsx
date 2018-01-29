@@ -3,11 +3,15 @@ import { Route, Redirect, Link } from 'react-router-dom';
 import AmCharts from '@amcharts/amcharts3-react';
 import 'ammap3/ammap/ammap.js';
 import { Container, Row, Col } from 'reactstrap';
+import metricsData from '../../metricsData.json'
+import { connect } from 'react-redux';
+
+
 
 class Map extends React.Component {
 
-  render() {
 
+  render() {
 
   var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
 
@@ -38,51 +42,7 @@ var config = {
     "map": "worldLow",
 
 
-    "images": [ {
-
-          "label": "Paris",
-          "svgPath": targetSVG,
-          "zoomLevel": 2,
-          "scale": 1.0,
-          "title": "Paris",
-          "latitude": 48.8567,
-          "longitude": 2.3510,
-
-        }, {
-          "label": "Toronto",
-          "svgPath": targetSVG,
-          "zoomLevel": 2,
-          "scale": 1.0,
-          "title": "Toronto",
-          "latitude": 43.8163,
-          "longitude": -79.4287
-        }, {
-          "label": "Los Angeles",
-          "svgPath": targetSVG,
-          "zoomLevel": 2,
-          "scale": 1.0,
-          "title": "Los Angeles",
-          "latitude": 34.3,
-          "longitude": -118.15
-        }, {
-          "label": "Havana",
-          "svgPath": targetSVG,
-          "zoomLevel": 2,
-          "scale": 1.0,
-          "title": "Havana",
-          "latitude": 23,
-          "longitude": -82
-        },
-        {
-          "label": "India",
-          "svgPath": targetSVG,
-          "zoomLevel": 2,
-          "scale": 1.0,
-          "title": "Site : India </br> Latency : 25ms   Normal : 587 </br> Jitter : 3.75ms  No.of Links : 4  No.of CPE : 2 ",
-          "latitude": 11.0168,
-          "longitude": 76.9558,
-
-        }]
+    "images": []
   },
   "linesSettings": {
   "arc": -0.7, // this makes lines curved. Use value from -1 to 1
@@ -96,24 +56,64 @@ var config = {
   "listeners": [{
     "event": "clickMapObject",
     "method": function(event) {
-        if(event.mapObject && event.mapObject.lines) {
 
-            var object =  {
-                "latitudes": [event.mapObject.latitude, 23],
-                "longitudes": [event.mapObject.longitude, -82]
-            }
-            var object1 =  {
-                "latitudes": [event.mapObject.latitude, 34.3],
-                "longitudes": [event.mapObject.longitude, -118.15]
-            }
-            event.mapObject.lines.push(object);
-            event.mapObject.lines.push(object1);
+        if(event.mapObject && event.mapObject.lines) {
+          for(let [Key, Value] of Object.entries(metricsData)) {
+
+              {/* This needs to be changed and it should work based on current user loggedIn */}
+              if(Value.username === "john"){
+                  for(let [Key, Value] of Object.entries(Value.sites)) {
+                      for(let [Key, links] of Object.entries(Value.linkedWith)) {
+                      event.mapObject.lines.push({
+                         "latitudes": [event.mapObject.latitude, links.latitude],
+                         "longitudes": [event.mapObject.longitude, links.longitude]
+                     });
+                      }
+
+
+                  }
+              }
+
+          }
             event.mapObject.validate();
         }
 
     }
   }]
 }
+
+
+
+      for(let [Key, Value] of Object.entries(config)) {
+
+          if (Key == "dataProvider") {
+          for(let [Key, metrics] of Object.entries(metricsData)) {
+
+              {/* This needs to be changed and it should work based on current user loggedIn */}
+              if(metrics.username === "john"){
+              console.log(metrics)
+                  for(let [Key, site] of Object.entries(metrics.sites)) {
+                  Value.images.push({
+                  "label": site.name,
+                  "svgPath": targetSVG,
+                  "zoomLevel": 2,
+                  "scale": 1.0,
+                  "title": site.name,
+                  "latitude": site.latitude,
+                  "longitude": site.longitude,
+                  }
+
+                )
+}
+              }
+
+          }
+
+
+          }
+
+      }
+
 
     return (
     <Col xs="12" sm="12" md="12" lg="12" xl="12">
@@ -136,5 +136,15 @@ var config = {
   }
 }
 
+function mapStateToProps(state) {
 
-export { Map };
+    const { authentication } = state;
+
+    return {
+        authentication
+    };
+
+}
+
+const connectedMap = connect(mapStateToProps)(Map);
+export { connectedMap as Map };
