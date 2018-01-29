@@ -9,8 +9,6 @@ import LatencyRatio from '../_components/admin/LatencyRatio';
 import JitterRatio from '../_components/admin/JitterRatio';
 import SiteAvailability from '../_components/admin/SiteAvailability';
 import CustomerMetricsDashboard from '../_components/admin/CustomerMetricsDashboard';
-import ApplicationClassMetrics from '../_components/admin/ApplicationClassMetrics';
-import Bandwidth from '../_components/admin/Bandwidth';
 import { userActions } from '../_actions';
 import { Link, Events } from 'react-scroll';
 import { Header } from '../_components/Header';

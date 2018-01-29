@@ -242,39 +242,15 @@ class Filter extends Component {
           </Col>
         </Row>
         <Row>
-          <Col xs="6" sm="6" md="12" lg="12" xl="12">
-            <h4> Application Class Metrics </h4>
-            <ApplicationClassMetrics />
-          </Col>
-          <Col>
-            <h4>Bandwidth </h4>
-            <Bandwidth />
-          </Col>
+             <ApplicationClassMetrics />
+             <Bandwidth />
         </Row>
         <Row>
-          <Col xs="6" sm="6" md="12" lg="12" xl="12">
-            <h4> Link Utitilization </h4>
             <LinkCapacity filter={this.state.toFilter} customer="customer" />
-          </Col>
-          <Col xs="6" sm="6" md="12" lg="12" xl="12">
-            <h4> Link Latency(ms) </h4>
             <LatencyRatio filter={this.state.toFilter} customer="customer" />
-          </Col>
-        </Row>
+         </Row>
         <Row>
-          <Col xs="6" sm="6" md="12" lg="12" xl="12">  <h4> Link Jitter(ms) </h4>
-            <JitterRatio filter={this.state.toFilter} customer="customer" />
-          </Col>
-          <Col xs="6" sm="6" md="12" lg="12" xl="12">
-            <h4> Packet Loss Per Link </h4>
-            <JitterRatio filter={this.state.toFilter} customer="customer" />
-          </Col>
-        </Row>
-        <Row>
-
-          <Col xs="6" sm="6" md="12" lg="12" xl="12"> <h4>Bandwidth </h4>
-            <Bandwidth />
-          </Col>
+             <JitterRatio filter={this.state.toFilter} customer="customer" />
         </Row>
 
       </div>

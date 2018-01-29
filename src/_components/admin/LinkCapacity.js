@@ -4,6 +4,7 @@ import metricsData from '../../metricsData.json';
 import { indexOf } from 'lodash';
 import '../../assets/css/App.css';
 import { color } from '../../_constants';
+import { Container, Row, Col, select } from 'reactstrap';
 
 let linkCapacityData = (filter, customer) => {
     let metrics = [];
@@ -234,35 +235,22 @@ class LinkCapacity extends React.Component {
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-        // let configValue = config.bar;
-        // const linkCapacity = linkCapacityData();
-        // for (let [linkCapacityKey, linkCapacityValue] of Object.entries(configValue)) {
-        //     if (linkCapacityKey == "dataProvider") {
-        //         for (let data = 0; data < linkCapacityValue.length; data++) {
-        //             linkCapacityValue[data].percentage = linkCapacity[data];
-        //         }
-        //     }
-
-        // }
         return (
-
-            <div>
-                <Chart config={configValue} />
-            </div>
-
-
+            <Col xs="12" sm="12" md="6" lg="6" xl="6">
+                <div className="panel panel-default">
+                    <div className="panel-heading">
+                        <i className=""></i>
+                        <h3> Link Capacity </h3>
+                    </div>
+                    <div className="panel-body">
+                        <div className="list-group">
+                            <div>
+                                <Chart config={configValue} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Col>
         );
     }
 }
