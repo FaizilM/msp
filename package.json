@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --port 8081 --host 192.168.0.43 --content-base ."
   },
   "dependencies": {
     "@amcharts/amcharts3-react": "^3.0.0",
