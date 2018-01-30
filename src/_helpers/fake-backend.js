@@ -8,7 +8,7 @@ let users = metricsData;
 
 let admin =
   {firstName: "msp", lastName: "admin",
-   username: "admin", password: "password",
+   username: "msp_admin", password: "password",
     id: 123, role:"ROLE_ADMIN"}
 
 
@@ -45,18 +45,22 @@ export function configureFakeBackend() {
                           }
 
 
+                          if(filteredUsers && filteredUsers.length) {
+                            // if login details are valid return user details and fake jwt token
+                            let user = filteredUsers[0];
+                            let responseJson = {
+                                id: user.id,
+                                username: user.username,
+                                firstName: user.firstName,
+                                lastName: user.lastName,
+                                token: 'fake-jwt-token',
+                                role:user.role
+                            };
+                            resolve({ ok: true, json: () => responseJson });
+                          } else {
+                            reject('Username or password is incorrect');
+                          }
 
-                        // if login details are valid return user details and fake jwt token
-                        let user = filteredUsers[0];
-                        let responseJson = {
-                            id: user.id,
-                            username: user.username,
-                            firstName: user.firstName,
-                            lastName: user.lastName,
-                            token: 'fake-jwt-token',
-                            role:user.role
-                        };
-                        resolve({ ok: true, json: () => responseJson });
                     } else {
                         // else return error
                         reject('Username or password is incorrect');
