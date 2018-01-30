@@ -18,11 +18,15 @@ import Filter from './Filter';
 import ApplicationClassMetrics from './ApplicationClassMetrics';
 import {Tabs, TabList,DragTabList,Tab, DragTab, PanelList, Panel, ExtraButton} from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
+import { connect } from 'react-redux';
 
 
 class Dashboard extends React.Component {
 
     render() {
+
+
+  
         return (
 <div className="app_container">
 <Row className="well">
@@ -75,5 +79,4 @@ class Dashboard extends React.Component {
     }
 }
 
-
-export { Dashboard };
+export {  Dashboard };

@@ -13,6 +13,11 @@ class Map extends React.Component {
 
   render() {
 
+
+  console.log("This props map ", this.props.authentication.user.username)
+
+        let user = this.props.authentication.user.username
+
   var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
 
 var starSVG = "M20,7.244 L12.809,6.627 L10,0 L7.191,6.627 L0,7.244 L5.455,11.971 L3.82,19 L10,15.272 L16.18,19 L14.545,11.971 L20,7.244 L20,7.244 Z M10,13.396 L6.237,15.666 L7.233,11.385 L3.91,8.507 L8.29,8.131 L10,4.095 L11.71,8.131 L16.09,8.507 L12.768,11.385 L13.764,15.666 L10,13.396 L10,13.396 Z";
@@ -59,9 +64,7 @@ var config = {
 
         if(event.mapObject && event.mapObject.lines) {
           for(let [Key, Value] of Object.entries(metricsData)) {
-
-              {/* This needs to be changed and it should work based on current user loggedIn */}
-              if(Value.username === "john"){
+              if(Value.username === user){
                   for(let [Key, Value] of Object.entries(Value.sites)) {
                       for(let [Key, links] of Object.entries(Value.linkedWith)) {
                       event.mapObject.lines.push({
@@ -88,20 +91,18 @@ var config = {
 
           if (Key == "dataProvider") {
           for(let [Key, metrics] of Object.entries(metricsData)) {
+              if(metrics.username === user){
 
-              {/* This needs to be changed and it should work based on current user loggedIn */}
-              if(metrics.username === "john"){
-              console.log(metrics)
                   for(let [Key, site] of Object.entries(metrics.sites)) {
-                  Value.images.push({
-                  "label": site.name,
-                  "svgPath": targetSVG,
-                  "zoomLevel": 2,
-                  "scale": 1.0,
-                  "title": site.name,
-                  "latitude": site.latitude,
-                  "longitude": site.longitude,
-                  }
+                      Value.images.push({
+                      "label": site.name,
+                      "svgPath": targetSVG,
+                      "zoomLevel": 2,
+                      "scale": 1.0,
+                      "title": site.name,
+                      "latitude": site.latitude,
+                      "longitude": site.longitude,
+                      }
 
                 )
 }

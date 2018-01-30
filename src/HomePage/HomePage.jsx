@@ -23,7 +23,7 @@ class HomePage extends React.Component {
         return (
             <div style={{ backgroundColor:"#F3F2F2"}}>
 
-                <Dashboard />
+                <Dashboard/>
             </div>
         );
     }
