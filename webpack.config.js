@@ -50,6 +50,9 @@ module.exports = {
         inject: 'body'
     })],
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        inline: true,
+        port: 8080,
+        host: '0.0.0.0'
     }
 }
