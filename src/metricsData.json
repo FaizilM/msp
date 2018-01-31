@@ -58,25 +58,88 @@
         ],
         "devices": [
           {
-            "CPE1": [
+            "CPE": [
               {
-                "application": [
+                "applications": [
                   {
                     "voice-HD": {
-                      "destination": [
-                        "Boston"
-                      ],
-                      "link": "mpls",
+                      "destination": "Boston",
+                      "link": "MPLS",
                       "octets": 480,
                       "packets": 160,
-                      "route": "app_route_policy",
-                      "routeValue": 1,
-                      "timestamp": "15:32:33"
+                      "is_no_route":false,
+                      "route_change": 2,
+                      "timestamp": "15:32:33",
+                      "link_util":82,
+                      "latency":"28ms",
+                      "jitter":5.6,
+                      "packet_loss":1
                     }
+
                   }
                 ]
               }
-            ]
+
+
+            ],
+            "CPE_VES":[
+                {
+                    "applications" : [{
+                        "voice-HD": {
+                          "destination": "Chicogo",
+                          "link": "MPLS-VES",
+                          "octets": 580,
+                          "packets": 110,
+                          "is_no_route":true,
+                          "route_change": 5,
+                          "timestamp": "21:11:09",
+                          "link_util":64,
+                          "latency":"250ms",
+                          "jitter":48,
+                          "packet_loss":2.7
+                        },
+                        "voice": {
+                          "destination": "London",
+                          "link": "MPLS",
+                          "octets": 210,
+                          "packets": 70,
+                          "is_no_route":false,
+                          "route_change": 0
+                        },
+
+                        "video": {
+                          "destination": "Tokyo",
+                          "link": "MPLS",
+                          "octets": 1200,
+                          "packets": 368,
+                          "is_no_route":false,
+                          "route_change": 0
+                        },
+                        "Default":{
+                          "destination": "Chicogo",
+                          "link": "LTE",
+                          "octets": 480,
+                          "packets": 110,
+                          "is_no_route":false,
+                          "route_change": 0
+                        }
+
+                    }
+                  ]
+
+              }],
+              "CPE-Century":[{
+                "Webex": {
+                  "destination": "London",
+                  "link": "BroadBand",
+                  "octets": 2780,
+                  "packets": 890,
+                  "is_no_route":false,
+                  "route_change": 0
+                }
+
+                }]
+
           }
         ],
         "application": [
