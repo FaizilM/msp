@@ -70,7 +70,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke={color.GREEN_COLOR} strokeWidth="5" fill="white" />
                         <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
-                            <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.data.app_route_policy}</text>
+                            <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{availability[0]}</text>
                         </Link>
                     </svg>
                     <div><h4>App Route Policy</h4></div>
@@ -79,7 +79,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="#FFFF00" strokeWidth="5" fill="white" />
                         <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
-                            <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline' }}>{this.state.data.app_route_change}</text>
+                            <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline' }}>{availability[1]}</text>
                         </Link>
                     </svg>
                     <div><h4>App Route Change</h4></div>
@@ -88,7 +88,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="#ff0011" strokeWidth="5" fill="white" />
                         <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
-                            <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline' }}>{this.state.data.no_app_route}</text>
+                            <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline' }}>{availability[2]}</text>
                         </Link>
                     </svg>
                     <div><h4>No App Route</h4></div>

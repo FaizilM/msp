@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import metricsData from '../../metricsData.json'
 import '../../assets/css/App.css';
-import {Chart} from '../';
+import { Chart } from '../';
 import { color } from '../../_constants';
 import { indexOf } from 'lodash';
 import { Container, Row, Col, select } from 'reactstrap';
@@ -59,7 +59,7 @@ let bandwidthData = () => {
                             }
                         }
                     }
-
+                    
                     bandwidth = bandwidth / applicationSize;
                     applicationSize = 0;
 

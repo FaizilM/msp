@@ -99,7 +99,7 @@ let customerMetricsDashboardData = () => {
       jitterlength = 0;
       jitter = 0;
 
-      if (latency > 0 && latency / latencylength > 50) {
+      if (latency > 0 && latency / latencylength > 150) {
         customerData["latency"] += 1;
       }
 
@@ -139,7 +139,7 @@ let tHead = [
   "Sites with Utilization above 75%",
   "Sites with Packet Loss above 2.5%",
   "Sites with Jitter above 22ms",
-  "Sites with Latency above 250ms",
+  "Sites with Latency above 150ms",
   "Sites with Availability above 96%",
 ];
 

@@ -32,25 +32,25 @@
           {
             "broadband": {
               "utilization": 84,
-              "latency": 44,
+              "latency": 290,
               "jitter": 0.8,
               "packet_loss": 4
             },
             "mpls": {
               "utilization": 92,
-              "latency": 10,
+              "latency": 200,
               "jitter": 0.1,
               "packet_loss": 3
             },
             "t1_lines": {
               "utilization": 52,
-              "latency": 5,
+              "latency": 150,
               "jitter": 1.9,
               "packet_loss": 0.3
             },
             "4G": {
               "utilization": 46,
-              "latency": 25,
+              "latency": 155,
               "jitter": 10,
               "packet_loss": 8
             }
@@ -58,23 +58,82 @@
         ],
         "devices": [
           {
-            "CPE1": [
+            "CPE": [
               {
-                "application": [
+                "applications": [
                   {
                     "voice-HD": {
-                      "destination": [
-                        "Boston"
-                      ],
-                      "link": "mpls",
+                      "destination": "Boston",
+                      "link": "MPLS",
                       "octets": 480,
                       "packets": 160,
-                      "route": "app_route_policy",
-                      "routeValue": 1,
-                      "timestamp": "15:32:33"
+                      "is_no_route": false,
+                      "route_change": 2,
+                      "timestamp": "15:32:33",
+                      "link_util": 82,
+                      "latency": "28ms",
+                      "jitter": 5.6,
+                      "packet_loss": 1
                     }
                   }
                 ]
+              }
+            ],
+            "CPE_VES": [
+              {
+                "applications": [
+                  {
+                    "voice-HD": {
+                      "destination": "Chicogo",
+                      "link": "MPLS-VES",
+                      "octets": 580,
+                      "packets": 110,
+                      "is_no_route": true,
+                      "route_change": 5,
+                      "timestamp": "21:11:09",
+                      "link_util": 64,
+                      "latency": "250ms",
+                      "jitter": 48,
+                      "packet_loss": 2.7
+                    },
+                    "voice": {
+                      "destination": "London",
+                      "link": "MPLS",
+                      "octets": 210,
+                      "packets": 70,
+                      "is_no_route": false,
+                      "route_change": 0
+                    },
+                    "video": {
+                      "destination": "Tokyo",
+                      "link": "MPLS",
+                      "octets": 1200,
+                      "packets": 368,
+                      "is_no_route": false,
+                      "route_change": 0
+                    },
+                    "Default": {
+                      "destination": "Chicogo",
+                      "link": "LTE",
+                      "octets": 480,
+                      "packets": 110,
+                      "is_no_route": false,
+                      "route_change": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "CPE-Century": [
+              {
+                "Webex": {
+                  "destination": "London",
+                  "link": "BroadBand",
+                  "octets": 2780,
+                  "packets": 890,
+                  "is_no_route": false,
+                  "route_change": 0
+                }
               }
             ]
           }
@@ -83,58 +142,58 @@
           {
             "voice": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 20,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 20,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 20,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 20,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 20,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 20,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 20,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class8": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 20,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ]
           }
@@ -193,58 +252,58 @@
           {
             "voice": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class8": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ]
           }
@@ -305,56 +364,56 @@
               {
                 "bandwidth": 22.6,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
+                "bandwidth": 20,
+                "route_change": 8,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 15,
+                "route_change": 7,
+                "route_fail": 1
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 20,
+                "route_change": 6,
+                "route_fail": 0
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 18,
+                "route_change": 5,
+                "route_fail": 1
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 5,
+                "route_change": 1,
+                "route_fail": 0
               }
             ],
             "class8": [
               {
                 "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "route_change": 4,
+                "route_fail": 0
               }
             ]
           }
@@ -379,19 +438,19 @@
             "broadband": {
               "utilization": 87,
               "latency": 102,
-              "jitter": 0.8,
+              "jitter": 80,
               "packet_loss": 0.9
             },
             "mpls": {
               "utilization": 62,
               "latency": 30,
-              "jitter": 0.1,
+              "jitter": 10,
               "packet_loss": 1.2
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 98,
-              "jitter": 0.9,
+              "jitter": 9,
               "packet_loss": 0.3
             },
             "4G": {
@@ -408,56 +467,56 @@
               {
                 "bandwidth": 22.6,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
+                "bandwidth": 20,
+                "route_change": 8,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 15,
+                "route_change": 7,
+                "route_fail": 1
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 20,
+                "route_change": 6,
+                "route_fail": 0
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 18,
+                "route_change": 5,
+                "route_fail": 1
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 5,
+                "route_change": 1,
+                "route_fail": 0
               }
             ],
             "class8": [
               {
                 "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "route_change": 4,
+                "route_fail": 0
               }
             ]
           }
@@ -506,56 +565,56 @@
               {
                 "bandwidth": 22.6,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
+                "bandwidth": 20,
+                "route_change": 8,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 15,
+                "route_change": 7,
+                "route_fail": 1
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 20,
+                "route_change": 6,
+                "route_fail": 0
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 18,
+                "route_change": 5,
+                "route_fail": 1
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 5,
+                "route_change": 1,
+                "route_fail": 0
               }
             ],
             "class8": [
               {
                 "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "route_change": 4,
+                "route_fail": 0
               }
             ]
           }
@@ -604,56 +663,56 @@
               {
                 "bandwidth": 22.6,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
+                "bandwidth": 20,
+                "route_change": 8,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 15,
+                "route_change": 7,
+                "route_fail": 1
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 20,
+                "route_change": 6,
+                "route_fail": 0
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 18,
+                "route_change": 5,
+                "route_fail": 1
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 5,
+                "route_change": 1,
+                "route_fail": 0
               }
             ],
             "class8": [
               {
                 "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "route_change": 4,
+                "route_fail": 0
               }
             ]
           }
@@ -705,58 +764,58 @@
           {
             "voice": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 50,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
+                "bandwidth": 50,
+                "route_change": 8,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 50,
+                "route_change": 7,
+                "route_fail": 1
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 50,
+                "route_change": 6,
+                "route_fail": 0
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 50,
+                "route_change": 5,
+                "route_fail": 1
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 50,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 50,
+                "route_change": 1,
+                "route_fail": 0
               }
             ],
             "class8": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 50,
+                "route_change": 4,
+                "route_fail": 0
               }
             ]
           }
@@ -803,58 +862,58 @@
           {
             "voice": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 70,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
+                "bandwidth": 78,
+                "route_change": 8,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 62,
+                "route_change": 7,
+                "route_fail": 1
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 17,
+                "route_change": 6,
+                "route_fail": 0
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 80,
+                "route_change": 5,
+                "route_fail": 1
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 89,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 55,
+                "route_change": 1,
+                "route_fail": 0
               }
             ],
             "class8": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 72,
+                "route_change": 4,
+                "route_fail": 0
               }
             ]
           }
@@ -903,56 +962,56 @@
               {
                 "bandwidth": 22.6,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
+                "bandwidth": 20,
+                "route_change": 8,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 15,
+                "route_change": 7,
+                "route_fail": 1
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 20,
+                "route_change": 6,
+                "route_fail": 0
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 18,
+                "route_change": 5,
+                "route_fail": 1
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 5,
+                "route_change": 1,
+                "route_fail": 0
               }
             ],
             "class8": [
               {
                 "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "route_change": 4,
+                "route_fail": 0
               }
             ]
           }
@@ -1006,56 +1065,56 @@
               {
                 "bandwidth": 22.6,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
+                "bandwidth": 20,
+                "route_change": 8,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 15,
+                "route_change": 7,
+                "route_fail": 1
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 20,
+                "route_change": 6,
+                "route_fail": 0
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 18,
+                "route_change": 5,
+                "route_fail": 1
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 5,
+                "route_change": 1,
+                "route_fail": 0
               }
             ],
             "class8": [
               {
                 "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "route_change": 4,
+                "route_fail": 0
               }
             ]
           }
@@ -1102,58 +1161,58 @@
           {
             "voice": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 50,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
+                "bandwidth": 70,
+                "route_change": 8,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 80,
+                "route_change": 7,
+                "route_fail": 1
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 100,
+                "route_change": 6,
+                "route_fail": 0
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 87,
+                "route_change": 5,
+                "route_fail": 1
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 60,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 54,
+                "route_change": 1,
+                "route_fail": 0
               }
             ],
             "class8": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 22,
+                "route_change": 4,
+                "route_fail": 0
               }
             ]
           }
@@ -1202,56 +1261,56 @@
               {
                 "bandwidth": 22.6,
                 "route_change": 9,
-                "route_fail": 2
+                "route_fail": 0
               }
             ],
             "video": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
+                "bandwidth": 20,
+                "route_change": 8,
                 "route_fail": 2
               }
             ],
             "class3": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 15,
+                "route_change": 7,
+                "route_fail": 1
               }
             ],
             "class4": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 20,
+                "route_change": 6,
+                "route_fail": 0
               }
             ],
             "class5": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 18,
+                "route_change": 5,
+                "route_fail": 1
               }
             ],
             "class6": [
               {
-                "bandwidth": 22.6,
+                "bandwidth": 10,
                 "route_change": 9,
                 "route_fail": 2
               }
             ],
             "class7": [
               {
-                "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "bandwidth": 5,
+                "route_change": 1,
+                "route_fail": 0
               }
             ],
             "class8": [
               {
                 "bandwidth": 22.6,
-                "route_change": 9,
-                "route_fail": 2
+                "route_change": 4,
+                "route_fail": 0
               }
             ]
           }
