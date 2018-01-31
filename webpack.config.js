@@ -17,31 +17,29 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
 
                 use: [{
-                  loader: 'babel-loader',
-                  query: {
-                      presets: ['react', 'es2015', 'stage-3']
+                    loader: 'babel-loader',
+                    query: {
+                        presets: ['react', 'es2015', 'stage-3']
                     },
-                  },
-
-
-              ],
+                },
+                ],
 
             },
             {
                 test: /\.css$/,
                 use: [
-                  { loader: "style-loader" },
-                  { loader: "css-loader" }
+                    { loader: "style-loader" },
+                    { loader: "css-loader" }
                 ]
-              },{
-  test: /\.(jpg|png|svg)$/,
-  use: {
-    loader: "url-loader",
-    options: {
-      limit: 25000,
-    },
-  },
-},
+            }, {
+                test: /\.(jpg|png|svg)$/,
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 25000,
+                    },
+                },
+            },
         ]
     },
     plugins: [new HtmlWebpackPlugin({

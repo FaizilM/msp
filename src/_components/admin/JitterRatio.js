@@ -38,7 +38,7 @@ let jitterRatioData = (filter, customer) => {
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics)) {
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
-     let links = sites[site].links;
+      let links = sites[site].links;
       if (customer == undefined) {
         for (let link = 0; link < links.length; link++) {
           let linkJitter = links[link];

@@ -9,7 +9,7 @@ import { Container, Row, Col, select } from 'reactstrap';
 
 class ApplicationDetails extends React.Component {
     render() {
-        return(
+        return (
             <div></div>
         );
     }

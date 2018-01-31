@@ -19,9 +19,9 @@ class Header extends React.Component {
         return (
             <div>
                 <nav className="navbar navbar-default navbar-fixed-top">
-                    <div className="container-fluid" style={{backgroundColor:"#FFFFFF"}}>
+                    <div className="container-fluid" style={{ backgroundColor: "#FFFFFF" }}>
                         <div className="navbar-header">
-                            <a className="navbar-brand" href="#"><img src="src/assets/images/logo.png" alt="logo" style = {{width:"90px"}}></img></a>
+                            <a className="navbar-brand" href="#"><img src="src/assets/images/logo.png" alt="logo" style={{ width: "90px" }}></img></a>
                         </div>
                         <ul className="nav navbar-nav">
                             {home}

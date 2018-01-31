@@ -11,130 +11,130 @@ import { connect } from 'react-redux';
 class Map extends React.Component {
 
 
-  render() {
+    render() {
 
 
-  console.log("This props map ", this.props.authentication.user.username)
+        console.log("This props map ", this.props.authentication.user.username)
 
         let user = this.props.authentication.user.username
 
-  var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
+        var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
 
-var starSVG = "M20,7.244 L12.809,6.627 L10,0 L7.191,6.627 L0,7.244 L5.455,11.971 L3.82,19 L10,15.272 L16.18,19 L14.545,11.971 L20,7.244 L20,7.244 Z M10,13.396 L6.237,15.666 L7.233,11.385 L3.91,8.507 L8.29,8.131 L10,4.095 L11.71,8.131 L16.09,8.507 L12.768,11.385 L13.764,15.666 L10,13.396 L10,13.396 Z";
+        var starSVG = "M20,7.244 L12.809,6.627 L10,0 L7.191,6.627 L0,7.244 L5.455,11.971 L3.82,19 L10,15.272 L16.18,19 L14.545,11.971 L20,7.244 L20,7.244 Z M10,13.396 L6.237,15.666 L7.233,11.385 L3.91,8.507 L8.29,8.131 L10,4.095 L11.71,8.131 L16.09,8.507 L12.768,11.385 L13.764,15.666 L10,13.396 L10,13.396 Z";
 
-var config = {
-  "type": "map",
+        var config = {
+            "type": "map",
 
-  "theme": "none",
-  "map": "worldLow",
+            "theme": "none",
+            "map": "worldLow",
 
-  "imagesSettings": {
-    "rollOverColor": "#089282",
-    "rollOverScale": 3,
-    "selectedScale": 3,
-    "selectedColor": "#089282",
-    "color": "#13564e",
-    "labelRollOverColor":"#006666"
-  },
+            "imagesSettings": {
+                "rollOverColor": "#089282",
+                "rollOverScale": 3,
+                "selectedScale": 3,
+                "selectedColor": "#089282",
+                "color": "#13564e",
+                "labelRollOverColor": "#006666"
+            },
 
-  "areasSettings": {
-    "unlistedAreasColor": "#15A892",
-      outlineThickness:0.1,
+            "areasSettings": {
+                "unlistedAreasColor": "#15A892",
+                outlineThickness: 0.1,
 
-  },
+            },
 
-  "dataProvider": {
-    "map": "worldLow",
-
-
-    "images": []
-  },
-  "linesSettings": {
-  "arc": -0.7, // this makes lines curved. Use value from -1 to 1
-  "arrow": "middle",
-  "color": "#585869",
-  "alpha": 0.6,
-  "arrowAlpha": 1,
-  "arrowSize": 4
-  },
-
-  "listeners": [{
-    "event": "clickMapObject",
-    "method": function(event) {
-
-        if(event.mapObject && event.mapObject.lines) {
-          for(let [Key, Value] of Object.entries(metricsData)) {
-              if(Value.username === user){
-                  for(let [Key, Value] of Object.entries(Value.sites)) {
-                      for(let [Key, links] of Object.entries(Value.linkedWith)) {
-                      event.mapObject.lines.push({
-                         "latitudes": [event.mapObject.latitude, links.latitude],
-                         "longitudes": [event.mapObject.longitude, links.longitude]
-                     });
-                      }
+            "dataProvider": {
+                "map": "worldLow",
 
 
-                  }
-              }
+                "images": []
+            },
+            "linesSettings": {
+                "arc": -0.7, // this makes lines curved. Use value from -1 to 1
+                "arrow": "middle",
+                "color": "#585869",
+                "alpha": 0.6,
+                "arrowAlpha": 1,
+                "arrowSize": 4
+            },
 
-          }
-            event.mapObject.validate();
+            "listeners": [{
+                "event": "clickMapObject",
+                "method": function (event) {
+
+                    if (event.mapObject && event.mapObject.lines) {
+                        for (let [Key, Value] of Object.entries(metricsData)) {
+                            if (Value.username === user) {
+                                for (let [Key, Value] of Object.entries(Value.sites)) {
+                                    for (let [Key, links] of Object.entries(Value.linkedWith)) {
+                                        event.mapObject.lines.push({
+                                            "latitudes": [event.mapObject.latitude, links.latitude],
+                                            "longitudes": [event.mapObject.longitude, links.longitude]
+                                        });
+                                    }
+
+
+                                }
+                            }
+
+                        }
+                        event.mapObject.validate();
+                    }
+
+                }
+            }]
         }
 
+
+
+        for (let [Key, Value] of Object.entries(config)) {
+
+            if (Key == "dataProvider") {
+                for (let [Key, metrics] of Object.entries(metricsData)) {
+                    if (metrics.username === user) {
+
+                        for (let [Key, site] of Object.entries(metrics.sites)) {
+                            Value.images.push({
+                                "label": site.name,
+                                "svgPath": targetSVG,
+                                "zoomLevel": 2,
+                                "scale": 1.0,
+                                "title": site.name,
+                                "latitude": site.latitude,
+                                "longitude": site.longitude,
+                            }
+
+                            )
+                        }
+                    }
+
+                }
+
+
+            }
+
+        }
+
+
+        return (
+            <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                <div className="panel panel-default">
+                    <div className="panel-heading">
+                        <i className=""></i> <h3>Sites</h3>
+                    </div>
+                    <div className="panel-body">
+                        <div className="list-group">
+                            <div style={{ width: "100%", height: "450px", backgroundColor: "lightblue" }} >
+                                <AmCharts.React options={config} style={{ width: "100%", height: "350px" }} />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </Col>
+
+        );
     }
-  }]
-}
-
-
-
-      for(let [Key, Value] of Object.entries(config)) {
-
-          if (Key == "dataProvider") {
-          for(let [Key, metrics] of Object.entries(metricsData)) {
-              if(metrics.username === user){
-
-                  for(let [Key, site] of Object.entries(metrics.sites)) {
-                      Value.images.push({
-                      "label": site.name,
-                      "svgPath": targetSVG,
-                      "zoomLevel": 2,
-                      "scale": 1.0,
-                      "title": site.name,
-                      "latitude": site.latitude,
-                      "longitude": site.longitude,
-                      }
-
-                )
-}
-              }
-
-          }
-
-
-          }
-
-      }
-
-
-    return (
-    <Col xs="12" sm="12" md="12" lg="12" xl="12">
-        <div className="panel panel-default">
-            <div className="panel-heading">
-                <i className=""></i> <h3>Sites</h3>
-            </div>
-            <div className="panel-body">
-                <div className="list-group">
-                <div style={{ width: "100%", height: "450px", backgroundColor: "lightblue" }} >
-                  <AmCharts.React options={config} style={{ width: "100%", height: "350px" }} />
-                </div>
-
-                </div>
-            </div>
-        </div>
-    </Col>
-
-    );
-  }
 }
 
 function mapStateToProps(state) {

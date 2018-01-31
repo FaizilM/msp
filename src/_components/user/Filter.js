@@ -242,15 +242,16 @@ class Filter extends Component {
           </Col>
         </Row>
         <Row>
-             <ApplicationClassMetrics />
-             <Bandwidth />
+          <ApplicationClassMetrics />
+          <Bandwidth />
         </Row>
         <Row>
-            <LinkCapacity filter={this.state.toFilter} customer="customer" />
-            <LatencyRatio filter={this.state.toFilter} customer="customer" />
-         </Row>
+          <LinkCapacity filter={this.state.toFilter} customer="customer" />
+          <LatencyRatio filter={this.state.toFilter} customer="customer" />
+        </Row>
         <Row>
-             <JitterRatio filter={this.state.toFilter} customer="customer" />
+          <JitterRatio filter={this.state.toFilter} customer="customer" />
+          <PacketLoss filter={this.state.toFilter} customer="customer" />
         </Row>
 
       </div>

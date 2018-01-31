@@ -28,6 +28,8 @@ let siteAvailabilityData = () => {
     return availability;
 };
 class Sites extends Component {
+
+
     constructor(props) {
         super(props);
         this.state =
@@ -40,6 +42,28 @@ class Sites extends Component {
 
             }
     };
+    componentDidMount() {
+
+        Events.scrollEvent.register('begin', function () {
+            console.log("begin", arguments);
+        });
+
+        Events.scrollEvent.register('end', function () {
+            console.log("end", arguments);
+        });
+
+    }
+
+    componentWillUnmount() {
+        Events.scrollEvent.remove('begin');
+        Events.scrollEvent.remove('end');
+    }
+
+
+    handleClick() {
+        console.log("Event tiggered");
+    }
+
 
     render() {
         let availability = siteAvailabilityData();
@@ -48,27 +72,27 @@ class Sites extends Component {
                 <div style={{ float: 'left' }}>
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke={color.GREEN_COLOR} strokeWidth="5" fill="white" />
-                        <a href="#customerData" style={{ color: "white", textDecoration: 'underline' }}>
+                        <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
                             <text textAnchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.data.app_route_policy}</text>
-                        </a>
+                        </Link>
                     </svg>
                     <div><h4>App Route Policy</h4></div>
                 </div>
                 <div style={{ float: 'right' }}>
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="#FFFF00" strokeWidth="5" fill="white" />
-                        <a href="#customerData" style={{ color: "white", textDecoration: 'underline' }}>
+                        <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
                             <text textAnchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{this.state.data.app_route_change}</text>
-                        </a>
+                        </Link>
                     </svg>
                     <div><h4>App Route Change</h4></div>
                 </div>
                 <div style={{ float: 'right' }}>
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="#ff0011" strokeWidth="5" fill="white" />
-                        <a href="#customerData" style={{ color: "white", textDecoration: 'underline' }}>
+                        <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
                             <text textAnchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{this.state.data.no_app_route}</text>
-                        </a>
+                        </Link>
                     </svg>
                     <div><h4>No App Route</h4></div>
                 </div>

@@ -7,13 +7,14 @@ import PacketLoss from '../_components/admin/PacketLoss';
 import LinkCapacity from '../_components/admin/LinkCapacity';
 import LatencyRatio from '../_components/admin/LatencyRatio';
 import JitterRatio from '../_components/admin/JitterRatio';
+import Reference from '../_components/admin/Reference';
 import SiteAvailability from '../_components/admin/SiteAvailability';
 import CustomerMetricsDashboard from '../_components/admin/CustomerMetricsDashboard';
 import { userActions } from '../_actions';
 import { Link, Events } from 'react-scroll';
 import { Header } from '../_components/Header';
 import { Container, Row, Col } from 'reactstrap';
-import {Tabs, TabList,DragTabList,Tab, DragTab, PanelList, Panel, ExtraButton} from 'react-tabtab';
+import { Tabs, TabList, DragTabList, Tab, DragTab, PanelList, Panel, ExtraButton } from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
 
 
@@ -21,13 +22,13 @@ class AdminDashboard extends React.Component {
 
 
     constructor(props) {
-      super(props)
+        super(props)
 
-      this.state = { tabIndex: 0 };
+        this.state = { tabIndex: 0 };
     }
 
     handleSelect(key) {
-        this.setState({tabIndex:key})
+        this.setState({ tabIndex: key })
         console.log(this.state)
     }
     render() {
@@ -46,91 +47,79 @@ class AdminDashboard extends React.Component {
 
 
                     <Tabs customStyle={customStyle} defaultIndex={this.state.tabIndex}>
-                      <TabList>
-                         <Tab>Dashboard</Tab>
-                         <Tab>Customer Metrics Dashboard</Tab>
-                      </TabList>
-                      <PanelList>
-                         <Panel>
-                         <Row>
-                             <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                                 <div className="panel panel-default">
-                                     <div className="panel-heading">
-                                         <i className=""></i>
-                                         <h3>Inventory</h3>
-                                     </div>
-                                     <div className="panel-body">
-                                         <div className="list-group">
-                                             <Inventory />
-                                         </div>
-                                     </div>
-                                 </div>
-                             </Col>
-                             <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                                 <div className="panel panel-default">
-                                     <div className="panel-heading">
-                                         <i className=""></i>
-                                         <h3>Sites</h3>
-                                     </div>
-                                     <div className="panel-body">
-                                         <div className="list-group">
-                                             <Sites />
-                                         </div>
+                        <TabList>
+                            <Tab>Dashboard</Tab>
+                            <Tab>Customer Metrics Dashboard</Tab>
+                        </TabList>
+                        <PanelList>
+                            <Panel>
+                                <Row>
+                                    <Col xs="12" sm="12" md="6" lg="6" xl="6">
+                                        <div className="panel panel-default">
+                                            <div className="panel-heading">
+                                                <i className=""></i>
+                                                <h3>Inventory</h3>
+                                            </div>
+                                            <div className="panel-body">
+                                                <div className="list-group">
+                                                    <Inventory />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col xs="12" sm="12" md="6" lg="6" xl="6">
+                                        <div className="panel panel-default">
+                                            <div className="panel-heading">
+                                                <i className=""></i>
+                                                <h3>Sites</h3>
+                                            </div>
+                                            <div className="panel-body">
+                                                <div className="list-group">
+                                                    <Sites />
+                                                </div>
 
-                                         <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%" }}>
-                                             <a onClick={() => this.handleSelect(1)} style={{ color: "white" }}><label>View All Sites</label></a>
-                                         </button>
-                                     </div>
-                                 </div>
-                             </Col>
-                         </Row>
-                         <Row>
-                           <SiteAvailability />
-                             <LatencyRatio />
+                                                <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%" }}>
+                                                    <a onClick={() => this.handleSelect(1)} style={{ color: "white" }}><label>View All Sites</label></a>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <SiteAvailability />
+                                    <LatencyRatio />
 
-                         </Row>
+                                </Row>
 
-                         <Row>
-                         <JitterRatio />
-                               <PacketLoss />
+                                <Row>
+                                    <JitterRatio />
+                                    <PacketLoss />
 
-                         </Row>
-                         <Row>
-                             <Col xs="12" sm="12" md="12" lg="12" xl="12">
-                                 <div className="panel panel-default">
-                                     <div className="panel-heading">
-                                         <i className=""></i>
-                                         <h3>Link Capacity Utilization</h3>
-                                     </div>
-                                     <div className="panel-body">
-                                         <div className="list-group">
-                                             <LinkCapacity />
-                                         </div>
-                                     </div>
-                                 </div>
-                             </Col>
+                                </Row>
+                                <Row>
+                                    <LinkCapacity />
+                                </Row>
+                            </Panel>
+                            <Panel>
+                                <Row>
+                                    <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                                        <div className="panel panel-default">
+                                            <div className="panel-heading">
+                                                <i className=""></i>
+                                                <h3>Customer Metrics Dashboard</h3>
+                                            </div>
+                                            <div className="panel-body">
+                                                <div className="list-group" id="customer_metrics_table">
+                                                    <CustomerMetricsDashboard />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                         </Row>
-                         </Panel>
-                         <Panel>
-                         <Row>
-                             <Col xs="12" sm="12" md="12" lg="12" xl="12">
-                                 <div className="panel panel-default">
-                                     <div className="panel-heading">
-                                         <i className=""></i>
-                                         <h3>Customer Metrics Dashboard</h3>
-                                     </div>
-                                     <div className="panel-body">
-                                         <div className="list-group" id="customer_metrics_table">
-                                             <CustomerMetricsDashboard />
-                                         </div>
-                                     </div>
-                                 </div>
-
-                             </Col>
-                         </Row>
-                         </Panel>
-                      </PanelList>
+                                    </Col>
+                                </Row>
+                                <Row><Reference /></Row>
+                            </Panel>
+                        </PanelList>
                     </Tabs>
 
 

@@ -240,7 +240,7 @@ class LinkCapacity extends React.Component {
                 <div className="panel panel-default">
                     <div className="panel-heading">
                         <i className=""></i>
-                        <h3> Link Capacity </h3>
+                        <h3> Link Capacity Utilization</h3>
                     </div>
                     <div className="panel-body">
                         <div className="list-group">

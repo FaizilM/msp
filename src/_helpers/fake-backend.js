@@ -7,9 +7,11 @@ import metricsData from '../metricsData.json'
 let users = metricsData;
 
 let admin =
-  {firstName: "msp", lastName: "admin",
-   username: "msp_admin", password: "password",
-    id: 123, role:"ROLE_ADMIN"}
+    {
+        firstName: "msp", lastName: "admin",
+        username: "msp_admin", password: "password",
+        id: 123, role: "ROLE_ADMIN"
+    }
 
 
 export function configureFakeBackend() {
@@ -31,21 +33,21 @@ export function configureFakeBackend() {
                     let filteredUsers;
 
                     if (users.length) {
-                      if(params.username.toUpperCase() === admin.username.toUpperCase() && admin.password === params.password) {
+                        if (params.username.toUpperCase() === admin.username.toUpperCase() && admin.password === params.password) {
 
-                              filteredUsers =  [admin];
-                          } else {
+                            filteredUsers = [admin];
+                        } else {
                             users.filter(user => {
 
-                                if(user.username === params.username && user.password === params.password){
+                                if (user.username === params.username && user.password === params.password) {
 
                                     filteredUsers = [user]
                                 }
-                              })
-                          }
+                            })
+                        }
 
 
-                          if(filteredUsers && filteredUsers.length) {
+                        if (filteredUsers && filteredUsers.length) {
                             // if login details are valid return user details and fake jwt token
                             let user = filteredUsers[0];
                             let responseJson = {
@@ -54,12 +56,12 @@ export function configureFakeBackend() {
                                 firstName: user.firstName,
                                 lastName: user.lastName,
                                 token: 'fake-jwt-token',
-                                role:user.role
+                                role: user.role
                             };
                             resolve({ ok: true, json: () => responseJson });
-                          } else {
+                        } else {
                             reject('Username or password is incorrect');
-                          }
+                        }
 
                     } else {
                         // else return error
@@ -93,7 +95,7 @@ export function configureFakeBackend() {
                         let user = matchedUsers.length ? matchedUsers[0] : null;
 
                         // respond 200 OK with user
-                        resolve({ ok: true, json: () => user});
+                        resolve({ ok: true, json: () => user });
                     } else {
                         // return 401 not authorised if token is null or invalid
                         reject('Unauthorised');

@@ -1,16 +1,16 @@
 
 
 const Authorization = (allowedRoles) =>
-(WrappedComponent) =>
+  (WrappedComponent) =>
   return class WithAuthorization extends React.Component {
     constructor(props) {
       super(props)
-        user: {
-          name: 'vcarl',
+      user: {
+        name: 'vcarl',
           role: 'admin'
-        }
       }
     }
+  }
     render() {
       const { role } = this.state.user
       if (allowedRoles.includes(role)) {
@@ -22,4 +22,4 @@ const Authorization = (allowedRoles) =>
   }
 
 
-  export { Authorization };
+export { Authorization };

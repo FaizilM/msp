@@ -40,12 +40,12 @@ class RegisterPage extends React.Component {
         const { user } = this.state;
         const { dispatch } = this.props;
         if (user.firstName && user.lastName && user.username && user.password) {
-           dispatch(userActions.register(user));
+            dispatch(userActions.register(user));
         }
     }
 
     render() {
-        const { registering  } = this.props;
+        const { registering } = this.props;
         const { user, submitted } = this.state;
         return (
             <div className="col-md-6 col-md-offset-3">

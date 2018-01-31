@@ -7,7 +7,7 @@ import { Container, Row, Col } from 'reactstrap';
 let siteAvailabilityData = () => {
   let totalSite = 0;
   let availability = [0, 0, 0];
-  let count =0;
+  let count = 0;
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
     totalSite += metricsDataValue.sites.length;
     let sites = metricsDataValue.sites;
@@ -39,7 +39,7 @@ class SiteAvailability extends React.Component {
         "type": "serial",
         "startDuration": 0,
         "legend": {
-          "horizontalGap":70,
+          "horizontalGap": 70,
           "markerSize": 10,
           "data": [
             { "title": ">99.9%", "color": color.GREEN_COLOR },
@@ -62,8 +62,8 @@ class SiteAvailability extends React.Component {
         }],
         "valueAxes": [{
           "position": "left",
-          "minimum":0,
-          "maximum":0
+          "minimum": 0,
+          "maximum": 0
         }],
         "depth3D": 20,
         "angle": 30,
@@ -72,7 +72,7 @@ class SiteAvailability extends React.Component {
           "fillColorsField": "color",
           "fillAlphas": 1,
           "lineAlpha": 0.1,
-          "precision":0,
+          "precision": 0,
           "type": "column",
           "fixedColumnWidth": 50,
           "valueField": "site"
@@ -108,19 +108,19 @@ class SiteAvailability extends React.Component {
     configValue.valueAxes[0].maximum = totalSite;
     return (
       <Col xs="12" sm="12" md="6" lg="6" xl="6">
-          <div className="panel panel-default">
-              <div className="panel-heading">
-                  <i className=""></i>
-                  <h3>Site Availability</h3>
-              </div>
-              <div className="panel-body">
-                  <div className="list-group">
-                  <div>
-                    <Chart config={configValue} />
-                  </div>
-                  </div>
-              </div>
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <i className=""></i>
+            <h3>Site Availability</h3>
           </div>
+          <div className="panel-body">
+            <div className="list-group">
+              <div>
+                <Chart config={configValue} />
+              </div>
+            </div>
+          </div>
+        </div>
       </Col>
 
 
