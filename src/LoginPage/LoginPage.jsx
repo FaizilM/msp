@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { userActions } from '../_actions';
 import '../assets/css/main.css';
 import '../assets/css/util.css';
-
 import footerLogo from '../assets/images/logo-footer.png';
 
-
 class LoginPage extends React.Component {
+   
     constructor(props) {
         super(props);
 
@@ -38,23 +36,22 @@ class LoginPage extends React.Component {
         const { username, password } = this.state;
 
         const { dispatch } = this.props;
+    
         if (username && password) {
             dispatch(userActions.login(username, password));
         }
     }
 
     render() {
-        const { loggingIn } = this.props;
 
+        const { loggingIn } = this.props;
         const { alert } = this.props;
         const { username, password, submitted } = this.state;
+
         return (
             <div className="limiter">
-
                 <div className="container-login100">
-
                     <div className="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-
                         {alert.message &&
                             <div className={`alert ${alert.type}`} col-sm-4 col-sm-offset-4>{alert.message}</div>
                         }
@@ -109,16 +106,16 @@ class LoginPage extends React.Component {
     }
 }
 
-
-
 function mapStateToProps(state) {
 
     const { alert } = state;
     const { loggingIn } = state.authentication;
+
     return {
         alert,
         loggingIn
     };
+
 }
 
 const connectedLoginPage = connect(mapStateToProps)(LoginPage);

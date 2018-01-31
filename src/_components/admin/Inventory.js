@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../../assets/css/App.css';
 import metricsData from '../../metricsData.json';
 
-
 let inventoryData = () => {
   let inventory = {};
   inventory["total_customers"] = metricsData.length;
@@ -15,7 +14,6 @@ let inventoryData = () => {
     managedsites = metricsDataValue.sites.length;
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
-
       links += sites[site].links.length;
       managedCPE += sites[site].managed_CPE;
     }
@@ -26,6 +24,7 @@ let inventoryData = () => {
 
   return inventory;
 };
+
 class Inventory extends Component {
   constructor(props) {
     super(props);
@@ -55,10 +54,8 @@ class Inventory extends Component {
     return (
 
       <div>
-
         <div className="table-responsive">
           <table className="inventory table">
-
             <tbody>
               {tableData}
             </tbody>
@@ -69,4 +66,4 @@ class Inventory extends Component {
   }
 }
 
-export default Inventory;
+export { Inventory };

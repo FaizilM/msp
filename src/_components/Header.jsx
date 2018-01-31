@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { userConstants } from '../_constants';
 
 class Header extends React.Component {
 
@@ -9,14 +10,14 @@ class Header extends React.Component {
         const { user } = this.props;
         var home;
 
-        if (user.role == "ROLE_ADMIN") {
+        if (user.role == userConstants.ROLE_ADMIN) {
             home = <li className="active"><Link to="/"><span className="app_font">Dashboard</span></Link></li>
         } else {
             home = <li className="active"><Link to="/customer"><span className="app_font">Dashboard</span></Link></li>
         }
 
-
         return (
+
             <div>
                 <nav className="navbar navbar-default navbar-fixed-top">
                     <div className="container-fluid" style={{ backgroundColor: "#FFFFFF" }}>
@@ -32,16 +33,14 @@ class Header extends React.Component {
                             <li><Link to="/login"><span className="glyphicon glyphicon-log-in"></span><span className="app_font"> Logout</span></Link></li>
                             <li></li>
                             <p>
-
                             </p>
                         </ul>
                     </div>
                 </nav>
-
-
             </div>
 
         );
+
     }
 }
 

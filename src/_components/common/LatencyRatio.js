@@ -1,5 +1,5 @@
 import React from 'react';
-import Chart from '../chart/chart';
+import { Chart } from '../';
 import metricsData from '../../metricsData.json';
 import { color } from '../../_constants';
 import { Container, Row, Col } from 'reactstrap';
@@ -47,7 +47,6 @@ let latencyRatioData = (filter, customer) => {
             totalLink++;
           }
         }
-
         if (latencySite > 0 && latencySite / totalLink <= 30) {
           latency[2] += 1;
         } else if (latencySite > 0 && latencySite / totalLink <= 50) {
@@ -58,7 +57,6 @@ let latencyRatioData = (filter, customer) => {
         totalLink = 0;
         totalSite++;
         latencySite = 0;
-
       } else {
         if ((siteGroup != undefined && sites[site].sitesgroup == siteGroup) || siteGroup == undefined) {
           if ((siteName != undefined && sites[site].name == siteName) || siteName == undefined) {
@@ -73,7 +71,6 @@ let latencyRatioData = (filter, customer) => {
                   } else {
                     latencyData[linkKey] = (latencyData[linkKey] + linkValue.latency) / 2;
                   }
-
                 }
               }
             }
@@ -86,12 +83,10 @@ let latencyRatioData = (filter, customer) => {
     latency[0] = parseInt((latency[0] / totalSite) * 100);
     latency[1] = parseInt((latency[1] / totalSite) * 100);
     latency[2] = parseInt((latency[2] / totalSite) * 100);
-
     return latency;
   } else {
     return latencyData;
   }
-
 };
 
 class LatencyRatio extends React.Component {
@@ -136,11 +131,9 @@ class LatencyRatio extends React.Component {
         "categoryAxis": {
           "gridPosition": "start"
         }
-
       }
     };
     let configValue = config.bar;
-
     const latencyRatio = latencyRatioData(this.props.filter, this.props.customer);
 
     if (this.props.customer == undefined) {
@@ -155,7 +148,6 @@ class LatencyRatio extends React.Component {
           label.push(labelData);
           latencyValue = label;
         }
-
         if (latencyKey == "dataProvider") {
           for (let data = 0; data < latencyValue.length; data++) {
             latencyValue[data].percentage = latencyRatio[data];
@@ -180,8 +172,6 @@ class LatencyRatio extends React.Component {
         if (latencyKey == "categoryField") {
           configValue.categoryField = "latency_ratio";
         }
-
-
         if (latencyKey == "categoryAxis") {
           let labelData = latencyValue;
           labelData["labelFunction"] = function (value) {
@@ -190,10 +180,8 @@ class LatencyRatio extends React.Component {
             } else {
               return ">" + 150 + "ms";
             }
-
           }
         }
-
         if (latencyKey == "legend") {
           latencyValue.data.push(
             { "title": "<30ms", "color": color.GREEN_COLOR },
@@ -201,7 +189,6 @@ class LatencyRatio extends React.Component {
             { "title": ">150ms", "color": color.ORANGE_COLOR }
           );
         }
-
       }
     } else {
       let colorcode = [color.GREEN_COLOR, color.YELLOW_COLOR, color.ORANGE_COLOR, color.BLUE_COLOR]
@@ -221,10 +208,8 @@ class LatencyRatio extends React.Component {
             value.data.push(jsonlatencyData);
           }
         }
-
       }
     }
-
 
     return (
       <Col xs="12" sm="12" md="6" lg="6" xl="6">
@@ -242,12 +227,8 @@ class LatencyRatio extends React.Component {
           </div>
         </div>
       </Col>
-
-
-
     );
   }
 }
 
-
-export default LatencyRatio;
+export { LatencyRatio };

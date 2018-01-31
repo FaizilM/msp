@@ -1,34 +1,50 @@
 import React, { Component } from 'react';
 import metricsData from '../../metricsData.json'
 import '../../assets/css/App.css';
-import Chart from '../chart/chart';
+import {Chart} from '../';
 import { color } from '../../_constants';
 import { indexOf } from 'lodash';
 import { Container, Row, Col, select } from 'reactstrap';
 
 let bandwidthData = () => {
+
     let applicationSite = [];
     let applicationCustomer = [];
     let bandwidth = 0;
     let applicationSize = 0;
     let applicationSiteSize = 0;
+
     if (metricsData != null && metricsData != undefined) {
+
         for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
             let count = 0;
+
             if (metricsDataValue.sites != null && metricsDataValue.sites != undefined) {
                 let sites = metricsDataValue.sites;
+
                 for (let site = 0; site < sites.length; site++) {
                     let application = sites[site].application;
+
                     if (application != null && application != undefined) {
+
                         for (let [applicationKey, applicationValue] of Object.entries(application)) {
+
                             if (applicationValue != null && applicationValue != undefined) {
+
                                 for (let [applicationDataKey, applicationDataValue] of Object.entries(applicationValue)) {
+
                                     if (applicationDataValue != null && applicationDataValue != undefined) {
+
                                         for (let [classKey, classValue] of Object.entries(applicationDataValue)) {
+
                                             if (classValue != null && classValue != undefined) {
+
                                                 for (let [classDataKey, classDataValue] of Object.entries(classValue)) {
+
                                                     if ((classDataValue != null && classDataValue != undefined) && (classDataValue != null && classDataValue != undefined)) {
+
                                                         if (classDataKey != null && classDataKey != undefined) {
+
                                                             if (classDataKey == "bandwidth") {
                                                                 bandwidth += classDataValue;
                                                                 applicationSize++;
@@ -43,6 +59,7 @@ let bandwidthData = () => {
                             }
                         }
                     }
+
                     bandwidth = bandwidth / applicationSize;
                     applicationSize = 0;
 
@@ -59,10 +76,10 @@ let bandwidthData = () => {
     return applicationSite;
 }
 
-
 class Bandwidth extends Component {
 
     render() {
+
         let config = {
             "bar": {
                 "theme": "light",
@@ -111,9 +128,13 @@ class Bandwidth extends Component {
 
             }
         };
+
         let configValue = config.bar;
+
         for (let [key, value] of Object.entries(configValue)) {
+
             if (key == "dataProvider") {
+
                 for (let [bandwidthKey, bandwidthValue] of Object.entries(bandwidthData())) {
                     let jsonBandwidthData = { "name": bandwidthKey, "bandwidth": bandwidthValue }
                     value.push(jsonBandwidthData);
@@ -123,6 +144,7 @@ class Bandwidth extends Component {
         }
 
         return (
+
             <Col xs="12" sm="12" md="6" lg="6" xl="6">
                 <div className="panel panel-default">
                     <div className="panel-heading">
@@ -139,7 +161,8 @@ class Bandwidth extends Component {
                 </div>
             </Col>
         );
+
     }
 }
 
-export default Bandwidth;
+export { Bandwidth };
