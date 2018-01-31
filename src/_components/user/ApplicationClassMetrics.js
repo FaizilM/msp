@@ -127,21 +127,21 @@ class ApplicationClassMetrics extends Component {
 
         return (
             <Col xs="12" sm="12" md="6" lg="6" xl="6">
-            <div className="panel panel-default">
-                <div className="panel-heading">
-                    <i className=""></i>
-                    <h3> Application Class Metrics </h3>
-                </div>
-                <div className="panel-body">
-                    <div className="list-group">
-                        <div>
-                        <Chart config={configValue} />
+                <div className="panel panel-default">
+                    <div className="panel-heading">
+                        <i className=""></i>
+                        <h3> Application Class Metrics </h3>
+                    </div>
+                    <div className="panel-body">
+                        <div className="list-group">
+                            <div>
+                                <Chart config={configValue} />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </Col>
-           
+            </Col>
+
         );
     }
 }

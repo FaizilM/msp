@@ -17,27 +17,27 @@ function login(username, password) {
 
         userService.login(username, password)
             .then(
-                user => {
+            user => {
 
-                    dispatch(success(user));
+                dispatch(success(user));
 
-                    if(user.role === "ROLE_USER") {
-                      history.push('/customer');
-                    } else {
-                      history.push('/');
-                    }
-
-
-                },
-                error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                if (user.role === "ROLE_USER") {
+                    history.push('/customer');
+                } else {
+                    history.push('/');
                 }
+
+
+            },
+            error => {
+                dispatch(failure(error));
+                dispatch(alertActions.error(error));
+            }
             );
     };
 
     function request(user) {
-      return { type: userConstants.LOGIN_REQUEST, user }
+        return { type: userConstants.LOGIN_REQUEST, user }
     }
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
@@ -54,15 +54,15 @@ function register(user) {
 
         userService.register(user)
             .then(
-                user => {
-                    dispatch(success());
-                    history.push('/login');
-                    dispatch(alertActions.success('Registration successful'));
-                },
-                error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                }
+            user => {
+                dispatch(success());
+                history.push('/login');
+                dispatch(alertActions.success('Registration successful'));
+            },
+            error => {
+                dispatch(failure(error));
+                dispatch(alertActions.error(error));
+            }
             );
     };
 
@@ -77,8 +77,8 @@ function getAll() {
 
         userService.getAll()
             .then(
-                users => dispatch(success(users)),
-                error => dispatch(failure(error))
+            users => dispatch(success(users)),
+            error => dispatch(failure(error))
             );
     };
 
@@ -94,12 +94,12 @@ function _delete(id) {
 
         userService.delete(id)
             .then(
-                user => {
-                    dispatch(success(id));
-                },
-                error => {
-                    dispatch(failure(id, error));
-                }
+            user => {
+                dispatch(success(id));
+            },
+            error => {
+                dispatch(failure(id, error));
+            }
             );
     };
 

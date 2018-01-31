@@ -1,11 +1,11 @@
 [
   {
     "customer": "John",
-    "username" : "john",
-    "firstName" : "John",
+    "username": "john",
+    "firstName": "John",
     "lastName": "Edison",
     "password": "password",
-    "role":"ROLE_USER",
+    "role": "ROLE_USER",
     "sites": [
       {
         "id": 1,
@@ -18,15 +18,15 @@
         "sitesgroup": "ATM",
         "latitude": 11.0168,
         "longitude": 76.9558,
-        "linkedWith" : [
-            {
-              "latitude": 23,
-              "longitude": -82
-            },
-            {
-              "latitude": 48.8567,
-              "longitude": 2.3510
-            }
+        "linkedWith": [
+          {
+            "latitude": 23,
+            "longitude": -82
+          },
+          {
+            "latitude": 48.8567,
+            "longitude": 2.3510
+          }
         ],
         "links": [
           {
@@ -54,6 +54,29 @@
               "jitter": 10,
               "packet_loss": 8
             }
+          }
+        ],
+        "devices": [
+          {
+            "CPE1": [
+              {
+                "application": [
+                  {
+                    "voice-HD": {
+                      "destination": [
+                        "Boston"
+                      ],
+                      "link": "mpls",
+                      "octets": 480,
+                      "packets": 160,
+                      "route": "app_route_policy",
+                      "routeValue": 1,
+                      "timestamp": "15:32:33"
+                    }
+                  }
+                ]
+              }
+            ]
           }
         ],
         "application": [
@@ -128,15 +151,15 @@
         "sitesgroup": "Domestic sites",
         "latitude": 48.8567,
         "longitude": 2.3510,
-        "linkedWith" : [
-            {
-              "latitude": 23,
-              "longitude": -82
-            },
-            {
-              "latitude": 11.0168,
-              "longitude": 76.9558
-            }
+        "linkedWith": [
+          {
+            "latitude": 23,
+            "longitude": -82
+          },
+          {
+            "latitude": 11.0168,
+            "longitude": 76.9558
+          }
         ],
         "links": [
           {
@@ -238,15 +261,15 @@
         "sitesgroup": "International sites",
         "latitude": 23,
         "longitude": -82,
-        "linkedWith" : [
-            {
-              "latitude": 48.8567,
-              "longitude": 2.3510
-            },
-            {
-              "latitude": 11.0168,
-              "longitude": 76.9558
-            }
+        "linkedWith": [
+          {
+            "latitude": 48.8567,
+            "longitude": 2.3510
+          },
+          {
+            "latitude": 11.0168,
+            "longitude": 76.9558
+          }
         ],
         "links": [
           {
@@ -341,7 +364,6 @@
   },
   {
     "customer": "Ashwin",
-
     "sites": [
       {
         "id": 1,

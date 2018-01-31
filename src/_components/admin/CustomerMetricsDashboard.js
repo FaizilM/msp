@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../../assets/css/App.css';
 import metricsData from '../../metricsData.json';
-import { indexOf } from 'lodash';
+import { indexOf, replace } from 'lodash';
 
-import  SortableTbl  from 'react-sort-search-table'
+import SortableTbl from 'react-sort-search-table'
 import ImageLoader from 'react-imageloader';
 
 
@@ -35,7 +35,7 @@ let customerMetricsDashboardData = () => {
       }
       if (metricsDataValue.no_app_route) {
         customerData["no_app_route"] = customerData["no_app_route"] + 1;
-        customerData["availability"] = customerData["availability"]  + 1;
+        customerData["availability"] = customerData["availability"] + 1;
 
       }
       let loss = 0;
@@ -108,45 +108,53 @@ let customerMetricsDashboardData = () => {
 
 let col = [
 
-      "customer",
-      "sites",
-      "app_route_policy",
-      "no_app_route",
-      "app_route_change",
-      "utilization",
-      "packet_loss",
-      "jitter",
-      "latency",
-      "availability",
+  "customer",
+  "sites",
+  "app_route_policy",
+  "no_app_route",
+  "app_route_change",
+  "utilization",
+  "packet_loss",
+  "jitter",
+  "latency",
+  "availability",
 
 ];
 let tHead = [
 
-      "Customer",
-      "No of Sites",
-      "Sites with App Route Policy",
-      "Sites with No App Route",
-      "Sites with App Route Change",
-      "Sites with Utilization above 75%",
-      "Sites with Packet Loss above 2.5%",
-      "Sites with Jitter above 22ms",
-      "Sites with Latency above 250ms",
-      "Sites with Availability above 96%",
+  "Customer",
+  "No of Sites",
+  "Sites with App Route Policy",
+  "Sites with No App Route",
+  "Sites with App Route Change",
+  "Sites with Utilization above 75%",
+  "Sites with Packet Loss above 2.5%",
+  "Sites with Jitter above 22ms",
+  "Sites with Latency above 250ms",
+  "Sites with Availability above 96%",
 ];
 
 class CustomerMetricsDashboard extends Component {
+
+  componentDidMount() {
+    let content = document.querySelector("#customer_metrics_table > div > div > div.form-group > div.desc.col-sm-5.col-xs-12 > div").textContent;
+    content = replace(content, new RegExp("totlas", "g"), "total");
+    document.querySelector("#customer_metrics_table > div > div > div.form-group > div.desc.col-sm-5.col-xs-12 > div").textContent = content;
+  }
   render() {
+
 
     let customerData = customerMetricsDashboardData();
 
 
-      return (
-		      <SortableTbl tblData={customerData}
-			       tHead={tHead}
-             
-			          dKey={col}
-		/>
-  );}
+    return (
+      <SortableTbl tblData={customerData}
+        tHead={tHead}
+
+        dKey={col}
+      />
+    );
+  }
 
 };
 
