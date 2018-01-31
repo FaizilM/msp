@@ -5,7 +5,6 @@ import rootReducer from '../_reducers';
 
 const loggerMiddleware = createLogger();
 
-
 // function logger({ getState }) {
 // return next => action => {
 // console.log('will dispatch', action)

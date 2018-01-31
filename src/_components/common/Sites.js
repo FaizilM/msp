@@ -7,10 +7,13 @@ import { color } from '../../_constants';
 let siteAvailabilityData = () => {
     let totalSite = 0;
     let availability = [0, 0, 0];
+   
     for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
         totalSite += metricsDataValue.sites.length;
         let sites = metricsDataValue.sites;
+        
         for (let site = 0; site < sites.length; site++) {
+            
             if (sites[site].app_route_policy == true) {
                 availability[0] += 1;
             }
@@ -18,15 +21,16 @@ let siteAvailabilityData = () => {
             if (sites[site].app_route_change == true) {
                 availability[1] += 1;
             }
+
             if (sites[site].no_app_route == true) {
                 availability[2] += 1;
             }
 
         }
     }
-
     return availability;
 };
+
 class Sites extends Component {
 
 
@@ -42,8 +46,8 @@ class Sites extends Component {
 
             }
     };
-    componentDidMount() {
 
+    componentDidMount() {
         Events.scrollEvent.register('begin', function () {
             console.log("begin", arguments);
         });
@@ -51,19 +55,12 @@ class Sites extends Component {
         Events.scrollEvent.register('end', function () {
             console.log("end", arguments);
         });
-
     }
 
     componentWillUnmount() {
         Events.scrollEvent.remove('begin');
         Events.scrollEvent.remove('end');
     }
-
-
-    handleClick() {
-        console.log("Event tiggered");
-    }
-
 
     render() {
         let availability = siteAvailabilityData();
@@ -73,7 +70,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke={color.GREEN_COLOR} strokeWidth="5" fill="white" />
                         <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
-                            <text textAnchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.data.app_route_policy}</text>
+                            <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.data.app_route_policy}</text>
                         </Link>
                     </svg>
                     <div><h4>App Route Policy</h4></div>
@@ -82,7 +79,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="#FFFF00" strokeWidth="5" fill="white" />
                         <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
-                            <text textAnchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{this.state.data.app_route_change}</text>
+                            <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline' }}>{this.state.data.app_route_change}</text>
                         </Link>
                     </svg>
                     <div><h4>App Route Change</h4></div>
@@ -91,7 +88,7 @@ class Sites extends Component {
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="#ff0011" strokeWidth="5" fill="white" />
                         <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
-                            <text textAnchor="middle" x="60" y="60" fill="#191970" onClick={this.handleClick} style={{ textDecoration: 'underline' }}>{this.state.data.no_app_route}</text>
+                            <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline' }}>{this.state.data.no_app_route}</text>
                         </Link>
                     </svg>
                     <div><h4>No App Route</h4></div>
@@ -102,4 +99,4 @@ class Sites extends Component {
     }
 }
 
-export default Sites;
+export { Sites };

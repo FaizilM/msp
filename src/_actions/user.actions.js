@@ -21,7 +21,7 @@ function login(username, password) {
 
                 dispatch(success(user));
 
-                if (user.role === "ROLE_USER") {
+                if (user.role === userConstants.ROLE_USER) {
                     history.push('/customer');
                 } else {
                     history.push('/');

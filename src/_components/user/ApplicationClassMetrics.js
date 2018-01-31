@@ -1,32 +1,47 @@
 import React, { Component } from 'react';
 import metricsData from '../../metricsData.json'
 import '../../assets/css/App.css';
-import Chart from '../chart/chart';
+import { Chart } from '../';
 import { color } from '../../_constants';
 import { indexOf } from 'lodash';
 import { Container, Row, Col, select } from 'reactstrap';
 
 let customerClassMetrics = () => {
+
     let classMetrics = [];
     let customerClassMetricsData = [];
+
     if (metricsData != null && metricsData != undefined) {
+
         for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
             let count = 0;
+
             if (metricsDataValue.sites != null && metricsDataValue.sites != undefined) {
                 let sites = metricsDataValue.sites;
+
                 for (let site = 0; site < 1; site++) {
                     let application = sites[site].application;
+
                     if (application != null && application != undefined) {
+
                         for (let [applicationKey, applicationValue] of Object.entries(application)) {
+
                             if (applicationValue != null && applicationValue != undefined) {
+
                                 for (let [applicationDataKey, applicationDataValue] of Object.entries(applicationValue)) {
+
                                     if (applicationDataValue != null && applicationDataValue != undefined && applicationDataKey != null && applicationDataKey != undefined) {
+
                                         if (classMetrics[applicationDataKey] == undefined) {
                                             classMetrics[applicationDataKey] = [];
                                         }
+
                                         let valueMetrics = [];
+
                                         for (let [metricsKey, metricsValue] of Object.entries(applicationDataValue)) {
+
                                             for (let [key, value] of Object.entries(metricsValue)) {
+
                                                 if (classMetrics[applicationDataKey][key] == undefined) {
                                                     classMetrics[applicationDataKey][key] = value;
                                                 } else {
@@ -46,10 +61,10 @@ let customerClassMetrics = () => {
     return classMetrics;
 }
 
-
 class ApplicationClassMetrics extends Component {
 
     render() {
+
         let config = {
             "bar": {
                 "type": "serial",
@@ -109,23 +124,30 @@ class ApplicationClassMetrics extends Component {
                 }
             }
         };
+
         let configValue = config.bar;
         const customerClass = customerClassMetrics();
+
         for (let [key, value] of Object.entries(configValue)) {
+
             if (key == "dataProvider") {
+
                 for (let [customerClassKey, customerClassValue] of Object.entries(customerClass)) {
                     let metricsData = [];
                     let data = [];
                     data = { "name": customerClassKey };
+
                     for (let [classKey, classValue] of Object.entries(customerClassValue)) {
                         data[classKey] = classValue;
                     }
+
                     value.push(data);
                 }
             }
         }
 
         return (
+
             <Col xs="12" sm="12" md="6" lg="6" xl="6">
                 <div className="panel panel-default">
                     <div className="panel-heading">
@@ -146,4 +168,4 @@ class ApplicationClassMetrics extends Component {
     }
 }
 
-export default ApplicationClassMetrics;
+export { ApplicationClassMetrics };

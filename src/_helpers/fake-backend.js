@@ -1,4 +1,5 @@
 import metricsData from '../metricsData.json'
+import { userConstants } from '../_constants';
 
 // array in local storage for registered users
 // let users = JSON.parse(localStorage.getItem('users')) || [];
@@ -10,9 +11,8 @@ let admin =
     {
         firstName: "msp", lastName: "admin",
         username: "msp_admin", password: "password",
-        id: 123, role: "ROLE_ADMIN"
+        id: 123, role: userConstants.ROLE_ADMIN
     }
-
 
 export function configureFakeBackend() {
     let realFetch = window.fetch;
@@ -29,12 +29,11 @@ export function configureFakeBackend() {
                     let params = JSON.parse(opts.body);
 
                     // find if any user matches login credentials
-
                     let filteredUsers;
 
                     if (users.length) {
-                        if (params.username.toUpperCase() === admin.username.toUpperCase() && admin.password === params.password) {
 
+                        if (params.username.toUpperCase() === admin.username.toUpperCase() && admin.password === params.password) {
                             filteredUsers = [admin];
                         } else {
                             users.filter(user => {
@@ -45,7 +44,6 @@ export function configureFakeBackend() {
                                 }
                             })
                         }
-
 
                         if (filteredUsers && filteredUsers.length) {
                             // if login details are valid return user details and fake jwt token
@@ -74,6 +72,7 @@ export function configureFakeBackend() {
                 // get users
                 if (url.endsWith('/users') && opts.method === 'GET') {
                     // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                  
                     if (opts.headers && opts.headers.Authorization === 'Bearer fake-jwt-token') {
                         resolve({ ok: true, json: () => users });
                     } else {
@@ -86,9 +85,11 @@ export function configureFakeBackend() {
 
                 // get user by id
                 if (url.match(/\/users\/\d+$/) && opts.method === 'GET') {
+                  
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                     if (opts.headers && opts.headers.Authorization === 'Bearer fake-jwt-token') {
                         // find user by id in users array
+                  
                         let urlParts = url.split('/');
                         let id = parseInt(urlParts[urlParts.length - 1]);
                         let matchedUsers = users.filter(user => { return user.id === id; });
@@ -129,13 +130,17 @@ export function configureFakeBackend() {
 
                 // delete user
                 if (url.match(/\/users\/\d+$/) && opts.method === 'DELETE') {
+                  
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                     if (opts.headers && opts.headers.Authorization === 'Bearer fake-jwt-token') {
+                  
                         // find user by id in users array
                         let urlParts = url.split('/');
                         let id = parseInt(urlParts[urlParts.length - 1]);
+                  
                         for (let i = 0; i < users.length; i++) {
                             let user = users[i];
+                  
                             if (user.id === id) {
                                 // delete user
                                 users.splice(i, 1);

@@ -1,5 +1,5 @@
 import React from 'react';
-import Chart from '../chart/chart';
+import { Chart } from '../';
 import metricsDatas from '../../metricsData.json';
 import { color } from '../../_constants';
 import { Container, Row, Col } from 'reactstrap';
@@ -8,10 +8,13 @@ let siteAvailabilityData = () => {
   let totalSite = 0;
   let availability = [0, 0, 0];
   let count = 0;
+
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
     totalSite += metricsDataValue.sites.length;
     let sites = metricsDataValue.sites;
+
     for (let site = 0; site < sites.length; site++) {
+
       if (sites[site].app_route_policy == true) {
         count++;
         availability[0] += 1;
@@ -21,6 +24,7 @@ let siteAvailabilityData = () => {
         count++;
         availability[1] += 1;
       }
+
       if (sites[site].no_app_route == true) {
         count++;
         availability[2] += 1;
@@ -97,8 +101,11 @@ class SiteAvailability extends React.Component {
 
     const availability = siteAvailabilityData();
     let totalSite = 0;
+
     for (let [Key, Value] of Object.entries(configValue)) {
+
       if (Key == "dataProvider") {
+
         for (let data = 0; data < Value.length; data++) {
           Value[data].site = availability[data];
           totalSite += availability[data];
@@ -106,6 +113,7 @@ class SiteAvailability extends React.Component {
       }
     }
     configValue.valueAxes[0].maximum = totalSite;
+
     return (
       <Col xs="12" sm="12" md="6" lg="6" xl="6">
         <div className="panel panel-default">
@@ -122,12 +130,8 @@ class SiteAvailability extends React.Component {
           </div>
         </div>
       </Col>
-
-
-
     );
   }
 }
 
-
-export default SiteAvailability;
+export { SiteAvailability };
