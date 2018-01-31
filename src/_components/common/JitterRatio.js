@@ -51,7 +51,7 @@ let jitterRatioData = (filter, customer) => {
           jitter[0] += 1;
         } else if (jitterSite > 0 && jitterSite / totalLink <= 7.5) {
           jitter[1] += 1;
-        } else {
+        } else if (jitterSite > 0 && jitterSite / totalLink > 22) {
           jitter[2] += 1;
         }
         totalLink = 0;
@@ -121,10 +121,10 @@ class JitterRatio extends React.Component {
         "depth3D": 20,
         "angle": 30,
         "graphs": [{
-          "balloonText": "Percentage: <b>[[value]]</b>",
+          "balloonText": "Milli Second: <b>[[value]]ms</b>",
           "fillColorsField": "color",
           "fillAlphas": 1,
-          "precision": 0,
+          "precision": 1,
           "lineAlpha": 0.1,
           "type": "column",
           "fixedColumnWidth": 50,
@@ -173,7 +173,7 @@ class JitterRatio extends React.Component {
               "percentage": 0,
               "color": color.YELLOW_COLOR
             }, {
-              "jitter_ratio": 7.6,
+              "jitter_ratio": 22,
               "percentage": 0,
               "color": color.ORANGE_COLOR
             })
@@ -190,7 +190,7 @@ class JitterRatio extends React.Component {
             if (value == 4.5 || value == 7.5) {
               return "<" + value + "ms";
             } else {
-              return ">" + 7.5 + "ms";
+              return ">" + value + "ms";
             }
 
           }
@@ -200,11 +200,13 @@ class JitterRatio extends React.Component {
           jitterValue.data.push(
             { "title": "<4.5ms", "color": color.GREEN_COLOR },
             { "title": "<7.5ms", "color": color.YELLOW_COLOR },
-            { "title": ">7.5ms", "color": color.ORANGE_COLOR }
+            { "title": ">22ms", "color": color.ORANGE_COLOR }
           );
         }
 
       }
+      configValue.graphs[0].precision = 0;
+      configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
     } else {
       let colorcode = [color.GREEN_COLOR, color.YELLOW_COLOR, color.ORANGE_COLOR, color.BLUE_COLOR]
       for (let [key, value] of Object.entries(configValue)) {

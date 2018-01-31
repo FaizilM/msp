@@ -87,6 +87,7 @@ class ApplicationClassMetrics extends Component {
                     "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
                     "fillAlphas": 0.8,
                     "labelText": "[[value]]",
+                    "precision": 0,
                     "lineAlpha": 0.3,
                     "title": "Bandwidth",
                     "type": "column",

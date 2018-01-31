@@ -51,7 +51,7 @@ let latencyRatioData = (filter, customer) => {
           latency[2] += 1;
         } else if (latencySite > 0 && latencySite / totalLink <= 50) {
           latency[1] += 1;
-        } else {
+        } else if (latencySite > 0 && latencySite / totalLink > 150) {
           latency[0] += 1;
         }
         totalLink = 0;
@@ -111,7 +111,7 @@ class LatencyRatio extends React.Component {
         "depth3D": 20,
         "angle": 30,
         "graphs": [{
-          "balloonText": "Percentage: <b>[[value]]%</b>",
+          "balloonText": "Milli Second: <b>[[value]]ms</b>",
           "fillColorsField": "color",
           "precision": 0,
           "fillAlphas": 1,
@@ -178,7 +178,7 @@ class LatencyRatio extends React.Component {
             if (value == 30 || value == 50) {
               return "<" + value + "ms";
             } else {
-              return ">" + 150 + "ms";
+              return ">" + value + "ms";
             }
           }
         }
@@ -190,6 +190,8 @@ class LatencyRatio extends React.Component {
           );
         }
       }
+      configValue.graphs[0].precision = 0;
+      configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
     } else {
       let colorcode = [color.GREEN_COLOR, color.YELLOW_COLOR, color.ORANGE_COLOR, color.BLUE_COLOR]
       for (let [key, value] of Object.entries(configValue)) {
