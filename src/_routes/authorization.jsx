@@ -21,5 +21,4 @@ const Authorization = (allowedRoles) =>
     }
   }
 
-
 export { Authorization };

@@ -1,25 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import '../assets/css/App.css';
-import Inventory from '../_components/admin/Inventory';
-import Sites from '../_components/admin/Sites';
-import PacketLoss from '../_components/admin/PacketLoss';
-import LinkCapacity from '../_components/admin/LinkCapacity';
-import LatencyRatio from '../_components/admin/LatencyRatio';
-import JitterRatio from '../_components/admin/JitterRatio';
-import Reference from '../_components/admin/Reference';
-import SiteAvailability from '../_components/admin/SiteAvailability';
-import CustomerMetricsDashboard from '../_components/admin/CustomerMetricsDashboard';
-import { userActions } from '../_actions';
+import '../../assets/css/App.css';
+import {Inventory, Sites, PacketLoss, LinkCapacity, LatencyRatio, JitterRatio, SiteAvailability, CustomerMetrics} from '../';
+import { userActions } from '../../_actions';
 import { Link, Events } from 'react-scroll';
-import { Header } from '../_components/Header';
+import { Header } from '../Header';
 import { Container, Row, Col } from 'reactstrap';
 import { Tabs, TabList, DragTabList, Tab, DragTab, PanelList, Panel, ExtraButton } from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
 
 
 class AdminDashboard extends React.Component {
-
 
     constructor(props) {
         super(props)
@@ -31,21 +22,18 @@ class AdminDashboard extends React.Component {
         this.setState({ tabIndex: key })
         console.log(this.state)
     }
+
     render() {
 
         const { user, users } = this.props;
 
-
         return (
             <div style={{ backgroundColor: "#F3F2F2" }}>
-
                 <div className="app_container">
                     <Row className="well">
                         <Col xs="12" sm="12" md="12" lg="12" xl="12">
                         </Col>
                     </Row>
-
-
                     <Tabs customStyle={customStyle} defaultIndex={this.state.tabIndex}>
                         <TabList>
                             <Tab>Dashboard</Tab>
@@ -88,13 +76,10 @@ class AdminDashboard extends React.Component {
                                 <Row>
                                     <SiteAvailability />
                                     <LatencyRatio />
-
                                 </Row>
-
                                 <Row>
                                     <JitterRatio />
                                     <PacketLoss />
-
                                 </Row>
                                 <Row>
                                     <LinkCapacity />
@@ -102,30 +87,11 @@ class AdminDashboard extends React.Component {
                             </Panel>
                             <Panel>
                                 <Row>
-                                    <Col xs="12" sm="12" md="12" lg="12" xl="12">
-                                        <div className="panel panel-default">
-                                            <div className="panel-heading">
-                                                <i className=""></i>
-                                                <h3>Customer Metrics Dashboard</h3>
-                                            </div>
-                                            <div className="panel-body">
-                                                <div className="list-group" id="customer_metrics_table">
-                                                    <CustomerMetricsDashboard />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </Col>
+                                    <CustomerMetrics />
                                 </Row>
-                                <Row><Reference /></Row>
                             </Panel>
                         </PanelList>
                     </Tabs>
-
-
-
-
-
                 </div>
             </div>
         );

@@ -11,6 +11,7 @@ export const userService = {
 };
 
 function login(username, password) {
+   
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -19,6 +20,7 @@ function login(username, password) {
 
     return fetch('/users/authenticate', requestOptions)
         .then(response => {
+            
             if (!response.ok) {
                 return Promise.reject(response.statusText);
             }
@@ -26,6 +28,7 @@ function login(username, password) {
             return response.json();
         })
         .then(user => {
+           
             // login successful if there's a jwt token in the response
             if (user && user.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -42,6 +45,7 @@ function logout() {
 }
 
 function getAll() {
+   
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
@@ -51,6 +55,7 @@ function getAll() {
 }
 
 function getById(id) {
+   
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
@@ -60,6 +65,7 @@ function getById(id) {
 }
 
 function register(user) {
+   
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -70,6 +76,7 @@ function register(user) {
 }
 
 function update(user) {
+   
     const requestOptions = {
         method: 'PUT',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
@@ -81,6 +88,7 @@ function update(user) {
 
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {
+    
     const requestOptions = {
         method: 'DELETE',
         headers: authHeader()
@@ -90,6 +98,7 @@ function _delete(id) {
 }
 
 function handleResponse(response) {
+   
     if (!response.ok) {
         return Promise.reject(response.statusText);
     }
