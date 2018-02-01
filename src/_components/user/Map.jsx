@@ -5,6 +5,7 @@ import 'ammap3/ammap/ammap.js';
 import { Container, Row, Col } from 'reactstrap';
 import metricsData from '../../metricsData.json'
 import { connect } from 'react-redux';
+import jsonQuery from 'json-query';
 
 class Map extends React.Component {
 
@@ -48,21 +49,38 @@ class Map extends React.Component {
 
                     if (event.mapObject && event.mapObject.lines) {
 
-                        for (let [Key, Value] of Object.entries(metricsData)) {
+                        let data = {};
+                        data["customers"] = metricsData
 
-                            if (Value.username === user) {
+                        let userDetails = jsonQuery('customers[username='+user+']', {
+                          data: data
+                        }).value
 
-                                for (let [Key, Value] of Object.entries(Value.sites)) {
+                        for (let [Key, site] of Object.entries(userDetails.sites)) {
 
-                                    for (let [Key, links] of Object.entries(Value.linkedWith)) {
-                                        event.mapObject.lines.push({
-                                            "latitudes": [event.mapObject.latitude, links.latitude],
-                                            "longitudes": [event.mapObject.longitude, links.longitude]
-                                        });
-                                    }
+                            if(site.name == event.mapObject.label) {
+
+                                for (let [Key, links] of Object.entries(site.linkedWith)) {
+
+                                    var siteDetails = {};
+                                    siteDetails["sites"] = userDetails.sites
+                                    let isNoAppRoute = jsonQuery('sites[latitude='+links.latitude+'].no_app_route', {
+                                      data: siteDetails
+                                    }).value
+
+                                    let lineObject = {"latitudes": [event.mapObject.latitude, links.latitude],
+                                      "longitudes": [event.mapObject.longitude, links.longitude]}
+
+                                      if(isNoAppRoute) {
+                                          lineObject["arrowColor"] = "red";
+                                          lineObject["arrowSize"] = 10;
+                                      }
+                                    event.mapObject.lines.push(lineObject);
                                 }
                             }
+
                         }
+
                         event.mapObject.validate();
                     }
                 }
