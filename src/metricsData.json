@@ -1,9 +1,9 @@
 [
   {
-    "customer": "John",
-    "username": "john",
-    "firstName": "John",
-    "lastName": "Edison",
+    "customer": "pepsi",
+    "username": "pepsi",
+    "firstName": "msp",
+    "lastName": "pepsi",
     "password": "password",
     "role": "ROLE_USER",
     "sites": [
@@ -426,7 +426,7 @@
     ]
   },
   {
-    "customer": "Ashwin",
+    "customer": "coke",
     "sites": [
       {
         "id": 1,
@@ -725,7 +725,7 @@
     ]
   },
   {
-    "customer": "Lakshy",
+    "customer": "walmart",
     "sites": [
       {
         "id": 1,
@@ -1024,7 +1024,7 @@
     ]
   },
   {
-    "customer": "Keerthi",
+    "customer": "mcdonalds",
     "sites": [
       {
         "id": 1,
