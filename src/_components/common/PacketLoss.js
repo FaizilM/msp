@@ -70,6 +70,7 @@ let packetLossData = (filter, customer) => {
         packetLossLink = 0;
 
       } else {
+
         if ((siteGroup != undefined && sites[site].sitesgroup == siteGroup) || siteGroup == undefined) {
 
           if ((siteName != undefined && sites[site].name == siteName) || siteName == undefined) {
@@ -159,8 +160,8 @@ class PacketLoss extends Component {
       }
     };
     const configValue = config.bar;
-    const packetLoss = packetLossData(this.props.filter, this.props.customer);
 
+    const packetLoss = packetLossData(this.props.filter, this.props.customer);
     if (this.props.customer == undefined) {
 
       for (let [packetLossKey, packetLossValue] of Object.entries(configValue)) {
@@ -219,6 +220,8 @@ class PacketLoss extends Component {
         }
 
       }
+      configValue.graphs[0].precision = 0;
+      configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
     } else {
       let colorcode = [color.GREEN_COLOR, color.YELLOW_COLOR, color.ORANGE_COLOR, color.BLUE_COLOR]
       for (let [key, value] of Object.entries(configValue)) {
@@ -243,8 +246,19 @@ class PacketLoss extends Component {
       }
     }
 
+    let pickChart = () => {
+      
+      if (packetLoss.length != undefined || packetLoss.broadband != undefined) {
+        return <Chart config={configValue} />
+      } else {
+        return < h1 > No Site Available </h1>
+      }
+
+    };
+
+
     return (
-      <Col xs="12" sm="12" md="6" lg="6" xl="6">
+      <Col xs="12" sm="12" md="6" lg="6" xl="6" >
         <div className="panel panel-default">
           <div className="panel-heading">
             <i className=""></i>
@@ -252,7 +266,7 @@ class PacketLoss extends Component {
           </div>
           <div className="panel-body">
             <div className="list-group">
-              <Chart config={configValue} />
+              {pickChart()}
             </div>
           </div>
         </div>

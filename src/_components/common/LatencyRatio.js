@@ -213,6 +213,16 @@ class LatencyRatio extends React.Component {
       }
     }
 
+    let pickChart = () => {
+
+      if (latencyRatio.length != undefined || latencyRatio.broadband != undefined) {
+        return <Chart config={configValue} />
+      } else {
+        return < h1 > No Site Available </h1>
+      }
+
+    };
+
     return (
       <Col xs="12" sm="12" md="6" lg="6" xl="6">
         <div className="panel panel-default">
@@ -223,7 +233,7 @@ class LatencyRatio extends React.Component {
           <div className="panel-body">
             <div className="list-group">
               <div>
-                <Chart config={configValue} />
+                {pickChart()}
               </div>
             </div>
           </div>

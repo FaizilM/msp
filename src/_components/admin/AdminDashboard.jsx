@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../../assets/css/App.css';
-import {Inventory, Sites, PacketLoss, LinkCapacity, LatencyRatio, JitterRatio, SiteAvailability, CustomerMetrics} from '../';
+import { SLAMetrics, Inventory, Sites, PacketLoss, LinkCapacity, LatencyRatio, JitterRatio, SiteAvailability, CustomerMetrics } from '../';
 import { userActions } from '../../_actions';
 import { Link, Events } from 'react-scroll';
 import { Header } from '../Header';
@@ -83,6 +83,7 @@ class AdminDashboard extends React.Component {
                                 </Row>
                                 <Row>
                                     <LinkCapacity />
+                                    <SLAMetrics />
                                 </Row>
                             </Panel>
                             <Panel>

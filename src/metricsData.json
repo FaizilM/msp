@@ -120,21 +120,24 @@
                       "is_no_route": false,
                       "route_change": 0
                     }
-
                   }
                 ]
               }
             ],
             "CPE-Century": [
               {
-                "Webex": {
-                  "destination": "London",
-                  "link": "BroadBand",
-                  "octets": 2780,
-                  "packets": 890,
-                  "is_no_route": false,
-                  "route_change": 0
-                }
+                "applications": [
+                  {
+                    "Webex": {
+                      "destination": "London",
+                      "link": "BroadBand",
+                      "octets": 2780,
+                      "packets": 890,
+                      "is_no_route": false,
+                      "route_change": 0
+                    }
+                  }
+                ]
               }
             ]
           }

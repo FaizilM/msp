@@ -50,6 +50,9 @@ class Filter extends Component {
 
   siteGroup() {
 
+    this.state.siteName = undefined;
+    this.state.linkName = undefined;
+    this.state.applicationName = undefined;
     let sitesgroup = [];
     let sitegroupkey = [];
 
@@ -70,6 +73,9 @@ class Filter extends Component {
 
   allSites(selectedSite) {
 
+    this.state.linkName = undefined;
+    this.state.applicationName = undefined;
+
     let siteName = [];
     let sitekey = [];
     let metrics = [];
@@ -82,17 +88,18 @@ class Filter extends Component {
     } else {
       metrics.push(metricsData[0]);
     }
-
+    
     for (let index = 0; index < metrics.length; index++) {
 
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics[index].sites)) {
         let sitename;
-
+        
         if (siteGroup == undefined || siteGroup == "All Site Group") {
           sitename = metricsDataValue.name;
         }
 
         else if (metricsDataValue.sitesgroup == siteGroup) {
+          
           sitename = metricsDataValue.name;
         }
 
@@ -161,7 +168,7 @@ class Filter extends Component {
     for (let index = 0; index < metricsData.length; index++) {
 
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-
+        
         if ((siteName == undefined || siteName == "All Sites") || (siteName != undefined && metricsDataValue.name == siteName)) {
           let application = metricsDataValue.application
 
@@ -266,7 +273,7 @@ class Filter extends Component {
           </Col>
           <Col lg="2">
             <button className="btn btn-primary btn-block"
-              onClick={this.handlePrint}>Filter Data</button>
+              onClick={this.handlePrint}> Filter </button>
           </Col>
         </Row>
         <Row>

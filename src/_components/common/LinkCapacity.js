@@ -223,6 +223,8 @@ class LinkCapacity extends React.Component {
                     );
                 }
             }
+            configValue.graphs[0].precision = 0;
+            configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
         } else {
             let colorcode = [color.GREEN_COLOR, color.YELLOW_COLOR, color.ORANGE_COLOR, color.BLUE_COLOR]
 
@@ -246,7 +248,17 @@ class LinkCapacity extends React.Component {
                     }
                 }
             }
+        };
+         
+    let pickChart = () => {
+
+        if (linkCapacity.length != undefined || linkCapacity.broadband != undefined) {
+          return <Chart config={configValue} />
+        } else {
+          return < h1 > No Site Available </h1>
         }
+  
+      };
 
         return (
             <Col xs="12" sm="12" md="6" lg="6" xl="6">
@@ -258,7 +270,7 @@ class LinkCapacity extends React.Component {
                     <div className="panel-body">
                         <div className="list-group">
                             <div>
-                                <Chart config={configValue} />
+                            {pickChart()}
                             </div>
                         </div>
                     </div>
