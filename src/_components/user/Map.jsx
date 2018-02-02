@@ -36,11 +36,9 @@ class Map extends React.Component {
                 "images": []
             },
             "linesSettings": {
-                "arc": -0.7, // this makes lines curved. Use value from -1 to 1
                 "arrow": "middle",
                 "color": "#585869",
-                "alpha": 0.6,
-                "arrowAlpha": 1,
+                "alpha": 0.8,
                 "arrowSize": 4
             },
             "listeners": [{
@@ -69,11 +67,15 @@ class Map extends React.Component {
                                     }).value
 
                                     let lineObject = {"latitudes": [event.mapObject.latitude, links.latitude],
-                                      "longitudes": [event.mapObject.longitude, links.longitude]}
+                                      "longitudes": [event.mapObject.longitude, links.longitude],
+                                      "arrowColor":  "#2d862d",
+                                      "arrowSize": 13
+                                      }
 
                                       if(isNoAppRoute) {
                                           lineObject["arrowColor"] = "red";
-                                          lineObject["arrowSize"] = 10;
+                                          lineObject["arrowSize"] = 13;
+                                          lineObject["arrowAlpha"] = 0.7
                                       }
                                     event.mapObject.lines.push(lineObject);
                                 }
