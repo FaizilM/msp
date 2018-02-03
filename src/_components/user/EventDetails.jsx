@@ -9,7 +9,7 @@ class EventDetails extends React.Component {
     render() {
 
         return (
-
+            <Row>
             <Col xs="12" sm="12" md="12" lg="12" xl="12">
                 <div className="panel panel-default">
                     <div className="panel-heading">
@@ -25,7 +25,8 @@ class EventDetails extends React.Component {
                     </div>
                 </div>
             </Col>
-          
+            </Row>
+
         );
 
     }
