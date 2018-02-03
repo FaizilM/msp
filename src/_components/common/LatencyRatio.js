@@ -3,14 +3,22 @@ import { Chart } from '../';
 import metricsData from '../../metricsData.json';
 import { color } from '../../_constants';
 import { Container, Row, Col } from 'reactstrap';
+import { userConstants } from '../../_constants';
+import { connect } from 'react-redux';
+import jsonQuery from 'json-query';
 
 
-let latencyRatioData = (filter, customer) => {
+let latencyRatioData = (filter, user) => {
   let metrics = [];
-  if (customer == undefined) {
+  if (userConstants.ROLE_ADMIN == user.role) {
     metrics = metricsData;
-  } else {
-    metrics.push(metricsData[0]);
+  } else if (user.role == userConstants.ROLE_USER) {
+    let data = {};
+    data["customers"] = metricsData
+    data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+      data: data
+    }).value;
+    metrics.push(data["customers"]);
   }
   let latency = [0, 0, 0];
   let totalSite = 0;
@@ -39,7 +47,7 @@ let latencyRatioData = (filter, customer) => {
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
       let links = sites[site].links;
-      if (customer == undefined) {
+      if (filter == undefined) {
         for (let link = 0; link < links.length; link++) {
           let linkLatency = links[link];
           for (let [linkKey, linkValue] of Object.entries(linkLatency)) {
@@ -79,7 +87,7 @@ let latencyRatioData = (filter, customer) => {
       }
     }
   }
-  if (customer == undefined) {
+  if (filter == undefined) {
     latency[0] = parseInt((latency[0] / totalSite) * 100);
     latency[1] = parseInt((latency[1] / totalSite) * 100);
     latency[2] = parseInt((latency[2] / totalSite) * 100);
@@ -134,9 +142,10 @@ class LatencyRatio extends React.Component {
       }
     };
     let configValue = config.bar;
-    const latencyRatio = latencyRatioData(this.props.filter, this.props.customer);
+    let user = this.props.authentication.user;
+    const latencyRatio = latencyRatioData(this.props.filter, user);
 
-    if (this.props.customer == undefined) {
+    if (this.props.filter == undefined) {
       for (let [latencyKey, latencyValue] of Object.entries(configValue)) {
         if (latencyKey == "valueAxes") {
           let label = [];
@@ -243,4 +252,14 @@ class LatencyRatio extends React.Component {
   }
 }
 
-export { LatencyRatio };
+
+function mapStateToProps(state) {
+  const { authentication } = state;
+
+  return {
+    authentication
+  };
+}
+
+const connectedLatencyRatio = connect(mapStateToProps)(LatencyRatio);
+export { connectedLatencyRatio as LatencyRatio };

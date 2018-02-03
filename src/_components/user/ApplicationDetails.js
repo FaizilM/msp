@@ -5,10 +5,24 @@ import { color } from '../../_constants';
 import { indexOf } from 'lodash';
 import { Container, Row, Col, select } from 'reactstrap';
 import SortableTbl from 'react-sort-search-table';
+import { userConstants } from '../../_constants';
+import { connect } from 'react-redux';
+import jsonQuery from 'json-query';
 
-let getApplicationDetails = () => {
+
+let getApplicationDetails = (user) => {
     let customerMetricsData = [];
-    customerMetricsData.push(metricsData[0]);
+    if (user.role == userConstants.ROLE_ADMIN) {
+        customerMetricsData.push(metricsData);
+    } else if (user.role == userConstants.ROLE_USER) {
+        let data = {};
+        data["customers"] = metricsData
+        data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+            data: data
+        }).value;
+        customerMetricsData.push(data["customers"]);
+    }
+
     let tableMetricsData = [];
     if (customerMetricsData != null && customerMetricsData != undefined) {
 
@@ -27,11 +41,22 @@ let getApplicationDetails = () => {
                                     for (let application = 0; application < cpeValue.length; application++) {
                                         for (let [applicationKey, applicationValue] of Object.entries(cpeValue[application])) {
                                             let deviceData = {};
+                                            deviceData["is_no_route"] = 0;
                                             for (let [key, value] of Object.entries(applicationValue)) {
                                                 deviceData["CPE"] = deviceKey;
                                                 deviceData["application"] = applicationKey;
-                                                deviceData[key] = value;
+
+                                                if (key == "is_no_route") {
+
+                                                    if (value) {
+                                                        deviceData["is_no_route"] = 1;
+                                                    }
+
+                                                } else {
+                                                    deviceData[key] = value;
+                                                }
                                             }
+
 
                                             tableMetricsData.push(deviceData);
                                         }
@@ -75,18 +100,21 @@ let tHead = [
 class ApplicationDetails extends React.Component {
 
     render() {
-        let applicationDetails = getApplicationDetails();
+        let user = this.props.authentication.user;
+        let applicationDetails = getApplicationDetails(user);
         let index = 0;
         let tableData = [];
         let headerData = [];
+        headerData.push(<th key={0}>ID</th>)
         for (let index = 0; index < tHead.length; index++) {
-            headerData.push(<th>{tHead[index]}</th>)
+            headerData.push(<th key={index + 1}>{tHead[index]}</th>);
         }
-        tableData.push(<tr key={"header"}>{headerData}</tr>)
+        tableData.push(<tr className="appdetailsTH" key={"header"}>{headerData}</tr>)
         for (let applicationIndex = 0; applicationIndex < applicationDetails.length; applicationIndex++) {
             let rowData = [];
+            rowData.push(<td key={"id"}>{applicationIndex}</td>);
             for (let index = 0; index < col.length; index++) {
-                rowData.push(<td key={tHead[index]}>{applicationDetails[applicationIndex][col[index]]}</td>);
+                rowData.push(<td key={col[index]}>{applicationDetails[applicationIndex][col[index]]}</td>);
             }
 
             tableData.push(<tr key={applicationIndex}>{rowData}</tr>);
@@ -95,7 +123,7 @@ class ApplicationDetails extends React.Component {
 
 
         return (
-            <Col xs="12" sm="12" md="6" lg="6" xl="6">
+            <Col xs="12" sm="12" md="12" lg="12" xl="12">
                 <div className="panel panel-default">
                     <div className="panel-heading">
                         <i className=""></i>
@@ -120,4 +148,15 @@ class ApplicationDetails extends React.Component {
     }
 }
 
-export { ApplicationDetails };
+
+function mapStateToProps(state) {
+    const { authentication } = state;
+
+    return {
+        authentication
+    };
+}
+
+
+const connectedApplicationDetails = connect(mapStateToProps)(ApplicationDetails);
+export { connectedApplicationDetails as ApplicationDetails };

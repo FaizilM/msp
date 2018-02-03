@@ -3,7 +3,7 @@ import '../../assets/css/App.css';
 import { Container, Row, Col, select } from 'reactstrap';
 import metricsData from '../../metricsData.json';
 import { indexOf } from 'lodash';
-import { LinkCapacity, LatencyRatio, JitterRatio, PacketLoss, ApplicationClassMetrics, Bandwidth} from '../';
+import { ApplicationDetails, LinkCapacity, LatencyRatio, JitterRatio, PacketLoss, ApplicationClassMetrics, Bandwidth } from '../';
 
 class Filter extends Component {
 
@@ -88,18 +88,18 @@ class Filter extends Component {
     } else {
       metrics.push(metricsData[0]);
     }
-    
+
     for (let index = 0; index < metrics.length; index++) {
 
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics[index].sites)) {
         let sitename;
-        
+
         if (siteGroup == undefined || siteGroup == "All Site Group") {
           sitename = metricsDataValue.name;
         }
 
         else if (metricsDataValue.sitesgroup == siteGroup) {
-          
+
           sitename = metricsDataValue.name;
         }
 
@@ -168,7 +168,7 @@ class Filter extends Component {
     for (let index = 0; index < metricsData.length; index++) {
 
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-        
+
         if ((siteName == undefined || siteName == "All Sites") || (siteName != undefined && metricsDataValue.name == siteName)) {
           let application = metricsDataValue.application
 
@@ -277,8 +277,8 @@ class Filter extends Component {
           </Col>
         </Row>
         <Row>
-          <ApplicationClassMetrics />
-          <Bandwidth />
+          <ApplicationClassMetrics filter={this.state.toFilter} customer="customer"  />
+          <Bandwidth filter={this.state.toFilter} customer="customer"  />
         </Row>
         <Row>
           <LinkCapacity filter={this.state.toFilter} customer="customer" />
@@ -288,7 +288,9 @@ class Filter extends Component {
           <JitterRatio filter={this.state.toFilter} customer="customer" />
           <PacketLoss filter={this.state.toFilter} customer="customer" />
         </Row>
-
+        <Row>
+          <ApplicationDetails />
+        </Row>
       </div>
 
     );

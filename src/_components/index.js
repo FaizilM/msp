@@ -14,6 +14,7 @@ export * from './common/LatencyRatio';
 export * from './common/JitterRatio';
 export * from './common/SiteAvailability';
 export * from './admin/CustomerMetrics';
-export * from './admin/SLAMetrics';
+export * from './admin/MPLSLinkUtilization';
+export * from './user/BroadbandLinkUtilization';
 export * from './user/ApplicationDetails';
 export * from './chart/Chart';

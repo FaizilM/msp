@@ -11,10 +11,16 @@
 .amchart {
   display: inline-block;
 }
+
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
+}
+
+.appdetailsTH{
+  background-color: #2E77B8;
+  color:#FFFFFF;
 }
 .inventory tr:nth-child(odd) {
   background-color: #2E77B8;

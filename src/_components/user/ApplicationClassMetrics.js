@@ -5,15 +5,29 @@ import { Chart } from '../';
 import { color } from '../../_constants';
 import { indexOf } from 'lodash';
 import { Container, Row, Col, select } from 'reactstrap';
+import { userConstants } from '../../_constants';
+import { connect } from 'react-redux';
+import jsonQuery from 'json-query';
 
-let customerClassMetrics = () => {
-
+let customerClassMetrics = (filter, user) => {
+    let metrics = [];
     let classMetrics = [];
     let customerClassMetricsData = [];
 
+    if (userConstants.ROLE_ADMIN == user.role) {
+        metrics = metricsData;
+      } else if (user.role == userConstants.ROLE_USER) {
+        let data = {};
+        data["customers"] = metricsData
+        data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+          data: data
+        }).value;
+        metrics.push(data["customers"]);
+      }
+      
     if (metricsData != null && metricsData != undefined) {
 
-        for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
+        for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics)) {
             let count = 0;
 
             if (metricsDataValue.sites != null && metricsDataValue.sites != undefined) {
@@ -127,7 +141,8 @@ class ApplicationClassMetrics extends Component {
         };
 
         let configValue = config.bar;
-        const customerClass = customerClassMetrics();
+        let user = this.props.authentication.user;
+        const customerClass = customerClassMetrics(this.props.filter, user);
 
         for (let [key, value] of Object.entries(configValue)) {
 
@@ -169,4 +184,14 @@ class ApplicationClassMetrics extends Component {
     }
 }
 
-export { ApplicationClassMetrics };
+function mapStateToProps(state) {
+    const { authentication } = state;
+  
+    return {
+      authentication
+    };
+  }
+  
+  const connectedApplicationClassMetrics = connect(mapStateToProps)(ApplicationClassMetrics);
+  export { connectedApplicationClassMetrics as ApplicationClassMetrics };
+  

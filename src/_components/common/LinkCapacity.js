@@ -5,15 +5,23 @@ import { indexOf } from 'lodash';
 import '../../assets/css/App.css';
 import { color } from '../../_constants';
 import { Container, Row, Col, select } from 'reactstrap';
+import { userConstants } from '../../_constants';
+import { connect } from 'react-redux';
+import jsonQuery from 'json-query';
 
-let linkCapacityData = (filter, customer) => {
+let linkCapacityData = (filter, user) => {
     let metrics = [];
 
-    if (customer == undefined) {
+    if (userConstants.ROLE_ADMIN == user.role) {
         metrics = metricsData;
-    } else {
-        metrics.push(metricsData[0]);
-    }
+      } else if (user.role == userConstants.ROLE_USER) {
+        let data = {};
+        data["customers"] = metricsData
+        data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+          data: data
+        }).value;
+        metrics.push(data["customers"]);
+      }
 
     let capacity = [];
     let totalSite = [];
@@ -53,7 +61,7 @@ let linkCapacityData = (filter, customer) => {
         for (let site = 0; site < sites.length; site++) {
             let links = sites[site].links;
 
-            if (customer == undefined) {
+            if (filter == undefined) {
 
                 for (let link = 0; link < links.length; link++) {
                     let linkCapacity = links[link];
@@ -102,7 +110,7 @@ let linkCapacityData = (filter, customer) => {
         }
     }
 
-    if (customer == undefined) {
+    if (filter == undefined) {
 
         for (let index = 0; index < capacity.length; index++) {
             capacity[index] = capacity[index] / totalSite[index];
@@ -166,9 +174,10 @@ class LinkCapacity extends React.Component {
         };
 
         let configValue = config.bar;
-        const linkCapacity = linkCapacityData(this.props.filter, this.props.customer);
+        let user = this.props.authentication.user;
+        const linkCapacity = linkCapacityData(this.props.filter, user);
 
-        if (this.props.customer == undefined) {
+        if (this.props.filter == undefined) {
 
             for (let [linkCapacityKey, linkCapacityValue] of Object.entries(configValue)) {
 
@@ -280,4 +289,15 @@ class LinkCapacity extends React.Component {
     }
 }
 
-export { LinkCapacity };
+
+function mapStateToProps(state) {
+    const { authentication } = state;
+  
+    return {
+      authentication
+    };
+  }
+  
+  const connectedLinkCapacity = connect(mapStateToProps)(LinkCapacity);
+  export { connectedLinkCapacity as LinkCapacity };
+  
