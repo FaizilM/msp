@@ -76,7 +76,7 @@ background-color: #2E77B8 !important;
 
 .page_wrapper {
   padding-top: 5%;
-  width: 100%;
+  width: 100% !important;
   background-color: rgb(243, 242, 242);
 }
 

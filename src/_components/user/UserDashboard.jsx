@@ -49,7 +49,8 @@ class UserDashboard extends React.Component {
               </Panel>
               <Panel>
                 <Row>
-                  <Filter/>
+                  <Filter />
+
                 </Row>
               </Panel>
             </PanelList>
