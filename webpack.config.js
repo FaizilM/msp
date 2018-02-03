@@ -51,6 +51,6 @@ module.exports = {
         historyApiFallback: true,
         inline: true,
         port: 8080,
-        host: '0.0.0.0'
+        host: 'localhost'
     }
 }

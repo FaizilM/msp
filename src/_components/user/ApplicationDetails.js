@@ -8,6 +8,7 @@ import SortableTbl from 'react-sort-search-table';
 import { userConstants } from '../../_constants';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
+import { Route, Redirect, Link } from 'react-router-dom';
 
 
 let getApplicationDetails = (user) => {
@@ -139,7 +140,8 @@ let eventHead = [
     "Link Utilization",
     "Latency",
     "Jitter",
-    "Packet Loss"
+    "Packet Loss",
+    "Action"
 ];
 
 class ApplicationDetails extends React.Component {
@@ -186,6 +188,14 @@ class ApplicationDetails extends React.Component {
                         rowEventData.push(<td key={eventCol[index]}>{applicationDetails[applicationIndex][eventCol[index]]}</td>);
                     }
                 }
+                rowEventData.push(<td key={"button"}>
+                    <Link to="/event_details">
+                        <button className= "btn btn-primary" type="button">
+                            More
+                      </button>
+                    </Link></td>);
+
+
             }
             eventData.push(<tr key={applicationIndex}>{rowEventData}</tr>);
             tableData.push(<tr key={applicationIndex}>{rowData}</tr>);
