@@ -3,7 +3,7 @@ import '../../assets/css/App.css';
 import { Container, Row, Col, select } from 'reactstrap';
 import metricsData from '../../metricsData.json';
 import { indexOf } from 'lodash';
-import { LinkCapacity, LatencyRatio, JitterRatio, PacketLoss, ApplicationClassMetrics, Bandwidth} from '../';
+import { ApplicationDetails, LinkCapacity, LatencyRatio, JitterRatio, PacketLoss, ApplicationClassMetrics, Bandwidth } from '../';
 
 class Filter extends Component {
 
@@ -50,6 +50,9 @@ class Filter extends Component {
 
   siteGroup() {
 
+    this.state.siteName = undefined;
+    this.state.linkName = undefined;
+    this.state.applicationName = undefined;
     let sitesgroup = [];
     let sitegroupkey = [];
 
@@ -69,6 +72,9 @@ class Filter extends Component {
   }
 
   allSites(selectedSite) {
+
+    this.state.linkName = undefined;
+    this.state.applicationName = undefined;
 
     let siteName = [];
     let sitekey = [];
@@ -93,6 +99,7 @@ class Filter extends Component {
         }
 
         else if (metricsDataValue.sitesgroup == siteGroup) {
+
           sitename = metricsDataValue.name;
         }
 
@@ -266,12 +273,12 @@ class Filter extends Component {
           </Col>
           <Col lg="2">
             <button className="btn btn-primary btn-block"
-              onClick={this.handlePrint}>Filter Data</button>
+              onClick={this.handlePrint}> Filter </button>
           </Col>
         </Row>
         <Row>
-          <ApplicationClassMetrics />
-          <Bandwidth />
+          <ApplicationClassMetrics filter={this.state.toFilter} customer="customer"  />
+          <Bandwidth filter={this.state.toFilter} customer="customer"  />
         </Row>
         <Row>
           <LinkCapacity filter={this.state.toFilter} customer="customer" />
@@ -281,7 +288,9 @@ class Filter extends Component {
           <JitterRatio filter={this.state.toFilter} customer="customer" />
           <PacketLoss filter={this.state.toFilter} customer="customer" />
         </Row>
-
+        <Row>
+          <ApplicationDetails />
+        </Row>
       </div>
 
     );

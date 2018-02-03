@@ -3,7 +3,7 @@ import '../../assets/css/App.css';
 import metricsData from '../../metricsData.json';
 import { indexOf, replace } from 'lodash';
 import { Container, Row, Col } from 'reactstrap';
-import SortableTbl from 'react-sort-search-table'
+import SortableTbl from 'react-sort-search-table';
 import ImageLoader from 'react-imageloader';
 
 
