@@ -58,7 +58,6 @@ class AdminDashboard extends React.Component {
                                         <div className="list-group">
                                             <Sites />
                                         </div>
-
                                         <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%" }}>
                                             <a onClick={() => this.handleSelect(1)} style={{ color: "white" }}><label>View All Sites</label></a>
                                         </button>

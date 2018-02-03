@@ -6,12 +6,18 @@ import { indexOf } from 'lodash';
 import { Container, Row, Col, select } from 'reactstrap';
 import { Tabs, TabList, DragTabList, Tab, DragTab, PanelList, Panel, ExtraButton } from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
+import { Route, Redirect, Link } from 'react-router-dom';
 
 class EventDetails extends React.Component {
     render() {
 
         return (
             <Row>
+                   <Link to="/customer">
+                        <button className= "btn btn-primary" type="button">
+                            Back
+                      </button>
+                    </Link>
                   <Col xs="12" sm="12" md="12" lg="12" xl="12">
                   <div className="panel panel-default">
                     <div className="panel-heading">
