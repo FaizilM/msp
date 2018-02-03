@@ -30,7 +30,7 @@ class App extends React.Component {
             <div>
 
                 <Router history={history}>
-                
+
                     <div className="app_container">
 
                         {

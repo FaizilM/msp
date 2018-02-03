@@ -59,7 +59,7 @@ class EventDetails extends React.Component {
                             <PanelList>
                               <Panel>
                                 <Row>
-                                <table className="table table-striped table-bordered view_page_table">
+                                <table className="table table-striped table-bordered">
                                    <tbody>
                                       <tr>
                                          <td>Source Site  </td>
