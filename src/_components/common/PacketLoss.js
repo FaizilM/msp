@@ -4,15 +4,25 @@ import '../../assets/css/App.css';
 import { Chart } from '../';
 import { color } from '../../_constants';
 import { Container, Row, Col } from 'reactstrap';
+import { userConstants } from '../../_constants';
+import { connect } from 'react-redux';
+import jsonQuery from 'json-query';
 
 
-let packetLossData = (filter, customer) => {
+let packetLossData = (filter, user) => {
   let metrics = [];
-  if (customer == undefined) {
+
+  if (userConstants.ROLE_ADMIN == user.role) {
     metrics = metricsData;
-  } else {
-    metrics.push(metricsData[0]);
+  } else if (user.role == userConstants.ROLE_USER) {
+    let data = {};
+    data["customers"] = metricsData
+    data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+      data: data
+    }).value;
+    metrics.push(data["customers"]);
   }
+  
   let loss = [0, 0, 0];
   let totalSite = 0;
   let packetLossLink = 0;
@@ -45,7 +55,7 @@ let packetLossData = (filter, customer) => {
 
       let links = sites[site].links;
 
-      if (customer == undefined) {
+      if (filter == undefined) {
 
         let links = sites[site].links;
 
@@ -70,6 +80,7 @@ let packetLossData = (filter, customer) => {
         packetLossLink = 0;
 
       } else {
+
         if ((siteGroup != undefined && sites[site].sitesgroup == siteGroup) || siteGroup == undefined) {
 
           if ((siteName != undefined && sites[site].name == siteName) || siteName == undefined) {
@@ -99,7 +110,7 @@ let packetLossData = (filter, customer) => {
     }
   }
 
-  if (customer == undefined) {
+  if (filter == undefined) {
     loss[0] = parseInt((loss[0] / totalSite) * 100);
     loss[1] = parseInt((loss[1] / totalSite) * 100);
     loss[2] = parseInt((loss[2] / totalSite) * 100);
@@ -159,9 +170,9 @@ class PacketLoss extends Component {
       }
     };
     const configValue = config.bar;
-    const packetLoss = packetLossData(this.props.filter, this.props.customer);
-
-    if (this.props.customer == undefined) {
+    let user = this.props.authentication.user;
+    const packetLoss = packetLossData(this.props.filter, user);
+    if (this.props.filter == undefined) {
 
       for (let [packetLossKey, packetLossValue] of Object.entries(configValue)) {
 
@@ -219,6 +230,8 @@ class PacketLoss extends Component {
         }
 
       }
+      configValue.graphs[0].precision = 0;
+      configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
     } else {
       let colorcode = [color.GREEN_COLOR, color.YELLOW_COLOR, color.ORANGE_COLOR, color.BLUE_COLOR]
       for (let [key, value] of Object.entries(configValue)) {
@@ -243,8 +256,19 @@ class PacketLoss extends Component {
       }
     }
 
+    let pickChart = () => {
+      
+      if (packetLoss.length != undefined || packetLoss.broadband != undefined) {
+        return <Chart config={configValue} />
+      } else {
+        return < h1 > No Site Available </h1>
+      }
+
+    };
+
+
     return (
-      <Col xs="12" sm="12" md="6" lg="6" xl="6">
+      <Col xs="12" sm="12" md="6" lg="6" xl="6" >
         <div className="panel panel-default">
           <div className="panel-heading">
             <i className=""></i>
@@ -252,7 +276,7 @@ class PacketLoss extends Component {
           </div>
           <div className="panel-body">
             <div className="list-group">
-              <Chart config={configValue} />
+              {pickChart()}
             </div>
           </div>
         </div>
@@ -261,4 +285,13 @@ class PacketLoss extends Component {
   }
 }
 
-export { PacketLoss };
+function mapStateToProps(state) {
+  const { authentication } = state;
+
+  return {
+    authentication
+  };
+}
+
+const connectedPacketLoss = connect(mapStateToProps)(PacketLoss);
+export { connectedPacketLoss as PacketLoss };

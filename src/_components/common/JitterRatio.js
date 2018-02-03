@@ -3,14 +3,23 @@ import { Chart } from '../';
 import metricsData from '../../metricsData.json';
 import { color } from '../../_constants';
 import { Container, Row, Col } from 'reactstrap';
+import { userConstants } from '../../_constants';
+import { connect } from 'react-redux';
+import jsonQuery from 'json-query';
 
 
-let jitterRatioData = (filter, customer) => {
+let jitterRatioData = (filter, user) => {
   let metrics = [];
-  if (customer == undefined) {
+
+  if (userConstants.ROLE_ADMIN == user.role) {
     metrics = metricsData;
-  } else {
-    metrics.push(metricsData[0]);
+  } else if (user.role == userConstants.ROLE_USER) {
+    let data = {};
+    data["customers"] = metricsData
+    data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+      data: data
+    }).value;
+    metrics.push(data["customers"]);
   }
   let jitter = [0, 0, 0];
   let totalSite = 0;
@@ -39,7 +48,7 @@ let jitterRatioData = (filter, customer) => {
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
       let links = sites[site].links;
-      if (customer == undefined) {
+      if (filter == undefined) {
         for (let link = 0; link < links.length; link++) {
           let linkJitter = links[link];
           for (let [linkKey, linkValue] of Object.entries(linkJitter)) {
@@ -82,7 +91,7 @@ let jitterRatioData = (filter, customer) => {
     }
   }
 
-  if (customer == undefined) {
+  if (filter == undefined) {
     jitter[0] = parseInt((jitter[0] / totalSite) * 100);
     jitter[1] = parseInt((jitter[1] / totalSite) * 100);
     jitter[2] = parseInt((jitter[2] / totalSite) * 100);
@@ -146,9 +155,10 @@ class JitterRatio extends React.Component {
     };
 
     let configValue = config.bar;
-    const jitterRatio = jitterRatioData(this.props.filter, this.props.customer);
+    let user = this.props.authentication.user;    
+    const jitterRatio = jitterRatioData(this.props.filter, user);
 
-    if (this.props.customer == undefined) {
+    if (this.props.filter == undefined) {
       for (let [jitterKey, jitterValue] of Object.entries(configValue)) {
         if (jitterKey == "valueAxes") {
           let label = [];
@@ -228,6 +238,15 @@ class JitterRatio extends React.Component {
       }
     }
 
+    let pickChart = () => {
+
+      if (jitterRatio.length != undefined || jitterRatio.broadband != undefined) {
+        return <Chart config={configValue} />
+      } else {
+        return < h1 > No Site Available </h1>
+      }
+
+    };
 
     return (
       <Col xs="12" sm="12" md="6" lg="6" xl="6">
@@ -239,7 +258,7 @@ class JitterRatio extends React.Component {
           <div className="panel-body">
             <div className="list-group">
               <div>
-                <Chart config={configValue} />
+                {pickChart()}
               </div>
             </div>
           </div>
@@ -249,4 +268,13 @@ class JitterRatio extends React.Component {
   }
 }
 
-export { JitterRatio };
+function mapStateToProps(state) {
+  const { authentication } = state;
+
+  return {
+    authentication
+  };
+}
+
+const connectedJitterRatio = connect(mapStateToProps)(JitterRatio);
+export { connectedJitterRatio as JitterRatio };

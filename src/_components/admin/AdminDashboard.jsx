@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../../assets/css/App.css';
-import {Inventory, Sites, PacketLoss, LinkCapacity, LatencyRatio, JitterRatio, SiteAvailability, CustomerMetrics} from '../';
+import { Inventory, Sites, PacketLoss, LinkCapacity, LatencyRatio, JitterRatio, SiteAvailability, CustomerMetrics, MPLSLinkUtilization } from '../';
 import { userActions } from '../../_actions';
 import { Link, Events } from 'react-scroll';
 import { Header } from '../Header';
@@ -20,7 +20,6 @@ class AdminDashboard extends React.Component {
 
     handleSelect(key) {
         this.setState({ tabIndex: key })
-        console.log(this.state)
     }
 
     render() {
@@ -83,6 +82,9 @@ class AdminDashboard extends React.Component {
                                 </Row>
                                 <Row>
                                     <LinkCapacity />
+                                </Row>
+                                <Row>
+                                    <MPLSLinkUtilization />
                                 </Row>
                             </Panel>
                             <Panel>
