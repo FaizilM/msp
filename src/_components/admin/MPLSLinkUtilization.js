@@ -9,7 +9,7 @@ import { userConstants } from '../../_constants';
 let getMPLSLinkUtilization = (user) => {
     let percent = [0, 0, 0, 0];
     let data = {};
-  
+
     if (user.role == userConstants.ROLE_ADMIN) {
         data["customers"] = metricsData
     } else {
@@ -18,23 +18,23 @@ let getMPLSLinkUtilization = (user) => {
             data: data
         }).value
     }
-    console.log(data["customers"]);
     let linkDetails = jsonQuery('customers.sites.links.mpls.utilization', {
         data: data
     }).value
-
-    for (let index = 0; index < linkDetails.length; index++) {
-        if (linkDetails[index] < 25) {
-            percent[0] += 1;
-        } else if (linkDetails[index] < 50) {
-            percent[1] += 1;
-        } else if (linkDetails[index] < 75) {
-            percent[2] += 1;
-        } else {
-            percent[3] += 1;
+    if (linkDetails != undefined) {
+        for (let index = 0; index < linkDetails.length; index++) {
+            if (linkDetails[index] < 25) {
+                percent[0] += 1;
+            } else if (linkDetails[index] < 50) {
+                percent[1] += 1;
+            } else if (linkDetails[index] < 75) {
+                percent[2] += 1;
+            } else {
+                percent[3] += 1;
+            }
         }
+        return { "total_links": linkDetails.length, "percentage": percent }
     }
-    return { "total_links": linkDetails.length, "percentage": percent }
 }
 
 class MPLSLinkUtilization extends React.Component {
@@ -121,7 +121,7 @@ class MPLSLinkUtilization extends React.Component {
                     <div className="panel-body">
                         <div className="list-group">
                             <div className="table-responsive">
-                            <Chart config={configValue} />
+                                <Chart config={configValue} />
                             </div>
                         </div>
                     </div>
