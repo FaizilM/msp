@@ -45,18 +45,34 @@ let getApplicationDetails = (user) => {
                                             for (let [key, value] of Object.entries(applicationValue)) {
                                                 deviceData["CPE"] = deviceKey;
                                                 deviceData["application"] = applicationKey;
-
                                                 if (key == "is_no_route") {
-
                                                     if (value) {
                                                         deviceData["is_no_route"] = 1;
                                                     }
+                                                } else if (key == "route_change") {
+                                                    if (value.length > 1) {
+                                                        deviceData["route_change"] = value.length;
+                                                    } else {
+                                                        deviceData["route_change"] = value.length - 1;
+                                                    }
+                                                    for (let [k, v] of Object.entries(value)) {
+                                                        for (let [routeChangeKey, routeChangeValue] of Object.entries(v)) {
 
+
+                                                            if ((routeChangeKey == "utilization" || routeChangeKey == "latency"
+                                                                || routeChangeKey == "jitter" || routeChangeKey == "packet_loss") && deviceData[routeChangeKey] != undefined) {
+                                                                if (routeChangeValue > 0) {
+                                                                    deviceData[routeChangeKey] = (deviceData[routeChangeKey] + routeChangeValue) /2;
+                                                                }
+                                                            } else {
+                                                                deviceData[routeChangeKey] = routeChangeValue;
+                                                            }
+                                                        }
+                                                    }
                                                 } else {
                                                     deviceData[key] = value;
                                                 }
                                             }
-
 
                                             tableMetricsData.push(deviceData);
                                         }
@@ -70,6 +86,7 @@ let getApplicationDetails = (user) => {
 
         }
     }
+
     return tableMetricsData;
 };
 
@@ -103,7 +120,7 @@ let eventCol = [
     "timestamp",
     "application",
     "destination",
-    "cpe",
+    "CPE",
     "link",
     "utilization",
     "latency",
@@ -162,9 +179,9 @@ class ApplicationDetails extends React.Component {
                 for (let index = 0; index < eventCol.length; index++) {
                     if (eventCol[index] == "event") {
                         if (applicationDetails[applicationIndex].is_no_route == true) {
-                            rowEventData.push(<td key={eventCol[index]}>{applicationDetails[applicationIndex].is_no_route}</td>);
+                            rowEventData.push(<td key={eventCol[index]}>{"No Route"}</td>);
                         } else {
-                            rowEventData.push(<td key={eventCol[index]}>{applicationDetails[applicationIndex].route_change}</td>);
+                            rowEventData.push(<td key={eventCol[index]}>{"Route Change"}</td>);
                         }
                     } else {
                         rowEventData.push(<td key={eventCol[index]}>{applicationDetails[applicationIndex][eventCol[index]]}</td>);

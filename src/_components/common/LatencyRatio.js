@@ -14,12 +14,14 @@ let latencyRatioData = (filter, user) => {
     metrics = metricsData;
   } else if (user.role == userConstants.ROLE_USER) {
     let data = {};
-    data["customers"] = metricsData
+    data["customers"] = metricsData;
     data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
       data: data
     }).value;
+    
     metrics.push(data["customers"]);
   }
+  
   let latency = [0, 0, 0];
   let totalSite = 0;
   let latencySite = 0;
@@ -43,41 +45,45 @@ let latencyRatioData = (filter, user) => {
       siteGroup = filter.siteGroup;
     }
   }
-  for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics)) {
-    let sites = metricsDataValue.sites;
-    for (let site = 0; site < sites.length; site++) {
-      let links = sites[site].links;
-      if (filter == undefined) {
-        for (let link = 0; link < links.length; link++) {
-          let linkLatency = links[link];
-          for (let [linkKey, linkValue] of Object.entries(linkLatency)) {
-            latencySite += linkValue.latency;
-            totalLink++;
+  if (metrics.length > 0) {
+    for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics)) {
+      let sites = metricsDataValue.sites;
+     
+      
+      for (let site = 0; site < sites.length; site++) {
+        let links = sites[site].links;
+        if (filter == undefined) {
+          for (let link = 0; link < links.length; link++) {
+            let linkLatency = links[link];
+            for (let [linkKey, linkValue] of Object.entries(linkLatency)) {
+              latencySite += linkValue.latency;
+              totalLink++;
+            }
           }
-        }
-        if (latencySite > 0 && latencySite / totalLink <= 30) {
-          latency[2] += 1;
-        } else if (latencySite > 0 && latencySite / totalLink <= 50) {
-          latency[1] += 1;
-        } else if (latencySite > 0 && latencySite / totalLink > 150) {
-          latency[0] += 1;
-        }
-        totalLink = 0;
-        totalSite++;
-        latencySite = 0;
-      } else {
-        if ((siteGroup != undefined && sites[site].sitesgroup == siteGroup) || siteGroup == undefined) {
-          if ((siteName != undefined && sites[site].name == siteName) || siteName == undefined) {
+          if (latencySite > 0 && latencySite / totalLink <= 30) {
+            latency[2] += 1;
+          } else if (latencySite > 0 && latencySite / totalLink <= 50) {
+            latency[1] += 1;
+          } else if (latencySite > 0 && latencySite / totalLink > 150) {
+            latency[0] += 1;
+          }
+          totalLink = 0;
+          totalSite++;
+          latencySite = 0;
+        } else {
+          if ((siteGroup != undefined && sites[site].sitesgroup == siteGroup) || siteGroup == undefined) {
+            if ((siteName != undefined && sites[site].name == siteName) || siteName == undefined) {
 
-            for (let link = 0; link < links.length; link++) {
-              let linkLosses = links[link];
-              if ((linkName != undefined && linkLosses[linkName] != undefined) || (linkName == undefined)) {
+              for (let link = 0; link < links.length; link++) {
+                let linkLosses = links[link];
+                if ((linkName != undefined && linkLosses[linkName] != undefined) || (linkName == undefined)) {
 
-                for (let [linkKey, linkValue] of Object.entries(linkLosses)) {
-                  if (latencyData[linkKey] == undefined) {
-                    latencyData[linkKey] = linkValue.latency;
-                  } else {
-                    latencyData[linkKey] = (latencyData[linkKey] + linkValue.latency) / 2;
+                  for (let [linkKey, linkValue] of Object.entries(linkLosses)) {
+                    if (latencyData[linkKey] == undefined) {
+                      latencyData[linkKey] = linkValue.latency;
+                    } else {
+                      latencyData[linkKey] = (latencyData[linkKey] + linkValue.latency) / 2;
+                    }
                   }
                 }
               }
@@ -86,14 +92,14 @@ let latencyRatioData = (filter, user) => {
         }
       }
     }
-  }
-  if (filter == undefined) {
-    latency[0] = parseInt((latency[0] / totalSite) * 100);
-    latency[1] = parseInt((latency[1] / totalSite) * 100);
-    latency[2] = parseInt((latency[2] / totalSite) * 100);
-    return latency;
-  } else {
-    return latencyData;
+    if (filter == undefined) {
+      latency[0] = parseInt((latency[0] / totalSite) * 100);
+      latency[1] = parseInt((latency[1] / totalSite) * 100);
+      latency[2] = parseInt((latency[2] / totalSite) * 100);
+      return latency;
+    } else {
+      return latencyData;
+    }
   }
 };
 

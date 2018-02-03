@@ -217,7 +217,7 @@ class Filter extends Component {
       "linkName": this.state.linkName,
       "applicationName": this.state.applicationName
     }
-    
+
     this.setState({ toFilter: filter });
 
   }
@@ -225,73 +225,84 @@ class Filter extends Component {
   render() {
 
     return (
+      <Col xs="12" sm="12" md="12" lg="12" xl="12">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <i className=""></i>
+            <h4> Filter</h4>
+          </div>
+          <div className="panel-body">
+            <div className="list-group">
+              <Row>
+                <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                  <div className="form-group">
+                    <select className="form-control" id="time" onChange={this.changeDuration}>
+                      <option>1Hour</option>
+                      <option>1Day</option>
+                      <option>1Week</option>
+                      <option>1Month</option>
+                      <option>1Year</option>
+                    </select>
+                  </div>
+                </Col>
+                <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                  <div className="form-group">
+                    <select className="form-control" id="siteGroup" onChange={this.allSites}>
+                      <option>All Site Group</option>
+                      {this.siteGroup()}
+                    </select>
+                  </div>
+                </Col>
+                <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                  <div className="form-group">
+                    <select className="form-control" id="site" onChange={this.changeData}>
+                      <option>All Sites</option>
+                      {this.state.all_site}
+                    </select>
+                  </div>
+                </Col>
+                <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                  <div className="form-group">
+                    <select className="form-control" id="link" onChange={this.changeLink}>
+                      <option>All Links</option>
+                      {this.state.all_link}
+                    </select>
+                  </div>
+                </Col>
+                <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                  <div className="form-group">
+                    <select className="form-control" id="application" onChange={this.changeApplication}>
+                      <option>All Applications</option>
+                      {this.state.all_application}
+                    </select>
+                  </div>
+                </Col>
+                <Col lg="2">
+                  <button className="btn btn-primary btn-block"
+                    onClick={this.handlePrint}> Filter </button>
+                </Col>
+              </Row>
+              <Row>
+                <ApplicationClassMetrics filter={this.state.toFilter} customer="customer" />
+                <Bandwidth filter={this.state.toFilter} customer="customer" />
+              </Row>
+              <Row>
+                <LinkCapacity filter={this.state.toFilter} customer="customer" />
+                <LatencyRatio filter={this.state.toFilter} customer="customer" />
+              </Row>
+              <Row>
+                <JitterRatio filter={this.state.toFilter} customer="customer" />
+                <PacketLoss filter={this.state.toFilter} customer="customer" />
+              </Row>
+              <Row>
+                <ApplicationDetails />
+              </Row>
 
-      <div>
-        <Row>
-          <Col xs="6" sm="6" md="2" lg="2" xl="2">
-            <div className="form-group">
-              <select className="form-control" id="time" onChange={this.changeDuration}>
-                <option>1Hour</option>
-                <option>1Day</option>
-                <option>1Week</option>
-                <option>1Month</option>
-                <option>1Year</option>
-              </select>
+
             </div>
-          </Col>
-          <Col xs="6" sm="6" md="2" lg="2" xl="2">
-            <div className="form-group">
-              <select className="form-control" id="siteGroup" onChange={this.allSites}>
-                <option>All Site Group</option>
-                {this.siteGroup()}
-              </select>
-            </div>
-          </Col>
-          <Col xs="6" sm="6" md="2" lg="2" xl="2">
-            <div className="form-group">
-              <select className="form-control" id="site" onChange={this.changeData}>
-                <option>All Sites</option>
-                {this.state.all_site}
-              </select>
-            </div>
-          </Col>
-          <Col xs="6" sm="6" md="2" lg="2" xl="2">
-            <div className="form-group">
-              <select className="form-control" id="link" onChange={this.changeLink}>
-                <option>All Links</option>
-                {this.state.all_link}
-              </select>
-            </div>
-          </Col>
-          <Col xs="6" sm="6" md="2" lg="2" xl="2">
-            <div className="form-group">
-              <select className="form-control" id="application" onChange={this.changeApplication}>
-                <option>All Applications</option>
-                {this.state.all_application}
-              </select>
-            </div>
-          </Col>
-          <Col lg="2">
-            <button className="btn btn-primary btn-block"
-              onClick={this.handlePrint}> Filter </button>
-          </Col>
-        </Row>
-        <Row>
-          <ApplicationClassMetrics filter={this.state.toFilter} customer="customer"  />
-          <Bandwidth filter={this.state.toFilter} customer="customer"  />
-        </Row>
-        <Row>
-          <LinkCapacity filter={this.state.toFilter} customer="customer" />
-          <LatencyRatio filter={this.state.toFilter} customer="customer" />
-        </Row>
-        <Row>
-          <JitterRatio filter={this.state.toFilter} customer="customer" />
-          <PacketLoss filter={this.state.toFilter} customer="customer" />
-        </Row>
-        <Row>
-          <ApplicationDetails />
-        </Row>
-      </div>
+          </div>
+        </div>
+      </Col>
 
     );
   }
