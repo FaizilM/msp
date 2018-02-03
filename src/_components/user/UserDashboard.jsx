@@ -50,19 +50,7 @@ class UserDashboard extends React.Component {
               </Panel>
               <Panel>
                 <Row>
-                  <Col xs="12" sm="12" md="12" lg="12" xl="12">
-                    <div className="panel panel-default">
-                      <div className="panel-heading">
-                        <i className=""></i>
-                        <h4> Filter</h4>
-                      </div>
-                      <div className="panel-body">
-                        <div className="list-group">
-                          <Filter />
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
+                  <Filter/>
                 </Row>
               </Panel>
             </PanelList>
