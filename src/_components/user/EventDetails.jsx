@@ -4,6 +4,8 @@ import '../../assets/css/App.css';
 import { color } from '../../_constants';
 import { indexOf } from 'lodash';
 import { Container, Row, Col, select } from 'reactstrap';
+import { Tabs, TabList, DragTabList, Tab, DragTab, PanelList, Panel, ExtraButton } from 'react-tabtab';
+import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
 
 class EventDetails extends React.Component {
     render() {
@@ -50,10 +52,25 @@ class EventDetails extends React.Component {
                                 </tr>
                              </tbody>
                           </table>
-                          <div>
-                          <h3> Route Changes</h3>
-                          </div>
-
+                          <Tabs customStyle={customStyle}>
+                            <TabList>
+                              <Tab>Route Changes</Tab>
+                            </TabList>
+                            <PanelList>
+                              <Panel>
+                                <Row>
+                                <table className="table table-striped table-bordered view_page_table">
+                                   <tbody>
+                                      <tr>
+                                         <td>Source Site  </td>
+                                         <td>San Francisco</td>
+                                      </tr>
+                                    </tbody>
+                                </table>
+                                </Row>
+                              </Panel>
+                            </PanelList>
+                          </Tabs>
                        </div>
                     </div>
                   </div>
