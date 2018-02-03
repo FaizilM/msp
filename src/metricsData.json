@@ -79,7 +79,7 @@
                           "policy": "voip-policy",
                           "SLA_latency": "30ms",
                           "utilization": 50,
-                          "latency": "10ms",
+                          "latency": 10,
                           "jitter": 5,
                           "packet_loss": 0,
                           "status": "UP"
@@ -92,7 +92,7 @@
                           "policy": "voip-policy",
                           "SLA_latency": "30ms",
                           "utilization": 36,
-                          "latency": "18ms",
+                          "latency": 18,
                           "jitter": 0.6,
                           "packet_loss": 1,
                           "status": "UP"
@@ -124,7 +124,7 @@
                           "policy": "voip-policy",
                           "SLA_latency": "30ms",
                           "utilization": 50,
-                          "latency": "10ms",
+                          "latency": 10,
                           "jitter": 5,
                           "packet_loss": 10,
                           "status": "UP"
@@ -132,12 +132,12 @@
                         {
                           "src_ip": "192.168.11.10",
                           "dst_ip": "192.168.13.10",
-                          "timestamp": "15:32:33",
+                          "timestamp": "15:32:34",
                           "protocol": "TCP",
                           "policy": "voip-policy",
                           "SLA_latency": "30ms",
-                          "utilization": 50,
-                          "latency": "10ms",
+                          "utilization": 40,
+                          "latency": 10,
                           "jitter": 5,
                           "packet_loss": 10,
                           "status": "DOWM"
@@ -161,7 +161,7 @@
                           "policy": "voip-policy",
                           "SLA_latency": "30ms",
                           "utilization": 50,
-                          "latency": "10ms",
+                          "latency": 10,
                           "jitter": 5,
                           "packet_loss": 0,
                           "status": "UP"
@@ -185,7 +185,7 @@
                           "policy": "voip-policy",
                           "SLA_latency": "30ms",
                           "utilization": 50,
-                          "latency": "10ms",
+                          "latency": 10,
                           "jitter": 5,
                           "packet_loss": 0,
                           "status": "UP"
@@ -209,7 +209,7 @@
                           "policy": "voip-policy",
                           "SLA_latency": "30ms",
                           "utilization": 50,
-                          "latency": "10ms",
+                          "latency": 10,
                           "jitter": 5,
                           "packet_loss": 0,
                           "status": "UP"
@@ -241,7 +241,7 @@
                           "policy": "voip-policy",
                           "SLA_latency": "30ms",
                           "utilization": 50,
-                          "latency": "10ms",
+                          "latency": 10,
                           "jitter": 5,
                           "packet_loss": 0,
                           "status": "UP"
