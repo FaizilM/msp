@@ -60,10 +60,28 @@ class EventDetails extends React.Component {
                               <Panel>
                                 <Row>
                                 <table className="table table-striped table-bordered">
+                                <thead>
+                                      <tr>
+                                        <th>Component Name</th>
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Status</th>
+                                        <th>Protocol</th>
+                                        <th>latency</th>
+                                        <th>Timstamp</th>
+                                        <th>Details</th>
+                                      </tr>
+                                    </thead>
                                    <tbody>
                                       <tr>
-                                         <td>Source Site  </td>
-                                         <td>San Francisco</td>
+                                        <th>App-Route</th>
+                                        <th>198.25.64.25</th>
+                                        <th>198.25.36.27</th>
+                                        <th>UP</th>
+                                        <th>ipsec</th>
+                                        <th>15ms</th>
+                                        <th>1489606442000</th>
+                                        <th>host-name=vhub1</th>
                                       </tr>
                                     </tbody>
                                 </table>
