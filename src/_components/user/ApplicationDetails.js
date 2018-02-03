@@ -57,7 +57,11 @@ let getApplicationDetails = (user) => {
                                                     }
                                                     for (let [k, v] of Object.entries(value)) {
                                                         for (let [routeChangeKey, routeChangeValue] of Object.entries(v)) {
-                                                            deviceData[routeChangeKey] = routeChangeValue;
+                                                            if (routeChangeKey == "utilization" || routeChangeKey == "latency"
+                                                                || routeChangeKey == "jitter" || routeChangeKey == "packet_loss") {
+                                                                    
+                                                                }
+                                                                deviceData[routeChangeKey] = routeChangeValue;
                                                         }
                                                     }
                                                 } else {
