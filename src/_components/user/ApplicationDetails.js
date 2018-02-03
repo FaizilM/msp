@@ -57,11 +57,16 @@ let getApplicationDetails = (user) => {
                                                     }
                                                     for (let [k, v] of Object.entries(value)) {
                                                         for (let [routeChangeKey, routeChangeValue] of Object.entries(v)) {
-                                                            if (routeChangeKey == "utilization" || routeChangeKey == "latency"
-                                                                || routeChangeKey == "jitter" || routeChangeKey == "packet_loss") {
-                                                                    
+
+
+                                                            if ((routeChangeKey == "utilization" || routeChangeKey == "latency"
+                                                                || routeChangeKey == "jitter" || routeChangeKey == "packet_loss") && deviceData[routeChangeKey] != undefined) {
+                                                                if (routeChangeValue > 0) {
+                                                                    deviceData[routeChangeKey] = (deviceData[routeChangeKey] + routeChangeValue) /2;
                                                                 }
+                                                            } else {
                                                                 deviceData[routeChangeKey] = routeChangeValue;
+                                                            }
                                                         }
                                                     }
                                                 } else {
