@@ -16,98 +16,73 @@ let bandwidthData = (filter, user) => {
     let bandwidth = 0;
     let applicationSize = 0;
     let applicationSiteSize = 0;
-    let siteName;
-    let siteGroup;
-    let linkName;
-    let applicationName;
-
     if (userConstants.ROLE_ADMIN == user.role) {
         metrics = metricsData;
-    } else if (user.role == userConstants.ROLE_USER) {
+      } else if (user.role == userConstants.ROLE_USER) {
         let data = {};
         data["customers"] = metricsData
-        data["customers"] = jsonQuery('customers[username=' + user.username + '].sites', {
-            data: data
+        data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+          data: data
         }).value;
         metrics.push(data["customers"]);
-    }
-    if (filter != undefined) {
-        if (filter.siteName != "" && filter.siteName != undefined && filter.siteName != "All Sites") {
-          siteName = filter.siteName;
-          data["sites"] = data["customers"];
-          data["sites"] = jsonQuery('sites[name=' + filter.siteName + ']', {
-            data: data
-        }).value;
-        } else {
-
-        }
-        if (filter.linkName != "" && filter.linkName != undefined && filter.linkName != "All Links") {
-          linkName = filter.linkName;
-        }
-        if (filter.applicationName != "" && filter.applicationName != undefined && filter.applicationName != "All Applications") {
-          applicationName = filter.applicationName;
-        }
-        if (filter.siteGroup != "" && filter.siteGroup != undefined && filter.siteGroup != "All Site Group") {
-          siteGroup = filter.siteGroup;
-        }
       }
     if (metricsData != null && metricsData != undefined) {
 
-        // for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics)) {
-        //     let count = 0;
+        for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics)) {
+            let count = 0;
 
-        //     if (metricsDataValue.sites != null && metricsDataValue.sites != undefined) {
-        //         let sites = metricsDataValue.sites;
+            if (metricsDataValue.sites != null && metricsDataValue.sites != undefined) {
+                let sites = metricsDataValue.sites;
 
-        //         for (let site = 0; site < sites.length; site++) {
-        //             let application = sites[site].application;
+                for (let site = 0; site < sites.length; site++) {
+                    let application = sites[site].application;
 
-        //             if (application != null && application != undefined) {
+                    if (application != null && application != undefined) {
 
-        //                 for (let [applicationKey, applicationValue] of Object.entries(application)) {
+                        for (let [applicationKey, applicationValue] of Object.entries(application)) {
 
-        //                     if (applicationValue != null && applicationValue != undefined) {
+                            if (applicationValue != null && applicationValue != undefined) {
 
-        //                         for (let [applicationDataKey, applicationDataValue] of Object.entries(applicationValue)) {
+                                for (let [applicationDataKey, applicationDataValue] of Object.entries(applicationValue)) {
 
-        //                             if (applicationDataValue != null && applicationDataValue != undefined) {
+                                    if (applicationDataValue != null && applicationDataValue != undefined) {
 
-        //                                 for (let [classKey, classValue] of Object.entries(applicationDataValue)) {
+                                        for (let [classKey, classValue] of Object.entries(applicationDataValue)) {
 
-        //                                     if (classValue != null && classValue != undefined) {
+                                            if (classValue != null && classValue != undefined) {
 
-        //                                         for (let [classDataKey, classDataValue] of Object.entries(classValue)) {
+                                                for (let [classDataKey, classDataValue] of Object.entries(classValue)) {
 
-        //                                             if ((classDataValue != null && classDataValue != undefined) && (classDataValue != null && classDataValue != undefined)) {
+                                                    if ((classDataValue != null && classDataValue != undefined) && (classDataValue != null && classDataValue != undefined)) {
 
-        //                                                 if (classDataKey != null && classDataKey != undefined) {
+                                                        if (classDataKey != null && classDataKey != undefined) {
 
-        //                                                     if (classDataKey == "bandwidth") {
-        //                                                         bandwidth += classDataValue;
-        //                                                         applicationSize++;
-        //                                                     }
-        //                                                 }
-        //                                             }
-        //                                         }
-        //                                     }
-        //                                 }
-        //                             }
-        //                         }
-        //                     }
-        //                 }
-        //             }
+                                                            if (classDataKey == "bandwidth") {
+                                                                bandwidth += classDataValue;
+                                                                applicationSize++;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    bandwidth = bandwidth / applicationSize;
+                    applicationSize = 0;
 
-        //             bandwidth = bandwidth / applicationSize;
-        //             applicationSize = 0;
-
-        //             if (applicationSite[sites[site].name] == undefined) {
-        //                 applicationSite[sites[site].name] = bandwidth;
-        //             } else {
-        //                 applicationSite[sites[site].name] = (applicationSite[sites[site].name] + bandwidth) / 2;
-        //             }
-        //         }
-        //     }
-        // }
+                    if (applicationSite[sites[site].name] == undefined) {
+                        applicationSite[sites[site].name] = bandwidth;
+                    } else {
+                        applicationSite[sites[site].name] = (applicationSite[sites[site].name] + bandwidth) / 2;
+                    }
+                }
+            }
+        }
     }
 
     return applicationSite;
@@ -205,11 +180,12 @@ class Bandwidth extends Component {
 
 function mapStateToProps(state) {
     const { authentication } = state;
-
+  
     return {
-        authentication
+      authentication
     };
-}
-
-const connectedBandwidth = connect(mapStateToProps)(Bandwidth);
-export { connectedBandwidth as Bandwidth };
+  }
+  
+  const connectedBandwidth = connect(mapStateToProps)(Bandwidth);
+  export { connectedBandwidth as Bandwidth };
+  

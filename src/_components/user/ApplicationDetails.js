@@ -97,6 +97,35 @@ let tHead = [
     "No Route"
 ];
 
+let eventCol = [
+
+    "event",
+    "timestamp",
+    "application",
+    "destination",
+    "cpe",
+    "link",
+    "utilization",
+    "latency",
+    "jitter",
+    "packet_loss"
+
+];
+
+let eventHead = [
+
+    "Event",
+    "TimeStamp",
+    "Application",
+    "Destination Site",
+    "CPE",
+    "Link",
+    "Link Utilization",
+    "Latency",
+    "Jitter",
+    "Packet Loss"
+];
+
 class ApplicationDetails extends React.Component {
 
     render() {
@@ -105,6 +134,15 @@ class ApplicationDetails extends React.Component {
         let index = 0;
         let tableData = [];
         let headerData = [];
+        let eventHeaderData = [];
+        let eventData = [];
+        let event = 1;
+        eventHeaderData.push(<th key={0}>ID</th>)
+        for (let index = 0; index < eventHead.length; index++) {
+            eventHeaderData.push(<th key={index + 1}>{eventHead[index]}</th>);
+        }
+        eventData.push(<tr className="appdetailsTH" key={"eventHeader"}>{eventHeaderData}</tr>)
+
         headerData.push(<th key={0}>ID</th>)
         for (let index = 0; index < tHead.length; index++) {
             headerData.push(<th key={index + 1}>{tHead[index]}</th>);
@@ -112,13 +150,33 @@ class ApplicationDetails extends React.Component {
         tableData.push(<tr className="appdetailsTH" key={"header"}>{headerData}</tr>)
         for (let applicationIndex = 0; applicationIndex < applicationDetails.length; applicationIndex++) {
             let rowData = [];
-            rowData.push(<td key={"id"}>{applicationIndex}</td>);
+            let rowEventData = [];
+            rowData.push(<td key={"id"}>{applicationIndex + 1}</td>);
             for (let index = 0; index < col.length; index++) {
                 rowData.push(<td key={col[index]}>{applicationDetails[applicationIndex][col[index]]}</td>);
             }
 
+            if (applicationDetails[applicationIndex].is_no_route == true || applicationDetails[applicationIndex].route_change > 0) {
+                rowEventData.push(<td key={"id"}>{event}</td>);
+                event++;
+                for (let index = 0; index < eventCol.length; index++) {
+                    if (eventCol[index] == "event") {
+                        if (applicationDetails[applicationIndex].is_no_route == true) {
+                            rowEventData.push(<td key={eventCol[index]}>{applicationDetails[applicationIndex].is_no_route}</td>);
+                        } else {
+                            rowEventData.push(<td key={eventCol[index]}>{applicationDetails[applicationIndex].route_change}</td>);
+                        }
+                    } else {
+                        rowEventData.push(<td key={eventCol[index]}>{applicationDetails[applicationIndex][eventCol[index]]}</td>);
+                    }
+                }
+            }
+            eventData.push(<tr key={applicationIndex}>{rowEventData}</tr>);
             tableData.push(<tr key={applicationIndex}>{rowData}</tr>);
-
+        }
+        if (event == 1) {
+            eventData = [];
+            eventHeaderData = [];
         }
 
 
@@ -132,9 +190,14 @@ class ApplicationDetails extends React.Component {
                     <div className="panel-body">
                         <div className="list-group">
                             <div className="table-responsive">
-                                <table className="table">
+                                <table className="table table-bordered">
                                     <tbody>
                                         {tableData}
+                                    </tbody>
+                                </table>
+                                <table className="table table-bordered">
+                                    <tbody>
+                                        {eventData}
                                     </tbody>
                                 </table>
                             </div>

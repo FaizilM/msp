@@ -217,7 +217,7 @@ class Filter extends Component {
       "linkName": this.state.linkName,
       "applicationName": this.state.applicationName
     }
-
+    
     this.setState({ toFilter: filter });
 
   }
