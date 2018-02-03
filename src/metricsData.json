@@ -22,7 +22,7 @@
           {
             "latitude": 23,
             "longitude": -82
-          },          
+          },
           {
             "latitude": 48.8567,
             "longitude": 2.3510
@@ -64,16 +64,40 @@
                   {
                     "voice-HD": {
                       "destination": "Boston",
+                      "source_ip": "192.168.20.1",
+                      "destination_ip": "192.168.30.1",
                       "link": "MPLS",
                       "octets": 480,
                       "packets": 160,
                       "is_no_route": false,
-                      "route_change": 2,
-                      "timestamp": "15:32:33",
-                      "link_util": 82,
-                      "latency": "28ms",
-                      "jitter": 5.6,
-                      "packet_loss": 1
+                      "route_change": [
+                        {
+                          "src_ip": "192.168.11.10",
+                          "dst_ip": "192.168.13.10",
+                          "timestamp": "15:32:33",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": "30ms",
+                          "utilization": 50,
+                          "latency": "10ms",
+                          "jitter": 5,
+                          "packet_loss": 0,
+                          "status": "UP"
+                        },
+                        {
+                          "src_ip": "192.168.13.10",
+                          "dst_ip": "192.168.12.10",
+                          "timestamp": "15:32:40",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": "30ms",
+                          "utilization": 36,
+                          "latency": "18ms",
+                          "jitter": 0.6,
+                          "packet_loss": 1,
+                          "status": "UP"
+                        }
+                      ]
                     }
                   }
                 ]
@@ -85,40 +109,112 @@
                   {
                     "voice-HD": {
                       "destination": "Chicogo",
+                      "source_ip": "192.168.20.1",
+                      "destination_ip": "192.168.30.1",
                       "link": "MPLS-VES",
                       "octets": 580,
                       "packets": 110,
                       "is_no_route": true,
-                      "route_change": 5,
-                      "timestamp": "21:11:09",
-                      "link_util": 64,
-                      "latency": "250ms",
-                      "jitter": 48,
-                      "packet_loss": 2.7
+                      "route_change": [
+                        {
+                          "src_ip": "192.168.11.10",
+                          "dst_ip": "192.168.13.10",
+                          "timestamp": "15:32:33",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": "30ms",
+                          "utilization": 50,
+                          "latency": "10ms",
+                          "jitter": 5,
+                          "packet_loss": 10,
+                          "status": "UP"
+                        },
+                        {
+                          "src_ip": "192.168.11.10",
+                          "dst_ip": "192.168.13.10",
+                          "timestamp": "15:32:33",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": "30ms",
+                          "utilization": 50,
+                          "latency": "10ms",
+                          "jitter": 5,
+                          "packet_loss": 10,
+                          "status": "DOWM"
+                        }
+                      ]
                     },
                     "voice": {
                       "destination": "London",
+                      "source_ip": "192.168.20.1",
+                      "destination_ip": "192.168.30.1",
                       "link": "MPLS",
                       "octets": 210,
                       "packets": 70,
                       "is_no_route": false,
-                      "route_change": 0
+                      "route_change": [
+                        {
+                          "src_ip": "192.168.11.10",
+                          "dst_ip": "192.168.13.10",
+                          "timestamp": "15:32:33",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": "30ms",
+                          "utilization": 50,
+                          "latency": "10ms",
+                          "jitter": 5,
+                          "packet_loss": 0,
+                          "status": "UP"
+                        }
+                      ]
                     },
                     "video": {
                       "destination": "Tokyo",
+                      "source_ip": "192.168.20.1",
+                      "destination_ip": "192.168.30.1",
                       "link": "MPLS",
                       "octets": 1200,
                       "packets": 368,
                       "is_no_route": false,
-                      "route_change": 0
+                      "route_change": [
+                        {
+                          "src_ip": "192.168.11.10",
+                          "dst_ip": "192.168.13.10",
+                          "timestamp": "15:32:33",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": "30ms",
+                          "utilization": 50,
+                          "latency": "10ms",
+                          "jitter": 5,
+                          "packet_loss": 0,
+                          "status": "UP"
+                        }
+                      ]
                     },
                     "Default": {
                       "destination": "Chicogo",
+                      "source_ip": "192.168.20.1",
+                      "destination_ip": "192.168.30.1",
                       "link": "LTE",
                       "octets": 480,
                       "packets": 110,
                       "is_no_route": false,
-                      "route_change": 0
+                      "route_change": [
+                        {
+                          "src_ip": "192.168.11.10",
+                          "dst_ip": "192.168.13.10",
+                          "timestamp": "15:32:33",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": "30ms",
+                          "utilization": 50,
+                          "latency": "10ms",
+                          "jitter": 5,
+                          "packet_loss": 0,
+                          "status": "UP"
+                        }
+                      ]
                     }
                   }
                 ]
@@ -130,11 +226,27 @@
                   {
                     "Webex": {
                       "destination": "London",
+                      "source_ip": "192.168.20.1",
+                      "destination_ip": "192.168.30.1",
                       "link": "BroadBand",
                       "octets": 2780,
                       "packets": 890,
                       "is_no_route": false,
-                      "route_change": 0
+                      "route_change": [
+                        {
+                          "src_ip": "192.168.11.10",
+                          "dst_ip": "192.168.13.10",
+                          "timestamp": "15:32:33",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": "30ms",
+                          "utilization": 50,
+                          "latency": "10ms",
+                          "jitter": 5,
+                          "packet_loss": 0,
+                          "status": "UP"
+                        }
+                      ]
                     }
                   }
                 ]
@@ -175,7 +287,7 @@
             "class5": [
               {
                 "bandwidth": 36,
-                "route_change":6,
+                "route_change": 6,
                 "route_fail": 1
               }
             ],

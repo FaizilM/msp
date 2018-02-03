@@ -47,7 +47,6 @@ let latencyRatioData = (filter, user) => {
   }
   if (metrics.length > 0) {
     for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics)) {
-      console.log("sites",metrics);
       let sites = metricsDataValue.sites;
      
       
