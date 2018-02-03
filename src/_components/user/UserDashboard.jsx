@@ -6,7 +6,7 @@ import { Route, Redirect, Link } from 'react-router-dom';
 import AmCharts from '@amcharts/amcharts3-react';
 import 'ammap3/ammap/ammap.js';
 import { Container, Row, Col } from 'reactstrap';
-import { BroadbandLinkUtilization, Filter, Map, BussinessImpactEvent, PacketLoss, LatencyRatio, JitterRatio, SiteAvailability } from '../';
+import { Filter, Map, BussinessImpactEvent, PacketLoss, LatencyRatio, JitterRatio, SiteAvailability } from '../';
 import { Tabs, TabList, DragTabList, Tab, DragTab, PanelList, Panel, ExtraButton } from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
 
@@ -45,7 +45,6 @@ class UserDashboard extends React.Component {
                 </Row>
                 <Row>
                   <BussinessImpactEvent />
-                  <BroadbandLinkUtilization />
                 </Row>
               </Panel>
               <Panel>
