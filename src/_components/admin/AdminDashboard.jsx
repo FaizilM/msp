@@ -28,12 +28,6 @@ class AdminDashboard extends React.Component {
         const { user, users } = this.props;
 
         return (
-            <div style={{ backgroundColor: "#F3F2F2" }}>
-                <div className="app_container">
-                    <Row className="well">
-                        <Col xs="12" sm="12" md="12" lg="12" xl="12">
-                        </Col>
-                    </Row>
                     <Tabs customStyle={customStyle} defaultIndex={this.state.tabIndex}>
                         <TabList>
                             <Tab>Dashboard</Tab>
@@ -92,8 +86,6 @@ class AdminDashboard extends React.Component {
                             </Panel>
                         </PanelList>
                     </Tabs>
-                </div>
-            </div>
         );
     }
 }

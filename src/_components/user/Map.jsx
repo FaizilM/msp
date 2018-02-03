@@ -36,10 +36,12 @@ class Map extends React.Component {
                 "images": []
             },
             "linesSettings": {
+
                 "arrow": "middle",
                 "color": "#585869",
-                "alpha": 0.8,
-                "arrowSize": 4
+                "alpha": 0.6,
+                "arrowAlpha": 1
+
             },
             "listeners": [{
                 "event": "clickMapObject",
@@ -74,8 +76,8 @@ class Map extends React.Component {
 
                                       if(isNoAppRoute) {
                                           lineObject["arrowColor"] = "red";
-                                          lineObject["arrowSize"] = 13;
                                           lineObject["arrowAlpha"] = 0.7
+                                          lineObject["arc"] = -0.7
                                       }
                                     event.mapObject.lines.push(lineObject);
                                 }

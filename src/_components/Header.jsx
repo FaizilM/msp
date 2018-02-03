@@ -18,7 +18,7 @@ class Header extends React.Component {
 
         return (
 
-            <div>
+
                 <nav className="navbar navbar-default navbar-fixed-top">
                     <div className="container-fluid" style={{ backgroundColor: "#FFFFFF" }}>
                         <div className="navbar-header">
@@ -37,7 +37,7 @@ class Header extends React.Component {
                         </ul>
                     </div>
                 </nav>
-            </div>
+
 
         );
 

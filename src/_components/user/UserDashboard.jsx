@@ -25,12 +25,6 @@ class UserDashboard extends React.Component {
     const { user, users } = this.props;
 
     return (
-      <div style={{ backgroundColor: "#F3F2F2" }}>
-        <div className="app_container">
-          <Row className="well">
-            <Col xs="12" sm="12" md="12" lg="6" xl="12">
-            </Col>
-          </Row>
           <Tabs customStyle={customStyle}>
             <TabList>
               <Tab>Dashboard</Tab>
@@ -72,8 +66,6 @@ class UserDashboard extends React.Component {
               </Panel>
             </PanelList>
           </Tabs>
-        </div>
-      </div>
     );
   }
 }
