@@ -13,16 +13,18 @@ class EventDetails extends React.Component {
 
         return (
             <Row>
-                   <Link to="/customer">
-                        <button className= "btn btn-primary" type="button">
-                            Back
-                      </button>
-                    </Link>
                   <Col xs="12" sm="12" md="12" lg="12" xl="12">
                   <div className="panel panel-default">
                     <div className="panel-heading">
                        <i className=""></i>
                        <h3>Event Details</h3>
+                       <div class="pull-right">
+                       <Link to="/customer">
+               <button className= "btn btn-primary" type="button">
+                   Back
+             </button>
+           </Link>
+                            </div>
                     </div>
                     <div className="panel-body">
                        <div className="list-group">
