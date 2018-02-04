@@ -72,6 +72,7 @@
                       "is_no_route": false,
                       "route_change": [
                         {
+                          "component_name":"R1",
                           "src_ip": "192.168.11.10",
                           "dst_ip": "192.168.13.10",
                           "timestamp": "15:32:33",
@@ -85,6 +86,7 @@
                           "status": "UP"
                         },
                         {
+                          "component_name":"R2",
                           "src_ip": "192.168.13.10",
                           "dst_ip": "192.168.12.10",
                           "timestamp": "15:32:40",
@@ -117,6 +119,7 @@
                       "is_no_route": true,
                       "route_change": [
                         {
+                          "component_name":"R1",
                           "src_ip": "192.168.11.10",
                           "dst_ip": "192.168.13.10",
                           "timestamp": "15:32:33",
@@ -124,12 +127,13 @@
                           "policy": "voip-policy",
                           "SLA_latency": "30ms",
                           "utilization": 50,
-                          "latency": 10,
+                          "latency": 20,
                           "jitter": 5,
                           "packet_loss": 10,
                           "status": "UP"
                         },
                         {
+                          "component_name":"R2",
                           "src_ip": "192.168.11.10",
                           "dst_ip": "192.168.13.10",
                           "timestamp": "15:32:34",
@@ -138,9 +142,9 @@
                           "SLA_latency": "30ms",
                           "utilization": 40,
                           "latency": 10,
-                          "jitter": 5,
-                          "packet_loss": 10,
-                          "status": "DOWM"
+                          "jitter": 15,
+                          "packet_loss": 30,
+                          "status": "DOWN"
                         }
                       ]
                     },
