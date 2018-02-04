@@ -116,8 +116,8 @@ class EventDetails extends React.Component {
       "Source IP",
       "Destination IP",
       "Link",
-      "Octet",
-      "Packet"
+      "Octets (K)",
+      "Packet (K)"
 
     ];
 
@@ -146,11 +146,11 @@ class EventDetails extends React.Component {
       "Timestamp",
       "Protocol",
       "Policy",
-      "SLA Latency",
-      "Utilization",
+      "SLA Latency (ms)",
+      "Utilization (%)",
       "Latency (ms)",
       "Jitter (ms)",
-      "Packet Loss",
+      "Packet Loss (%)",
       "Status"
 
 
@@ -181,7 +181,13 @@ class EventDetails extends React.Component {
         route = "No Route";
       }
       for (let index = 0; index < routeCol.length; index++) {
-        rowRouteData.push(<td key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
+        if(eventDetails[1][i][routeCol[index]] == "DOWN") {
+          rowRouteData.push(<td style= {{"backgroundColor":color.ORANGE_COLOR}} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
+        } else  if(eventDetails[1][i][routeCol[index]] == "UP"){
+          rowRouteData.push(<td style= {{"backgroundColor":color.GREEN_COLOR}} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
+        } else {
+          rowRouteData.push(<td key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
+        }
       }
       routeData.push(<tr key={i + 1}>{rowRouteData}</tr>)
     }
