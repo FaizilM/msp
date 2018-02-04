@@ -148,8 +148,8 @@ class EventDetails extends React.Component {
       "Policy",
       "SLA Latency",
       "Utilization",
-      "Latency",
-      "Jitter",
+      "Latency (ms)",
+      "Jitter (ms)",
       "Packet Loss",
       "Status"
 
@@ -164,6 +164,7 @@ class EventDetails extends React.Component {
     let routeHeaderData = [];
     let rowRouteData = [];
     let routeData = [];
+    let route = 'Route Change';
 
     for (let index = 0; index < col.length; index++) {
       rowEventData.push(<tr key={col[index]}><th>{tHead[index]}</th><td >{eventDetails[0][col[index]]}</td></tr>);
@@ -175,11 +176,16 @@ class EventDetails extends React.Component {
 
     for (let i = 0; i < eventDetails[1].length; i++) {
       rowRouteData = [];
+
+      if (eventDetails[1][i]["status"] == "DOWN") {
+        route = "No Route";
+      }
       for (let index = 0; index < routeCol.length; index++) {
         rowRouteData.push(<td key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
       }
-      routeData.push(<tr key={i+1}>{rowRouteData}</tr>)
+      routeData.push(<tr key={i + 1}>{rowRouteData}</tr>)
     }
+
     return (
       <Row>
         <Col xs="12" sm="12" md="12" lg="12" xl="12">
@@ -191,7 +197,7 @@ class EventDetails extends React.Component {
                 <h3>Event Details</h3>
 
                 <Link to="/customer">
-                  <button className="btn btn-primary btn-lg" style = {{"marginLeft":"95%"}} type="button">Back</button>
+                  <button className="btn btn-primary btn-lg" style={{ "marginLeft": "95%" }} type="button">Back</button>
                 </Link>
 
               </div>
@@ -204,7 +210,7 @@ class EventDetails extends React.Component {
                   </table>
                   <Tabs customStyle={customStyle}>
                     <TabList>
-                      <Tab>Route Changes</Tab>
+                      <Tab>{route}</Tab>
                     </TabList>
                     <PanelList>
                       <Panel>
