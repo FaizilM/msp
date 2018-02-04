@@ -137,10 +137,10 @@ let eventHead = [
     "Destination Site",
     "CPE",
     "Link",
-    "Link Utilization",
-    "Latency",
-    "Jitter",
-    "Packet Loss",
+    "Link Utilization (%)",
+    "Latency (ms)",
+    "Jitter (ms)",
+    "Packet Loss (%)",
     "Action"
 ];
 
