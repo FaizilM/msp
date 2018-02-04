@@ -94,6 +94,7 @@ let getEventDetails = (user, routeType) => {
 }
 
 class EventDetails extends React.Component {
+
   render() {
 
 
@@ -196,15 +197,9 @@ class EventDetails extends React.Component {
       <Row>
         <Col xs="12" sm="12" md="12" lg="12" xl="12">
           <div className="panel panel-default">
-            <div className="panel-heading">
               <i className=""></i>
               <div className="panel-heading">
-
-                <h3>Event Details</h3>
-
-                <Link to="/customer">
-                  <button className="btn btn-primary btn-lg" style={{ "marginLeft": "95%" }} type="button">Back</button>
-                </Link>
+                  <h3>Event Details</h3>
 
               </div>
               <div className="panel-body">
@@ -222,7 +217,6 @@ class EventDetails extends React.Component {
                       <Panel>
                         <Row>
                           <table className="table table-striped table-bordered">
-
                             <tbody>
                               {routeData}
                             </tbody>
@@ -231,7 +225,6 @@ class EventDetails extends React.Component {
                       </Panel>
                     </PanelList>
                   </Tabs>
-                </div>
               </div>
             </div>
           </div>
