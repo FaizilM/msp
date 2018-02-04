@@ -204,7 +204,9 @@ class EventDetails extends React.Component {
                      <h3>Event Details</h3>
                   </div>
                    <div className="inline_block pull-right">
-                     <button className="btn btn-primary">Back</button>
+                   <Link to="/customer">
+                      <button className="btn btn-primary" type="button">Back</button>
+                    </Link>
                   </div>
                 </div>
                 </div>
