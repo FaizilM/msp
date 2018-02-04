@@ -165,7 +165,6 @@ class EventDetails extends React.Component {
     let routeHeaderData = [];
     let rowRouteData = [];
     let routeData = [];
-    let route = 'Route Change';
 
     for (let index = 0; index < col.length; index++) {
       rowEventData.push(<tr key={col[index]}><th>{tHead[index]}</th><td >{eventDetails[0][col[index]]}</td></tr>);
@@ -178,14 +177,11 @@ class EventDetails extends React.Component {
     for (let i = 0; i < eventDetails[1].length; i++) {
       rowRouteData = [];
 
-      if (eventDetails[1][i]["status"] == "DOWN") {
-        route = "No Route";
-      }
       for (let index = 0; index < routeCol.length; index++) {
         if(eventDetails[1][i][routeCol[index]] == "DOWN") {
-          rowRouteData.push(<td style= {{"backgroundColor":color.ORANGE_COLOR}} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
+          rowRouteData.push(<td style= {{"color":color.ORANGE_COLOR}} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
         } else  if(eventDetails[1][i][routeCol[index]] == "UP"){
-          rowRouteData.push(<td style= {{"backgroundColor":color.GREEN_COLOR}} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
+          rowRouteData.push(<td style= {{"color":color.GREEN_COLOR}} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
         } else {
           rowRouteData.push(<td key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
         }
@@ -211,7 +207,7 @@ class EventDetails extends React.Component {
                   </table>
                   <Tabs customStyle={customStyle}>
                     <TabList>
-                      <Tab>{route}</Tab>
+                      <Tab>Route Change</Tab>
                     </TabList>
                     <PanelList>
                       <Panel>
