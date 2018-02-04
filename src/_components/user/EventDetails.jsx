@@ -193,9 +193,15 @@ class EventDetails extends React.Component {
           <div className="panel panel-default">
               <i className=""></i>
               <div className="panel-heading">
-                  <h3>Event Details</h3>
-
-              </div>
+              <div>
+                  <div className="inline_block">
+                     <h3>Event Details</h3>
+                  </div>
+                   <div className="inline_block pull-right">
+                     <button className="btn btn-primary">Back</button>
+                  </div>
+                </div>
+                </div>
               <div className="panel-body">
                 <div className="list-group">
                   <table className="table table-striped table-bordered view_page_table">
