@@ -155,6 +155,7 @@ class ApplicationDetails extends React.Component {
         let eventHeaderData = [];
         let eventData = [];
         let event = 1;
+        let routeEvent;
         eventHeaderData.push(<th key={0}>ID</th>)
         for (let index = 0; index < eventHead.length; index++) {
             eventHeaderData.push(<th key={index + 1}>{eventHead[index]}</th>);
@@ -180,17 +181,22 @@ class ApplicationDetails extends React.Component {
                 for (let index = 0; index < eventCol.length; index++) {
                     if (eventCol[index] == "event") {
                         if (applicationDetails[applicationIndex].is_no_route == true) {
+                            routeEvent = "is_no_route";
                             rowEventData.push(<td key={eventCol[index]}>{"No Route"}</td>);
                         } else {
+                            routeEvent = "route_change";
                             rowEventData.push(<td key={eventCol[index]}>{"Route Change"}</td>);
                         }
                     } else {
                         rowEventData.push(<td key={eventCol[index]}>{applicationDetails[applicationIndex][eventCol[index]]}</td>);
                     }
                 }
+                
                 rowEventData.push(<td key={"button"}>
-                    <Link to="/event_details">
-                        <button className= "btn btn-primary" type="button">
+                    
+
+                    <Link to={`/event_details/${routeEvent}`}>
+                        <button className="btn btn-primary" type="button">
                             More
                       </button>
                     </Link></td>);
