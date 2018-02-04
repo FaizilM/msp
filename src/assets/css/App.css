@@ -91,3 +91,8 @@ background-color: #2E77B8 !important;
     color:#FFFFFF;
    
 }
+
+
+.inline_block {
+  display: inline-block;
+}
