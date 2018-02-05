@@ -122,7 +122,6 @@ class Filter extends Component {
     
     if (selectedSite != undefined) {
       siteName = selectedSite.target.value;
-      console.log("link", selectedSite.target.value);
       metrics.push(metricsData[0]);
     } else {
       metrics.push(metricsData[0]);

@@ -195,6 +195,7 @@ class EventDetails extends React.Component {
       "Poll Bit",
       "Final Bit",
       "Multiplier",
+      "Length",
       "My Discr",
       "Your Discr",
       "Min tx interval",
@@ -236,7 +237,7 @@ class EventDetails extends React.Component {
       </tr>);
     }
 
-    for (let index = 0; index < col.length; index++) {
+    for (let index = 0; index < tHead.length; index++) {
       rowEventData.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);
     }
 
