@@ -6,60 +6,60 @@ import { userActions } from '../../_actions';
 import { Link, Events } from 'react-scroll';
 import { Header } from '../Header';
 import { Container, Row, Col } from 'reactstrap';
-import { Tabs, TabList, DragTabList, Tab, DragTab, PanelList, Panel, ExtraButton } from 'react-tabtab';
-import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
+import { Tabs, Tab } from 'react-bootstrap'
 
 
 class AdminDashboard extends React.Component {
 
-    constructor(props) {
-        super(props)
+      constructor(props, context) {
+          super(props, context);
 
-        this.state = { tabIndex: 0 };
-        this.handleSelect =this.handleSelect.bind();
-    }
+          this.state = {
+            key: 1
+          };
 
-    handleSelect() {
-        this.setState({ tabIndex: 1 })
-    }
-    
-    
+          this.gotoCustomerMetrics = this.gotoCustomerMetrics.bind(this);
+      }
+
+      gotoCustomerMetrics(key) {
+        this.setState({ key : key });
+      }
+
+
     render() {
         const { user, users } = this.props;
         return (
-            <Tabs customStyle={customStyle} defaultIndex={this.state.tabIndex}>
-                <TabList>
-                    <Tab handleSelect = {this.handleSelect}>Dashboard</Tab>
-                    <Tab>Customer Metrics Dashboard</Tab>
-                </TabList>
-                <PanelList>
-                    <Panel>
-                        <Row>
-                            <Inventory />
-                            <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                            <Sites />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <SiteAvailability />
-                            <LatencyRatio />
-                        </Row>
-                        <Row>
-                            <JitterRatio />
-                            <PacketLoss />
-                        </Row>
-                        <Row>
-                            <LinkCapacity />
-                            <MPLSLinkUtilization />
-                        </Row>
-                    </Panel>
-                    <Panel>
-                        <Row>
-                            <CustomerMetrics />
-                        </Row>
-                    </Panel>
-                </PanelList>
+
+        <Tabs activeKey={this.state.key}
+                  onSelect={this.gotoCustomerMetrics}
+                  id="controlled-tab-example">
+              <Tab eventKey={1} title="Dashboard">
+              <Row>
+                        <Inventory />
+                        <Col xs="12" sm="12" md="6" lg="6" xl="6">
+                        <Sites clickevent={this.gotoCustomerMetrics}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <SiteAvailability />
+                        <LatencyRatio />
+                    </Row>
+                    <Row>
+                        <JitterRatio />
+                        <PacketLoss />
+                    </Row>
+                    <Row>
+                        <LinkCapacity />
+                        <MPLSLinkUtilization />
+                    </Row>
+              </Tab>
+              <Tab eventKey={2} title="Customer Metrics Table">
+                  <Row>
+                      <CustomerMetrics />
+                  </Row>
+              </Tab>
             </Tabs>
+
         );
     }
 }

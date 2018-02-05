@@ -62,14 +62,13 @@ class Sites extends Component {
                 }
 
             }
-        this.handleSelect = this.handleSelect.bind(this);
+        this.gotoCustomerMetrics = this.gotoCustomerMetrics.bind(this);
     };
-    handleSelect(event) {
-        console.log("button clicked", this.props.state.tabIndex);
-        this.props.state.tabIndex = 1;
 
-
+    gotoCustomerMetrics() {
+        this.props.clickevent(2);
     }
+
     componentDidMount() {
         Events.scrollEvent.register('begin', function () {
             console.log("begin", arguments);
@@ -93,12 +92,12 @@ class Sites extends Component {
 
 
             if (userConstants.ROLE_ADMIN == user.role) {
-                viewSites.push( <button onClick={this.props.handleSelect} className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%", marginBottom: "5%" }}>
+                viewSites.push( <button onClick={this.gotoCustomerMetrics} className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%", marginBottom: "5%" }}>
                     <a style={{ color: "white" }}><label>View All Sites</label></a>
                 </button>);
                 site_admin ="adminSite"
-            } 
-       
+            }
+
 
         return (
             <div className="panel panel-default">
@@ -159,5 +158,3 @@ function mapStateToProps(state) {
 
 const connectedSites = connect(mapStateToProps)(Sites);
 export { connectedSites as Sites };
-
-
