@@ -76,20 +76,23 @@ let getEventDetails = (user, routeType) => {
 
                     if ((key == "utilization" || key == "latency"
                       || key == "jitter" || key == "packet_loss") && deviceData[key] != undefined) {
-                      if (value > 0) {
-                        deviceData[key] = (deviceData[key] + value);
-                      } else {
+
+                      if (deviceData[key] > 0 && value > 0) {
+                        deviceData[key] = (deviceData[key] + value) / 2;
+                      } else if (value != 0) {
                         deviceData[key] = value;
                       }
                     } else if ((key == "utilization" || key == "latency"
                       || key == "jitter" || key == "packet_loss") && deviceData[key] == undefined) {
-
                       deviceData[key] = value;
                     }
+
                   }
                   arrayDeviceRoute.push(deviceRouteData);
                 }
               } else {
+                console.log("else", routeDataKey, routeDataValue);
+
                 deviceData[routeDataKey] = routeDataValue;
               }
             }
@@ -240,28 +243,28 @@ class EventDetails extends React.Component {
     let routeDetails1 = [];
     for (let index = 0; index < routeDetailsCol.length; index++) {
 
-      if(index < 16) {
-      routeDetails.push(<tr key={routeDetailsCol[index]}>
+      if (index < 16) {
+        routeDetails.push(<tr key={routeDetailsCol[index]}>
 
           <td style={{ "fontWeight": "bold" }}>{routeDetailsHead[index]}</td>
           <td >{eventDetails[2][0][routeDetailsCol[index]]}</td>
-          </tr>);
+        </tr>);
       } else {
-      routeDetails1.push(<tr key={routeDetailsCol[index]}>
+        routeDetails1.push(<tr key={routeDetailsCol[index]}>
 
           <td style={{ "fontWeight": "bold" }}>{routeDetailsHead[index]}</td>
           <td >{eventDetails[2][0][routeDetailsCol[index]]}</td>
-          </tr>);
+        </tr>);
       }
 
     }
 
     for (let index = 0; index < col.length; index++) {
 
-      if(index < 8) {
-          rowEventData1.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);
+      if (index < 8) {
+        rowEventData1.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);
       } else {
-          rowEventData2.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);
+        rowEventData2.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);
       }
 
     }
@@ -298,11 +301,11 @@ class EventDetails extends React.Component {
                       </table>
                     </Col>
                     <Col xs="6" sm="6" md="6" lg="6" xl="6">
-                        <table className="table table-striped table-bordered view_page_table">
-                          <tbody>
-                            {rowEventData2}
-                          </tbody>
-                        </table>
+                      <table className="table table-striped table-bordered view_page_table">
+                        <tbody>
+                          {rowEventData2}
+                        </tbody>
+                      </table>
                     </Col>
                     {(eventDetails && eventDetails.length > 1 && eventDetails[0].is_no_route) ? <Col xs="6" sm="6" md="6" lg="6" xl="6"><Link to="/trouble_shoot">
                       <button className="btn btn-danger btn-lg pull-right" type="button">TroubleShoot</button>
@@ -310,37 +313,37 @@ class EventDetails extends React.Component {
                   </div>
                 </div>
               </Col>
-              </Row>
+            </Row>
 
 
           </div>
         </Col>
 
 
-      <Col xs="12" sm="12" md="12" lg="12" xl="12">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <i className=""></i>
-            <h3>Session Details</h3>
-          </div>
-          <div className="panel-body">
-            <div className="list-group">
-            <div className="list-group">
-              <Col xs="6" sm="6" md="6" lg="6" xl="6">
-                  <table className="table table-striped table-bordered view_page_table">
-                    <tbody>
-                        {routeDetails}
-                    </tbody>
-                  </table>
-                </Col>
-                <Col xs="6" sm="6" md="6" lg="6" xl="6">
+        <Col xs="12" sm="12" md="12" lg="12" xl="12">
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <i className=""></i>
+              <h3>Session Details</h3>
+            </div>
+            <div className="panel-body">
+              <div className="list-group">
+                <div className="list-group">
+                  <Col xs="6" sm="6" md="6" lg="6" xl="6">
                     <table className="table table-striped table-bordered view_page_table">
                       <tbody>
-                          {routeDetails1}
+                        {routeDetails}
                       </tbody>
                     </table>
                   </Col>
-              </div>
+                  <Col xs="6" sm="6" md="6" lg="6" xl="6">
+                    <table className="table table-striped table-bordered view_page_table">
+                      <tbody>
+                        {routeDetails1}
+                      </tbody>
+                    </table>
+                  </Col>
+                </div>
               </div>
             </div>
           </div>

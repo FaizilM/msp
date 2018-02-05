@@ -61,8 +61,11 @@ let getApplicationDetails = (user) => {
 
                                                             if ((routeChangeKey == "utilization" || routeChangeKey == "latency"
                                                                 || routeChangeKey == "jitter" || routeChangeKey == "packet_loss") && deviceData[routeChangeKey] != undefined) {
+                                                                    console.log(deviceData[routeChangeKey],routeChangeValue );
 
-                                                                if (routeChangeValue > 0) {
+                                                                if (deviceData[routeChangeKey] > 0 && routeChangeValue > 0) {
+                                                                    console.log("inside",deviceData[routeChangeKey],routeChangeValue );
+
                                                                     deviceData[routeChangeKey] = (deviceData[routeChangeKey] + routeChangeValue) / 2;
                                                                 } else {
                                                                     deviceData[routeChangeKey] = routeChangeValue;
