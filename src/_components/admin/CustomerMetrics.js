@@ -159,7 +159,7 @@ class CustomerMetrics extends Component {
         <div className="panel panel-default">
           <div className="panel-heading">
             <i className=""></i>
-            <h3>Customer Metrics Dashboard</h3>
+            <h3>Customer Metrics</h3>
           </div>
           <div className="panel-body">
             <div className="list-group" id="customer_metrics_table">

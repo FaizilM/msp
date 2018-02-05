@@ -53,7 +53,7 @@ class AdminDashboard extends React.Component {
                         <MPLSLinkUtilization />
                     </Row>
               </Tab>
-              <Tab eventKey={2} title="Customer Metrics Table">
+              <Tab eventKey={2} title="Customer Metrics">
                   <Row>
                       <CustomerMetrics />
                   </Row>
