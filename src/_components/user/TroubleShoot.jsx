@@ -219,7 +219,16 @@ class TroubleShoot extends React.Component {
                     <div className="panel panel-default">
                         <i className=""></i>
                         <div className="panel-heading">
-                            <h3> Topology</h3>
+                        <div>
+                            <div className="inline_block">
+                              <h3>Topology </h3>
+                            </div>
+                            <div className="inline_block pull-right">
+                              <Link to="/event_details/is_no_route">
+                                <button className="btn btn-primary" type="button">Back</button>
+                              </Link>
+                            </div>
+                          </div>
                         </div>
 
                         <div className="panel-body">
@@ -231,7 +240,7 @@ class TroubleShoot extends React.Component {
                         </div>
                     </div>
                 </Col>
-              
+
                 <Col xs="12" sm="12" md="12" lg="12" xl="12">
                     <div className="panel panel-default">
                         <i className=""></i>
@@ -268,7 +277,7 @@ class TroubleShoot extends React.Component {
                         </div>
                     </div>
                 </Col>
-               
+
             </Row>
         );
     }

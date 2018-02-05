@@ -240,7 +240,7 @@ class EventDetails extends React.Component {
     let routeDetails1 = [];
     for (let index = 0; index < routeDetailsCol.length; index++) {
 
-      if(index < 15) {
+      if(index < 16) {
       routeDetails.push(<tr key={routeDetailsCol[index]}>
 
           <td style={{ "fontWeight": "bold" }}>{routeDetailsHead[index]}</td>
@@ -304,9 +304,9 @@ class EventDetails extends React.Component {
                           </tbody>
                         </table>
                     </Col>
-                    {(eventDetails && eventDetails.length > 1 && eventDetails[0].is_no_route) ? <Link to="/trouble_shoot">
+                    {(eventDetails && eventDetails.length > 1 && eventDetails[0].is_no_route) ? <Col xs="6" sm="6" md="6" lg="6" xl="6"><Link to="/trouble_shoot">
                       <button className="btn btn-danger btn-lg pull-right" type="button">TroubleShoot</button>
-                    </Link> : ""}
+                    </Link></Col> : ""}
                   </div>
                 </div>
               </Col>
