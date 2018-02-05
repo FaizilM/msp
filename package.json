@@ -30,6 +30,7 @@
     "react-scroll": "^1.7.6",
     "react-sort-search-table": "^0.1.1",
     "react-table": "^6.7.6",
+    "react-tabs": "^2.2.1",
     "react-tabtab": "^1.2.0",
     "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
