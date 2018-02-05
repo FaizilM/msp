@@ -95,3 +95,16 @@ background-color: #2E77B8 !important;
 .inline_block {
   display: inline-block;
 }
+.adminSite
+{
+   display: flex;
+   justify-content: space-around;      
+ }
+
+ .userSite
+{
+   display: flex;
+   justify-content: space-around;      
+   margin-left: 25%;
+   margin-right: 25%
+ }
