@@ -111,7 +111,7 @@ class Sites extends Component {
                             <div style={{ float: 'left' }}>
                                 <svg height="120" width="120">
                                     <circle cx="60" cy="60" r="50" stroke={color.GREEN_COLOR} strokeWidth="5" fill="white" />
-                                    <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
+                                    <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500}  onClick={this.gotoCustomerMetrics}>
                                         <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{availability[0]}</text>
                                     </Link>
                                 </svg>
@@ -120,7 +120,7 @@ class Sites extends Component {
                             <div style={{ float: 'right' }}>
                                 <svg height="120" width="120">
                                     <circle cx="60" cy="60" r="50" stroke="#FFFF00" strokeWidth="5" fill="white" />
-                                    <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
+                                    <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500}  onClick={this.gotoCustomerMetrics}>
                                         <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline' }}>{availability[1]}</text>
                                     </Link>
                                 </svg>
@@ -129,7 +129,7 @@ class Sites extends Component {
                             <div style={{ float: 'right' }}>
                                 <svg height="120" width="120">
                                     <circle cx="60" cy="60" r="50" stroke="#ff0011" strokeWidth="5" fill="white" />
-                                    <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
+                                    <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500}  onClick={this.gotoCustomerMetrics}>
                                         <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline' }}>{availability[2]}</text>
                                     </Link>
                                 </svg>

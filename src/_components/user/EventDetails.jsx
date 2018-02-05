@@ -91,7 +91,6 @@ let getEventDetails = (user, routeType) => {
                   arrayDeviceRoute.push(deviceRouteData);
                 }
               } else {
-                console.log("else", routeDataKey, routeDataValue);
 
                 deviceData[routeDataKey] = routeDataValue;
               }
@@ -114,6 +113,16 @@ let getEventDetails = (user, routeType) => {
 }
 
 class EventDetails extends React.Component {
+
+  constructor(props) {
+    super(props);
+    
+    this.gotoCustomerMetrics = this.gotoCustomerMetrics.bind(this);
+};
+
+gotoCustomerMetrics() {
+    this.props.clickevent(3);
+}
 
   render() {
 
@@ -283,8 +292,8 @@ class EventDetails extends React.Component {
                   <h3>Event Details</h3>
                 </div>
                 <div className="inline_block pull-right">
-                  <Link to="/customer">
-                    <button className="btn btn-primary" type="button">Back</button>
+                  <Link to="/customer" >
+                    <button className="btn btn-primary" type="button" >Back</button>
                   </Link>
                 </div>
               </div>

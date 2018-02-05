@@ -3,7 +3,7 @@ import '../../assets/css/App.css';
 import { Container, Row, Col, select } from 'reactstrap';
 import metricsData from '../../metricsData.json';
 import { indexOf } from 'lodash';
-import { ApplicationDetails, LinkCapacity, LatencyRatio, JitterRatio, PacketLoss, ApplicationClassMetrics, Bandwidth } from '../';
+import { LinkCapacity, LatencyRatio, JitterRatio, PacketLoss, ApplicationClassMetrics, Bandwidth } from '../';
 
 class Filter extends Component {
 
@@ -160,8 +160,6 @@ class Filter extends Component {
     let siteName;
     if (selectedSite != undefined) {
       siteName = selectedSite.target.value;
-    console.log("link",selectedSite.target.value);
-      
       metrics.push(metricsData[0]);
     } else {
       metrics.push(metricsData[0]);
@@ -225,7 +223,6 @@ class Filter extends Component {
   }
 
   render() {
-    console.log("filter page", this.state.duration, this.state.siteGroup,this.state.siteName,this.state.linkName, this.state.applicationName );
 
     return (
       <Col xs="12" sm="12" md="12" lg="12" xl="12">
@@ -298,11 +295,6 @@ class Filter extends Component {
                 <JitterRatio filter={this.state.toFilter} customer="customer" />
                 <PacketLoss filter={this.state.toFilter} customer="customer" />
               </Row>
-              <Row>
-                <ApplicationDetails />
-              </Row>
-
-
             </div>
           </div>
         </div>
