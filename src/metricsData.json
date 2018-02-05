@@ -20,8 +20,8 @@
         "longitude": 76.9558,
         "linkedWith": [
           {
-            "latitude": 23,
-            "longitude": -82
+            "latitude": 42.661232,
+            "longitude": -78.745193
           },
           {
             "latitude": 48.8567,
@@ -391,8 +391,8 @@
         "longitude": 2.3510,
         "linkedWith": [
           {
-            "latitude": 23,
-            "longitude": -82
+            "latitude": 42.661232,
+            "longitude": -78.745193
           },
           {
             "latitude": 11.0168,
@@ -490,15 +490,15 @@
       },
       {
         "id": 3,
-        "name": "Havana",
+        "name": "Boston",
         "app_route_policy": false,
         "app_route_change": true,
         "no_app_route": false,
         "bandwidth": 10.7,
         "managed_CPE": 4,
         "sitesgroup": "International sites",
-        "latitude": 23,
-        "longitude": -82,
+        "latitude": 42.661232,
+        "longitude": -78.745193,
         "linkedWith": [
           {
             "latitude": 48.8567,
