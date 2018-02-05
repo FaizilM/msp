@@ -195,6 +195,7 @@ class EventDetails extends React.Component {
       "Poll Bit",
       "Final Bit",
       "Multiplier",
+      "Length",
       "My Discr",
       "Your Discr",
       "Min tx interval",

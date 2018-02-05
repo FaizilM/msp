@@ -11,7 +11,8 @@ import jsonQuery from 'json-query';
 
 let packetLossData = (filter, user) => {
   let metrics = [];
-
+  console.log("filter packet", filter);
+  
   if (userConstants.ROLE_ADMIN == user.role) {
     metrics = metricsData;
   } else if (user.role == userConstants.ROLE_USER) {
