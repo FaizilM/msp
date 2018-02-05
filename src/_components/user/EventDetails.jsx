@@ -122,12 +122,16 @@ class EventDetails extends React.Component {
       "source_ip",
       "destination_ip",
       "link",
+      "time",
       "utilization",
       "packet_loss",
       "jitter",
       "latency",
+      "SLA_latency",
+      "policy",
       "alternate_path",
-      "link_taken"
+      "link_taken",
+      "protocol",
 
 
     ];
@@ -210,36 +214,59 @@ class EventDetails extends React.Component {
       "Source IP",
       "Destination IP",
       "Link",
+      "Time",
       "Utilization (%)",
       "Packet Loss (%)",
       "Jitter (ms)",
       "Latency (ms)",
+      "SLA Latency",
+      "Policy",
       "Alternate Path",
-      "Link Taken"
+      "Link Taken",
+      "Protocol"
 
     ];
 
     let user = this.props.authentication.user;
     let eventDetails = getEventDetails(user, this.props.match.params.route_type);
     let eventHeaderData = [];
-    let rowEventData = [];
+    let rowEventData1 = [];
     let index = 0;
+    let rowEventData2 = [];
     let routeHeaderData = [];
     let rowRouteData = [];
     let routeData = [];
     let routeDetails = [];
+    let routeDetails1 = [];
     for (let index = 0; index < routeDetailsCol.length; index++) {
-      console.log("index   +++  " , index)
+
+      if(index < 15) {
       routeDetails.push(<tr key={routeDetailsCol[index]}>
 
-      <td style={{ "fontWeight": "bold" }}>{routeDetailsHead[index]}</td>
-      <td >{eventDetails[2][0][routeDetailsCol[index]]}</td>
-      </tr>);
+          <td style={{ "fontWeight": "bold" }}>{routeDetailsHead[index]}</td>
+          <td >{eventDetails[2][0][routeDetailsCol[index]]}</td>
+          </tr>);
+      } else {
+      routeDetails1.push(<tr key={routeDetailsCol[index]}>
+
+          <td style={{ "fontWeight": "bold" }}>{routeDetailsHead[index]}</td>
+          <td >{eventDetails[2][0][routeDetailsCol[index]]}</td>
+          </tr>);
+      }
+
     }
 
-    for (let index = 0; index < tHead.length; index++) {
-      rowEventData.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);
+    for (let index = 0; index < col.length; index++) {
+
+      if(index < 8) {
+          rowEventData1.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);
+      } else {
+          rowEventData2.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);
+      }
+
     }
+
+
 
 
     return (
@@ -260,35 +287,65 @@ class EventDetails extends React.Component {
               </div>
             </div>
             <Row>
-              <Col xs="12" sm="12" md="6" lg="6" xl="6">
+              <Col xs="12" sm="12" md="12" lg="12" xl="12">
                 <div className="panel-body">
                   <div className="list-group">
-                    <table className="table table-striped table-bordered view_page_table">
-                      <tbody>
-                        {rowEventData}
-                      </tbody>
-                    </table>
+                    <Col xs="6" sm="6" md="6" lg="6" xl="6">
+                      <table className="table table-striped table-bordered view_page_table">
+                        <tbody>
+                          {rowEventData1}
+                        </tbody>
+                      </table>
+                    </Col>
+                    <Col xs="6" sm="6" md="6" lg="6" xl="6">
+                        <table className="table table-striped table-bordered view_page_table">
+                          <tbody>
+                            {rowEventData2}
+                          </tbody>
+                        </table>
+                    </Col>
                     {(eventDetails && eventDetails.length > 1 && eventDetails[0].is_no_route) ? <Link to="/trouble_shoot">
                       <button className="btn btn-danger btn-lg pull-right" type="button">TroubleShoot</button>
                     </Link> : ""}
                   </div>
                 </div>
               </Col>
-              <Col xs="12" sm="6" md="6" lg="6" xl="6">
-                <div className="panel-body">
-                  <div className="list-group">
-                    <table className="table table-striped table-bordered view_page_table">
-                      <tbody>
-                        {routeDetails}
+              </Row>
 
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </Col>
-            </Row>
+
           </div>
         </Col>
+
+
+      <Col xs="12" sm="12" md="12" lg="12" xl="12">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <i className=""></i>
+            <h3>Session Details</h3>
+          </div>
+          <div className="panel-body">
+            <div className="list-group">
+            <div className="list-group">
+              <Col xs="6" sm="6" md="6" lg="6" xl="6">
+                  <table className="table table-striped table-bordered view_page_table">
+                    <tbody>
+                        {routeDetails}
+                    </tbody>
+                  </table>
+                </Col>
+                <Col xs="6" sm="6" md="6" lg="6" xl="6">
+                    <table className="table table-striped table-bordered view_page_table">
+                      <tbody>
+                          {routeDetails1}
+                      </tbody>
+                    </table>
+                  </Col>
+              </div>
+              </div>
+            </div>
+          </div>
+        </Col>
+
       </Row>
     );
 
