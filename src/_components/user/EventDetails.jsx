@@ -240,7 +240,7 @@ class EventDetails extends React.Component {
     let routeDetails1 = [];
     for (let index = 0; index < routeDetailsCol.length; index++) {
 
-      if(index < 15) {
+      if(index < 16) {
       routeDetails.push(<tr key={routeDetailsCol[index]}>
 
           <td style={{ "fontWeight": "bold" }}>{routeDetailsHead[index]}</td>
