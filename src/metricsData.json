@@ -131,7 +131,7 @@
                           "jitter": 5,
                           "packet_loss": 10,
                           "status": "UP",
-                          "alternate_path":"None",
+                          "alternate_path": "None",
                           "link_taken": "MPLS-VES"
                         },
                         {
@@ -147,7 +147,7 @@
                           "jitter": 15,
                           "packet_loss": 30,
                           "status": "DOWN",
-                          "alternate_path":"None",
+                          "alternate_path": "None",
                           "link_taken": "None"
                         }
                       ]
@@ -275,28 +275,17 @@
             "received_multiplier": 3,
             "holdown": "600(0)",
             "hello": "200(23543)",
-            "rx_count": 13877,
-            "rx_interval": "200/448/335",
-            "rx_last": 64,
-            "tx_count": 23546,
-            "tx_interval": "152/248/196",
-            "tx_last": 32,
+            "rx_count": "13877, Rx Interval (ms) min/max/avg: 200/448/335 last: 64 ms ago",
+            "tx_count": "23546, Tx Interval (ms) min/max/avg: 152/248/196 last: 32 ms ago",
             "registered_protocols": "ISIS",
             "uptime": "01:17:09",
-            "last_packet": "",
-            "version": 0,
-            "diagnostic": 0,
-            "bit": 1,
-            "demand_bit":0,
-            "poll_bit":0,
-            "final_bit":0,
-            "multiplier_bit":0,
-            "length": 24,
-            "my_discr": 8,
-            "your_discr": 1,
-            "min_tx_interval": 50000,
-            "min_rx_interval": 1000,
-            "min_echo_interval":0
+            "last_packet": " version: 0 - diagnostic: 0",
+            "bit": "1 - Demand Bit :0",
+            "poll_bit": " 0 - Final Bit:0",
+            "multiplier_bit": " 3 - length: 24",
+            "my_discr": "8 - your discr: 1",
+            "min_tx_interval": "50000 - Min rx interval: 1000",
+            "min_echo_interval": 0
           }
         ],
         "application": [

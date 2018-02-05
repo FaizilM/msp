@@ -34,6 +34,8 @@ let getEventDetails = (user, routeType) => {
 
         for (let site = 0; site < 1; site++) {
           let devices = sites[site].devices;
+          let routeDetails = sites[site].route_details;
+          
           let routeData = undefined;
           let deviceData = {};
           for (let device = 0; device < devices.length; device++) {
@@ -73,6 +75,21 @@ let getEventDetails = (user, routeType) => {
                   deviceRouteData = {};
                   for (let [key, value] of Object.entries(routeDataValue[index])) {
                     deviceRouteData[key] = value;
+                    
+                    if ((key == "utilization" || key == "latency"
+                      || key == "jitter" || key == "packet_loss") && deviceData[key] != undefined) {
+                        console.log("def", key, value);
+                        if (value > 0) {
+                        deviceData[key] = (deviceData[key] + value);
+                      } else {
+                        deviceData[key] = value;
+                      }
+                    } else if((key == "utilization" || key == "latency"
+                    || key == "jitter" || key == "packet_loss") && deviceData[key] == undefined) {
+                     console.log("undef", key, value);
+                     
+                      deviceData[key] = value;
+                    }
                   }
                   arrayDeviceRoute.push(deviceRouteData);
                 }
@@ -81,8 +98,12 @@ let getEventDetails = (user, routeType) => {
               }
             }
             let device = [];
+           
             device.push(deviceData);
             device.push(arrayDeviceRoute);
+            device.push(routeDetails);
+           
+
             return device;
           }
 
@@ -105,11 +126,63 @@ class EventDetails extends React.Component {
       "source_ip",
       "destination_ip",
       "link",
-      "octets",
-      "packets"
+      "utilization",
+      "packet_loss",
+      "jitter",
+      "latency"
+
 
     ];
-
+    let routeDetailsCol =  [
+      "CPE-VES",
+      "local_diag",
+      "demand_mode",
+      "poll_mode",
+      "min_txInt",
+      "min_rxInt",
+      "transmit_multiplier",
+      "received_min_rxInt",
+      "received_multiplier",
+      "holdown",
+      "hello",
+      "rx_count",
+      "tx_count",
+      "registered_protocols",
+      "uptime",
+      "last_packet",
+      "bit",
+      "poll_bit",
+      "multiplier_bit",
+      "my_discr",
+      "min_tx_interval",
+      "min_echo_interval"
+      
+    ];
+    let routeDetailsHead =  [
+      "CPE-VES",
+      "Local Diag",
+      "Demand Mode",
+      "Poll Bit",
+      "MinTxInt",
+      "MinRxInt",
+      "Multiplier",
+      "Received MinRxInt",
+      "Received Multiplier",
+      "Holdown (hits)",
+      "Hello (hits)",
+      "Rx Count",
+      "Tx Count",
+      "Registered Protocols",
+      "Uptime",
+      "Last Packet",
+      "I Hear You bit",
+      "Poll Bit",
+      "Multiplier",
+      "My Discr",
+      "Min tx interval",
+      "Min echo interval"
+    
+  ];
     let tHead = [
 
       "Source Site",
@@ -117,8 +190,10 @@ class EventDetails extends React.Component {
       "Source IP",
       "Destination IP",
       "Link",
-      "Octets (K)",
-      "Packet (K)"
+      "Utilization (%)",
+      "Packet Loss (%)",
+      "Jitter (ms)",
+      "Latency (ms)"
 
     ];
 
@@ -165,9 +240,14 @@ class EventDetails extends React.Component {
     let routeHeaderData = [];
     let rowRouteData = [];
     let routeData = [];
+    let routeDetails = [];
+    console.log("routeDetails data",eventDetails[2][0]);
+    for (let index = 0; index < col.length; index++) {
+      routeDetails.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{routeDetailsHead[index]}</td><td >{eventDetails[2][0][routeDetailsCol[index]]}</td></tr>);
+    }
 
     for (let index = 0; index < col.length; index++) {
-      rowEventData.push(<tr key={col[index]}><th>{tHead[index]}</th><td >{eventDetails[0][col[index]]}</td></tr>);
+      rowEventData.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);
     }
     for (let index = 0; index < routeCol.length; index++) {
       routeHeaderData.push(<th className="appdetailsTH" key={routeCol[index]}>{routeHead[index]}</th>)
@@ -178,10 +258,10 @@ class EventDetails extends React.Component {
       rowRouteData = [];
 
       for (let index = 0; index < routeCol.length; index++) {
-        if(eventDetails[1][i][routeCol[index]] == "DOWN") {
-          rowRouteData.push(<td style= {{"color":color.ORANGE_COLOR}} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
-        } else  if(eventDetails[1][i][routeCol[index]] == "UP"){
-          rowRouteData.push(<td style= {{"color":color.GREEN_COLOR}} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
+        if (eventDetails[1][i][routeCol[index]] == "DOWN") {
+          rowRouteData.push(<td style={{ "color": color.ORANGE_COLOR }} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
+        } else if (eventDetails[1][i][routeCol[index]] == "UP") {
+          rowRouteData.push(<td style={{ "color": color.GREEN_COLOR }} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
         } else {
           rowRouteData.push(<td key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
         }
@@ -193,45 +273,53 @@ class EventDetails extends React.Component {
       <Row>
         <Col xs="12" sm="12" md="12" lg="12" xl="12">
           <div className="panel panel-default">
-              <i className=""></i>
-              <div className="panel-heading">
+            <i className=""></i>
+            <div className="panel-heading">
               <div>
-                  <div className="inline_block">
-                     <h3>Event Details</h3>
-                  </div>
-                   <div className="inline_block pull-right">
-                   <Link to="/customer">
-                      <button className="btn btn-primary" type="button">Back</button>
-                    </Link>
-                  </div>
+                <div className="inline_block">
+                  <h3>Event Details</h3>
                 </div>
+                <div className="inline_block pull-right">
+                  <Link to="/customer">
+                    <button className="btn btn-primary" type="button">Back</button>
+                  </Link>
                 </div>
-              <div className="panel-body">
-                <div className="list-group">
-                  <table className="table table-striped table-bordered view_page_table">
-                    <tbody>
-                      {rowEventData}
-                    </tbody>
-                  </table>
-                  <Link to="/trouble_shoot">
-                     <button className="btn btn-danger btn-lg pull-right" type="button">TroubleShoot</button>
-                   </Link>
-                  <Tabs customStyle={customStyle}>
-                    <TabList>
-                      <Tab>Route Change</Tab>
-                    </TabList>
-                    <PanelList>
-                      <Panel>
-                        <Row>
-                          <table className="table table-striped table-bordered">
-                            <tbody>
-                              {routeData}
-                            </tbody>
-                          </table>
-                        </Row>
-                      </Panel>
-                    </PanelList>
-                  </Tabs>
+              </div>
+            </div>
+            <div className="panel-body">
+              <div className="list-group">
+                <table className="table table-striped table-bordered view_page_table">
+                  <tbody>
+                    {rowEventData}
+                    
+                  </tbody>
+                </table>
+                <table className="table table-striped table-bordered view_page_table">
+                  <tbody>
+                    {routeDetails}
+                    
+                  </tbody>
+                </table>
+                <Link to="/trouble_shoot">
+                  <button className="btn btn-danger btn-lg pull-right" type="button">TroubleShoot</button>
+                </Link>
+                <Tabs customStyle={customStyle}>
+                  <TabList>
+                    <Tab>Route Change</Tab>
+                  </TabList>
+                  <PanelList>
+                    <Panel>
+                      <Row>
+                        <table className="table table-striped table-bordered">
+                          <tbody>
+                            {routeData}
+                            
+                          </tbody>
+                        </table>
+                      </Row>
+                    </Panel>
+                  </PanelList>
+                </Tabs>
               </div>
             </div>
           </div>
