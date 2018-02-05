@@ -25,35 +25,37 @@ class UserDashboard extends React.Component {
     const { user, users } = this.props;
 
     return (
-          <Tabs customStyle={customStyle}>
-            <TabList>
-              <Tab>Dashboard</Tab>
-              <Tab>Filter</Tab>
-            </TabList>
-            <PanelList>
-              <Panel>
-                <Row>
-                  <Map />
-                </Row>
-                <Row>
-                  <Sites />
-                </Row>
-                <Row>
-                  <JitterRatio />
-                  <SiteAvailability />
-                </Row>
-                <Row>
-                  <LatencyRatio />
-                  <PacketLoss />
-                </Row>
-              </Panel>
-              <Panel>
-                <Row>
-                  <Filter />
-                </Row>
-              </Panel>
-            </PanelList>
-          </Tabs>
+      <Tabs customStyle={customStyle}>
+        <TabList>
+          <Tab>Dashboard</Tab>
+          <Tab>Filter</Tab>
+        </TabList>
+        <PanelList>
+          <Panel>
+            <Row>
+              <Map />
+            </Row>
+            <Row>
+              <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                <Sites />
+              </Col>
+            </Row>
+            <Row>
+              <JitterRatio />
+              <SiteAvailability />
+            </Row>
+            <Row>
+              <LatencyRatio />
+              <PacketLoss />
+            </Row>
+          </Panel>
+          <Panel>
+            <Row>
+              <Filter />
+            </Row>
+          </Panel>
+        </PanelList>
+      </Tabs>
     );
   }
 }
