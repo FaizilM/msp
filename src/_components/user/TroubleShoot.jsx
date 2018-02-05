@@ -231,7 +231,7 @@ class TroubleShoot extends React.Component {
                         </div>
                     </div>
                 </Col>
-              
+
                 <Col xs="12" sm="12" md="12" lg="12" xl="12">
                     <div className="panel panel-default">
                         <i className=""></i>
@@ -268,7 +268,7 @@ class TroubleShoot extends React.Component {
                         </div>
                     </div>
                 </Col>
-               
+
             </Row>
         );
     }
