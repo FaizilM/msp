@@ -118,9 +118,11 @@ class Filter extends Component {
     let linkkey = [];
     let metrics = [];
     let siteName;
-
+    
+    
     if (selectedSite != undefined) {
       siteName = selectedSite.target.value;
+      console.log("link", selectedSite.target.value);
       metrics.push(metricsData[0]);
     } else {
       metrics.push(metricsData[0]);
@@ -157,9 +159,10 @@ class Filter extends Component {
     let applicationkey = [];
     let metrics = [];
     let siteName;
-
     if (selectedSite != undefined) {
       siteName = selectedSite.target.value;
+    console.log("link",selectedSite.target.value);
+      
       metrics.push(metricsData[0]);
     } else {
       metrics.push(metricsData[0]);
@@ -192,9 +195,9 @@ class Filter extends Component {
   }
 
   changeData(selectedSite) {
+    this.setState({ siteName: selectedSite.target.value });
     this.linksData(selectedSite);
     this.applicationsData(selectedSite);
-    this.setState({ siteName: selectedSite.target.value });
   }
 
   changeLink(selectedSite) {
@@ -212,8 +215,8 @@ class Filter extends Component {
   handlePrint() {
     let filter = {
       "duration": this.state.duration,
-      "siteName": this.state.siteName,
       "siteGroup": this.state.siteGroup,
+      "siteName": this.state.siteName,
       "linkName": this.state.linkName,
       "applicationName": this.state.applicationName
     }
@@ -223,6 +226,7 @@ class Filter extends Component {
   }
 
   render() {
+    console.log("filter page", this.state.duration, this.state.siteGroup,this.state.siteName,this.state.linkName, this.state.applicationName );
 
     return (
       <Col xs="12" sm="12" md="12" lg="12" xl="12">
@@ -275,12 +279,9 @@ class Filter extends Component {
                       <option>All Applications</option>
                       {this.state.all_application}
                     </select>
-                  
+
                   </div>
                 </Col>
-                {/* <Row>
-                <img src ="src/assets/images/topology-final.png"/>
-                </Row> */}
                 <Col lg="2">
                   <button className="btn btn-primary btn-block"
                     onClick={this.handlePrint}> Filter </button>
