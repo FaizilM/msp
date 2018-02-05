@@ -90,6 +90,30 @@ let getEventDetails = (user) => {
 }
 
 
+
+
+let avgCol = [
+
+    "component_name",
+    "src_ip",
+    "dst_ip",
+    "utilization",
+    "jitter",
+    "packet_loss"
+    
+
+];
+
+let avgHead = [
+
+    "Component Name",
+    "Source IP",
+    "Destination IP",    
+    "Utilization (%)",
+    "Jitter (ms)",
+    "Packet Loss (%)",
+];
+
 let routeCol = [
 
     "component_name",
@@ -98,11 +122,9 @@ let routeCol = [
     "timestamp",
     "protocol",
     "policy",
-    "SLA_latency",
-    "utilization",
-    "latency",
-    "jitter",
-    "packet_loss",
+    // "utilization",
+    // "jitter",
+    // "packet_loss",
     "status",
     "mpls_label",
     "TTL",
@@ -121,11 +143,9 @@ let routeHead = [
     "Timestamp",
     "Protocol",
     "Policy",
-    "SLA Latency (ms)",
-    "Utilization (%)",
-    "Latency (ms)",
-    "Jitter (ms)",
-    "Packet Loss (%)",
+    // "Utilization (%)",
+    // "Jitter (ms)",
+    // "Packet Loss (%)",
     "Status",
     "MPLS Label",
     "TTL",
@@ -145,6 +165,35 @@ class TroubleShoot extends React.Component {
         let routeHeaderData = [];
         let rowRouteData = [];
         let routeData = [];
+        let avgData =[];
+
+        /**
+         * Table for average data , for route details.
+         */
+        for (let index = 0; index < avgCol.length; index++) {
+            routeHeaderData.push(<th className="appdetailsTH" key={avgCol[index]}>{avgHead[index]}</th>)
+        }
+        avgData.push(<tr key={0}>{routeHeaderData}</tr>)
+
+        for (let i = 0; i < eventDetails[0].length; i++) {
+            rowRouteData = [];
+
+            for (let index = 0; index < avgCol.length; index++) {
+                if (eventDetails[0][i][avgCol[index]] == "DOWN") {
+                    rowRouteData.push(<td style={{ "color": color.ORANGE_COLOR }} key={index}>{eventDetails[0][i][avgCol[index]]}</td>);
+                } else if (eventDetails[0][i][avgCol[index]] == "UP") {
+                    rowRouteData.push(<td style={{ "color": color.GREEN_COLOR }} key={index}>{eventDetails[0][i][avgCol[index]]}</td>);
+                } else {
+                    rowRouteData.push(<td key={index}>{eventDetails[0][i][avgCol[index]]}</td>);
+                }
+            }
+            avgData.push(<tr key={i + 1}>{rowRouteData}</tr>);
+        }
+
+        //To reset for the bnext table
+        routeHeaderData = [];
+        rowRouteData = [];
+
         for (let index = 0; index < routeCol.length; index++) {
             routeHeaderData.push(<th className="appdetailsTH" key={routeCol[index]}>{routeHead[index]}</th>)
         }
@@ -170,8 +219,19 @@ class TroubleShoot extends React.Component {
                     <div className="panel panel-default">
                         <i className=""></i>
                         <div className="panel-heading">
-                            <h3>Touble Shoot</h3>
+                            <h3>Route Details</h3>
                         </div>
+
+                        <div className="panel-body">
+                            <div className="list-group">
+                                <table className="table table-striped table-bordered">
+                                    <tbody>
+                                        {avgData}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                         <div className="panel-body">
                             <div className="list-group">
                                 <table className="table table-striped table-bordered">

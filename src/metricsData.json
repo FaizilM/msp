@@ -143,8 +143,8 @@
                         },
                         {
                           "component_name": "R2",
-                          "src_ip": "192.168.11.10",
-                          "dst_ip": "192.168.13.10",
+                          "src_ip": "192.168.13.10",
+                          "dst_ip": "192.168.14.10",
                           "timestamp": "15:32:34",
                           "protocol": "TCP",
                           "policy": "voip-policy",
