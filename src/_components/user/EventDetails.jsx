@@ -157,8 +157,10 @@ class EventDetails extends React.Component {
 
     ];
     let user = this.props.authentication.user;
-
     let eventDetails = getEventDetails(user, this.props.match.params.route_type);
+
+    console.log(eventDetails)
+
     let eventHeaderData = [];
     let rowEventData = [];
     let index = 0;
@@ -213,9 +215,10 @@ class EventDetails extends React.Component {
                       {rowEventData}
                     </tbody>
                   </table>
-                  <Link to="/trouble_shoot">
+                  { (eventDetails && eventDetails.length > 1 && eventDetails[0].is_no_route) ? <Link to="/trouble_shoot">
                      <button className="btn btn-danger btn-lg pull-right" type="button">TroubleShoot</button>
-                   </Link>
+                   </Link> : ""}
+
                   <Tabs customStyle={customStyle}>
                     <TabList>
                       <Tab>Route Change</Tab>
