@@ -62,7 +62,6 @@ let getEventDetails = (user) => {
                                 }
                             }
                         }
-                        console.log("rouete ", routeData);
 
                         let deviceRouteData = {};
                         let arrayDeviceRoute = [];
