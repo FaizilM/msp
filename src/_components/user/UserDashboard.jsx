@@ -46,9 +46,6 @@ class UserDashboard extends React.Component {
                   <LatencyRatio />
                   <PacketLoss />
                 </Row>
-                <Row>
-                  <BussinessImpactEvent />
-                </Row>
               </Panel>
               <Panel>
                 <Row>
