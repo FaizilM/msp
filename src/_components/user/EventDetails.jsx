@@ -122,12 +122,16 @@ class EventDetails extends React.Component {
       "source_ip",
       "destination_ip",
       "link",
+      "time",
       "utilization",
       "packet_loss",
       "jitter",
       "latency",
+      "SLA_latency",
+      "policy",
       "alternate_path",
-      "link_taken"
+      "link_taken",
+      "protocol",
 
 
     ];
@@ -210,12 +214,16 @@ class EventDetails extends React.Component {
       "Source IP",
       "Destination IP",
       "Link",
+      "Time",
       "Utilization (%)",
       "Packet Loss (%)",
       "Jitter (ms)",
       "Latency (ms)",
+      "SLA Latency",
+      "Policy",
       "Alternate Path",
-      "Link Taken"
+      "Link Taken",
+      "Protocol"
 
     ];
 
@@ -250,7 +258,7 @@ class EventDetails extends React.Component {
 
     for (let index = 0; index < col.length; index++) {
 
-      if(index < 6) {
+      if(index < 8) {
           rowEventData1.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);
       } else {
           rowEventData2.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);

@@ -72,6 +72,10 @@
                       "is_no_route": false,
                       "alternate_path": "Best Effort",
                       "link_taken": "Internet",
+                      "protocol":"TCP",
+                      "time":"15:32:33",
+                      "SLA_latency":"30",
+                      "policy": "voip-policy",
                       "route_change": [
                         {
                           "component_name": "R1",
@@ -121,6 +125,10 @@
                       "is_no_route": true,
                       "alternate_path": "None",
                       "link_taken": "None",
+                      "protocol":"TCP",
+                      "time":"15:32:33",
+                      "SLA_latency":"30",
+                      "policy": "voip-policy",
                       "route_change": [
                         {
                           "component_name": "R1",
