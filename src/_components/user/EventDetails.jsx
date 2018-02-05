@@ -213,6 +213,9 @@ class EventDetails extends React.Component {
                       {rowEventData}
                     </tbody>
                   </table>
+                  <Link to="/trouble_shoot">
+                     <button className="btn btn-danger btn-lg pull-right" type="button">TroubleShoot</button>
+                   </Link>
                   <Tabs customStyle={customStyle}>
                     <TabList>
                       <Tab>Route Change</Tab>

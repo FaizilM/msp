@@ -13,7 +13,7 @@ let inventoryData = () => {
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
     managedsites =managedsites + metricsDataValue.sites.length;
     let sites = metricsDataValue.sites;
-    
+
     for (let site = 0; site < sites.length; site++) {
       links += sites[site].links.length;
       managedCPE += sites[site].managed_CPE;

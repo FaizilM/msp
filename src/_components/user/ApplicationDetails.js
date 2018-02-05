@@ -191,9 +191,9 @@ class ApplicationDetails extends React.Component {
                         rowEventData.push(<td key={eventCol[index]}>{applicationDetails[applicationIndex][eventCol[index]]}</td>);
                     }
                 }
-                
+
                 rowEventData.push(<td key={"button"}>
-                    
+
 
                     <Link to={`/event_details/${routeEvent}`}>
                         <button className="btn btn-primary" type="button">
@@ -217,7 +217,7 @@ class ApplicationDetails extends React.Component {
                 <div className="panel panel-default">
                     <div className="panel-heading">
                         <i className=""></i>
-                        <h3> Application Class Metrics </h3>
+                        <h3> Application Details </h3>
                     </div>
                     <div className="panel-body">
                         <div className="list-group">

@@ -24,7 +24,7 @@ let customerClassMetrics = (filter, user) => {
         }).value;
         metrics.push(data["customers"]);
       }
-      
+
     if (metricsData != null && metricsData != undefined) {
 
         for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics)) {
@@ -186,12 +186,11 @@ class ApplicationClassMetrics extends Component {
 
 function mapStateToProps(state) {
     const { authentication } = state;
-  
+
     return {
       authentication
     };
   }
-  
+
   const connectedApplicationClassMetrics = connect(mapStateToProps)(ApplicationClassMetrics);
   export { connectedApplicationClassMetrics as ApplicationClassMetrics };
-  
