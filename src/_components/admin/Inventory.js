@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../../assets/css/App.css';
 import metricsData from '../../metricsData.json';
+import { Container, Row, Col, select } from 'reactstrap';
+
 
 let inventoryData = () => {
   let inventory = {};
@@ -11,7 +13,7 @@ let inventoryData = () => {
   let applicationPath = 0;
   let availability = [0, 0, 0];
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData)) {
-    managedsites =managedsites + metricsDataValue.sites.length;
+    managedsites = managedsites + metricsDataValue.sites.length;
     let sites = metricsDataValue.sites;
 
     for (let site = 0; site < sites.length; site++) {
@@ -54,16 +56,26 @@ class Inventory extends Component {
       tableData.push(<tr key={k}><td>{displayData[index++]}</td><td>{value}</td></tr>);
     }
     return (
-
-      <div>
-        <div className="table-responsive">
-          <table className="inventory table">
-            <tbody>
-              {tableData}
-            </tbody>
-          </table>
+      <Col xs="12" sm="12" md="6" lg="6" xl="6">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <i className=""></i>
+            <h3>Inventory</h3>
+          </div>
+          <div className="panel-body">
+            <div className="list-group">
+              <div className="table-responsive">
+                <table className="inventory table">
+                  <tbody>
+                    {tableData}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </Col>
+
     );
   }
 }

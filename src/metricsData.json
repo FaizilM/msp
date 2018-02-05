@@ -10,8 +10,8 @@
       {
         "id": 1,
         "name": "India",
-        "app_route_policy": false,
-        "app_route_change": true,
+        "app_route_policy": true,
+        "app_route_change": false,
         "no_app_route": false,
         "bandwidth": 10.7,
         "managed_CPE": 4,
@@ -70,9 +70,11 @@
                       "octets": 480,
                       "packets": 160,
                       "is_no_route": false,
+                      "alternate_path": "Best Effort",
+                      "link_taken": "Internet",
                       "route_change": [
                         {
-                          "component_name":"R1",
+                          "component_name": "R1",
                           "src_ip": "192.168.11.10",
                           "dst_ip": "192.168.13.10",
                           "timestamp": "15:32:33",
@@ -86,7 +88,7 @@
                           "status": "UP"
                         },
                         {
-                          "component_name":"R2",
+                          "component_name": "R2",
                           "src_ip": "192.168.13.10",
                           "dst_ip": "192.168.12.10",
                           "timestamp": "15:32:40",
@@ -117,9 +119,11 @@
                       "octets": 580,
                       "packets": 110,
                       "is_no_route": true,
+                      "alternate_path": "None",
+                      "link_taken": "None",
                       "route_change": [
                         {
-                          "component_name":"R1",
+                          "component_name": "R1",
                           "src_ip": "192.168.11.10",
                           "dst_ip": "192.168.13.10",
                           "timestamp": "15:32:33",
@@ -130,10 +134,15 @@
                           "latency": 20,
                           "jitter": 5,
                           "packet_loss": 10,
-                          "status": "UP"
+                          "status": "UP",
+                          "mpls_label": 100048,
+                          "TTL": 1,
+                          "label_stack": 1,
+                          "latency2": 0.861,
+                          "latency3": 0.761
                         },
                         {
-                          "component_name":"R2",
+                          "component_name": "R2",
                           "src_ip": "192.168.11.10",
                           "dst_ip": "192.168.13.10",
                           "timestamp": "15:32:34",
@@ -144,7 +153,12 @@
                           "latency": 10,
                           "jitter": 15,
                           "packet_loss": 30,
-                          "status": "DOWN"
+                          "status": "DOWN",
+                          "mpls_label": 100016,
+                          "TTL": 1,
+                          "label_stack": 1,
+                          "latency2": 0.861,
+                          "latency3": 0.761
                         }
                       ]
                     },
@@ -256,6 +270,43 @@
                 ]
               }
             ]
+          }
+        ],
+        "route_details": [
+          {
+            "CPE-VES": "BFD Neighbor OurAddr NeighAddr LD/RD RH Holdown(mult) State Int 172.16.10.1 172.16.10.2 1/8 1 536 (3 ) Up Fa0/1",
+            "local_diag": 0,
+            "demand_mode": 0,
+            "poll_mode": 0,
+            "min_txInt": 200000,
+            "min_rxInt": 200000,
+            "transmit_multiplier": 5,
+            "received_min_rxInt": 1000,
+            "received_multiplier": 3,
+            "holdown": "600(0)",
+            "hello": "200(23543)",
+            "rx_count": 13877,
+            "rx_interval": "200/448/335",
+            "rx_last": "64 ms ago",
+            "tx_count": 23546,
+            "tx_interval": "152/248/196",
+            "tx_last": "32 ms ago",
+            "registered_protocols": "ISIS",
+            "uptime": "01:17:09",
+            "last_packet": "",
+            "version": 0,
+            "diagnostic": 0,
+            "bit": 1,
+            "demand_bit": 0,
+            "poll_bit": 0,
+            "final_bit": 0,
+            "multiplier_bit": 3,
+            "length": 24,
+            "my_discr": 8,
+            "your_discr": 1,
+            "min_tx_interval": 50000,
+            "min_rx_interval": 1000,
+            "min_echo_interval": 0
           }
         ],
         "application": [

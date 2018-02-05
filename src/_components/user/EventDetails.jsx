@@ -34,6 +34,8 @@ let getEventDetails = (user, routeType) => {
 
         for (let site = 0; site < 1; site++) {
           let devices = sites[site].devices;
+          let routeDetails = sites[site].route_details;
+
           let routeData = undefined;
           let deviceData = {};
           for (let device = 0; device < devices.length; device++) {
@@ -64,8 +66,6 @@ let getEventDetails = (user, routeType) => {
             }
             let deviceRouteData = {};
             let arrayDeviceRoute = [];
-            let route = "is_no_route";
-            console.log("route data", routeData);
 
             for (let [routeDataKey, routeDataValue] of Object.entries(routeData)) {
               if (routeDataKey == "route_change") {
@@ -73,6 +73,19 @@ let getEventDetails = (user, routeType) => {
                   deviceRouteData = {};
                   for (let [key, value] of Object.entries(routeDataValue[index])) {
                     deviceRouteData[key] = value;
+
+                    if ((key == "utilization" || key == "latency"
+                      || key == "jitter" || key == "packet_loss") && deviceData[key] != undefined) {
+                      if (value > 0) {
+                        deviceData[key] = (deviceData[key] + value);
+                      } else {
+                        deviceData[key] = value;
+                      }
+                    } else if ((key == "utilization" || key == "latency"
+                      || key == "jitter" || key == "packet_loss") && deviceData[key] == undefined) {
+
+                      deviceData[key] = value;
+                    }
                   }
                   arrayDeviceRoute.push(deviceRouteData);
                 }
@@ -81,8 +94,12 @@ let getEventDetails = (user, routeType) => {
               }
             }
             let device = [];
+
             device.push(deviceData);
             device.push(arrayDeviceRoute);
+            device.push(routeDetails);
+
+
             return device;
           }
 
@@ -105,11 +122,86 @@ class EventDetails extends React.Component {
       "source_ip",
       "destination_ip",
       "link",
-      "octets",
-      "packets"
+      "utilization",
+      "packet_loss",
+      "jitter",
+      "latency",
+      "alternate_path",
+      "link_taken"
+
 
     ];
+    let routeDetailsCol = [
+      "CPE-VES",
+      "local_diag",
+      "demand_mode",
+      "poll_mode",
+      "min_txInt",
+      "min_rxInt",
+      "transmit_multiplier",
+      "received_min_rxInt",
+      "received_multiplier",
+      "holdown",
+      "hello",
+      "rx_count",
+      "rx_interval",
+      "rx_last",
+      "tx_count",
+      "tx_interval",
+      "tx_last",
+      "registered_protocols",
+      "uptime",
+      "last_packet",
+      "version",
+      "diagnostic",
+      "bit",
+      "demand_bit",
+      "poll_bit",
+      "final_bit",
+      "multiplier_bit",
+      "length",
+      "my_discr",
+      "your_discr",
+      "min_tx_interval",
+      "min_rx_interval",
+      "min_echo_interval"
 
+    ];
+    let routeDetailsHead = [
+      "CPE-VES",
+      "Local Diag",
+      "Demand Mode",
+      "Poll Bit",
+      "MinTxInt",
+      "MinRxInt",
+      "Multiplier",
+      "Received MinRxInt",
+      "Received Multiplier",
+      "Holdown (hits)",
+      "Hello (hits)",
+      "Rx Count",
+      "Rx Interval (ms) min/max/avg",
+      "Rx last",
+      "Tx Interval (ms) min/max/avg",
+      "Tx last",
+      "Tx Count",
+      "Registered Protocols",
+      "Uptime",
+      "Last Packet",
+      "Version",
+      "Diagnostic",
+      "I Hear You bit",
+      "Demand Bit",
+      "Poll Bit",
+      "Final Bit",
+      "Multiplier",
+      "My Discr",
+      "Your Discr",
+      "Min tx interval",
+      "Min rx interval",
+      "Min echo interval"
+
+    ];
     let tHead = [
 
       "Source Site",
@@ -117,126 +209,83 @@ class EventDetails extends React.Component {
       "Source IP",
       "Destination IP",
       "Link",
-      "Octets (K)",
-      "Packet (K)"
-
-    ];
-
-    let routeCol = [
-
-      "component_name",
-      "src_ip",
-      "dst_ip",
-      "timestamp",
-      "protocol",
-      "policy",
-      "SLA_latency",
-      "utilization",
-      "latency",
-      "jitter",
-      "packet_loss",
-      "status"
-
-    ];
-
-    let routeHead = [
-
-      "Component Name",
-      "Source IP",
-      "Destination IP",
-      "Timestamp",
-      "Protocol",
-      "Policy",
-      "SLA Latency (ms)",
       "Utilization (%)",
-      "Latency (ms)",
-      "Jitter (ms)",
       "Packet Loss (%)",
-      "Status"
-
+      "Jitter (ms)",
+      "Latency (ms)",
+      "Alternate Path",
+      "Link Taken"
 
     ];
+
     let user = this.props.authentication.user;
     let eventDetails = getEventDetails(user, this.props.match.params.route_type);
-
-    console.log(eventDetails)
-
     let eventHeaderData = [];
     let rowEventData = [];
     let index = 0;
     let routeHeaderData = [];
     let rowRouteData = [];
     let routeData = [];
+    let routeDetails = [];
+    for (let index = 0; index < routeDetailsCol.length; index++) {
+      console.log("index   +++  " , index)
+      routeDetails.push(<tr key={routeDetailsCol[index]}>
+
+      <td style={{ "fontWeight": "bold" }}>{routeDetailsHead[index]}</td>
+      <td >{eventDetails[2][0][routeDetailsCol[index]]}</td>
+      </tr>);
+    }
 
     for (let index = 0; index < col.length; index++) {
-      rowEventData.push(<tr key={col[index]}><th>{tHead[index]}</th><td >{eventDetails[0][col[index]]}</td></tr>);
+      rowEventData.push(<tr key={col[index]}><td style={{ "fontWeight": "bold" }}>{tHead[index]}</td><td >{eventDetails[0][col[index]]}</td></tr>);
     }
-    for (let index = 0; index < routeCol.length; index++) {
-      routeHeaderData.push(<th className="appdetailsTH" key={routeCol[index]}>{routeHead[index]}</th>)
-    }
-    routeData.push(<tr key={0}>{routeHeaderData}</tr>)
 
-    for (let i = 0; i < eventDetails[1].length; i++) {
-      rowRouteData = [];
-
-      for (let index = 0; index < routeCol.length; index++) {
-        if(eventDetails[1][i][routeCol[index]] == "DOWN") {
-          rowRouteData.push(<td style= {{"color":color.ORANGE_COLOR}} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
-        } else  if(eventDetails[1][i][routeCol[index]] == "UP"){
-          rowRouteData.push(<td style= {{"color":color.GREEN_COLOR}} key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
-        } else {
-          rowRouteData.push(<td key={index}>{eventDetails[1][i][routeCol[index]]}</td>);
-        }
-      }
-      routeData.push(<tr key={i + 1}>{rowRouteData}</tr>)
-    }
 
     return (
       <Row>
         <Col xs="12" sm="12" md="12" lg="12" xl="12">
           <div className="panel panel-default">
-              <i className=""></i>
-              <div className="panel-heading">
+            <i className=""></i>
+            <div className="panel-heading">
               <div>
-                  <div className="inline_block">
-                     <h3>Event Details</h3>
-                  </div>
-                   <div className="inline_block pull-right">
-                   <Link to="/customer">
-                      <button className="btn btn-primary" type="button">Back</button>
-                    </Link>
-                  </div>
+                <div className="inline_block">
+                  <h3>Event Details</h3>
                 </div>
+                <div className="inline_block pull-right">
+                  <Link to="/customer">
+                    <button className="btn btn-primary" type="button">Back</button>
+                  </Link>
                 </div>
-              <div className="panel-body">
-                <div className="list-group">
-                  <table className="table table-striped table-bordered view_page_table">
-                    <tbody>
-                      {rowEventData}
-                    </tbody>
-                  </table>
-                  { (eventDetails && eventDetails.length > 1 && eventDetails[0].is_no_route) ? <Link to="/trouble_shoot">
-                     <button className="btn btn-danger btn-lg pull-right" type="button">TroubleShoot</button>
-                   </Link> : ""}
-
-                  <Tabs customStyle={customStyle}>
-                    <TabList>
-                      <Tab>Route Change</Tab>
-                    </TabList>
-                    <PanelList>
-                      <Panel>
-                        <Row>
-                          <table className="table table-striped table-bordered">
-                            <tbody>
-                              {routeData}
-                            </tbody>
-                          </table>
-                        </Row>
-                      </Panel>
-                    </PanelList>
-                  </Tabs>
               </div>
             </div>
+            <Row>
+              <Col xs="12" sm="12" md="6" lg="6" xl="6">
+                <div className="panel-body">
+                  <div className="list-group">
+                    <table className="table table-striped table-bordered view_page_table">
+                      <tbody>
+                        {rowEventData}
+                      </tbody>
+                    </table>
+                    {(eventDetails && eventDetails.length > 1 && eventDetails[0].is_no_route) ? <Link to="/trouble_shoot">
+                      <button className="btn btn-danger btn-lg pull-right" type="button">TroubleShoot</button>
+                    </Link> : ""}
+                  </div>
+                </div>
+              </Col>
+              <Col xs="12" sm="6" md="6" lg="6" xl="6">
+                <div className="panel-body">
+                  <div className="list-group">
+                    <table className="table table-striped table-bordered view_page_table">
+                      <tbody>
+                        {routeDetails}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </Col>
+            </Row>
           </div>
         </Col>
       </Row>

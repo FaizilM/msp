@@ -16,54 +16,27 @@ class AdminDashboard extends React.Component {
         super(props)
 
         this.state = { tabIndex: 0 };
+        this.handleSelect =this.handleSelect.bind();
     }
 
-    handleSelect(key) {
-        this.setState({ tabIndex: key })
+    handleSelect() {
+        this.setState({ tabIndex: 1 })
     }
-
+    
+    
     render() {
-
         const { user, users } = this.props;
-
         return (
             <Tabs customStyle={customStyle} defaultIndex={this.state.tabIndex}>
                 <TabList>
-                    <Tab>Dashboard</Tab>
+                    <Tab handleSelect = {this.handleSelect}>Dashboard</Tab>
                     <Tab>Customer Metrics Dashboard</Tab>
                 </TabList>
                 <PanelList>
                     <Panel>
                         <Row>
-                            <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                                <div className="panel panel-default">
-                                    <div className="panel-heading">
-                                        <i className=""></i>
-                                        <h3>Inventory</h3>
-                                    </div>
-                                    <div className="panel-body">
-                                        <div className="list-group">
-                                            <Inventory />
-                                        </div>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                                <div className="panel panel-default">
-                                    <div className="panel-heading">
-                                        <i className=""></i>
-                                        <h3>Sites</h3>
-                                    </div>
-                                    <div className="panel-body">
-                                        <div className="list-group">
-                                            <Sites />
-                                        </div>
-                                        <button className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%" }}>
-                                            <a onClick={() => this.handleSelect(1)} style={{ color: "white" }}><label>View All Sites</label></a>
-                                        </button>
-                                    </div>
-                                </div>
-                            </Col>
+                            <Inventory />
+                            <Sites />
                         </Row>
                         <Row>
                             <SiteAvailability />
@@ -91,11 +64,12 @@ class AdminDashboard extends React.Component {
 
 function mapStateToProps(state) {
 
-    const { users, authentication } = state;
+    const { users, authentication, tabChange } = state;
     const { user } = authentication;
     return {
         user,
-        users
+        users,
+        tabChange
     };
 
 }

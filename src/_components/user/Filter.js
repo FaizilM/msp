@@ -275,8 +275,12 @@ class Filter extends Component {
                       <option>All Applications</option>
                       {this.state.all_application}
                     </select>
+                  
                   </div>
                 </Col>
+                {/* <Row>
+                <img src ="src/assets/images/topology-final.png"/>
+                </Row> */}
                 <Col lg="2">
                   <button className="btn btn-primary btn-block"
                     onClick={this.handlePrint}> Filter </button>
