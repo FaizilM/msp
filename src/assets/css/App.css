@@ -86,11 +86,11 @@ background-color: #2E77B8 !important;
   width: 50% !important;
 }
 
-.view_page_table tr:nth-child(odd) {
-   
-   
+.topologyImg {
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%
 }
-
 
 .inline_block {
   display: inline-block;

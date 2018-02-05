@@ -100,7 +100,7 @@ let avgCol = [
     "utilization",
     "jitter",
     "packet_loss"
-    
+
 
 ];
 
@@ -108,7 +108,7 @@ let avgHead = [
 
     "Component Name",
     "Source IP",
-    "Destination IP",    
+    "Destination IP",
     "Utilization (%)",
     "Jitter (ms)",
     "Packet Loss (%)",
@@ -165,7 +165,7 @@ class TroubleShoot extends React.Component {
         let routeHeaderData = [];
         let rowRouteData = [];
         let routeData = [];
-        let avgData =[];
+        let avgData = [];
 
         /**
          * Table for average data , for route details.
@@ -215,21 +215,28 @@ class TroubleShoot extends React.Component {
         }
         return (
             <Row>
+                 <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                    <div className="panel panel-default">
+                        <i className=""></i>
+                        <div className="panel-heading">
+                            <h3> Topology</h3>
+                        </div>
+
+                        <div className="panel-body">
+                            <div className="list-group">
+                                <div>
+                                    <img className="topologyImg" src="src/assets/images/topology-final.png" alt="topology" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Col>
+              
                 <Col xs="12" sm="12" md="12" lg="12" xl="12">
                     <div className="panel panel-default">
                         <i className=""></i>
                         <div className="panel-heading">
                             <h3>Route Details</h3>
-                        </div>
-
-                        <div className="panel-body">
-                            <div className="list-group">
-                                <table className="table table-striped table-bordered">
-                                    <tbody>
-                                        {avgData}
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
 
                         <div className="panel-body">
@@ -243,6 +250,25 @@ class TroubleShoot extends React.Component {
                         </div>
                     </div>
                 </Col>
+
+                <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                    <div className="panel panel-default">
+                        <i className=""></i>
+                        <div className="panel-heading">
+                            <h3>Average Details</h3>
+                        </div>
+                        <div className="panel-body">
+                            <div className="list-group">
+                                <table className="table table-striped table-bordered">
+                                    <tbody>
+                                        {avgData}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </Col>
+               
             </Row>
         );
     }
