@@ -219,7 +219,16 @@ class TroubleShoot extends React.Component {
                     <div className="panel panel-default">
                         <i className=""></i>
                         <div className="panel-heading">
-                            <h3> Topology</h3>
+                        <div>
+                            <div className="inline_block">
+                              <h3>Topology </h3>
+                            </div>
+                            <div className="inline_block pull-right">
+                              <Link to="/event_details/is_no_route">
+                                <button className="btn btn-primary" type="button">Back</button>
+                              </Link>
+                            </div>
+                          </div>
                         </div>
 
                         <div className="panel-body">
