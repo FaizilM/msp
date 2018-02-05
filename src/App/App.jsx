@@ -10,6 +10,7 @@ import { EventDetails } from '../_components/user/EventDetails';
 import { LoginPage } from '../LoginPage';
 import CustomerMetrics from '../_components/admin/CustomerMetrics';
 import { userConstants } from '../_constants';
+import { TroubleShoot } from '../_components/user/TroubleShoot';
 
 class App extends React.Component {
 
@@ -46,6 +47,7 @@ class App extends React.Component {
                         <PrivateRoute exact path="/" component={AdminDashboard} />
                         <PrivateRoute path="/customer" component={UserDashboard} />
                         <PrivateRoute path="/event_details/:route_type" component={EventDetails} />
+                        <PrivateRoute path="/trouble_shoot" component={TroubleShoot} />
                         <Route path="/login" component={LoginPage} />
                         </div>
                     </div>
