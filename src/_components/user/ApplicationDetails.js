@@ -228,12 +228,18 @@ class ApplicationDetails extends React.Component {
                 <div className="panel panel-default">
                 <div className="panel-heading">
                 <Row>
-                  <Col xs="9" sm="9" md="9" lg="9" xl="9">
+                  <Col xs="7" sm="7" md="7" lg="8" xl="8">
 
                         <h3> Application Routing Details : {applicationDetail[1]} </h3>
                   </Col>
 
-                  <Col xs="3" sm="3" md="3" lg="3" xl="3">
+                  <Col xs="2" sm="2" md="2" lg="1" xl="1">
+                      <div>
+                        <h5 style ={{marginTop: "10px"}}> Source Site </h5>
+                      </div>
+                  </Col>
+
+                  <Col xs="3" sm="4" md="3" lg="3" xl="3">
                     <div className="form-group">
                       <select className="form-control">
                         {siteOption}
