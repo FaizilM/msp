@@ -45,7 +45,7 @@ class App extends React.Component {
 
                         <div className="page_wrapper container">
                         <PrivateRoute exact path="/" component={AdminDashboard} />
-                        <PrivateRoute path="/customer" component={UserDashboard} />
+                        <PrivateRoute path="/customer/:tab_id?" component={UserDashboard} />
                         <PrivateRoute path="/event_details/:route_type" component={EventDetails} />
                         <PrivateRoute path="/trouble_shoot" component={TroubleShoot} />
                         <Route path="/login" component={LoginPage} />

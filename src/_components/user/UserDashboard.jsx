@@ -29,6 +29,17 @@ class UserDashboard extends React.Component {
     this.props.dispatch(userActions.getAll());
   }
 
+  componentWillMount() {
+
+      let keys = 1;
+      if(this.props.match.params && this.props.match.params.tab_id) {
+          keys =  this.props.match.params.tab_id.match(/\d+/g);
+          keys = parseInt(keys[0])
+      }
+
+      this.setState({ key: keys});
+  }
+
   handleDeleteUser(id) {
     return (e) => this.props.dispatch(userActions.delete(id));
   }

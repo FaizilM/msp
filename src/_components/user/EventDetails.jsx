@@ -116,7 +116,7 @@ class EventDetails extends React.Component {
 
   constructor(props) {
     super(props);
-    
+
     this.gotoCustomerMetrics = this.gotoCustomerMetrics.bind(this);
 };
 
@@ -292,7 +292,7 @@ gotoCustomerMetrics() {
                   <h3>Event Details</h3>
                 </div>
                 <div className="inline_block pull-right">
-                  <Link to="/customer" >
+                  <Link to="/customer/tab=3" >
                     <button className="btn btn-primary" type="button" >Back</button>
                   </Link>
                 </div>
