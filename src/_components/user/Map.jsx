@@ -56,7 +56,7 @@ class Map extends React.Component {
                           data: data
                         }).value
 
-                        console.log("==================================") 
+                        console.log("==================================")
                         console.log(userDetails.sites)
 
                         for (let [Key, site] of Object.entries(userDetails.sites)) {

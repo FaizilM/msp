@@ -9,11 +9,13 @@ class Header extends React.Component {
 
         const { user } = this.props;
         var home;
+        let logoLink = "/";
 
         if (user.role == userConstants.ROLE_ADMIN) {
             home = <li className="active"><Link to="/"><span className="app_font">Dashboard</span></Link></li>
         } else {
             home = <li className="active"><Link to="/customer"><span className="app_font">Dashboard</span></Link></li>
+            logoLink = "/customer"
         }
 
         return (
@@ -22,7 +24,7 @@ class Header extends React.Component {
                 <nav className="navbar navbar-default navbar-fixed-top">
                     <div className="container-fluid" style={{ backgroundColor: "#FFFFFF" }}>
                         <div className="navbar-header">
-                            <a className="navbar-brand" href="#"><img src="src/assets/images/logo.png" alt="logo" style={{ width: "90px" }}></img></a>
+                            <a className="navbar-brand" href={logoLink}><img src="src/assets/images/logo.png" alt="logo" style={{ width: "90px" }}></img></a>
                         </div>
                         <ul className="nav navbar-nav">
                             {home}
