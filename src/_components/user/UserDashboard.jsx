@@ -9,6 +9,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { ApplicationDetails, Sites, Filter, Map, BussinessImpactEvent, PacketLoss, LatencyRatio, JitterRatio, SiteAvailability } from '../';
 import { Tabs, Tab } from 'react-bootstrap'
 
+
 class UserDashboard extends React.Component {
 
   constructor(props, context) {
@@ -27,6 +28,17 @@ class UserDashboard extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(userActions.getAll());
+  }
+
+  componentWillMount() {
+
+      let keys = 1;
+      if(this.props.match.params && this.props.match.params.tab_id) {
+          keys =  this.props.match.params.tab_id.match(/\d+/g);
+          keys = parseInt(keys[0])
+      }
+
+      this.setState({ key: keys});
   }
 
   handleDeleteUser(id) {

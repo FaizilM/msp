@@ -7,7 +7,7 @@ import '../assets/css/util.css';
 import footerLogo from '../assets/images/logo-footer.png';
 
 class LoginPage extends React.Component {
-   
+
     constructor(props) {
         super(props);
 
@@ -36,7 +36,7 @@ class LoginPage extends React.Component {
         const { username, password } = this.state;
 
         const { dispatch } = this.props;
-    
+
         if (username && password) {
             dispatch(userActions.login(username, password));
         }
@@ -60,7 +60,7 @@ class LoginPage extends React.Component {
                                 <img src="src/assets/images/logo.png" alt="logo" style={{ width: "200px" }}></img>
                             </div>
                             <span className="login100-form-title p-b-32">
-                              
+
                     </span>
                             <span className="txt1 p-b-11">
                                 Username

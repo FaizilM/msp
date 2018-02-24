@@ -56,6 +56,9 @@ class Map extends React.Component {
                           data: data
                         }).value
 
+                        console.log("==================================")
+                        console.log(userDetails.sites)
+
                         for (let [Key, site] of Object.entries(userDetails.sites)) {
 
                             if(site.name == event.mapObject.label) {
@@ -71,14 +74,38 @@ class Map extends React.Component {
                                     let lineObject = {"latitudes": [event.mapObject.latitude, links.latitude],
                                       "longitudes": [event.mapObject.longitude, links.longitude],
                                       "arrowColor":  "#2d862d",
-                                      "arrowSize": 13
+                                      "arrowSize": 9,
+                                      "balloonText":"broad band",
+                                      "color":"blue",
+                                      "thickness":5,
+                                      "arrowAlpha":2,
+                                      "accessibleLabel":"broad band",
+                                      "bringForwardOnHover":true
                                       }
 
                                       if(isNoAppRoute) {
                                           lineObject["arrowColor"] = "red";
                                           lineObject["arrowAlpha"] = 0.7
-                                          lineObject["arc"] = -0.7
+                                          lineObject["arc"] = -0.8
+                                          lineObject["color"] = "red"
+                                          lineObject["balloonText"] = "no route"
+                                          lineObject["accessibleLabel"] = "no route"
                                       }
+
+                                    let lineObject2 = {"latitudes": [event.mapObject.latitude, links.latitude],
+                                      "longitudes": [event.mapObject.longitude, links.longitude],
+                                      "arrowColor":  "#2d862d",
+                                      "arrowSize": 9,
+                                      "arrowAlpha":2,
+                                      "color":"#FFDE24", // change the color
+                                      "accessibleLabel":"mpls",
+                                      "balloonText":"mpls",
+                                      "arc":-0.54 ,
+                                      "thickness":5,
+                                      "bringForwardOnHover":true
+                                      }
+                                    event.mapObject.lines.push(lineObject2);
+
                                     event.mapObject.lines.push(lineObject);
                                 }
                             }
