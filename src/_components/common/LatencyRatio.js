@@ -18,10 +18,10 @@ let latencyRatioData = (filter, user) => {
     data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
       data: data
     }).value;
-    
+
     metrics.push(data["customers"]);
   }
-  
+
   let latency = [0, 0, 0];
   let totalSite = 0;
   let latencySite = 0;
@@ -48,8 +48,8 @@ let latencyRatioData = (filter, user) => {
   if (metrics.length > 0) {
     for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics)) {
       let sites = metricsDataValue.sites;
-     
-      
+
+
       for (let site = 0; site < sites.length; site++) {
         let links = sites[site].links;
         if (filter == undefined) {
@@ -75,14 +75,22 @@ let latencyRatioData = (filter, user) => {
             if ((siteName != undefined && sites[site].name == siteName) || siteName == undefined) {
 
               for (let link = 0; link < links.length; link++) {
-                let linkLosses = links[link];
+
+                let linkLosses;
+                if (linkName != undefined && linkName != "") {
+                  linkLosses = links[link];
+                } else {
+                  linkLosses = links[link];
+                }
                 if ((linkName != undefined && linkLosses[linkName] != undefined) || (linkName == undefined)) {
 
                   for (let [linkKey, linkValue] of Object.entries(linkLosses)) {
-                    if (latencyData[linkKey] == undefined) {
-                      latencyData[linkKey] = linkValue.latency;
-                    } else {
-                      latencyData[linkKey] = (latencyData[linkKey] + linkValue.latency) / 2;
+                    if ((linkName != undefined && linkName == linkKey) || linkName == undefined) {
+                      if (latencyData[linkKey] == undefined) {
+                        latencyData[linkKey] = linkValue.latency;
+                      } else {
+                        latencyData[linkKey] = (latencyData[linkKey] + linkValue.latency) / 2;
+                      }
                     }
                   }
                 }
@@ -208,12 +216,12 @@ class LatencyRatio extends React.Component {
       configValue.graphs[0].precision = 0;
       configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
     } else {
-      let colorcode = [color.GREEN_COLOR, color.YELLOW_COLOR, color.ORANGE_COLOR, color.BLUE_COLOR]
+      let colorcode = {"broadband":color.GREEN_COLOR, "mpls":color.YELLOW_COLOR, "t1_lines":color.ORANGE_COLOR, "4G":color.BLUE_COLOR};
       for (let [key, value] of Object.entries(configValue)) {
         if (key == "dataProvider") {
           let index = 0;
           for (let [latencyKey, latencyValue] of Object.entries(latencyRatio)) {
-            let jsonlatencyData = { "name": latencyKey, "percentage": latencyValue, "color": colorcode[index++] }
+            let jsonlatencyData = { "name": latencyKey, "percentage": latencyValue, "color": colorcode[latencyKey] }
             value.push(jsonlatencyData);
           }
         }
@@ -221,7 +229,7 @@ class LatencyRatio extends React.Component {
           let index = 0;
 
           for (let [latencyKey, latencyValue] of Object.entries(latencyRatio)) {
-            let jsonlatencyData = { "title": latencyKey, "color": colorcode[index++] }
+            let jsonlatencyData = { "title": latencyKey, "color": colorcode[latencyKey] }
             value.data.push(jsonlatencyData);
           }
         }
@@ -230,7 +238,7 @@ class LatencyRatio extends React.Component {
 
     let pickChart = () => {
 
-      if (latencyRatio.length != undefined || latencyRatio.broadband != undefined) {
+      if (latencyRatio != undefined) {
         return <Chart config={configValue} />
       } else {
         return < h1 > No Site Available </h1>

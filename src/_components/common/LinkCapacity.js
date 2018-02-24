@@ -14,14 +14,14 @@ let linkCapacityData = (filter, user) => {
 
     if (userConstants.ROLE_ADMIN == user.role) {
         metrics = metricsData;
-      } else if (user.role == userConstants.ROLE_USER) {
+    } else if (user.role == userConstants.ROLE_USER) {
         let data = {};
         data["customers"] = metricsData
         data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
-          data: data
+            data: data
         }).value;
         metrics.push(data["customers"]);
-      }
+    }
 
     let capacity = [];
     let totalSite = [];
@@ -90,17 +90,26 @@ let linkCapacityData = (filter, user) => {
                     if ((siteName != undefined && sites[site].name == siteName) || siteName == undefined) {
 
                         for (let link = 0; link < links.length; link++) {
-                            let linkLosses = links[link];
+                            let linkLosses;
+                            if (linkName != undefined && linkName != "") {
+                                linkLosses = links[link];
+                            } else {
+                                linkLosses = links[link];
+                            }
 
                             if ((linkName != undefined && linkLosses[linkName] != undefined) || (linkName == undefined)) {
 
                                 for (let [linkKey, linkValue] of Object.entries(linkLosses)) {
 
-                                    if (utilization[linkKey] == undefined) {
-                                        utilization[linkKey] = linkValue.utilization;
-                                    } else {
-                                        utilization[linkKey] = (utilization[linkKey] + linkValue.utilization) / 2;
+                                    if ((linkName != undefined && linkName == linkKey) || linkName == undefined) {
+                                        if (utilization[linkKey] == undefined) {
+                                            utilization[linkKey] = linkValue.utilization;
+                                        } else {
+                                            utilization[linkKey] = (utilization[linkKey] + linkValue.utilization) / 2;
+                                        }
+
                                     }
+
                                 }
                             }
                         }
@@ -235,7 +244,7 @@ class LinkCapacity extends React.Component {
             configValue.graphs[0].precision = 0;
             configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
         } else {
-            let colorcode = [color.GREEN_COLOR, color.YELLOW_COLOR, color.ORANGE_COLOR, color.BLUE_COLOR]
+            let colorcode = { "broadband": color.GREEN_COLOR, "mpls": color.YELLOW_COLOR, "t1_lines": color.ORANGE_COLOR, "4G": color.BLUE_COLOR };
 
             for (let [key, value] of Object.entries(configValue)) {
 
@@ -243,31 +252,29 @@ class LinkCapacity extends React.Component {
                     let index = 0;
 
                     for (let [linkCapacityKey, linkCapacityValue] of Object.entries(linkCapacity)) {
-                        let jsonlinkCapacityData = { "name": linkCapacityKey, "percentage": linkCapacityValue, "color": color[index++] }
+                        let jsonlinkCapacityData = { "name": linkCapacityKey, "percentage": linkCapacityValue, "color": colorcode[linkCapacityKey] }
                         value.push(jsonlinkCapacityData);
                     }
                 }
-
                 if (key == "legend") {
-                    let index = 0;
-
+                    configValue.legend.horizontalGap = 70;
                     for (let [linkCapacityKey, linkCapacityValue] of Object.entries(linkCapacity)) {
-                        let jsonlinkCapacityData = { "title": linkCapacityKey, "color": colorcode[index++] }
-                        value.data.push(jsonlinkCapacityData);
+                        let jsonCapacityData = { "title": linkCapacityKey, "color": colorcode[linkCapacityKey] };
+                        value.data.push(jsonCapacityData);
                     }
                 }
             }
         };
-         
-    let pickChart = () => {
 
-        if (linkCapacity.length != undefined || linkCapacity.broadband != undefined) {
-          return <Chart config={configValue} />
-        } else {
-          return < h1 > No Site Available </h1>
-        }
-  
-      };
+        let pickChart = () => {
+
+            if (linkCapacity != undefined) {
+                return <Chart config={configValue} />
+            } else {
+                return < h1 > No Site Available </h1>
+            }
+
+        };
 
         return (
             <Col xs="12" sm="12" md="6" lg="6" xl="6">
@@ -279,7 +286,7 @@ class LinkCapacity extends React.Component {
                     <div className="panel-body">
                         <div className="list-group">
                             <div>
-                            {pickChart()}
+                                {pickChart()}
                             </div>
                         </div>
                     </div>
@@ -292,12 +299,12 @@ class LinkCapacity extends React.Component {
 
 function mapStateToProps(state) {
     const { authentication } = state;
-  
+
     return {
-      authentication
+        authentication
     };
-  }
-  
-  const connectedLinkCapacity = connect(mapStateToProps)(LinkCapacity);
-  export { connectedLinkCapacity as LinkCapacity };
-  
+}
+
+const connectedLinkCapacity = connect(mapStateToProps)(LinkCapacity);
+export { connectedLinkCapacity as LinkCapacity };
+
