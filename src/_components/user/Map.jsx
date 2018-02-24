@@ -12,6 +12,7 @@ class Map extends React.Component {
     render() {
 
         let user = this.props.authentication.user.username
+
         var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
         var starSVG = "M20,7.244 L12.809,6.627 L10,0 L7.191,6.627 L0,7.244 L5.455,11.971 L3.82,19 L10,15.272 L16.18,19 L14.545,11.971 L20,7.244 L20,7.244 Z M10,13.396 L6.237,15.666 L7.233,11.385 L3.91,8.507 L8.29,8.131 L10,4.095 L11.71,8.131 L16.09,8.507 L12.768,11.385 L13.764,15.666 L10,13.396 L10,13.396 Z";
         var config = {
@@ -19,15 +20,15 @@ class Map extends React.Component {
             "theme": "none",
             "map": "worldLow",
             "imagesSettings": {
-                "rollOverColor": "#089282",
+                "rollOverColor": "#708090",
                 "rollOverScale": 3,
                 "selectedScale": 3,
-                "selectedColor": "#089282",
+                "selectedColor": "#708090",
                 "color": "#13564e",
                 "labelRollOverColor": "#006666"
             },
             "areasSettings": {
-                "unlistedAreasColor": "#15A892",
+                "unlistedAreasColor": "#ffffff",
                 outlineThickness: 0.1,
 
             },
@@ -56,8 +57,7 @@ class Map extends React.Component {
                           data: data
                         }).value
 
-                        console.log("==================================")
-                        console.log(userDetails.sites)
+
 
                         for (let [Key, site] of Object.entries(userDetails.sites)) {
 
@@ -75,11 +75,11 @@ class Map extends React.Component {
                                       "longitudes": [event.mapObject.longitude, links.longitude],
                                       "arrowColor":  "#2d862d",
                                       "arrowSize": 9,
-                                      "balloonText":"broad band",
-                                      "color":"blue",
-                                      "thickness":5,
+                                      "balloonText":"<b>Link </b>: Broad band <br> <b>Event </b>: Route Change",
+                                      "color":"#4682b4",
+                                      "thickness":3,
                                       "arrowAlpha":2,
-                                      "accessibleLabel":"broad band",
+                                      "accessibleLabel":"Broad band",
                                       "bringForwardOnHover":true
                                       }
 
@@ -87,9 +87,10 @@ class Map extends React.Component {
                                           lineObject["arrowColor"] = "red";
                                           lineObject["arrowAlpha"] = 0.7
                                           lineObject["arc"] = -0.8
-                                          lineObject["color"] = "red"
-                                          lineObject["balloonText"] = "no route"
-                                          lineObject["accessibleLabel"] = "no route"
+                                          lineObject["color"] = "#ff6347"
+                                          lineObject["balloonText"] = "<b>Link </b>: MPLS-VES <br> <b>Event </b>: No Route"
+                                          lineObject["accessibleLabel"] = "No Route",
+                                          lineObject["url"] = "No Route"
                                       }
 
                                     let lineObject2 = {"latitudes": [event.mapObject.latitude, links.latitude],
@@ -99,9 +100,9 @@ class Map extends React.Component {
                                       "arrowAlpha":2,
                                       "color":"#FFDE24", // change the color
                                       "accessibleLabel":"mpls",
-                                      "balloonText":"mpls",
+                                      "balloonText":"<b>Link </b>: MPLS <br> <b>Event </b>:  Route Change",
                                       "arc":-0.54 ,
-                                      "thickness":5,
+                                      "thickness":3,
                                       "bringForwardOnHover":true
                                       }
                                     event.mapObject.lines.push(lineObject2);
@@ -154,7 +155,7 @@ class Map extends React.Component {
                     </div>
                     <div className="panel-body">
                         <div className="list-group">
-                            <div style={{ width: "100%", height: "450px", backgroundColor: "lightblue" }} >
+                            <div style={{ width: "100%", height: "450px", backgroundColor: "#add8e6" }} >
                                 <AmCharts.React options={config} style={{ width: "100%", height: "350px" }} />
                             </div>
 
