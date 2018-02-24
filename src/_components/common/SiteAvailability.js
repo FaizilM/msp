@@ -130,6 +130,7 @@ class SiteAvailability extends React.Component {
     configValue.valueAxes[0].maximum = totalSite;
 
     return (
+     
       <Col xs="12" sm="12" md="6" lg="6" xl="6">
         <div className="panel panel-default">
           <div className="panel-heading">
