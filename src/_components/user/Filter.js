@@ -4,6 +4,9 @@ import { Container, Row, Col, select } from 'reactstrap';
 import metricsData from '../../metricsData.json';
 import { indexOf } from 'lodash';
 import { LinkCapacity, LatencyRatio, JitterRatio, PacketLoss, ApplicationClassMetrics, Bandwidth } from '../';
+import jsonQuery from 'json-query';
+import { connect } from 'react-redux';
+import { userConstants } from '../../_constants';
 
 class Filter extends Component {
 
@@ -50,9 +53,6 @@ class Filter extends Component {
 
   siteGroup() {
 
-    this.state.siteName = undefined;
-    this.state.linkName = undefined;
-    this.state.applicationName = undefined;
     let sitesgroup = [];
     let sitegroupkey = [];
 
@@ -72,29 +72,33 @@ class Filter extends Component {
   }
 
   allSites(selectedSite) {
-
-    this.state.linkName = undefined;
-    this.state.applicationName = undefined;
-
+   
     let siteName = [];
     let sitekey = [];
     let metrics = [];
     let siteGroup;
+    let data = {};
+
+    let user = this.props.authentication.user;
+    if (user.role == userConstants.ROLE_USER) {
+      data["customers"] = metricsData
+      data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+        data: data
+      }).value;
+      metrics.push(data["customers"]);
+    }
 
     if (selectedSite != undefined) {
       this.setState({ siteGroup: selectedSite.target.value });
       siteGroup = selectedSite.target.value;
-      metrics.push(metricsData[0]);
-    } else {
-      metrics.push(metricsData[0]);
-    }
+    } 
 
     for (let index = 0; index < metrics.length; index++) {
 
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics[index].sites)) {
         let sitename;
 
-        if (siteGroup == undefined || siteGroup == "All Site Group") {
+        if (siteGroup == "" || siteGroup == undefined || siteGroup == "All Site Group") {
           sitename = metricsDataValue.name;
         }
 
@@ -118,14 +122,21 @@ class Filter extends Component {
     let linkkey = [];
     let metrics = [];
     let siteName;
-    
-    
+    let data = {};
+
+
+    let user = this.props.authentication.user;
+    if (user.role == userConstants.ROLE_USER) {
+      data["customers"] = metricsData
+      data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+        data: data
+      }).value;
+      metrics.push(data["customers"]);
+    }
+
     if (selectedSite != undefined) {
       siteName = selectedSite.target.value;
-      metrics.push(metricsData[0]);
-    } else {
-      metrics.push(metricsData[0]);
-    }
+    } 
 
     for (let index = 0; index < metrics.length; index++) {
 
@@ -158,12 +169,20 @@ class Filter extends Component {
     let applicationkey = [];
     let metrics = [];
     let siteName;
+    let data = {};
+
+    let user = this.props.authentication.user;
+    if (user.role == userConstants.ROLE_USER) {
+      data["customers"] = metricsData
+      data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+        data: data
+      }).value;
+      metrics.push(data["customers"]);
+    }
+
     if (selectedSite != undefined) {
       siteName = selectedSite.target.value;
-      metrics.push(metricsData[0]);
-    } else {
-      metrics.push(metricsData[0]);
-    }
+    } 
 
     for (let index = 0; index < metricsData.length; index++) {
 
@@ -188,7 +207,6 @@ class Filter extends Component {
     }
 
     this.setState({ all_application: applicationName });
-    return applicationName;
   }
 
   changeData(selectedSite) {
@@ -217,13 +235,11 @@ class Filter extends Component {
       "linkName": this.state.linkName,
       "applicationName": this.state.applicationName
     }
-
-    this.setState({ toFilter: filter });
+      this.setState({ toFilter: filter });
 
   }
 
   render() {
-
     return (
       <Col xs="12" sm="12" md="12" lg="12" xl="12">
         <div className="panel panel-default">
@@ -237,11 +253,11 @@ class Filter extends Component {
                 <Col xs="6" sm="6" md="2" lg="2" xl="2">
                   <div className="form-group">
                     <select className="form-control" id="time" onChange={this.changeDuration}>
-                      <option>1Hour</option>
-                      <option>1Day</option>
-                      <option>1Week</option>
-                      <option>1Month</option>
-                      <option>1Year</option>
+                      <option>Hour</option>
+                      <option>Day</option>
+                      <option>Week</option>
+                      <option>Month</option>
+                      <option>Year</option>
                     </select>
                   </div>
                 </Col>
@@ -284,16 +300,16 @@ class Filter extends Component {
                 </Col>
               </Row>
               <Row>
-                <ApplicationClassMetrics filter={this.state.toFilter} customer="customer" />
-                <Bandwidth filter={this.state.toFilter} customer="customer" />
-              </Row>
-              <Row>
                 <LinkCapacity filter={this.state.toFilter} customer="customer" />
                 <LatencyRatio filter={this.state.toFilter} customer="customer" />
               </Row>
               <Row>
                 <JitterRatio filter={this.state.toFilter} customer="customer" />
                 <PacketLoss filter={this.state.toFilter} customer="customer" />
+              </Row>
+              <Row>
+                <ApplicationClassMetrics filter={this.state.toFilter} customer="customer" />
+                <Bandwidth filter={this.state.toFilter} customer="customer" />
               </Row>
             </div>
           </div>
@@ -304,4 +320,14 @@ class Filter extends Component {
   }
 }
 
-export { Filter };
+function mapStateToProps(state) {
+  const { authentication } = state;
+
+  return {
+    authentication
+  };
+}
+
+const connectedFilter = connect(mapStateToProps)(Filter);
+export { connectedFilter as Filter };
+

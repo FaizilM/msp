@@ -71,16 +71,23 @@ let jitterRatioData = (filter, user) => {
           if ((siteName != undefined && sites[site].name == siteName) || siteName == undefined) {
 
             for (let link = 0; link < links.length; link++) {
-              let linkLosses = links[link];
+
+              let linkLosses;
+              if (linkName != undefined && linkName != "") {
+                linkLosses = links[link];
+              } else {
+                linkLosses = links[link];
+              }
               if ((linkName != undefined && linkLosses[linkName] != undefined) || (linkName == undefined)) {
 
                 for (let [linkKey, linkValue] of Object.entries(linkLosses)) {
-                  if (jitterData[linkKey] == undefined) {
-                    jitterData[linkKey] = linkValue.jitter;
-                  } else {
-                    jitterData[linkKey] = (jitterData[linkKey] + linkValue.jitter) / 2;
+                  if ((linkName != undefined && linkName == linkKey) || linkName == undefined) {
+                    if (jitterData[linkKey] == undefined) {
+                      jitterData[linkKey] = linkValue.jitter;
+                    } else {
+                      jitterData[linkKey] = (jitterData[linkKey] + linkValue.jitter) / 2;
+                    }
                   }
-
                 }
               }
             }
@@ -155,7 +162,7 @@ class JitterRatio extends React.Component {
     };
 
     let configValue = config.bar;
-    let user = this.props.authentication.user;    
+    let user = this.props.authentication.user;
     const jitterRatio = jitterRatioData(this.props.filter, user);
 
     if (this.props.filter == undefined) {
@@ -218,12 +225,12 @@ class JitterRatio extends React.Component {
       configValue.graphs[0].precision = 0;
       configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
     } else {
-      let colorcode = [color.GREEN_COLOR, color.YELLOW_COLOR, color.ORANGE_COLOR, color.BLUE_COLOR]
+      let colorcode = {"broadband":color.GREEN_COLOR, "mpls":color.YELLOW_COLOR, "t1_lines":color.ORANGE_COLOR, "4G":color.BLUE_COLOR};
       for (let [key, value] of Object.entries(configValue)) {
         if (key == "dataProvider") {
           let index = 0;
           for (let [jitterKey, jitterValue] of Object.entries(jitterRatio)) {
-            let jsonjitterData = { "name": jitterKey, "percentage": jitterValue, "color": colorcode[index++] }
+            let jsonjitterData = { "name": jitterKey, "percentage": jitterValue, "color": colorcode[jitterKey] }
             value.push(jsonjitterData);
           }
         }
@@ -231,7 +238,7 @@ class JitterRatio extends React.Component {
           let index = 0;
 
           for (let [jitterKey, jitterValue] of Object.entries(jitterRatio)) {
-            let jsonjitterData = { "title": jitterKey, "color": colorcode[index++] }
+            let jsonjitterData = { "title": jitterKey, "color": colorcode[jitterKey] }
             value.data.push(jsonjitterData);
           }
         }
@@ -240,7 +247,7 @@ class JitterRatio extends React.Component {
 
     let pickChart = () => {
 
-      if (jitterRatio.length != undefined || jitterRatio.broadband != undefined) {
+      if (jitterRatio != undefined) {
         return <Chart config={configValue} />
       } else {
         return < h1 > No Site Available </h1>

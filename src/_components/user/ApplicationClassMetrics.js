@@ -13,17 +13,21 @@ let customerClassMetrics = (filter, user) => {
     let metrics = [];
     let classMetrics = [];
     let customerClassMetricsData = [];
+    let applicationData;
+    if (filter != undefined && filter.applicationName != undefined) {
+        applicationData = filter.applicationName;
+    }
 
     if (userConstants.ROLE_ADMIN == user.role) {
         metrics = metricsData;
-      } else if (user.role == userConstants.ROLE_USER) {
+    } else if (user.role == userConstants.ROLE_USER) {
         let data = {};
         data["customers"] = metricsData
         data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
-          data: data
+            data: data
         }).value;
         metrics.push(data["customers"]);
-      }
+    }
 
     if (metricsData != null && metricsData != undefined) {
 
@@ -43,27 +47,27 @@ let customerClassMetrics = (filter, user) => {
                             if (applicationValue != null && applicationValue != undefined) {
 
                                 for (let [applicationDataKey, applicationDataValue] of Object.entries(applicationValue)) {
+                                    if ((applicationData != undefined && applicationDataKey == applicationData) || (applicationData == undefined)) {
+                                        if (applicationDataValue != null && applicationDataValue != undefined && applicationDataKey != null && applicationDataKey != undefined) {
 
-                                    if (applicationDataValue != null && applicationDataValue != undefined && applicationDataKey != null && applicationDataKey != undefined) {
+                                            if (classMetrics[applicationDataKey] == undefined) {
+                                                classMetrics[applicationDataKey] = [];
+                                            }
 
-                                        if (classMetrics[applicationDataKey] == undefined) {
-                                            classMetrics[applicationDataKey] = [];
-                                        }
+                                            let valueMetrics = [];
 
-                                        let valueMetrics = [];
+                                            for (let [metricsKey, metricsValue] of Object.entries(applicationDataValue)) {
 
-                                        for (let [metricsKey, metricsValue] of Object.entries(applicationDataValue)) {
+                                                for (let [key, value] of Object.entries(metricsValue)) {
 
-                                            for (let [key, value] of Object.entries(metricsValue)) {
-
-                                                if (classMetrics[applicationDataKey][key] == undefined) {
-                                                    classMetrics[applicationDataKey][key] = value;
-                                                } else {
-                                                    classMetrics[applicationDataKey][key] += value;
+                                                    if (classMetrics[applicationDataKey][key] == undefined) {
+                                                        classMetrics[applicationDataKey][key] = value;
+                                                    } else {
+                                                        classMetrics[applicationDataKey][key] += value;
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
                                 }
                             }
                         }
@@ -72,7 +76,8 @@ let customerClassMetrics = (filter, user) => {
             }
         }
     }
-    return classMetrics;
+}
+return classMetrics;
 }
 
 class ApplicationClassMetrics extends Component {
@@ -105,6 +110,7 @@ class ApplicationClassMetrics extends Component {
                     "lineAlpha": 0.3,
                     "title": "Bandwidth",
                     "type": "column",
+                    "fixedColumnWidth": 50,
                     "color": "#000000",
                     "valueField": "bandwidth"
                 }, {
@@ -114,6 +120,7 @@ class ApplicationClassMetrics extends Component {
                     "lineAlpha": 0.3,
                     "title": "Route Change",
                     "type": "column",
+                    "fixedColumnWidth": 50,
                     "color": "#000000",
                     "valueField": "route_change"
                 }, {
@@ -123,6 +130,7 @@ class ApplicationClassMetrics extends Component {
                     "lineAlpha": 0.3,
                     "title": "Route Fail",
                     "type": "column",
+                    "fixedColumnWidth": 50,
                     "color": "#000000",
                     "valueField": "route_fail"
                 }],
@@ -188,9 +196,9 @@ function mapStateToProps(state) {
     const { authentication } = state;
 
     return {
-      authentication
+        authentication
     };
-  }
+}
 
-  const connectedApplicationClassMetrics = connect(mapStateToProps)(ApplicationClassMetrics);
-  export { connectedApplicationClassMetrics as ApplicationClassMetrics };
+const connectedApplicationClassMetrics = connect(mapStateToProps)(ApplicationClassMetrics);
+export { connectedApplicationClassMetrics as ApplicationClassMetrics };

@@ -11,7 +11,7 @@ import jsonQuery from 'json-query';
 
 let packetLossData = (filter, user) => {
   let metrics = [];
-  
+
   if (userConstants.ROLE_ADMIN == user.role) {
     metrics = metricsData;
   } else if (user.role == userConstants.ROLE_USER) {
@@ -22,7 +22,7 @@ let packetLossData = (filter, user) => {
     }).value;
     metrics.push(data["customers"]);
   }
-  
+
   let loss = [0, 0, 0];
   let totalSite = 0;
   let packetLossLink = 0;
@@ -86,20 +86,26 @@ let packetLossData = (filter, user) => {
           if ((siteName != undefined && sites[site].name == siteName) || siteName == undefined) {
 
             for (let link = 0; link < links.length; link++) {
-              let linkLosses = links[link];
 
+              let linkLosses;
+              if (linkName != undefined && linkName != "") {
+                linkLosses = links[link];
+              } else {
+                linkLosses = links[link];
+              }
               if ((linkName != undefined && linkLosses[linkName] != undefined) || (linkName == undefined)) {
 
                 for (let [linkKey, linkValue] of Object.entries(linkLosses)) {
+                  if ((linkName != undefined && linkName == linkKey) || linkName == undefined) {
+                    if (packetLoss[linkKey] == undefined) {
+                      packetLoss[linkKey] = linkValue.packet_loss;
+                    } else {
 
-                  if (packetLoss[linkKey] == undefined) {
-                    packetLoss[linkKey] = linkValue.packet_loss;
-                  } else {
+                      if (linkValue.packet_loss > 0) {
+                        packetLoss[linkKey] = (packetLoss[linkKey] + linkValue.packet_loss) / 2;
+                      }
 
-                    if (linkValue.packet_loss > 0) {
-                      packetLoss[linkKey] = (packetLoss[linkKey] + linkValue.packet_loss) / 2;
                     }
-
                   }
                 }
               }
@@ -233,13 +239,13 @@ class PacketLoss extends Component {
       configValue.graphs[0].precision = 0;
       configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
     } else {
-      let colorcode = [color.GREEN_COLOR, color.YELLOW_COLOR, color.ORANGE_COLOR, color.BLUE_COLOR]
+      let colorcode = {"broadband":color.GREEN_COLOR, "mpls":color.YELLOW_COLOR, "t1_lines":color.ORANGE_COLOR, "4G":color.BLUE_COLOR};
       for (let [key, value] of Object.entries(configValue)) {
 
         if (key == "dataProvider") {
           let index = 0;
           for (let [packetLossKey, packetLossValue] of Object.entries(packetLoss)) {
-            let jsonPacketlossData = { "name": packetLossKey, "percentage": packetLossValue, "color": colorcode[index++] }
+            let jsonPacketlossData = { "name": packetLossKey, "percentage": packetLossValue, "color":  colorcode[packetLossKey] }
             value.push(jsonPacketlossData);
           }
         }
@@ -248,7 +254,7 @@ class PacketLoss extends Component {
           let index = 0;
 
           for (let [packetLossKey, packetLossValue] of Object.entries(packetLoss)) {
-            let jsonPacketlossData = { "title": packetLossKey, "color": colorcode[index++] }
+            let jsonPacketlossData = { "title": packetLossKey, "color":  colorcode[packetLossKey] }
             value.data.push(jsonPacketlossData);
           }
         }
@@ -257,8 +263,8 @@ class PacketLoss extends Component {
     }
 
     let pickChart = () => {
-      
-      if (packetLoss.length != undefined || packetLoss.broadband != undefined) {
+
+      if (packetLoss != undefined) {
         return <Chart config={configValue} />
       } else {
         return < h1 > No Site Available </h1>
