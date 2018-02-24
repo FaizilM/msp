@@ -21,11 +21,13 @@
         "linkedWith": [
           {
             "latitude": 42.661232,
-            "longitude": -78.745193
+            "longitude": -78.745193,
+            "eventType":"APP_ROUTE"
           },
           {
             "latitude": 48.8567,
-            "longitude": 2.3510
+            "longitude": 2.3510,
+            "eventType":"APP_ROUTE"
           }
         ],
         "links": [
@@ -348,11 +350,13 @@
         "linkedWith": [
           {
             "latitude": 42.661232,
-            "longitude": -78.745193
+            "longitude": -78.745193,
+            "eventType":"NO_ROUTE"
           },
           {
             "latitude": 11.0168,
-            "longitude": 76.9558
+            "longitude": 76.9558,
+            "eventType":"APP_ROUTE"
           }
         ],
         "links": [
@@ -458,11 +462,13 @@
         "linkedWith": [
           {
             "latitude": 48.8567,
-            "longitude": 2.3510
+            "longitude": 2.3510,
+            "eventType":"APP_ROUTE"
           },
           {
             "latitude": 11.0168,
-            "longitude": 76.9558
+            "longitude": 76.9558,
+            "eventType":"APP_ROUTE"
           }
         ],
         "links": [
