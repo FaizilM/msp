@@ -7,6 +7,7 @@ import SortableTbl from 'react-sort-search-table';
 import ImageLoader from 'react-imageloader';
 
 
+
 let customerMetricsDashboardData = () => {
   let customerMetricsData = [];
 
@@ -153,7 +154,7 @@ class CustomerMetrics extends Component {
   render() {
 
     let customerData = customerMetricsDashboardData();
-
+  
     return (
       <Col xs="12" sm="12" md="12" lg="12" xl="12">
         <div className="panel panel-default">
