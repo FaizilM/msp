@@ -8,13 +8,14 @@ import { Container, Row, Col, select } from 'reactstrap';
 import { userConstants } from '../../_constants';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
+import { getValueByTime } from '../../_helpers/shared';
 
 let customerClassMetrics = (filter, user) => {
     let metrics = [];
     let classMetrics = [];
     let customerClassMetricsData = [];
     let applicationData;
-    if (filter != undefined && filter.applicationName != undefined) {
+    if (filter != undefined && filter.applicationName != undefined && filter.applicationName != "All Applications" && filter.applicationName != "") {
         applicationData = filter.applicationName;
     }
 
@@ -68,6 +69,7 @@ let customerClassMetrics = (filter, user) => {
                                                 }
                                             }
                                         }
+                                    }
                                 }
                             }
                         }
@@ -76,8 +78,7 @@ let customerClassMetrics = (filter, user) => {
             }
         }
     }
-}
-return classMetrics;
+    return classMetrics;
 }
 
 class ApplicationClassMetrics extends Component {
@@ -88,11 +89,10 @@ class ApplicationClassMetrics extends Component {
             "bar": {
                 "type": "serial",
                 "theme": "light",
-
                 "legend": {
-                    "horizontalGap": 10,
-                    "useGraphSettings": true,
-                    "markerSize": 10
+                    "horizontalGap": 70,
+                    "markerSize": 10,
+                    "data": []
                 },
                 "dataProvider": [],
                 "valueAxes": [{
@@ -110,6 +110,7 @@ class ApplicationClassMetrics extends Component {
                     "lineAlpha": 0.3,
                     "title": "Bandwidth",
                     "type": "column",
+                    "fillColors":color.BLUE_COLOR,
                     "fixedColumnWidth": 50,
                     "color": "#000000",
                     "valueField": "bandwidth"
@@ -120,6 +121,7 @@ class ApplicationClassMetrics extends Component {
                     "lineAlpha": 0.3,
                     "title": "Route Change",
                     "type": "column",
+                    "fillColors":color.YELLOW_COLOR,
                     "fixedColumnWidth": 50,
                     "color": "#000000",
                     "valueField": "route_change"
@@ -130,6 +132,7 @@ class ApplicationClassMetrics extends Component {
                     "lineAlpha": 0.3,
                     "title": "Route Fail",
                     "type": "column",
+                    "fillColors":color.ORANGE_COLOR,
                     "fixedColumnWidth": 50,
                     "color": "#000000",
                     "valueField": "route_fail"
@@ -153,21 +156,41 @@ class ApplicationClassMetrics extends Component {
         const customerClass = customerClassMetrics(this.props.filter, user);
 
         for (let [key, value] of Object.entries(configValue)) {
-
+            if (key == "legend") {
+                value.data.push(
+                    { "title": "Bandwidth", "color": color.BLUE_COLOR },
+                    { "title": "Route Change", "color": color.YELLOW_COLOR },
+                    { "title": "No Route", "color": color.ORANGE_COLOR }
+                );
+            }
             if (key == "dataProvider") {
-
+                let colorCode = {"bandwidth":color.BLUE_COLOR, "route_change":color.YELLOW_COLOR, "route_fail":color.ORANGE_COLOR};
                 for (let [customerClassKey, customerClassValue] of Object.entries(customerClass)) {
                     let metricsData = [];
                     let data = [];
-                    data = { "name": customerClassKey };
 
+                    data = { "name": customerClassKey };
+                    
                     for (let [classKey, classValue] of Object.entries(customerClassValue)) {
-                        data[classKey] = classValue;
+                        console.log(this.props.filter, this.props.filter.duration);
+
+                        if (this.props.filter != undefined && this.props.filter.duration != undefined) {
+                            data[classKey] = getValueByTime(classValue, this.props.filter.duration);
+                            data["color"] = colorCode[classKey];
+                            console.log(data);
+                            
+                        } else {
+                            data[classKey] = classValue;
+                            console.log("classkey", classKey, classValue,colorCode[classKey], classKey);
+                            data["color"] = colorCode[classKey];
+                            console.log("data",data);
+                        }
                     }
 
                     value.push(data);
                 }
             }
+
         }
 
         return (

@@ -1,15 +1,30 @@
 import React from 'react';
 import { Chart } from '../';
-import metricsDatas from '../../metricsData.json';
+import metricsData from '../../metricsData.json';
 import { color } from '../../_constants';
 import { Container, Row, Col } from 'reactstrap';
+import { connect } from 'react-redux';
+import jsonQuery from 'json-query';
+import { getValueByTime } from '../../_helpers/shared';
+import { userConstants } from '../../_constants';
 
-let siteAvailabilityData = () => {
+let siteAvailabilityData = (user) => {
   let totalSite = 0;
   let availability = [0, 0, 0];
   let count = 0;
+  let metrics = [];
 
-  for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsDatas)) {
+  if (userConstants.ROLE_ADMIN == user.role) {
+    metrics = metricsData;
+  } else if (user.role == userConstants.ROLE_USER) {
+    let data = {};
+    data["customers"] = metricsData
+    data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+      data: data
+    }).value;
+    metrics.push(data["customers"]);
+  }
+  for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics)) {
     totalSite += metricsDataValue.sites.length;
     let sites = metricsDataValue.sites;
 
@@ -98,8 +113,8 @@ class SiteAvailability extends React.Component {
       }
     };
     let configValue = config.bar;
-
-    const availability = siteAvailabilityData();
+    let user = this.props.authentication.user;
+    const availability = siteAvailabilityData(user);
     let totalSite = 0;
 
     for (let [Key, Value] of Object.entries(configValue)) {
@@ -134,4 +149,13 @@ class SiteAvailability extends React.Component {
   }
 }
 
-export { SiteAvailability };
+function mapStateToProps(state) {
+  const { authentication } = state;
+
+  return {
+    authentication
+  };
+}
+
+const connectedSiteAvailability = connect(mapStateToProps)(SiteAvailability);
+export { connectedSiteAvailability as SiteAvailability };

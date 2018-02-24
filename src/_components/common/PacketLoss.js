@@ -260,6 +260,7 @@ class PacketLoss extends Component {
         }
 
       }
+      
     }
 
     let pickChart = () => {
