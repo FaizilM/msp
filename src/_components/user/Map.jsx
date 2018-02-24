@@ -27,7 +27,7 @@ let populateMapSites = (config, user) => {
                             "svgPath": targetSVG,
                             "zoomLevel": 2,
                             "scale": 1.0,
-                            "title": site.name,
+                            "title": "<b>" + site.name + "</b><br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
                             "latitude": site.latitude,
                             "longitude": site.longitude,
                             "color": color
@@ -49,7 +49,7 @@ let getLinkDetails = (routeType) => {
     switch (routeType) {
         case "NO_ROUTE":
             lineObject = {
-                "balloonText": "<b>Link </b>: MPLS-VES <br> <b>Event </b>: No Route",
+                "balloonText": "<b>Link </b>: MPLS-VES <br> Event: No Route<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
                 "color": "red",
                 "arc": -0.54,
                 "accessibleLabel": "No Route",
@@ -57,7 +57,7 @@ let getLinkDetails = (routeType) => {
             break;
         case "APP_ROUTE":
             lineObject = {
-                "balloonText": "<b>Link </b>: Broad band <br> <b>Event </b>: App Route",
+                "balloonText": "<b>Link </b>: Broad band <br>Event: App Route<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
                 "color": "#2d862d",
                 "accessibleLabel": "Broad band",
             }
@@ -66,7 +66,7 @@ let getLinkDetails = (routeType) => {
             lineObject = {
                 "color": "#FFDE24", // change the color
                 "accessibleLabel": "mpls",
-                "balloonText": "<b>Link </b>: MPLS <br> <b>Event </b>:  Route Change",
+                "balloonText": "<b>Link </b>: MPLS <br>Event:  Route Change<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
                 "arc": -0.1,
             }
     }
@@ -163,7 +163,7 @@ class Map extends React.Component {
                                         "arrowAlpha": 2,
                                         "color": "#2d862d", // change the color
                                         "accessibleLabel": "mpls",
-                                        "balloonText": "<b>Link </b>: MPLS <br> <b>Event </b>:  Route Change",
+                                        "balloonText": "<b>Link </b>: MPLS <br>Event:  App Route<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
                                         "arc": -0.1,
                                         "thickness": 3,
                                         "bringForwardOnHover": true
