@@ -9,6 +9,20 @@ import { userConstants } from '../../_constants';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
 import { Route, Redirect, Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import { Dialog } from './../common/Dialog'
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+    }
+};
+
 
 let getApplicationDetails = (user) => {
     let customerMetricsData = [];
@@ -32,7 +46,7 @@ let getApplicationDetails = (user) => {
             if (metricsDataValue.sites != null && metricsDataValue.sites != undefined) {
                 let sites = metricsDataValue.sites;
                 for (let site = 0; site < 1; site++) {
-                  sourceSite = sites[site].name;
+                    sourceSite = sites[site].name;
                     let devices = sites[site].devices;
                     for (let device = 0; device < devices.length; device++) {
                         for (let [deviceKey, deviceValue] of Object.entries(devices[device])) {
@@ -146,6 +160,31 @@ let eventHead = [
 ];
 
 class ApplicationDetails extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {
+            modalIsOpen: false
+        };
+
+        this.openModal = this.openModal.bind(this);
+        this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+    openModal() {
+        this.setState({ modalIsOpen: true });
+    }
+
+    afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        this.subtitle.style.color = '#f00';
+    }
+
+    closeModal() {
+        console.log("Prent close model ")
+        this.setState({ modalIsOpen: false });
+    }
 
     render() {
         let user = this.props.authentication.user;
@@ -160,7 +199,7 @@ class ApplicationDetails extends React.Component {
         let routeEvent;
         let site = [];
         let siteOption = [];
-        siteOption.push(  <option key={"source"}>{applicationDetail[1]}</option>);
+        siteOption.push(<option key={"source"}>{applicationDetail[1]}</option>);
         eventHeaderData.push(<th key={0}>ID</th>)
         for (let index = 0; index < eventHead.length; index++) {
             eventHeaderData.push(<th key={index + 1}>{eventHead[index]}</th>);
@@ -175,9 +214,9 @@ class ApplicationDetails extends React.Component {
         for (let applicationIndex = 0; applicationIndex < applicationDetails.length; applicationIndex++) {
             let rowData = [];
             let rowEventData = [];
-            if(site.indexOf(applicationDetails[applicationIndex]["destination"]) == -1) {
-              site.push(applicationDetails[applicationIndex]["destination"]);
-              siteOption.push(  <option key={applicationIndex}>{applicationDetails[applicationIndex]["destination"]}</option>);
+            if (site.indexOf(applicationDetails[applicationIndex]["destination"]) == -1) {
+                site.push(applicationDetails[applicationIndex]["destination"]);
+                siteOption.push(<option key={applicationIndex}>{applicationDetails[applicationIndex]["destination"]}</option>);
             }
             rowData.push(<td key={"id"}>{applicationIndex + 1}</td>);
             for (let index = 0; index < col.length; index++) {
@@ -202,13 +241,10 @@ class ApplicationDetails extends React.Component {
                 }
 
                 rowEventData.push(<td key={"button"}>
-
-
-                    <Link to={`/event_details/${routeEvent}`}>
-                        <button className="btn btn-primary" type="button">
-                            More
+                    <button className="btn btn-primary" type="button" onClick={this.openModal}>
+                        More
                       </button>
-                    </Link></td>);
+                </td>);
 
 
             }
@@ -222,66 +258,68 @@ class ApplicationDetails extends React.Component {
 
 
         return (
-          <div>
-            <Col xs="12>" sm="12" md="12" lg="12" xl="12">
+            <div>
+                <Col xs="12>" sm="12" md="12" lg="12" xl="12">
 
-                <div className="panel panel-default">
-                <div className="panel-heading">
-                <Row>
-                  <Col xs="7" sm="7" md="7" lg="8" xl="8">
+                    <div className="panel panel-default">
+                        <div className="panel-heading">
+                            <Row>
+                                <Col xs="7" sm="7" md="7" lg="8" xl="8">
 
-                        <h3> Application Routing Details : {applicationDetail[1]} </h3>
-                  </Col>
+                                    <h3> Application Routing Details : {applicationDetail[1]} </h3>
+                                </Col>
 
-                  <Col xs="2" sm="2" md="2" lg="1" xl="1">
-                      <div>
-                        <h5 style ={{marginTop: "10px"}}> Source Site </h5>
-                      </div>
-                  </Col>
+                                <Col xs="2" sm="2" md="2" lg="1" xl="1">
+                                    <div>
+                                        <h5 style={{ marginTop: "10px" }}> Source Site </h5>
+                                    </div>
+                                </Col>
 
-                  <Col xs="3" sm="4" md="3" lg="3" xl="3">
-                    <div className="form-group">
-                      <select className="form-control">
-                        {siteOption}
-                      </select>
-                    </div>
-                  </Col>
-                </Row>
-                </div>
+                                <Col xs="3" sm="4" md="3" lg="3" xl="3">
+                                    <div className="form-group">
+                                        <select className="form-control">
+                                            {siteOption}
+                                        </select>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
 
 
-                    <div className="panel-body">
-                        <div className="list-group">
-                            <div className="table-responsive">
-                                <table className="table table-bordered">
-                                    <tbody>
-                                        {tableData}
-                                    </tbody>
-                                </table>
+                        <div className="panel-body">
+                            <div className="list-group">
+                                <div className="table-responsive">
+                                    <table className="table table-bordered">
+                                        <tbody>
+                                            {tableData}
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Col>
-              <Col xs="12" sm="12" md="12" lg="12" xl="12">
-                <div className="panel panel-default">
-                    <div className="panel-heading">
-                        <i className=""></i>
-                        <h3> Event Details </h3>
-                    </div>
-                    <div className="panel-body">
-                        <div className="list-group">
-                            <div className="table-responsive">
-                                <table className="table table-bordered">
-                                    <tbody>
-                                        {eventData}
-                                    </tbody>
-                                </table>
+                </Col>
+                <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                    <div className="panel panel-default">
+                        <div className="panel-heading">
+                            <i className=""></i>
+                            <h3> Event Details </h3>
+                        </div>
+                        <div className="panel-body">
+                            <div className="list-group">
+                                <div className="table-responsive">
+                                    <table className="table table-bordered">
+                                        <tbody>
+                                            {eventData}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-              </Col>
+                </Col>
+                <Dialog isOpen={this.state.modalIsOpen} closeModal={this.closeModal} />
             </div>
         );
 
