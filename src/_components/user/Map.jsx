@@ -7,6 +7,41 @@ import metricsData from '../../metricsData.json';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
 
+let getLinkDetails = (routeType) => {
+    let response = ""
+
+    let lineObject = {}
+    
+    switch (routeType) {
+        case "NO_ROUTE":
+            lineObject = {
+                "balloonText": "<b>Link </b>: MPLS-VES <br> <b>Event </b>: No Route",
+                "color": "red",
+                "thickness": 3,
+                "arc": -0.54,
+                "accessibleLabel": "No Route",
+            }
+            break;
+        case "APP_ROUTE":
+            lineObject = {
+                "balloonText": "<b>Link </b>: Broad band <br> <b>Event </b>: App Route",
+                "color": "#2d862d",
+                "thickness": 3,
+                "accessibleLabel": "Broad band",
+            }
+            break;
+        default:
+            lineObject = {
+                "color": "#FFDE24", // change the color
+                "accessibleLabel": "mpls",
+                "balloonText": "<b>Link </b>: MPLS <br> <b>Event </b>:  Route Change",
+                "arc": -0.1,
+                "thickness": 3,
+            }
+    }
+    return lineObject;
+}
+
 class Map extends React.Component {
 
     render() {
@@ -53,58 +88,48 @@ class Map extends React.Component {
                         let data = {};
                         data["customers"] = metricsData
 
-                        let userDetails = jsonQuery('customers[username='+user+']', {
-                          data: data
+                        let userDetails = jsonQuery('customers[username=' + user + ']', {
+                            data: data
                         }).value
 
 
 
                         for (let [Key, site] of Object.entries(userDetails.sites)) {
 
-                            if(site.name == event.mapObject.label) {
+                            if (site.name == event.mapObject.label) {
 
                                 for (let [Key, links] of Object.entries(site.linkedWith)) {
 
-                                    var siteDetails = {};
-                                    siteDetails["sites"] = userDetails.sites
-                                    let isNoAppRoute = jsonQuery('sites[latitude='+links.latitude+'].no_app_route', {
-                                      data: siteDetails
-                                    }).value
+                                    let linkObj = getLinkDetails(links.eventType);
+                                    console.log(links);
+                                    
+                                    let lineObject = {
+                                        "latitudes": [event.mapObject.latitude, links.latitude],
+                                        "longitudes": [event.mapObject.longitude, links.longitude],
+                                        "arrowColor": "#2d862d",
+                                        "arrowSize": 9,
+                                        "balloonText": linkObj.balloonText,
+                                        "color": linkObj.color,
+                                        "thickness": linkObj.thickness,
+                                        "arrowAlpha": 2,
+                                        "accessibleLabel": linkObj.accessibleLabel,
+                                        "bringForwardOnHover": true
+                                    }
 
-                                    let lineObject = {"latitudes": [event.mapObject.latitude, links.latitude],
-                                      "longitudes": [event.mapObject.longitude, links.longitude],
-                                      "arrowColor":  "#2d862d",
-                                      "arrowSize": 9,
-                                      "balloonText":"<b>Link </b>: Broad band <br> <b>Event </b>: Route Change",
-                                      "color":"#4682b4",
-                                      "thickness":3,
-                                      "arrowAlpha":2,
-                                      "accessibleLabel":"Broad band",
-                                      "bringForwardOnHover":true
-                                      }
+                                    let lineObject2 = {
+                                        "latitudes": [event.mapObject.latitude, links.latitude],
+                                        "longitudes": [event.mapObject.longitude, links.longitude],
+                                        "arrowColor": "#2d862d",
+                                        "arrowSize": 9,
+                                        "arrowAlpha": 2,
+                                        "color": "#2d862d", // change the color
+                                        "accessibleLabel": "mpls",
+                                        "balloonText": "<b>Link </b>: MPLS <br> <b>Event </b>:  Route Change",
+                                        "arc": -0.1,
+                                        "thickness": 3,
+                                        "bringForwardOnHover": true
+                                    }
 
-                                      if(isNoAppRoute) {
-                                          lineObject["arrowColor"] = "red";
-                                          lineObject["arrowAlpha"] = 0.7
-                                          lineObject["arc"] = -0.8
-                                          lineObject["color"] = "#ff6347"
-                                          lineObject["balloonText"] = "<b>Link </b>: MPLS-VES <br> <b>Event </b>: No Route"
-                                          lineObject["accessibleLabel"] = "No Route",
-                                          lineObject["url"] = "No Route"
-                                      }
-
-                                    let lineObject2 = {"latitudes": [event.mapObject.latitude, links.latitude],
-                                      "longitudes": [event.mapObject.longitude, links.longitude],
-                                      "arrowColor":  "#2d862d",
-                                      "arrowSize": 9,
-                                      "arrowAlpha":2,
-                                      "color":"#FFDE24", // change the color
-                                      "accessibleLabel":"mpls",
-                                      "balloonText":"<b>Link </b>: MPLS <br> <b>Event </b>:  Route Change",
-                                      "arc":-0.54 ,
-                                      "thickness":3,
-                                      "bringForwardOnHover":true
-                                      }
                                     event.mapObject.lines.push(lineObject2);
 
                                     event.mapObject.lines.push(lineObject);
@@ -128,7 +153,7 @@ class Map extends React.Component {
                     if (metrics.username === user) {
 
                         for (let [Key, site] of Object.entries(metrics.sites)) {
-
+                            let color = site.no_app_route ? "red" : "green"
                             Value.images.push({
                                 "label": site.name,
                                 "svgPath": targetSVG,
@@ -137,6 +162,7 @@ class Map extends React.Component {
                                 "title": site.name,
                                 "latitude": site.latitude,
                                 "longitude": site.longitude,
+                                "color": color
                             }
 
                             )
