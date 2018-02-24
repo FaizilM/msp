@@ -116,7 +116,7 @@
                 "applications": [
                   {
                     "voice-HD": {
-                      "destination": "Chicogo",
+                      "destination": "Chicago",
                       "source_ip": "172.17.0.3",
                       "destination_ip": "172.17.0.102",
                       "link": "MPLS-VES",
@@ -219,7 +219,7 @@
                       ]
                     },
                     "Default": {
-                      "destination": "Chicogo",
+                      "destination": "Chicago",
                       "source_ip": "192.168.20.1",
                       "destination_ip": "192.168.30.1",
                       "link": "LTE",
