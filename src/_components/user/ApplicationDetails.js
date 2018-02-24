@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
 import { Route, Redirect, Link } from 'react-router-dom';
 
-
 let getApplicationDetails = (user) => {
     let customerMetricsData = [];
     if (user.role == userConstants.ROLE_ADMIN) {
@@ -25,14 +24,15 @@ let getApplicationDetails = (user) => {
     }
 
     let tableMetricsData = [];
+    let sourceSite;
     if (customerMetricsData != null && customerMetricsData != undefined) {
 
         for (let [metricsDataKey, metricsDataValue] of Object.entries(customerMetricsData)) {
             let count = 0;
             if (metricsDataValue.sites != null && metricsDataValue.sites != undefined) {
                 let sites = metricsDataValue.sites;
-
                 for (let site = 0; site < 1; site++) {
+                  sourceSite = sites[site].name;
                     let devices = sites[site].devices;
                     for (let device = 0; device < devices.length; device++) {
                         for (let [deviceKey, deviceValue] of Object.entries(devices[device])) {
@@ -90,7 +90,7 @@ let getApplicationDetails = (user) => {
         }
     }
 
-    return tableMetricsData;
+    return [tableMetricsData, sourceSite];
 };
 
 
@@ -149,7 +149,8 @@ class ApplicationDetails extends React.Component {
 
     render() {
         let user = this.props.authentication.user;
-        let applicationDetails = getApplicationDetails(user);
+        let applicationDetail = getApplicationDetails(user);
+        let applicationDetails = applicationDetail[0];
         let index = 0;
         let tableData = [];
         let headerData = [];
@@ -157,6 +158,9 @@ class ApplicationDetails extends React.Component {
         let eventData = [];
         let event = 1;
         let routeEvent;
+        let site = [];
+        let siteOption = [];
+        siteOption.push(  <option key={"source"}>{applicationDetail[1]}</option>);
         eventHeaderData.push(<th key={0}>ID</th>)
         for (let index = 0; index < eventHead.length; index++) {
             eventHeaderData.push(<th key={index + 1}>{eventHead[index]}</th>);
@@ -171,6 +175,10 @@ class ApplicationDetails extends React.Component {
         for (let applicationIndex = 0; applicationIndex < applicationDetails.length; applicationIndex++) {
             let rowData = [];
             let rowEventData = [];
+            if(site.indexOf(applicationDetails[applicationIndex]["destination"]) == -1) {
+              site.push(applicationDetails[applicationIndex]["destination"]);
+              siteOption.push(  <option key={applicationIndex}>{applicationDetails[applicationIndex]["destination"]}</option>);
+            }
             rowData.push(<td key={"id"}>{applicationIndex + 1}</td>);
             for (let index = 0; index < col.length; index++) {
                 rowData.push(<td key={col[index]}>{applicationDetails[applicationIndex][col[index]]}</td>);
@@ -214,12 +222,34 @@ class ApplicationDetails extends React.Component {
 
 
         return (
-            <Col xs="12" sm="12" md="12" lg="12" xl="12">
+          <div>
+            <Col xs="12>" sm="12" md="12" lg="12" xl="12">
+
                 <div className="panel panel-default">
-                    <div className="panel-heading">
-                        <i className=""></i>
-                        <h3> Application Details </h3>
+                <div className="panel-heading">
+                <Row>
+                  <Col xs="7" sm="7" md="7" lg="8" xl="8">
+
+                        <h3> Application Routing Details : {applicationDetail[1]} </h3>
+                  </Col>
+
+                  <Col xs="2" sm="2" md="2" lg="1" xl="1">
+                      <div>
+                        <h5 style ={{marginTop: "10px"}}> Source Site </h5>
+                      </div>
+                  </Col>
+
+                  <Col xs="3" sm="4" md="3" lg="3" xl="3">
+                    <div className="form-group">
+                      <select className="form-control">
+                        {siteOption}
+                      </select>
                     </div>
+                  </Col>
+                </Row>
+                </div>
+
+
                     <div className="panel-body">
                         <div className="list-group">
                             <div className="table-responsive">
@@ -228,6 +258,20 @@ class ApplicationDetails extends React.Component {
                                         {tableData}
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Col>
+              <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                <div className="panel panel-default">
+                    <div className="panel-heading">
+                        <i className=""></i>
+                        <h3> Event Details </h3>
+                    </div>
+                    <div className="panel-body">
+                        <div className="list-group">
+                            <div className="table-responsive">
                                 <table className="table table-bordered">
                                     <tbody>
                                         {eventData}
@@ -237,8 +281,8 @@ class ApplicationDetails extends React.Component {
                         </div>
                     </div>
                 </div>
-            </Col >
-
+              </Col>
+            </div>
         );
 
     }
