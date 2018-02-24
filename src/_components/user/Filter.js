@@ -240,6 +240,7 @@ class Filter extends Component {
   }
 
   render() {
+
     return (
       <Col xs="12" sm="12" md="12" lg="12" xl="12">
         <div className="panel panel-default">
@@ -253,11 +254,11 @@ class Filter extends Component {
                 <Col xs="6" sm="6" md="2" lg="2" xl="2">
                   <div className="form-group">
                     <select className="form-control" id="time" onChange={this.changeDuration}>
-                      <option>Hour</option>
-                      <option>Day</option>
-                      <option>Week</option>
-                      <option>Month</option>
-                      <option>Year</option>
+                      <option value={"HOUR"}>Hour</option>
+                      <option value={"DAY"}>Day</option>
+                      <option value={"WEEK"}>Week</option>
+                      <option value={"MONTH"}>Month</option>
+                      <option value={"YEAR"}>Year</option>
                     </select>
                   </div>
                 </Col>

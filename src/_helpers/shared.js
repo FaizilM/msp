@@ -8,7 +8,9 @@ export function getValueByTime(
 ) {
     let response = 0;
     if (value && typeBy) {
-
+        if (value == 0) {
+            value = 1;
+        }
         switch (typeBy) {
             case "DAY":
                 response = value * 24;
