@@ -11,33 +11,33 @@ import { Tabs, Tab } from 'react-bootstrap'
 
 class AdminDashboard extends React.Component {
 
-      constructor(props, context) {
-          super(props, context);
+    constructor(props, context) {
+        super(props, context);
 
-          this.state = {
+        this.state = {
             key: 1
-          };
+        };
 
-          this.gotoCustomerMetrics = this.gotoCustomerMetrics.bind(this);
-      }
+        this.gotoCustomerMetrics = this.gotoCustomerMetrics.bind(this);
+    }
 
-      gotoCustomerMetrics(key) {
-        this.setState({ key : key });
-      }
+    gotoCustomerMetrics(key) {
+        this.setState({ key: key });
+    }
 
 
     render() {
         const { user, users } = this.props;
         return (
 
-        <Tabs activeKey={this.state.key}
-                  onSelect={this.gotoCustomerMetrics}
-                  id="controlled-tab-example">
-              <Tab eventKey={1} title="Dashboard">
-              <Row>
+            <Tabs activeKey={this.state.key}
+                onSelect={this.gotoCustomerMetrics}
+                id="controlled-tab-example">
+                <Tab eventKey={1} title="Dashboard">
+                    <Row>
                         <Inventory />
                         <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                        <Sites clickevent={this.gotoCustomerMetrics}/>
+                            <Sites clickevent={this.gotoCustomerMetrics} />
                         </Col>
                     </Row>
                     <Row>
@@ -52,12 +52,12 @@ class AdminDashboard extends React.Component {
                         <LinkCapacity />
                         <MPLSLinkUtilization />
                     </Row>
-              </Tab>
-              <Tab eventKey={2} title="Customer Metrics">
-                  <Row>
-                      <CustomerMetrics />
-                  </Row>
-              </Tab>
+                </Tab>
+                <Tab eventKey={2} title="Customer Metrics">
+                    <Row>
+                        <CustomerMetrics />
+                    </Row>
+                </Tab>
             </Tabs>
 
         );

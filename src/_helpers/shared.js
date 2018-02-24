@@ -19,15 +19,41 @@ export function getValueByTime(
                 response = value * (24 * 7) - 24;
                 break;
             case "MONTH":
-                response = value * (24 * 30)- 24;
+                response = value * (24 * 30) - 24;
                 break;
             case "YEAR":
-                response = value * (24 * 366 )- 24;
+                response = value * (24 * 366) - 24;
                 break;
             default:
                 response = value;
         }
     }
-    console.log("typeBy --> "+ typeBy +  ": "+  response);
+    console.log("typeBy --> " + typeBy + ": " + response);
+    return response;
+}
+
+export function getSiteByTime(
+    typeBy
+) {
+    let response = [];
+    if (typeBy) {
+         switch (typeBy) {
+            case "DAY":
+                response = [9, 2, 1];
+                break;
+            case "WEEK":
+                response = [8, 3, 1];
+                break;
+            case "MONTH":
+                response = [8, 3, 1];
+                break;
+            case "YEAR":
+                response = [7, 4, 1];
+                break;
+            default:
+                response = [9, 2, 1];
+        }
+    }
+    console.log("typeBy --> " + typeBy + ": " + response);
     return response;
 }

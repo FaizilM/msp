@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
 import { Container, Row, Col, select } from 'reactstrap';
 import { tabActions } from '../../_actions';
+import { getSiteByTime } from '../../_helpers/shared';
 
 let siteAvailabilityData = (user) => {
     let totalSite = 0;
@@ -51,6 +52,7 @@ let siteAvailabilityData = (user) => {
 class Sites extends Component {
 
 
+
     constructor(props) {
         super(props);
         this.state =
@@ -59,12 +61,22 @@ class Sites extends Component {
                     'app_route_policy': 12500,
                     'app_route_change': 60,
                     'no_app_route': 7
-                }
-
+                },
+                availabileSite: []
             }
         this.gotoCustomerMetrics = this.gotoCustomerMetrics.bind(this);
+        this.changeDuration = this.changeDuration.bind(this);
+        this.setAvailable = this.setAvailable.bind(this);
     };
 
+    changeDuration(selectedSite) {
+        this.setState({ availabileSite: getSiteByTime(selectedSite.target.value) });
+
+    }
+    setAvailable() {
+        let user = this.props.authentication.user;
+        this.setState({availabileSite:siteAvailabilityData(user)});
+    }
     gotoCustomerMetrics() {
         this.props.clickevent(2);
     }
@@ -86,71 +98,86 @@ class Sites extends Component {
 
     render() {
         let user = this.props.authentication.user;
-        let availability = siteAvailabilityData(user);
         let viewSites = [];
-        let site_admin ="userSite"
-        let  app_route = []
-        let  change_route = []
-        let  no_route = []
+        let site_admin = "userSite"
+        let app_route = []
+        let change_route = []
+        let no_route = []
+        if(this.state.availabileSite.length ==0) {
+            this.setAvailable();
+        }
 
 
+        if (userConstants.ROLE_ADMIN == user.role) {
+            viewSites.push(<button key={4} onClick={this.gotoCustomerMetrics} className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%", marginBottom: "5%" }}>
+                <a style={{ color: "white" }}><label>View All Sites</label></a>
+            </button>);
 
-            if (userConstants.ROLE_ADMIN == user.role) {
-                viewSites.push( <button onClick={this.gotoCustomerMetrics} className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%", marginBottom: "5%" }}>
-                    <a style={{ color: "white" }}><label>View All Sites</label></a>
-                </button>);
 
+            app_route.push(
+                <Link key={0} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onClick={this.gotoCustomerMetrics} id="app_route" >
+                    <text key={0} textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.availabileSite[0]}</text>
+                </Link>
+            )
 
-                app_route.push(
-                  <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500}  onClick={this.gotoCustomerMetrics} id="app_route" >
-                      <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{availability[0]}</text>
-                  </Link>
-                )
+            app_route.push(
+                <Link key={1} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onClick={this.gotoCustomerMetrics} id="app_route_change" >
+                    <text key={1} textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.availabileSite[1]}</text>
+                </Link>
+            )
 
-                app_route.push(
-                    <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500}  onClick={this.gotoCustomerMetrics} id="app_route_change" >
-                        <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{availability[1]}</text>
-                    </Link>
-                )
+            app_route.push(
+                <Link key={2} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} id="no_route" onClick={this.gotoCustomerMetrics}  >
+                    <text key={2} textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.availabileSite[2]}</text>
+                </Link>
+            )
 
-                app_route.push(
-                  <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500}  id="no_route" onClick={this.gotoCustomerMetrics}  >
-                      <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{availability[2]}</text>
-                  </Link>
-                )
+            site_admin = "adminSite"
+        } else {
 
-                site_admin ="adminSite"
-            } else {
+            app_route.push(
+                <Link key={0} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} id="app_route"  >
+                    <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ justifyContent: 'center' }}>{availability[0]}</text>
+                </Link>
+            )
 
-                app_route.push(
-                  <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} id="app_route"  >
-                      <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ justifyContent: 'center' }}>{availability[0]}</text>
-                  </Link>
-              )
-
-              app_route.push(
-                <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500}  id="app_route_change"  >
+            app_route.push(
+                <Link key={1} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} id="app_route_change"  >
                     <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ justifyContent: 'center' }}>{availability[1]}</text>
                 </Link>
-              )
+            )
 
-              app_route.push(
-                <Link activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500}  id="no_route" >
+            app_route.push(
+                <Link key={2} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} id="no_route" >
                     <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ justifyContent: 'center' }}>{availability[2]}</text>
                 </Link>
-              )
-            }
+            )
+        }
 
 
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
-                    <i className=""></i>
-                    <h3>Sites</h3>
+                    <Row>
+                        <Col lg={{ size: 1 }}>
+                            <h3>Sites</h3>
+                        </Col>
+                        <Col lg={{ size: 3 }} className="pull-right">
+                            <div className="form-group">
+                                <select className="form-control" onChange={this.changeDuration}>
+                                    <option key={"Hour"} value={"HOUR"}>Hour</option>
+                                    <option key={"Day"} value={"DAY"}>Day</option>
+                                    <option key={"Week"} value={"WEEK"}>Week</option>
+                                    <option key={"Month"} value={"MONTH"}>Month</option>
+                                    <option key={"Year"} value={"YEAR"}>Year</option>
+                                </select>
+                            </div>
+                        </Col>
+                    </Row>
                 </div>
                 <div className="panel-body">
                     <div className="list-group">
-                        <div  className= {site_admin} >
+                        <div className={site_admin} >
                             <div style={{ float: 'left' }}>
                                 <svg height="120" width="120">
                                     <circle cx="60" cy="60" r="50" stroke={color.GREEN_COLOR} strokeWidth="5" fill="white" />

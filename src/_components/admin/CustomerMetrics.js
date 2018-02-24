@@ -5,7 +5,7 @@ import { indexOf, replace } from 'lodash';
 import { Container, Row, Col } from 'reactstrap';
 import SortableTbl from 'react-sort-search-table';
 import ImageLoader from 'react-imageloader';
-
+import sortJsonArray from 'sort-json-array';
 
 
 let customerMetricsDashboardData = () => {
@@ -154,7 +154,29 @@ class CustomerMetrics extends Component {
   render() {
 
     let customerData = customerMetricsDashboardData();
-  
+    customerData = sortJsonArray(customerData, 'customer');
+    customerData = sortJsonArray(customerData, 'app_route_change', 'des');
+    customerData = sortJsonArray(customerData, 'no_app_route', 'des');
+    for (let index = 0; index < customerData.length; index++) {
+      if (customerData[index]["no_app_route"] > 0 || customerData[index]["app_route_change"] > 0) {
+        let noApp = customerData[index]["no_app_route"];
+        let changeApp = customerData[index]["app_route_change"];
+        for (let [customerDataKey, customerDataValue] of Object.entries(customerData[index])) {
+          if (customerDataKey != "customer" && customerDataKey != "sites" && customerDataKey != "app_route_policy") {
+            if (changeApp > 0) {
+              customerData[index][customerDataKey] = <span style={{ color: "orange", fontWeight:"bold" }}>{customerDataValue}</span>
+            }
+            if (noApp > 0 && customerDataKey != "app_route_change") {
+                customerData[index][customerDataKey] = <span style={{ color: "red", fontWeight:"bold" }}>{customerDataValue}</span>
+            }
+            
+          }
+        }
+      }
+    }
+
+
+
     return (
       <Col xs="12" sm="12" md="12" lg="12" xl="12">
         <div className="panel panel-default">
