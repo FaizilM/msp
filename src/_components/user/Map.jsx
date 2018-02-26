@@ -53,6 +53,7 @@ let getLinkDetails = (routeType) => {
                 "color": "red",
                 "arc": -0.54,
                 "accessibleLabel": "No Route",
+                "url": window.url
             }
             break;
         case "APP_ROUTE":
@@ -90,7 +91,6 @@ class Map extends React.Component {
     render() {
 
         let user = this.props.authentication.user.username
-
         var starSVG = "M20,7.244 L12.809,6.627 L10,0 L7.191,6.627 L0,7.244 L5.455,11.971 L3.82,19 L10,15.272 L16.18,19 L14.545,11.971 L20,7.244 L20,7.244 Z M10,13.396 L6.237,15.666 L7.233,11.385 L3.91,8.507 L8.29,8.131 L10,4.095 L11.71,8.131 L16.09,8.507 L12.768,11.385 L13.764,15.666 L10,13.396 L10,13.396 Z";
         var config = {
             "type": "map",
@@ -141,18 +141,20 @@ class Map extends React.Component {
                                 for (let [Key, links] of Object.entries(site.linkedWith)) {
 
                                     let linkObj = getLinkDetails(links.eventType);
-
+                                    
                                     let lineObject = {
                                         "latitudes": [event.mapObject.latitude, links.latitude],
                                         "longitudes": [event.mapObject.longitude, links.longitude],
                                         "arrowColor": "#2d862d",
+                                        "url": window.location.href + "/tab=3",
                                         "arrowSize": 9,
                                         "balloonText": linkObj.balloonText,
                                         "color": linkObj.color,
                                         "thickness": 3,
                                         "arrowAlpha": 2,
                                         "accessibleLabel": linkObj.accessibleLabel,
-                                        "bringForwardOnHover": true
+                                        "bringForwardOnHover": true,
+                                        
                                     }
 
                                     let lineObject2 = {
@@ -197,6 +199,13 @@ class Map extends React.Component {
                             </Col>
                             <Col lg={{ size: 3 }} className="pull-right">
                                 <div className="form-group">
+                                    <select className="form-control">
+                                        <option>Network Topology</option>
+                                    </select>
+                                </div>
+                            </Col>
+                            <Col lg={{ size: 3 }} className="pull-right">
+                                <div className="form-group">
                                     <select className="form-control" onChange={this.changeDuration}>
                                         <option>Hour</option>
                                         <option>Day</option>
@@ -218,7 +227,6 @@ class Map extends React.Component {
                     </div>
                 </div>
             </Col>
-
         );
     }
 }
