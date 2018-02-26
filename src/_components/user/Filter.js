@@ -3,7 +3,7 @@ import '../../assets/css/App.css';
 import { Container, Row, Col, select } from 'reactstrap';
 import metricsData from '../../metricsData.json';
 import { indexOf } from 'lodash';
-import { LinkCapacity, Sites, ApplicationClassMetrics, Bandwidth, PacketLoss, LatencyRatio, JitterRatio, SiteAvailability } from '../';
+import { LinkCapacity, Sites, ApplicationClassMetrics, Bandwidth, PacketLoss, LatencyRatio, JitterRatio, SiteAvailability, ApplicationDetails } from '../';
 import jsonQuery from 'json-query';
 import { connect } from 'react-redux';
 import { userConstants } from '../../_constants';
@@ -19,11 +19,12 @@ class Filter extends Component {
       siteGroup: "",
       siteName: "",
       linkName: "",
-      cpeValue:"",
-      sourceSite:"",
+      cpeValue: "",
+      sourceSite: "",
       applicationName: "",
-      duration: "",
-      toFilter: ""
+      duration: "HOUR",
+      toFilter: "",
+      destinationSite: ""
     }
 
     this.siteGroup = this.siteGroup.bind(this);
@@ -40,7 +41,9 @@ class Filter extends Component {
     this.familyApplication = this.familyApplication.bind(this);
     this.changeCpe = this.changeCpe.bind(this);
     this.changeSource = this.changeSource.bind(this);
-    this.handleDashBoardData =this.handleDashBoardData.bind(this);
+    this.handleDashBoardData = this.handleDashBoardData.bind(this);
+    this.allDestinationSite = this.allDestinationSite.bind(this);
+    this.changeDestination = this.changeDestination.bind(this);
   }
 
   componentDidMount() {
@@ -78,8 +81,9 @@ class Filter extends Component {
     }
     return source;
   }
-  cpeData() {
 
+  cpeData() {
+    let sourceSite;
     let cpe = [];
     let user = this.props.authentication.user;
     let data = {};
@@ -95,12 +99,21 @@ class Filter extends Component {
 
     data = {};
     data["deviceData"] = metrics;
+    let query;
+    sourceSite = this.state.sourceSite;
+    if (sourceSite == undefined || sourceSite == "" || sourceSite == "All Source") {
+      query = 'deviceData[sites].devices';
+    } else {
+      query = 'deviceData[sites][**][name=' + sourceSite + '].devices';
+    }
 
-    data["deviceData"] = jsonQuery('deviceData[sites].devices', {
+    data["deviceData"] = jsonQuery(query, {
       data: data
     }).value;
     metrics = [];
-    metrics.push(data["deviceData"]);
+    if (data["deviceData"] != null) {
+      metrics.push(data["deviceData"]);
+    }
 
     for (let device = 0; device < metrics.length; device++) {
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics[device])) {
@@ -109,6 +122,7 @@ class Filter extends Component {
         }
       }
     }
+    // this.setState({cpeValue: cpe});
     return cpe;
   }
 
@@ -131,8 +145,73 @@ class Filter extends Component {
     return sitesgroup;
   }
 
-  allSites(selectedSite) {
+  allDestinationSite() {
 
+    let siteName = [];
+    let sitekey = [];
+    let metrics = [];
+    let data = {};
+    let cpe = this.state.cpeValue;
+    let source = this.state.sourceSite;
+
+    let user = this.props.authentication.user;
+    if (user.role == userConstants.ROLE_USER) {
+      data["customers"] = metricsData
+      data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+        data: data
+      }).value;
+      metrics.push(data["customers"]);
+    } else {
+      metrics.push(metricsData);
+    }
+    data = {};
+    data["deviceData"] = metrics;
+    let query;
+    if (source == undefined || source == "" || source == "All Source") {
+      query = "deviceData[sites].devices";
+    } else {
+      query = 'deviceData[sites][**][name=' + source + '].devices'
+    }
+
+    data["deviceData"] = jsonQuery(query, {
+      data: data
+    }).value;
+    metrics = [];
+    metrics = data["deviceData"]
+    let deviceQuery;
+
+    if (cpe == undefined || cpe == "" || cpe == "All CPE") {
+      deviceQuery = 'deviceList[**][0][**].applications';
+    } else {
+      deviceQuery = 'deviceList[**][0][' + cpe + '].applications';
+    }
+
+    data = {};
+    data["deviceList"] = metrics;
+    data["deviceList"] = jsonQuery(deviceQuery, {
+      data: data
+    }).value;
+    metrics = [];
+    metrics = data["deviceList"]
+
+    for (let index = 0; index < metrics.length; index++) {
+      let sitename;
+
+      data = {};
+      data["device"] = metrics[index];
+      data["device"] = jsonQuery('device[**][0].destination', {
+        data: data
+      }).value;
+
+      if (data.device != undefined && sitekey.indexOf(data.device) == -1) {
+        sitekey.push(data.device);
+        siteName.push(<option key={data.device}>{data.device}</option>);
+      }
+
+    }
+    return siteName;
+  }
+  allSites(selectedSite) {
     let siteName = [];
     let sitekey = [];
     let metrics = [];
@@ -150,49 +229,33 @@ class Filter extends Component {
       metrics.push(metricsData);
     }
 
+
     if (selectedSite != undefined) {
       this.setState({ siteGroup: selectedSite.target.value });
       siteGroup = selectedSite.target.value;
     }
     data = {};
     data["deviceData"] = metrics;
-let query;
-if (siteGroup == "" || siteGroup == undefined || siteGroup == "All Site Group") {
-  query = "deviceData[sites]";
-}
-else if (metricsDataValue.sitesgroup == siteGroup) {
-  query = 'deviceData[sites][**][sitesgroup='+siteGroup+']'
-}
+    let query;
+    if (siteGroup == "" || siteGroup == undefined || siteGroup == "All Site Group") {
+      query = "deviceData[sites].name";
+    }
+    else {
+      query = 'deviceData[sites][**][sitesgroup=' + siteGroup + '].name'
+    }
     data["deviceData"] = jsonQuery(query, {
       data: data
     }).value;
-    metrics =[];
-    metrics = data["deviceData"]
-    data["deviceList"] = metrics
-    data["deviceList"] = jsonQuery('deviceList.devices[0][**].applications', {
-      data: data
-    }).value;
-    metrics = data["deviceList"]
-    console.log(metrics);
+    metrics = [];
+    if (siteGroup != undefined) {
+      metrics.push(data["deviceData"]);
+    } else {
+      metrics = data["deviceData"]
+    }
     for (let index = 0; index < metrics.length; index++) {
-        let sitename;
-        data = {};
-        data["sitegroup"] = metrics[index];
-        data["device"] = jsonQuery('device[**][0].destination', {
-          data: data
-        }).value;
-        
-        data = {};
-        data["device"] = metrics[index];
-        data["device"] = jsonQuery('device[**][0].destination', {
-          data: data
-        }).value;
-        
-       
-
-        if (sitename != undefined && sitekey.indexOf(sitename) == -1) {
-          sitekey.push(sitename);
-          siteName.push(<option key={sitename}>{sitename}</option>);
+      if (metrics[index] != undefined && sitekey.indexOf(metrics[index]) == -1) {
+        sitekey.push(metrics[index]);
+        siteName.push(<option key={metrics[index]}>{metrics[index]}</option>);
       }
     }
     this.setState({ all_site: siteName });
@@ -298,9 +361,9 @@ else if (metricsDataValue.sitesgroup == siteGroup) {
     this.linksData(selectedSite);
     this.applicationsData(selectedSite);
   }
- changeCpe(selectedSite) {
-  this.setState({ cpeValue: selectedSite.target.value });
- }
+  changeCpe(selectedSite) {
+    this.setState({ cpeValue: selectedSite.target.value });
+  }
   changeLink(selectedSite) {
     this.setState({ linkName: selectedSite.target.value });
   }
@@ -315,6 +378,10 @@ else if (metricsDataValue.sitesgroup == siteGroup) {
 
   changeSource(selectedSite) {
     this.setState({ sourceSite: selectedSite.target.value });
+  }
+
+  changeDestination(selectedSite) {
+    this.setState({ destinationSite: selectedSite.target.value });
   }
 
   handlePrint() {
@@ -336,7 +403,7 @@ else if (metricsDataValue.sitesgroup == siteGroup) {
       "cpeValue": this.state.cpeValue,
       "siteName": this.state.siteName,
       "linkName": this.state.linkName
-     
+
     }
     this.setState({ toFilter: filter });
 
@@ -344,8 +411,7 @@ else if (metricsDataValue.sitesgroup == siteGroup) {
 
   render() {
     let user = this.props.authentication.user;
-
-    if (userConstants.ROLE_USER == user.role && this.props.type != "visualization") {
+    if (userConstants.ROLE_USER == user.role && this.props.type != "visualization" && this.props.type != "applicationDetails") {
       return (
         <Col xs="12" sm="12" md="12" lg="12" xl="12">
           <div className="panel panel-default">
@@ -385,9 +451,9 @@ else if (metricsDataValue.sitesgroup == siteGroup) {
                   </Col>
                   <Col xs="6" sm="6" md="2" lg="2" xl="2">
                     <div className="form-group">
-                      <select className="form-control" id="site" onChange={this.changeData}>
+                      <select className="form-control" id="site" onChange={this.changeDestination}>
                         <option>All Sites</option>
-                        {this.state.all_site}
+                        {this.allDestinationSite()}
                       </select>
                     </div>
                   </Col>
@@ -448,22 +514,6 @@ else if (metricsDataValue.sitesgroup == siteGroup) {
                   </Col>
                   <Col xs="6" sm="6" md="2" lg="2" xl="2">
                     <div className="form-group">
-                      <select className="form-control" id="source" onChange={this.allSites}>
-                        <option>All Source</option>
-                        {this.sourceSite()}
-                      </select>
-                    </div>
-                  </Col>
-                  <Col xs="6" sm="6" md="2" lg="2" xl="2">
-                    <div className="form-group">
-                      <select className="form-control" id="cpe" onChange={this.allSites}>
-                        <option>All CPE</option>
-                        {this.cpeData()}
-                      </select>
-                    </div>
-                  </Col>
-                  <Col xs="6" sm="6" md="2" lg="2" xl="2">
-                    <div className="form-group">
                       <select className="form-control" id="siteGroup" onChange={this.allSites}>
                         <option>All Site Group</option>
                         {this.siteGroup()}
@@ -488,14 +538,6 @@ else if (metricsDataValue.sitesgroup == siteGroup) {
                   </Col>
                   <Col xs="6" sm="6" md="2" lg="2" xl="2">
                     <div className="form-group">
-                      <select className="form-control" id="link" onChange={this.changeLink}>
-                        <option>Application Family</option>
-                        {this.familyApplication()}
-                      </select>
-                    </div>
-                  </Col>
-                  <Col xs="6" sm="6" md="2" lg="2" xl="2">
-                    <div className="form-group">
                       <select className="form-control" id="application" onChange={this.changeApplication}>
                         <option>All Applications</option>
                         {this.state.all_application}
@@ -509,16 +551,16 @@ else if (metricsDataValue.sitesgroup == siteGroup) {
                   </Col>
                 </Row>
                 <Row>
-                  <LinkCapacity filter={this.state.toFilter} />
-                  <LatencyRatio filter={this.state.toFilter} />
+                  <LinkCapacity filter={this.state.toFilter} type="visualization" />
+                  <LatencyRatio filter={this.state.toFilter} type="visualization" />
                 </Row>
                 <Row>
-                  <JitterRatio filter={this.state.toFilter} />
-                  <PacketLoss filter={this.state.toFilter} />
+                  <JitterRatio filter={this.state.toFilter} type="visualization" />
+                  <PacketLoss filter={this.state.toFilter} type="visualization" />
                 </Row>
                 <Row>
-                  <ApplicationClassMetrics filter={this.state.toFilter} />
-                  <Bandwidth filter={this.state.toFilter} />
+                  <ApplicationClassMetrics filter={this.state.toFilter} type="visualization" />
+                  <Bandwidth filter={this.state.toFilter} type="visualization" />
                 </Row>
               </div>
             </div>
@@ -526,6 +568,82 @@ else if (metricsDataValue.sitesgroup == siteGroup) {
         </Col>
 
       );
+    } else if (userConstants.ROLE_USER == user.role && this.props.type == "applicationDetails") {
+      return (
+        <Row>
+          <Col xs="12" sm="12" md="12" lg="12" xl="12">
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <i className=""></i>
+                <h4> Filter</h4>
+              </div>
+              <div className="panel-body">
+                <div className="list-group">
+                  <Row>
+                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <div className="form-group">
+                        <select className="form-control" id="time" onChange={this.changeDuration}>
+                          <option value={"HOUR"}>Hour</option>
+                          <option value={"DAY"}>Day</option>
+                          <option value={"WEEK"}>Week</option>
+                          <option value={"MONTH"}>Month</option>
+                          <option value={"YEAR"}>Year</option>
+                        </select>
+                      </div>
+                    </Col>
+                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <div className="form-group">
+                        <select className="form-control" id="source" onChange={this.changeSource}>
+                          <option>All Source</option>
+                          {this.sourceSite()}
+                        </select>
+                      </div>
+                    </Col>
+                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <div className="form-group">
+                        <select className="form-control" id="cpe" onChange={this.changeCpe}>
+                          <option>All CPE</option>
+                          {this.cpeData()}
+                        </select>
+                      </div>
+                    </Col>
+                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <div className="form-group">
+                        <select className="form-control" id="site" onChange={this.changeDestination}>
+                          <option>All Sites</option>
+                          {this.allDestinationSite()}
+                        </select>
+                      </div>
+                    </Col>
+                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <div className="form-group">
+                        <select className="form-control" id="link" onChange={this.changeLink}>
+                          <option>All Links</option>
+                          {this.state.all_link}
+                        </select>
+                      </div>
+                    </Col>
+                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <div className="form-group">
+                        <select className="form-control" id="application" onChange={this.changeApplication}>
+                          <option>All Applications</option>
+                          {this.state.all_application}
+                        </select>
+
+                      </div>
+                    </Col>
+                    <Col lg="2">
+                      <button className="btn btn-primary btn-block"
+                        onClick={this.handleDashBoardData}> Filter </button>
+                    </Col>
+                  </Row>
+                </div>
+              </div>
+            </div>
+          </Col>
+          <ApplicationDetails filter={this.state.toFilter} type="applicationDetails" />
+        </Row>
+      )
     }
   }
 }
