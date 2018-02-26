@@ -15,14 +15,19 @@ class AdminDashboard extends React.Component {
         super(props, context);
 
         this.state = {
-            key: 1
+            key: 1,
+            duration:"HOUR"
         };
 
         this.gotoCustomerMetrics = this.gotoCustomerMetrics.bind(this);
+        this.setDuration = this.setDuration.bind(this);
     }
 
     gotoCustomerMetrics(key) {
         this.setState({ key: key });
+    }
+    setDuration(duration) {
+        this.setState({ duration: duration });
     }
 
 
@@ -37,8 +42,11 @@ class AdminDashboard extends React.Component {
                     <Row>
                         <Inventory />
                         <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                            <Sites clickevent={this.gotoCustomerMetrics}/>
+                            <Sites clickevent={this.gotoCustomerMetrics} duration={this.setDuration}/>
                         </Col>
+                    </Row>
+                    <Row>
+                        <CustomerMetrics id="customerData" currentTimeFrame={this.state.duration}/>
                     </Row>
                     <Row>
                         <SiteAvailability />
@@ -53,11 +61,11 @@ class AdminDashboard extends React.Component {
                         <MPLSLinkUtilization />
                     </Row>
                 </Tab>
-                <Tab eventKey={2} title="Customer Metrics">
+                {/* <Tab eventKey={2} title="Customer Metrics">
                     <Row>
                         <CustomerMetrics />
                     </Row>
-                </Tab>
+                </Tab> */}
             </Tabs>
 
         );

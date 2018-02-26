@@ -152,11 +152,22 @@ class CustomerMetrics extends Component {
     document.querySelector("#customer_metrics_table > div > div > div.form-group > div.desc.col-sm-5.col-xs-12 > div").textContent = content;
   }
   render() {
-
+    let time = this.props.currentTimeFrame;
     let customerData = customerMetricsDashboardData();
+    if (time == "MONTH" || time == "WEEK") {
+      customerData = customerMetricsDashboardData();
+      customerData[2]["app_route_policy"] = customerData[2]["app_route_policy"] - 1
+      customerData[2]["app_route_change"] = customerData[2]["app_route_change"] + 1
+    } 
+    if(time == "YEAR") {
+      customerData = customerMetricsDashboardData();
+      customerData[2]["app_route_policy"] = customerData[2]["app_route_policy"] - 2
+      customerData[2]["app_route_change"] = customerData[2]["app_route_change"] + 2
+    }
     customerData = sortJsonArray(customerData, 'customer');
     customerData = sortJsonArray(customerData, 'app_route_change', 'des');
     customerData = sortJsonArray(customerData, 'no_app_route', 'des');
+   
     for (let index = 0; index < customerData.length; index++) {
       if (customerData[index]["no_app_route"] > 0 || customerData[index]["app_route_change"] > 0) {
         let noApp = customerData[index]["no_app_route"];
@@ -164,12 +175,12 @@ class CustomerMetrics extends Component {
         for (let [customerDataKey, customerDataValue] of Object.entries(customerData[index])) {
           if (customerDataKey != "customer" && customerDataKey != "sites" && customerDataKey != "app_route_policy") {
             if (changeApp > 0) {
-              customerData[index][customerDataKey] = <span style={{ color: "orange", fontWeight:"bold" }}>{customerDataValue}</span>
+              customerData[index][customerDataKey] = <span style={{ color: "orange", fontWeight: "bold" }}>{customerDataValue}</span>
             }
             if (noApp > 0 && customerDataKey != "app_route_change") {
-                customerData[index][customerDataKey] = <span style={{ color: "red", fontWeight:"bold" }}>{customerDataValue}</span>
+              customerData[index][customerDataKey] = <span style={{ color: "red", fontWeight: "bold" }}>{customerDataValue}</span>
             }
-            
+
           }
         }
       }

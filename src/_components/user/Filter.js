@@ -173,27 +173,22 @@ else if (metricsDataValue.sitesgroup == siteGroup) {
       data: data
     }).value;
     metrics = data["deviceList"]
-    console.log(metrics);
     for (let index = 0; index < metrics.length; index++) {
         let sitename;
         data = {};
-        data["sitegroup"] = metrics[index];
-        data["device"] = jsonQuery('device[**][0].destination', {
-          data: data
-        }).value;
-        
-        data = {};
+       
         data["device"] = metrics[index];
         data["device"] = jsonQuery('device[**][0].destination', {
           data: data
         }).value;
         
-       
+        for (let index = 0; index < data.length; index++) {
+          if (sitename != undefined && sitekey.indexOf(sitename) == -1) {
+            sitekey.push(sitename);
+            siteName.push(<option key={sitename}>{sitename}</option>);
+        }
+        }
 
-        if (sitename != undefined && sitekey.indexOf(sitename) == -1) {
-          sitekey.push(sitename);
-          siteName.push(<option key={sitename}>{sitename}</option>);
-      }
     }
     this.setState({ all_site: siteName });
   }
