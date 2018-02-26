@@ -6,9 +6,9 @@ import { Container, Row, Col } from 'reactstrap';
 import { userConstants } from '../../_constants';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
+import { getKPIData } from '../../_helpers/shared';
 
-
-let latencyRatioData = (filter, user) => {
+let latencyRatioData = (filter, user, type) => {
   let metrics = [];
   if (userConstants.ROLE_ADMIN == user.role) {
     metrics = metricsData;
@@ -52,7 +52,7 @@ let latencyRatioData = (filter, user) => {
 
       for (let site = 0; site < sites.length; site++) {
         let links = sites[site].links;
-        if (filter == undefined) {
+        if (filter == undefined || type == 'dashboard') {
           for (let link = 0; link < links.length; link++) {
             let linkLatency = links[link];
             for (let [linkKey, linkValue] of Object.entries(linkLatency)) {
@@ -72,8 +72,8 @@ let latencyRatioData = (filter, user) => {
           latencySite = 0;
         } else {
           if ((siteGroup != undefined && sites[site].sitesgroup == siteGroup) || siteGroup == undefined) {
+           
             if ((siteName != undefined && sites[site].name == siteName) || siteName == undefined) {
-
               for (let link = 0; link < links.length; link++) {
 
                 let linkLosses;
@@ -105,7 +105,30 @@ let latencyRatioData = (filter, user) => {
       latency[1] = parseInt((latency[1] / totalSite) * 100);
       latency[2] = parseInt((latency[2] / totalSite) * 100);
       return latency;
+    } else if (type == "dashboard") {
+      let duration = "HOUR"
+      if (filter != undefined && filter.duration != undefined) {
+        duration = filter.duration;
+      }
+      latency[0] = getKPIData(parseInt((latency[0] / totalSite) * 100), duration);
+      latency[1] = getKPIData(parseInt((latency[1] / totalSite) * 100), duration);
+      latency[2] = getKPIData(parseInt((latency[2] / totalSite) * 100), duration);
+      return latency;
     } else {
+      if (filter.duration != undefined) {
+        if (latencyData.broadband) {
+          latencyData.broadband = getKPIData(latencyData.broadband, filter.duration);
+        }
+        if (latencyData.mpls) {
+          latencyData.mpls = getKPIData(latencyData.mpls, filter.duration);
+        }
+        if (latencyData.t1_lines) {
+          latencyData.t1_lines = getKPIData(latencyData.t1_lines, filter.duration);
+        }
+        if (latencyData['4G']) {
+          latencyData['4G'] = getKPIData(latencyData['4G'], filter.duration);
+        }
+      }
       return latencyData;
     }
   }
@@ -157,9 +180,10 @@ class LatencyRatio extends React.Component {
     };
     let configValue = config.bar;
     let user = this.props.authentication.user;
-    const latencyRatio = latencyRatioData(this.props.filter, user);
+    let type = this.props.type;
+    const latencyRatio = latencyRatioData(this.props.filter, user, type);
 
-    if (this.props.filter == undefined) {
+    if (this.props.filter == undefined || type == "dashboard") {
       for (let [latencyKey, latencyValue] of Object.entries(configValue)) {
         if (latencyKey == "valueAxes") {
           let label = [];
@@ -216,7 +240,7 @@ class LatencyRatio extends React.Component {
       configValue.graphs[0].precision = 0;
       configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
     } else {
-      let colorcode = {"broadband":color.GREEN_COLOR, "mpls":color.YELLOW_COLOR, "t1_lines":color.ORANGE_COLOR, "4G":color.BLUE_COLOR};
+      let colorcode = { "broadband": color.GREEN_COLOR, "mpls": color.YELLOW_COLOR, "t1_lines": color.ORANGE_COLOR, "4G": color.BLUE_COLOR };
       for (let [key, value] of Object.entries(configValue)) {
         if (key == "dataProvider") {
           let index = 0;

@@ -10,7 +10,8 @@ import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
 import { Route, Redirect, Link } from 'react-router-dom';
 import Modal from 'react-modal';
-import { Dialog } from './../common/Dialog'
+import { Dialog } from './../common/Dialog';
+import { Filter } from '../';
 
 const customStyles = {
     content: {

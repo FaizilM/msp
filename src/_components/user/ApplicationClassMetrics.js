@@ -110,7 +110,7 @@ class ApplicationClassMetrics extends Component {
                     "lineAlpha": 0.3,
                     "title": "Bandwidth",
                     "type": "column",
-                    "fillColors":color.BLUE_COLOR,
+                    "fillColors": color.BLUE_COLOR,
                     "fixedColumnWidth": 50,
                     "color": "#000000",
                     "valueField": "bandwidth"
@@ -121,7 +121,7 @@ class ApplicationClassMetrics extends Component {
                     "lineAlpha": 0.3,
                     "title": "Route Change",
                     "type": "column",
-                    "fillColors":color.YELLOW_COLOR,
+                    "fillColors": color.YELLOW_COLOR,
                     "fixedColumnWidth": 50,
                     "color": "#000000",
                     "valueField": "route_change"
@@ -132,7 +132,7 @@ class ApplicationClassMetrics extends Component {
                     "lineAlpha": 0.3,
                     "title": "Route Fail",
                     "type": "column",
-                    "fillColors":color.ORANGE_COLOR,
+                    "fillColors": color.ORANGE_COLOR,
                     "fixedColumnWidth": 50,
                     "color": "#000000",
                     "valueField": "route_fail"
@@ -164,19 +164,19 @@ class ApplicationClassMetrics extends Component {
                 );
             }
             if (key == "dataProvider") {
-                let colorCode = {"bandwidth":color.BLUE_COLOR, "route_change":color.YELLOW_COLOR, "route_fail":color.ORANGE_COLOR};
+                let colorCode = { "bandwidth": color.BLUE_COLOR, "route_change": color.YELLOW_COLOR, "route_fail": color.ORANGE_COLOR };
                 for (let [customerClassKey, customerClassValue] of Object.entries(customerClass)) {
                     let metricsData = [];
                     let data = [];
 
                     data = { "name": customerClassKey };
-                    
+
                     for (let [classKey, classValue] of Object.entries(customerClassValue)) {
 
                         if (this.props.filter != undefined && this.props.filter.duration != undefined) {
                             data[classKey] = getValueByTime(classValue, this.props.filter.duration);
                             data["color"] = colorCode[classKey];
-                            
+
                         } else {
                             data[classKey] = classValue;
                             data["color"] = colorCode[classKey];
