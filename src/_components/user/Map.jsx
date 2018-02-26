@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
 
 
-let populateMapSites = (config, user) => {
+let populateMapSites = (config, user, timeFilterBy) => {
 
     var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
 
@@ -20,8 +20,12 @@ let populateMapSites = (config, user) => {
 
                 if (metrics.username === user) {
 
-                    for (let [Key, site] of Object.entries(metrics.sites)) {
+                    for (let [siteIndex, site] of Object.entries(metrics.sites)) {
                         let color = site.no_app_route ? "red" : "green"
+                        if ((timeFilterBy.toString() === 'MONTH' || timeFilterBy.toString() === 'YEAR') && parseInt(siteIndex) === 0) {
+                            color = "yellow"
+                        }
+
                         Value.images.push({
                             "label": site.name,
                             "svgPath": targetSVG,
@@ -31,9 +35,7 @@ let populateMapSites = (config, user) => {
                             "latitude": site.latitude,
                             "longitude": site.longitude,
                             "color": color
-                        }
-
-                        )
+                        })
                     }
                 }
             }
@@ -53,7 +55,6 @@ let getLinkDetails = (routeType) => {
                 "color": "red",
                 "arc": -0.54,
                 "accessibleLabel": "No Route",
-                "url": window.url
             }
             break;
         case "APP_ROUTE":
@@ -80,7 +81,7 @@ class Map extends React.Component {
         super(props);
         this.changeDuration = this.changeDuration.bind(this);
         this.state = {
-            duration: "",
+            duration: "HOUR",
         }
     }
 
@@ -91,6 +92,8 @@ class Map extends React.Component {
     render() {
 
         let user = this.props.authentication.user.username
+
+        let currentTimeFrame = this.state.duration;
         var starSVG = "M20,7.244 L12.809,6.627 L10,0 L7.191,6.627 L0,7.244 L5.455,11.971 L3.82,19 L10,15.272 L16.18,19 L14.545,11.971 L20,7.244 L20,7.244 Z M10,13.396 L6.237,15.666 L7.233,11.385 L3.91,8.507 L8.29,8.131 L10,4.095 L11.71,8.131 L16.09,8.507 L12.768,11.385 L13.764,15.666 L10,13.396 L10,13.396 Z";
         var config = {
             "type": "map",
@@ -106,7 +109,7 @@ class Map extends React.Component {
             },
             "areasSettings": {
                 "unlistedAreasColor": "#ffffff",
-                outlineThickness: 0.1,
+                "autoZoom": false
 
             },
             "dataProvider": {
@@ -127,6 +130,12 @@ class Map extends React.Component {
 
                     if (event.mapObject && event.mapObject.lines) {
 
+                        console.log("inital ", event.mapObject.lines)
+                        for(var line in event.mapObject.lines) {
+                            event.mapObject.lines.splice(0, 2);
+                        }
+                   
+                       
                         let data = {};
                         data["customers"] = metricsData
 
@@ -134,19 +143,19 @@ class Map extends React.Component {
                             data: data
                         }).value
 
-                        for (let [Key, site] of Object.entries(userDetails.sites)) {
+                        for (let [siteIndex, site] of Object.entries(userDetails.sites)) {
 
                             if (site.name == event.mapObject.label) {
 
                                 for (let [Key, links] of Object.entries(site.linkedWith)) {
 
                                     let linkObj = getLinkDetails(links.eventType);
-                                    
+                                    let linkColor = "#2d862d" //Green By default
+
                                     let lineObject = {
                                         "latitudes": [event.mapObject.latitude, links.latitude],
                                         "longitudes": [event.mapObject.longitude, links.longitude],
                                         "arrowColor": "#2d862d",
-                                        "url": window.location.href + "/tab=3",
                                         "arrowSize": 9,
                                         "balloonText": linkObj.balloonText,
                                         "color": linkObj.color,
@@ -154,7 +163,14 @@ class Map extends React.Component {
                                         "arrowAlpha": 2,
                                         "accessibleLabel": linkObj.accessibleLabel,
                                         "bringForwardOnHover": true,
-                                        
+                                    }
+
+                                    if(links.eventType === "NO_ROUTE") {
+                                        lineObject["url"] =  window.location.href + "/tab=3"
+                                    }
+
+                                    if ((currentTimeFrame.toString() === 'MONTH' || currentTimeFrame.toString() === 'YEAR') && parseInt(siteIndex) === 0) {
+                                        linkColor = "yellow"
                                     }
 
                                     let lineObject2 = {
@@ -163,7 +179,7 @@ class Map extends React.Component {
                                         "arrowColor": "#2d862d",
                                         "arrowSize": 9,
                                         "arrowAlpha": 2,
-                                        "color": "#2d862d", // change the color
+                                        "color": linkColor, // change the color
                                         "accessibleLabel": "mpls",
                                         "balloonText": "<b>Link </b>: MPLS <br>Event:  App Route<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
                                         "arc": -0.1,
@@ -176,9 +192,8 @@ class Map extends React.Component {
                                     event.mapObject.lines.push(lineObject);
                                 }
                             }
-
                         }
-
+                        //update the area's color
                         event.mapObject.validate();
                     }
                 }
@@ -186,7 +201,7 @@ class Map extends React.Component {
         }
 
         //Populate sites in map
-        populateMapSites(config, user);
+        populateMapSites(config, user, this.state.duration);
 
         return (
 
@@ -200,18 +215,18 @@ class Map extends React.Component {
                             <Col lg={{ size: 3 }} className="pull-right">
                                 <div className="form-group">
                                     <select className="form-control">
-                                        <option>Network Topology</option>
+                                        <option>Geo Topology</option>
                                     </select>
                                 </div>
                             </Col>
                             <Col lg={{ size: 3 }} className="pull-right">
                                 <div className="form-group">
                                     <select className="form-control" onChange={this.changeDuration}>
-                                        <option>Hour</option>
-                                        <option>Day</option>
-                                        <option>Week</option>
-                                        <option>Month</option>
-                                        <option>Year</option>
+                                        <option value="HOUR">Hour</option>
+                                        <option value="DAY">Day</option>
+                                        <option value="WEEK">Week</option>
+                                        <option value="MONTH">Month</option>
+                                        <option value="YEAR">Year</option>
                                     </select>
                                 </div>
                             </Col>
