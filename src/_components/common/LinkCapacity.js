@@ -8,6 +8,7 @@ import { Container, Row, Col, select } from 'reactstrap';
 import { userConstants } from '../../_constants';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
+import { getKPIData } from '../../_helpers/shared';
 
 let linkCapacityData = (filter, user) => {
     let metrics = [];
@@ -126,6 +127,20 @@ let linkCapacityData = (filter, user) => {
         }
         return capacity;
     } else {
+        if (filter.duration != undefined) {
+            if (utilization.broadband) {
+                utilization.broadband = getKPIData(utilization.broadband, filter.duration);
+            }
+            if (utilization.mpls) {
+                utilization.mpls = getKPIData(utilization.mpls, filter.duration);
+            }
+            if (utilization.t1_lines) {
+                utilization.t1_lines = getKPIData(utilization.t1_lines, filter.duration);
+            }
+            if (utilization['4G']) {
+                utilization['4G'] = getKPIData(utilization['4G'], filter.duration);
+            }
+        }
         return utilization;
     }
 };

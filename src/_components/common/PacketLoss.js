@@ -7,9 +7,10 @@ import { Container, Row, Col } from 'reactstrap';
 import { userConstants } from '../../_constants';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
+import { getKPIData } from '../../_helpers/shared';
 
 
-let packetLossData = (filter, user) => {
+let packetLossData = (filter, user, type) => {
   let metrics = [];
 
   if (userConstants.ROLE_ADMIN == user.role) {
@@ -55,12 +56,9 @@ let packetLossData = (filter, user) => {
     let sites = metricsDataValue.sites;
 
     for (let site = 0; site < sites.length; site++) {
-
       let links = sites[site].links;
-
-      if (filter == undefined) {
-
-        let links = sites[site].links;
+      if (filter == undefined || type == "dashboard") {
+        links = sites[site].links;
 
         for (let link = 0; link < links.length; link++) {
           let linkLosses = links[link];
@@ -123,6 +121,17 @@ let packetLossData = (filter, user) => {
     loss[0] = parseInt((loss[0] / totalSite) * 100);
     loss[1] = parseInt((loss[1] / totalSite) * 100);
     loss[2] = parseInt((loss[2] / totalSite) * 100);
+
+    return loss;
+  } else if (type == "dashboard") {
+
+    let duration = "HOUR"
+    if(filter != undefined && filter.duration != undefined) {
+      duration = filter.duration;
+    }
+    loss[0] = getKPIData(parseInt((loss[0] / totalSite) * 100), duration);
+    loss[1] = getKPIData(parseInt((loss[1] / totalSite) * 100), duration);
+    loss[2] = getKPIData(parseInt((loss[2] / totalSite) * 100), duration);
     return loss;
   } else {
     return packetLoss;
@@ -180,8 +189,9 @@ class PacketLoss extends Component {
     };
     const configValue = config.bar;
     let user = this.props.authentication.user;
-    const packetLoss = packetLossData(this.props.filter, user);
-    if (this.props.filter == undefined) {
+    let type = this.props.type;
+    const packetLoss = packetLossData(this.props.filter, user, type);
+    if (this.props.filter == undefined || type == 'dashboard') {
 
       for (let [packetLossKey, packetLossValue] of Object.entries(configValue)) {
 
@@ -211,6 +221,7 @@ class PacketLoss extends Component {
               "color": color.ORANGE_COLOR
             })
           for (let data = 0; data < packetLossValue.length; data++) {
+
             packetLossValue[data].percentage = packetLoss[data];
           }
         }
@@ -242,13 +253,13 @@ class PacketLoss extends Component {
       configValue.graphs[0].precision = 0;
       configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
     } else {
-      let colorcode = {"broadband":color.GREEN_COLOR, "mpls":color.YELLOW_COLOR, "t1_lines":color.ORANGE_COLOR, "4G":color.BLUE_COLOR};
+      let colorcode = { "broadband": color.GREEN_COLOR, "mpls": color.YELLOW_COLOR, "t1_lines": color.ORANGE_COLOR, "4G": color.BLUE_COLOR };
       for (let [key, value] of Object.entries(configValue)) {
 
         if (key == "dataProvider") {
           let index = 0;
           for (let [packetLossKey, packetLossValue] of Object.entries(packetLoss)) {
-            let jsonPacketlossData = { "name": packetLossKey, "percentage": packetLossValue, "color":  colorcode[packetLossKey] }
+            let jsonPacketlossData = { "name": packetLossKey, "percentage": packetLossValue, "color": colorcode[packetLossKey] }
             value.push(jsonPacketlossData);
           }
         }
@@ -257,13 +268,12 @@ class PacketLoss extends Component {
           let index = 0;
 
           for (let [packetLossKey, packetLossValue] of Object.entries(packetLoss)) {
-            let jsonPacketlossData = { "title": packetLossKey, "color":  colorcode[packetLossKey] }
+            let jsonPacketlossData = { "title": packetLossKey, "color": colorcode[packetLossKey] }
             value.data.push(jsonPacketlossData);
           }
         }
-
       }
-      
+
     }
 
     let pickChart = () => {

@@ -6,9 +6,9 @@ import { Container, Row, Col } from 'reactstrap';
 import { userConstants } from '../../_constants';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
+import { getKPIData } from '../../_helpers/shared';
 
-
-let jitterRatioData = (filter, user) => {
+let jitterRatioData = (filter, user, type) => {
   let metrics = [];
 
   if (userConstants.ROLE_ADMIN == user.role) {
@@ -48,7 +48,7 @@ let jitterRatioData = (filter, user) => {
     let sites = metricsDataValue.sites;
     for (let site = 0; site < sites.length; site++) {
       let links = sites[site].links;
-      if (filter == undefined) {
+      if (filter == undefined || type == 'dashboard') {
         for (let link = 0; link < links.length; link++) {
           let linkJitter = links[link];
           for (let [linkKey, linkValue] of Object.entries(linkJitter)) {
@@ -104,7 +104,16 @@ let jitterRatioData = (filter, user) => {
     jitter[2] = parseInt((jitter[2] / totalSite) * 100);
 
     return jitter;
-  } else {
+  } else if (type == "dashboard") {
+    let duration = "HOUR"
+    if (filter != undefined && filter.duration != undefined) {
+      duration = filter.duration;
+    }
+    jitter[0] = getKPIData(parseInt((jitter[0] / totalSite) * 100), duration);
+    jitter[1] = getKPIData(parseInt((jitter[1] / totalSite) * 100), duration);
+    jitter[2] = getKPIData(parseInt((jitter[2] / totalSite) * 100), duration);
+    return jitter;
+  }  else {
     return jitterData;
   }
 
@@ -163,9 +172,10 @@ class JitterRatio extends React.Component {
 
     let configValue = config.bar;
     let user = this.props.authentication.user;
-    const jitterRatio = jitterRatioData(this.props.filter, user);
+    let type = this.props.type;
+    const jitterRatio = jitterRatioData(this.props.filter, user, type);
 
-    if (this.props.filter == undefined) {
+    if (this.props.filter == undefined || type == 'dashboard') {
       for (let [jitterKey, jitterValue] of Object.entries(configValue)) {
         if (jitterKey == "valueAxes") {
           let label = [];
@@ -225,7 +235,7 @@ class JitterRatio extends React.Component {
       configValue.graphs[0].precision = 0;
       configValue.graphs[0].balloonText = "Percentage: <b>[[value]]%</b>";
     } else {
-      let colorcode = {"broadband":color.GREEN_COLOR, "mpls":color.YELLOW_COLOR, "t1_lines":color.ORANGE_COLOR, "4G":color.BLUE_COLOR};
+      let colorcode = { "broadband": color.GREEN_COLOR, "mpls": color.YELLOW_COLOR, "t1_lines": color.ORANGE_COLOR, "4G": color.BLUE_COLOR };
       for (let [key, value] of Object.entries(configValue)) {
         if (key == "dataProvider") {
           let index = 0;

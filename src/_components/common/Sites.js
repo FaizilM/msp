@@ -62,16 +62,15 @@ class Sites extends Component {
                     'app_route_change': 60,
                     'no_app_route': 7
                 },
-                availabileSite: []
+                availabileSite: [],
             }
         this.gotoCustomerMetrics = this.gotoCustomerMetrics.bind(this);
         this.changeDuration = this.changeDuration.bind(this);
         this.setAvailable = this.setAvailable.bind(this);
     };
-
-    changeDuration(selectedSite) {
-        this.setState({ availabileSite: getSiteByTime(selectedSite.target.value) });
-
+    changeDuration(selectedDuration) {
+        this.props.duration(selectedDuration.target.value);
+        this.setState({ availabileSite: getSiteByTime(selectedDuration.target.value) });
     }
     setAvailable() {
         let user = this.props.authentication.user;
@@ -80,6 +79,7 @@ class Sites extends Component {
     gotoCustomerMetrics() {
         this.props.clickevent(2);
     }
+
 
     componentDidMount() {
         Events.scrollEvent.register('begin', function () {
@@ -109,25 +109,27 @@ class Sites extends Component {
 
 
         if (userConstants.ROLE_ADMIN == user.role) {
-            viewSites.push(<button key={4} onClick={this.gotoCustomerMetrics} className="btn btn-primary btn-block" style={{ width: "50%", marginLeft: "25%", marginBottom: "5%" }}>
-                <a style={{ color: "white" }}><label>View All Sites</label></a>
+            viewSites.push(<button id="button" className="btn btn-primary btn-block" value="user"
+                style={{ width: "50%", marginLeft: "25%" }}> <Link id="1" activeClass="active" className="customer_metrics_table" to="customer_metrics_table" spy={true} smooth={true} offset={50} duration={500}>
+                    <label id="0" style={{ color: "white" }}> View All Sites</label>
+                </Link>
             </button>);
 
 
             app_route.push(
-                <Link key={0} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onClick={this.gotoCustomerMetrics} id="app_route" >
+                <Link key={0} activeClass="active" className="customer_metrics_table" to="customer_metrics_table" spy={true} smooth={true} offset={50} duration={500} id="app_route" >
                     <text key={0} textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.availabileSite[0]}</text>
                 </Link>
             )
 
             app_route.push(
-                <Link key={1} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} onClick={this.gotoCustomerMetrics} id="app_route_change" >
+                <Link key={1} activeClass="active" className="customer_metrics_table" to="customer_metrics_table" spy={true} smooth={true} offset={50} duration={500} id="app_route_change" >
                     <text key={1} textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.availabileSite[1]}</text>
                 </Link>
             )
 
             app_route.push(
-                <Link key={2} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} id="no_route" onClick={this.gotoCustomerMetrics}  >
+                <Link key={2} activeClass="active" className="customer_metrics_table" to="customer_metrics_table" spy={true} smooth={true} offset={50} duration={500} id="no_route" >
                     <text key={2} textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.availabileSite[2]}</text>
                 </Link>
             )
@@ -180,6 +182,7 @@ class Sites extends Component {
                 <div className="panel-body">
                     <div className="list-group">
                         <div className={site_admin} >
+
                             <div style={{ float: 'left' }}>
                                 <svg height="120" width="120">
                                     <circle cx="60" cy="60" r="50" stroke={color.GREEN_COLOR} strokeWidth="5" fill="white" />
@@ -202,9 +205,12 @@ class Sites extends Component {
 
                                 </svg>
                                 <div><h4>No App Route</h4></div>
+
                             </div>
 
                         </div>
+
+
                     </div>
 
                     {viewSites}

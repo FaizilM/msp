@@ -37,7 +37,7 @@ export function getSiteByTime(
 ) {
     let response = [];
     if (typeBy) {
-         switch (typeBy) {
+        switch (typeBy) {
             case "DAY":
                 response = [9, 2, 1];
                 break;
@@ -52,6 +52,36 @@ export function getSiteByTime(
                 break;
             default:
                 response = [9, 2, 1];
+        }
+    }
+    console.log("typeBy --> " + typeBy + ": " + response);
+    return response;
+}
+
+export function getKPIData(
+    value,
+    typeBy
+) {
+    if (value == 0) {
+        value = 1;
+    }
+    let response = [];
+    if (typeBy && value) {
+        switch (typeBy) {
+            case "DAY":
+                response = (value * 24) / 100;
+                break;
+            case "WEEK":
+                response = (((value * 24) * 7) / 100) - 24;
+                break;
+            case "MONTH":
+                response = (((((value * 24) * 7) / 100) * 30) / 100);
+                break;
+            case "YEAR":
+                response = ((((((value * 24) * 7) / 100) * 30) / 100) * 365) / 100 - 24;
+                break;
+            default:
+                response = (value * 24) / 100;
         }
     }
     console.log("typeBy --> " + typeBy + ": " + response);
