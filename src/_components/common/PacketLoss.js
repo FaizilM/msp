@@ -32,10 +32,14 @@ let packetLossData = (filter, user) => {
   let siteGroup;
   let linkName;
   let applicationName;
+  let sourceSite;
 
   if (filter != undefined) {
     if (filter.siteName != "" && filter.siteName != undefined && filter.siteName != "All Sites") {
       siteName = filter.siteName;
+    }
+    if (filter.sourceSite != "" && filter.sourceSite != undefined && filter.sourceSite != "All Source") {
+      sourceSite = filter.sourceSite;
     }
     if (filter.linkName != "" && filter.linkName != undefined && filter.linkName != "All Links") {
       linkName = filter.linkName;
@@ -48,7 +52,6 @@ let packetLossData = (filter, user) => {
     }
   }
   for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics)) {
-
     let sites = metricsDataValue.sites;
 
     for (let site = 0; site < sites.length; site++) {

@@ -57,23 +57,16 @@ class UserDashboard extends React.Component {
           <Row>
             <Map />
           </Row>
-          <Row>
+           <Row>
             <Col xs="12" sm="12" md="12" lg="12" xl="12">
-              <Sites />
+              <Filter />
             </Col>
           </Row>
-          <Row>
-            <JitterRatio />
-            <SiteAvailability />
-          </Row>
-          <Row>
-            <LatencyRatio />
-            <PacketLoss />
-          </Row>
+          
         </Tab>
         <Tab eventKey={2} title="Visualization">
           <Row>
-            <Filter />
+            <Filter type = {"visualization"}/>
           </Row>
         </Tab>
         <Tab eventKey={3} title="Application Details">

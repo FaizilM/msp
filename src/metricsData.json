@@ -14,7 +14,7 @@
         "app_route_change": false,
         "no_app_route": false,
         "bandwidth": 10.7,
-        "managed_CPE": 4,
+        "managed_CPE": 3,
         "sitesgroup": "ATM",
         "latitude": 11.0168,
         "longitude": 76.9558,
@@ -22,12 +22,12 @@
           {
             "latitude": 42.661232,
             "longitude": -78.745193,
-            "eventType":"APP_ROUTE"
+            "eventType": "APP_ROUTE"
           },
           {
             "latitude": 48.8567,
             "longitude": 2.3510,
-            "eventType":"APP_ROUTE"
+            "eventType": "APP_ROUTE"
           }
         ],
         "links": [
@@ -74,9 +74,9 @@
                       "is_no_route": false,
                       "alternate_path": "Best Effort",
                       "link_taken": "Internet",
-                      "protocol":"TCP",
-                      "time":"15:32:33",
-                      "SLA_latency":57,
+                      "protocol": "TCP",
+                      "time": "15:32:33",
+                      "SLA_latency": 57,
                       "policy": "voip-policy",
                       "route_change": [
                         {
@@ -127,9 +127,9 @@
                       "is_no_route": true,
                       "alternate_path": "None",
                       "link_taken": "None",
-                      "protocol":"TCP",
-                      "time":"15:32:33",
-                      "SLA_latency":49,
+                      "protocol": "TCP",
+                      "time": "15:32:33",
+                      "SLA_latency": 49,
                       "policy": "voip-policy",
                       "route_change": [
                         {
@@ -207,32 +207,30 @@
                   },
                   {
                     "Skype": {
-                    "destination": "Boston",
-                    "source_ip": "192.168.20.1",
-                    "destination_ip": "192.168.30.1",
-                    "link": "MPLS-VES",
-                    "octets": 1200,
-                    "packets": 368,
-                    "is_no_route": false,
-                    "route_change": [
-                      {
-                        "src_ip": "192.168.11.10",
-                        "dst_ip": "192.168.13.10",
-                        "timestamp": "15:32:33",
-                        "protocol": "TCP",
-                        "policy": "voip-policy",
-                        "SLA_latency": 30,
-                        "utilization": 50,
-                        "latency": 10,
-                        "jitter": 5,
-                        "packet_loss": 0,
-                        "status": "UP"
-                      }
-                    ]
+                      "destination": "Boston",
+                      "source_ip": "192.168.20.1",
+                      "destination_ip": "192.168.30.1",
+                      "link": "MPLS-VES",
+                      "octets": 1200,
+                      "packets": 368,
+                      "is_no_route": false,
+                      "route_change": [
+                        {
+                          "src_ip": "192.168.11.10",
+                          "dst_ip": "192.168.13.10",
+                          "timestamp": "15:32:33",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": 30,
+                          "utilization": 50,
+                          "latency": 10,
+                          "jitter": 5,
+                          "packet_loss": 0,
+                          "status": "UP"
+                        }
+                      ]
+                    }
                   }
-
-                }
-
                 ]
               }
             ]
@@ -343,7 +341,10 @@
         "app_route_change": false,
         "no_app_route": true,
         "bandwidth": 10.7,
-        "managed_CPE": 4,
+        "managed_CPE": 1,
+        "cpe_name": [
+          "cpe_paris1"
+        ],
         "sitesgroup": "Domestic sites",
         "latitude": 48.8567,
         "longitude": 2.3510,
@@ -351,12 +352,12 @@
           {
             "latitude": 42.661232,
             "longitude": -78.745193,
-            "eventType":"NO_ROUTE"
+            "eventType": "NO_ROUTE"
           },
           {
             "latitude": 11.0168,
             "longitude": 76.9558,
-            "eventType":"APP_ROUTE"
+            "eventType": "APP_ROUTE"
           }
         ],
         "links": [
@@ -455,7 +456,10 @@
         "app_route_change": true,
         "no_app_route": false,
         "bandwidth": 10.7,
-        "managed_CPE": 4,
+        "managed_CPE": 1,
+        "cpe_name": [
+          "cpe_boston1"
+        ],
         "sitesgroup": "International sites",
         "latitude": 42.661232,
         "longitude": -78.745193,
@@ -463,12 +467,12 @@
           {
             "latitude": 48.8567,
             "longitude": 2.3510,
-            "eventType":"APP_ROUTE"
+            "eventType": "APP_ROUTE"
           },
           {
             "latitude": 11.0168,
             "longitude": 76.9558,
-            "eventType":"APP_ROUTE"
+            "eventType": "APP_ROUTE"
           }
         ],
         "links": [

@@ -37,7 +37,7 @@ class AdminDashboard extends React.Component {
                     <Row>
                         <Inventory />
                         <Col xs="12" sm="12" md="6" lg="6" xl="6">
-                            <Sites clickevent={this.gotoCustomerMetrics} />
+                            <Sites clickevent={this.gotoCustomerMetrics}/>
                         </Col>
                     </Row>
                     <Row>

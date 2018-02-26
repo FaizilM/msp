@@ -172,18 +172,14 @@ class ApplicationClassMetrics extends Component {
                     data = { "name": customerClassKey };
                     
                     for (let [classKey, classValue] of Object.entries(customerClassValue)) {
-                        console.log(this.props.filter, this.props.filter.duration);
 
                         if (this.props.filter != undefined && this.props.filter.duration != undefined) {
                             data[classKey] = getValueByTime(classValue, this.props.filter.duration);
                             data["color"] = colorCode[classKey];
-                            console.log(data);
                             
                         } else {
                             data[classKey] = classValue;
-                            console.log("classkey", classKey, classValue,colorCode[classKey], classKey);
                             data["color"] = colorCode[classKey];
-                            console.log("data",data);
                         }
                     }
 

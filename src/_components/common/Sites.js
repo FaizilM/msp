@@ -75,7 +75,7 @@ class Sites extends Component {
     }
     setAvailable() {
         let user = this.props.authentication.user;
-        this.setState({availabileSite:siteAvailabilityData(user)});
+        this.setState({ availabileSite: siteAvailabilityData(user) });
     }
     gotoCustomerMetrics() {
         this.props.clickevent(2);
@@ -103,7 +103,7 @@ class Sites extends Component {
         let app_route = []
         let change_route = []
         let no_route = []
-        if(this.state.availabileSite.length ==0) {
+        if (this.state.availabileSite.length == 0) {
             this.setAvailable();
         }
 
@@ -131,50 +131,52 @@ class Sites extends Component {
                     <text key={2} textAnchor="middle" x="60" y="60" fill="#191970" style={{ textDecoration: 'underline', justifyContent: 'center' }}>{this.state.availabileSite[2]}</text>
                 </Link>
             )
+            app_route.push(<div key={3} className="panel-heading">
+                <Row>
+                    <Col lg={{ size: 1 }}>
+                        <h3>Sites</h3>
+                    </Col>
+                    <Col lg={{ size: 3 }} className="pull-right">
+                        <div className="form-group">
+                            <select className="form-control" onChange={this.changeDuration}>
+                                <option key={"Hour"} value={"HOUR"}>Hour</option>
+                                <option key={"Day"} value={"DAY"}>Day</option>
+                                <option key={"Week"} value={"WEEK"}>Week</option>
+                                <option key={"Month"} value={"MONTH"}>Month</option>
+                                <option key={"Year"} value={"YEAR"}>Year</option>
+                            </select>
+                        </div>
+                    </Col>
+                </Row>
+            </div>)
 
             site_admin = "adminSite"
         } else {
 
             app_route.push(
                 <Link key={0} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} id="app_route"  >
-                    <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ justifyContent: 'center' }}>{availability[0]}</text>
+                    <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ justifyContent: 'center' }}>{this.state.availabileSite[0]}</text>
                 </Link>
             )
 
             app_route.push(
                 <Link key={1} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} id="app_route_change"  >
-                    <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ justifyContent: 'center' }}>{availability[1]}</text>
+                    <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ justifyContent: 'center' }}>{this.state.availabileSite[1]}</text>
                 </Link>
             )
 
             app_route.push(
                 <Link key={2} activeClass="active" to="customerData" spy={true} smooth={true} offset={50} duration={500} id="no_route" >
-                    <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ justifyContent: 'center' }}>{availability[2]}</text>
+                    <text textAnchor="middle" x="60" y="60" fill="#191970" style={{ justifyContent: 'center' }}>{this.state.availabileSite[2]}</text>
                 </Link>
             )
+            app_route.push(<span></span>)
         }
 
 
         return (
             <div className="panel panel-default">
-                <div className="panel-heading">
-                    <Row>
-                        <Col lg={{ size: 1 }}>
-                            <h3>Sites</h3>
-                        </Col>
-                        <Col lg={{ size: 3 }} className="pull-right">
-                            <div className="form-group">
-                                <select className="form-control" onChange={this.changeDuration}>
-                                    <option key={"Hour"} value={"HOUR"}>Hour</option>
-                                    <option key={"Day"} value={"DAY"}>Day</option>
-                                    <option key={"Week"} value={"WEEK"}>Week</option>
-                                    <option key={"Month"} value={"MONTH"}>Month</option>
-                                    <option key={"Year"} value={"YEAR"}>Year</option>
-                                </select>
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
+                {app_route[3]}
                 <div className="panel-body">
                     <div className="list-group">
                         <div className={site_admin} >
