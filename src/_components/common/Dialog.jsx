@@ -1,22 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactModal from 'react-modal';
 import { CustomerMetrics } from '../admin/CustomerMetrics'
 import { Button, Container, Row, Col } from 'reactstrap';
-
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
-
+import {
+    Modal, Popover, Tooltip, OverlayTrigger
+} from 'react-bootstrap';
+import { PacketLoss } from '../common/PacketLoss'
 
 class Dialog extends React.Component {
+
     constructor() {
         super();
 
@@ -31,28 +23,33 @@ class Dialog extends React.Component {
     closeModal() {
         this.props.closeModal();
     }
-
     render() {
+        const popover = (
+            <Popover id="modal-popover" title="popover">
+                very popover. such engagement
+          </Popover>
+        );
+        const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
+
         return (
             <div>
-                <ReactModal
-                    isOpen={this.props.isOpen}
-                    
-                    shouldCloseOnEsc={true}
-                    contentLabel="Minimal Modal Example"
-                    style={{ overlay: {}, content: {top:'75px'} }}
-                >
-                <Row>
-                <CustomerMetrics />
-                </Row>
-                <Row>
-                <Button color="danger" className="pull-right" onClick={this.closeModal}>Close</Button>{' '}
-                </Row>
-                
-                </ReactModal>
+                <Modal bsSize="large" show={this.props.isOpen} onHide={this.closeModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal heading</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Row>
+                    <PacketLoss />
+                    </Row>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button color="danger" className='pull-right' onClick={this.closeModal}>Close</Button>{' '}
+                    </Modal.Footer>
+                </Modal>
             </div>
         );
     }
+
 }
 
 export { Dialog };
