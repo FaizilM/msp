@@ -48,7 +48,7 @@
               "utilization": 52,
               "latency": 150,
               "jitter": 9,
-              "packet_loss": 2
+              "packet_loss": 0.4
             },
             "4G": {
               "utilization": 46,
@@ -366,7 +366,7 @@
               "utilization": 76,
               "latency": 10,
               "jitter": 48,
-              "packet_loss": 0
+              "packet_loss": 2
             },
             "mpls": {
               "utilization": 20,
@@ -384,7 +384,7 @@
               "utilization": 46,
               "latency": 30,
               "jitter": 9,
-              "packet_loss": 0
+              "packet_loss": 5
             }
           }
         ],
@@ -481,7 +481,7 @@
               "utilization": 93,
               "latency": 40,
               "jitter": 0.8,
-              "packet_loss": 0
+              "packet_loss": 0.6
             },
             "mpls": {
               "utilization": 97,
