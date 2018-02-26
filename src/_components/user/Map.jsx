@@ -68,7 +68,7 @@ let populateMapSites = (config, user, timeFilterBy) => {
                     "zoomLevel": 2,
                     "scale": 1.0,
                     "title": "<b>" + site.name + "</b>"+
-                                "<br> Utilization :"+kpiDetails.totalUtilization+"<br>" +
+                                "<br> Utilization :"+kpiDetails.totalUtilization+"%<br>" +
                                 "Latency : "+kpiDetails.totalLatency+"ms <br>"+
                                 "Jitter : "+kpiDetails.totalJitter+"ms <br>"+
                                 "Packet Loss : "+kpiDetails.totalPacketLoss+"%",
@@ -90,7 +90,7 @@ let getLinkDetails = (routeType) => {
     switch (routeType) {
         case "NO_ROUTE":
             lineObject = {
-                "balloonText": "<b>Link </b>: MPLS-VES <br> Event: No Route<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
+                "balloonText": "<b>Link </b>: MPLS-VES <br> Event: No Route<br> Latency : 52ms <br> Jitter : 5.5ms <br> Packet Loss : 100%",
                 "color": "red",
                 "arc": -0.54,
                 "accessibleLabel": "No Route",
@@ -98,7 +98,7 @@ let getLinkDetails = (routeType) => {
             break;
         case "APP_ROUTE":
             lineObject = {
-                "balloonText": "<b>Link </b>: Broad band <br>Event: App Route<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
+                "balloonText": "<b>Link </b>: Broad band <br>Event: App Route<br> Latency : 5ms <br> Jitter : 0.65ms <br> Packet Loss : 4%",
                 "color": "#2d862d",
                 "accessibleLabel": "Broad band",
             }
@@ -107,7 +107,7 @@ let getLinkDetails = (routeType) => {
             lineObject = {
                 "color": "#FFDE24", // change the color
                 "accessibleLabel": "mpls",
-                "balloonText": "<b>Link </b>: MPLS <br>Event:  Route Change<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
+                "balloonText": "<b>Link </b>: MPLS <br>Event:  Route Change<br> Latency : 18ms <br> Jitter : 1.65ms <br> Packet Loss : 14%",
                 "arc": -0.1,
             }
     }

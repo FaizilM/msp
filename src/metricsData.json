@@ -33,25 +33,25 @@
         "links": [
           {
             "broadband": {
-              "utilization": 44,
+              "utilization": 22,
               "latency": 290,
               "jitter": 8,
               "packet_loss": 2
             },
             "mpls": {
-              "utilization": 92,
+              "utilization": 24,
               "latency": 200,
               "jitter": 1,
               "packet_loss": 0.1
             },
             "t1_lines": {
-              "utilization": 52,
+              "utilization": 14,
               "latency": 150,
               "jitter": 9,
               "packet_loss": 0.4
             },
             "4G": {
-              "utilization": 46,
+              "utilization": 32,
               "latency": 155,
               "jitter": 10,
               "packet_loss": 2
@@ -363,7 +363,7 @@
         "links": [
           {
             "broadband": {
-              "utilization": 76,
+              "utilization": 26,
               "latency": 10,
               "jitter": 48,
               "packet_loss": 2
@@ -375,13 +375,13 @@
               "packet_loss": 0.3
             },
             "t1_lines": {
-              "utilization": 52,
+              "utilization": 12,
               "latency": 33,
               "jitter": 27,
               "packet_loss": 0.3
             },
             "4G": {
-              "utilization": 46,
+              "utilization": 36,
               "latency": 30,
               "jitter": 9,
               "packet_loss": 5
@@ -478,25 +478,25 @@
         "links": [
           {
             "broadband": {
-              "utilization": 93,
+              "utilization": 33,
               "latency": 40,
               "jitter": 0.8,
               "packet_loss": 0.6
             },
             "mpls": {
-              "utilization": 97,
+              "utilization": 27,
               "latency": 22,
               "jitter": 0.1,
               "packet_loss": 0.3
             },
             "t1_lines": {
-              "utilization": 86,
+              "utilization": 16,
               "latency": 15,
               "jitter": 0.9,
               "packet_loss": 0.3
             },
             "4G": {
-              "utilization": 46,
+              "utilization": 5,
               "latency": 23,
               "jitter": 0.9,
               "packet_loss": 0
