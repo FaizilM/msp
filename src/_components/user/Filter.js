@@ -38,12 +38,13 @@ class Filter extends Component {
     this.changeDuration = this.changeDuration.bind(this);
     this.sourceSite = this.sourceSite.bind(this);
     this.cpeData = this.cpeData.bind(this);
-    this.familyApplication = this.familyApplication.bind(this);
+    this.applicationFamily = this.applicationFamily.bind(this);
     this.changeCpe = this.changeCpe.bind(this);
     this.changeSource = this.changeSource.bind(this);
     this.handleDashBoardData = this.handleDashBoardData.bind(this);
     this.allDestinationSite = this.allDestinationSite.bind(this);
     this.changeDestination = this.changeDestination.bind(this);
+    this.applicationLink = this.applicationLink.bind(this);
   }
 
   componentDidMount() {
@@ -261,6 +262,20 @@ class Filter extends Component {
     this.setState({ all_site: siteName });
   }
 
+  applicationLink() {
+    
+    let metrics = [];
+    let user = this.props.authentication.user;
+    if (user.role == userConstants.ROLE_USER) {
+      data["customers"] = metricsData
+      data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+        data: data
+      }).value;
+      metrics.push(data["customers"]);
+    }
+
+  }
+
   linksData(selectedSite) {
 
     let linkName = [];
@@ -307,9 +322,66 @@ class Filter extends Component {
 
     this.setState({ all_link: linkName });
   }
-  familyApplication() {
+
+  applicationFamily() {
+    let data = {};
+    let metrics = [];
+    let sitekey = [];
+    let user = this.props.authentication.user;
+    if (user.role == userConstants.ROLE_USER) {
+      data["customers"] = metricsData
+      data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
+        data: data
+      }).value;
+      metrics.push(data["customers"]);
+    }
+
+    data = {};
+    data["links"] = metrics;
+    let query;
+    let source = this.state.sourceSite;
+    if (source == "" || source == undefined || source == "All Source") {
+      query = "links[sites][**].links";
+    }
+    else {
+      query = 'links[sites][**][name=' + source + '].links'
+    }
+    data["links"] = jsonQuery(query, {
+      data: data
+    }).value;
+    metrics = data;
+
+    let appFamily = metrics.links;
+    let appFamilies = [];
+    for (let index = 0; index < appFamily.length; index++) {
+      data = {};
+      data["app_family"] = appFamily[index];
+      let query;
+      let link = this.state.linkName;
+      if (link == "" || link == undefined || link == "All Site Group") {
+        query = "app_family[**].app_family";
+      }
+      else {
+        query = 'app_family[' + link + '].app_family'
+      }
+      data["app_family"] = jsonQuery('app_family[**].app_family', {
+        data: data
+      }).value;
+
+      for (let index = 0; index < data.app_family.length; index++) {
+
+        if (data.app_family[index] != undefined && sitekey.indexOf(data.app_family[index]) == -1) {
+          sitekey.push(data.app_family[index]);
+          appFamilies.push(<option key={data.app_family[index]}>{data.app_family[index]}</option>);
+        }
+      }
+
+    }
+    return appFamilies;
+
 
   }
+
   applicationsData(selectedSite) {
 
     let applicationName = [];
@@ -580,7 +652,30 @@ class Filter extends Component {
               <div className="panel-body">
                 <div className="list-group">
                   <Row>
+                    <Col xs="6" sm="6" md="2" lg="1" xl="1">
+                      <h5>Duration</h5>
+                    </Col>
+                    <Col xs="6" sm="6" md="2" lg="1" xl="1">
+                      <h5>Source Site</h5>
+                    </Col>
                     <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <h5>CPE</h5>
+                    </Col>
+                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <h5>Destination Site</h5>
+                    </Col>
+                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <h5>Links</h5>
+                    </Col>
+                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <h5>Application Family</h5>
+                    </Col>
+                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <h5>Application</h5>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs="6" sm="6" md="2" lg="1" xl="1">
                       <div className="form-group">
                         <select className="form-control" id="time" onChange={this.changeDuration}>
                           <option value={"HOUR"}>Hour</option>
@@ -591,7 +686,7 @@ class Filter extends Component {
                         </select>
                       </div>
                     </Col>
-                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                    <Col xs="6" sm="6" md="2" lg="1" xl="1">
                       <div className="form-group">
                         <select className="form-control" id="source" onChange={this.changeSource}>
                           <option>All Source</option>
@@ -621,6 +716,15 @@ class Filter extends Component {
                           <option>All Links</option>
                           {this.state.all_link}
                         </select>
+                      </div>
+                    </Col>
+                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                      <div className="form-group">
+                        <select className="form-control" id="application" onChange={this.changeApplication}>
+                          <option>All Application Family</option>
+                          {this.applicationFamily()}
+                        </select>
+
                       </div>
                     </Col>
                     <Col xs="6" sm="6" md="2" lg="2" xl="2">
