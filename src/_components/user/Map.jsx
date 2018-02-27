@@ -7,38 +7,77 @@ import metricsData from '../../metricsData.json';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
 
+//Get All KPI details for sites
+let getKPIDetails = (links) => {
+
+    let response = {};
+    let totalUtilization = 0;
+    let totalLatency = 0;
+    let totalJitter = 0;
+    let totalPacketLoss = 0;
+    for(let [Key, link] of Object.entries(links[0])) {
+        if(Key && link) {
+            totalUtilization = totalUtilization + link.utilization
+            totalLatency = totalLatency + link.latency
+            totalJitter = totalJitter + link.jitter
+            totalPacketLoss = totalPacketLoss + link.packet_loss
+        }
+    }
+
+    response["totalUtilization"] = totalUtilization
+    response["totalLatency"] = totalLatency
+    response["totalJitter"] = totalJitter
+    response["totalPacketLoss"] = totalPacketLoss
+    return response;
+    
+}   
 
 let populateMapSites = (config, user, timeFilterBy) => {
 
     var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
 
+    
+    let data = {};
+    data["customers"] = metricsData
+
+    let sites = jsonQuery('customers[username=' + user + '].sites', {
+        data: data
+    }).value
+
     for (let [Key, Value] of Object.entries(config)) {
 
         if (Key == "dataProvider") {
 
-            for (let [Key, metrics] of Object.entries(metricsData)) {
-
-                if (metrics.username === user) {
-
-                    for (let [siteIndex, site] of Object.entries(metrics.sites)) {
-                        let color = site.no_app_route ? "red" : "green"
-                        if ((timeFilterBy.toString() === 'MONTH' || timeFilterBy.toString() === 'YEAR') && parseInt(siteIndex) === 0) {
-                            color = "yellow"
-                        }
-
-                        Value.images.push({
-                            "label": site.name,
-                            "svgPath": targetSVG,
-                            "zoomLevel": 2,
-                            "scale": 1.0,
-                            "title": "<b>" + site.name + "</b><br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
-                            "latitude": site.latitude,
-                            "longitude": site.longitude,
-                            "color": color
-                        })
-                    }
+            for (let [siteIndex, site] of Object.entries(sites)) {
+                let color = site.no_app_route ? "red" : "green"
+                if ((timeFilterBy.toString() === 'MONTH' || timeFilterBy.toString() === 'YEAR') && parseInt(siteIndex) === 0) {
+                    color = "yellow"
                 }
+
+                let allSites = {}
+                allSites["allSites"] = sites;
+                let links = jsonQuery('allSites[name=' + site.name + '].links', {
+                    data: allSites
+                }).value
+
+                let kpiDetails = getKPIDetails(links);
+
+                Value.images.push({
+                    "label": site.name,
+                    "svgPath": targetSVG,
+                    "zoomLevel": 2,
+                    "scale": 1.0,
+                    "title": "<b>" + site.name + "</b>"+
+                                "<br> Utilization :"+kpiDetails.totalUtilization+"%<br>" +
+                                "Latency : "+kpiDetails.totalLatency+"ms <br>"+
+                                "Jitter : "+kpiDetails.totalJitter+"ms <br>"+
+                                "Packet Loss : "+kpiDetails.totalPacketLoss+"%",
+                    "latitude": site.latitude,
+                    "longitude": site.longitude,
+                    "color": color
+                })
             }
+
         }
     }
 }
@@ -51,7 +90,7 @@ let getLinkDetails = (routeType) => {
     switch (routeType) {
         case "NO_ROUTE":
             lineObject = {
-                "balloonText": "<b>Link </b>: MPLS-VES <br> Event: No Route<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
+                "balloonText": "<b>Link </b>: MPLS-VES <br> Event: No Route<br> Latency : 52ms <br> Jitter : 5.5ms <br> Packet Loss : 100%",
                 "color": "red",
                 "arc": -0.54,
                 "accessibleLabel": "No Route",
@@ -59,7 +98,7 @@ let getLinkDetails = (routeType) => {
             break;
         case "APP_ROUTE":
             lineObject = {
-                "balloonText": "<b>Link </b>: Broad band <br>Event: App Route<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
+                "balloonText": "<b>Link </b>: Broad band <br>Event: App Route<br> Latency : 5ms <br> Jitter : 0.65ms <br> Packet Loss : 4%",
                 "color": "#2d862d",
                 "accessibleLabel": "Broad band",
             }
@@ -68,7 +107,7 @@ let getLinkDetails = (routeType) => {
             lineObject = {
                 "color": "#FFDE24", // change the color
                 "accessibleLabel": "mpls",
-                "balloonText": "<b>Link </b>: MPLS <br>Event:  Route Change<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
+                "balloonText": "<b>Link </b>: MPLS <br>Event:  Route Change<br> Latency : 18ms <br> Jitter : 1.65ms <br> Packet Loss : 14%",
                 "arc": -0.1,
             }
     }
@@ -130,12 +169,6 @@ class Map extends React.Component {
 
                     if (event.mapObject && event.mapObject.lines) {
 
-                        console.log("inital ", event.mapObject.lines)
-                        for(var line in event.mapObject.lines) {
-                            event.mapObject.lines.splice(0, 2);
-                        }
-                   
-                       
                         let data = {};
                         data["customers"] = metricsData
 
@@ -165,8 +198,8 @@ class Map extends React.Component {
                                         "bringForwardOnHover": true,
                                     }
 
-                                    if(links.eventType === "NO_ROUTE") {
-                                        lineObject["url"] =  window.location.href + "/tab=3"
+                                    if (links.eventType === "NO_ROUTE") {
+                                        lineObject["url"] = window.location.href + "/tab=3"
                                     }
 
                                     if ((currentTimeFrame.toString() === 'MONTH' || currentTimeFrame.toString() === 'YEAR') && parseInt(siteIndex) === 0) {
