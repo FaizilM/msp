@@ -45,7 +45,7 @@
               "utilization": 24,
               "latency": 0.5,
               "jitter": 1,
-              "packet_loss": 0.1,
+              "packet_loss": 1,
               "app_family": [
                 "Office"
               ]
@@ -54,7 +54,7 @@
               "utilization": 14,
               "latency": 1.5,
               "jitter": 9,
-              "packet_loss": 0.4,
+              "packet_loss": 1.4,
               "app_family": [
                 "Social"
               ]
@@ -534,7 +534,7 @@
               "utilization": 26,
               "latency": 1.0,
               "jitter": 4.8,
-              "packet_loss": 0,
+              "packet_loss": 11,
               "app_family": [
                 "Network Management"
               ]
@@ -688,7 +688,7 @@
               "utilization": 5,
               "latency": 2.3,
               "jitter": 0.9,
-              "packet_loss": 0,
+              "packet_loss": 0.8,
               "app_family": [
                 "Media"
               ]

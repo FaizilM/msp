@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'reactstrap';
 import metricsData from '../../metricsData.json';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
-import { getValueByTime } from '../../_helpers/shared'
+import { getValueByTime, getKPIDataByPercentage } from '../../_helpers/shared'
 
 //Get All KPI details for sites
 let getKPIDetails = (links, timeFilterBy) => {
@@ -25,10 +25,10 @@ let getKPIDetails = (links, timeFilterBy) => {
         }
     }
 
-    response["totalUtilization"] = totalUtilization
+    response["totalUtilization"] = Math.round(getKPIDataByPercentage(totalUtilization, timeFilterBy));
     response["totalLatency"] = Math.round(getValueByTime(totalLatency, timeFilterBy));
     response["totalJitter"] = Math.round(getValueByTime(totalJitter, timeFilterBy))
-    response["totalPacketLoss"] = totalPacketLoss
+    response["totalPacketLoss"] = Math.round(getKPIDataByPercentage(totalPacketLoss, timeFilterBy));
     return response;
     
 }   
@@ -36,7 +36,6 @@ let getKPIDetails = (links, timeFilterBy) => {
 let populateMapSites = (config, user, timeFilterBy) => {
 
     var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
-
     
     let data = {};
     data["customers"] = metricsData
@@ -132,6 +131,7 @@ class Map extends React.Component {
     render() {
 
         let user = this.props.authentication.user.username
+        let doubleClicked = false;
 
         let currentTimeFrame = this.state.duration;
         var starSVG = "M20,7.244 L12.809,6.627 L10,0 L7.191,6.627 L0,7.244 L5.455,11.971 L3.82,19 L10,15.272 L16.18,19 L14.545,11.971 L20,7.244 L20,7.244 Z M10,13.396 L6.237,15.666 L7.233,11.385 L3.91,8.507 L8.29,8.131 L10,4.095 L11.71,8.131 L16.09,8.507 L12.768,11.385 L13.764,15.666 L10,13.396 L10,13.396 Z";
@@ -154,6 +154,7 @@ class Map extends React.Component {
             },
             "dataProvider": {
                 "map": "worldLow",
+                
                 "images": []
             },
             "linesSettings": {
@@ -169,10 +170,11 @@ class Map extends React.Component {
                 "method": function (event) {
 
                     if (event.mapObject && event.mapObject.lines) {
-
+                        
                         let data = {};
                         data["customers"] = metricsData
                         event.mapObject.lines = [];
+
                         let userDetails = jsonQuery('customers[username=' + user + ']', {
                             data: data
                         }).value
@@ -226,12 +228,12 @@ class Map extends React.Component {
                                     event.mapObject.lines.push(lineObject2);
 
                                     event.mapObject.lines.push(lineObject);
-                                    //update the area's color
-                                    event.mapObject.validate();
+                          
                                 }
                             }
                         }
-                        
+                        //update the area's color
+                        event.mapObject.validate();
                     }
                 }
             }]
