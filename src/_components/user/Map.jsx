@@ -6,9 +6,10 @@ import { Container, Row, Col } from 'reactstrap';
 import metricsData from '../../metricsData.json';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
+import { getValueByTime } from '../../_helpers/shared'
 
 //Get All KPI details for sites
-let getKPIDetails = (links) => {
+let getKPIDetails = (links, timeFilterBy) => {
 
     let response = {};
     let totalUtilization = 0;
@@ -25,8 +26,8 @@ let getKPIDetails = (links) => {
     }
 
     response["totalUtilization"] = totalUtilization
-    response["totalLatency"] = totalLatency
-    response["totalJitter"] = totalJitter
+    response["totalLatency"] = Math.round(getValueByTime(totalLatency, timeFilterBy));
+    response["totalJitter"] = Math.round(getValueByTime(totalJitter, timeFilterBy))
     response["totalPacketLoss"] = totalPacketLoss
     return response;
     
@@ -60,7 +61,7 @@ let populateMapSites = (config, user, timeFilterBy) => {
                     data: allSites
                 }).value
 
-                let kpiDetails = getKPIDetails(links);
+                let kpiDetails = getKPIDetails(links, timeFilterBy);
 
                 Value.images.push({
                     "label": site.name,
@@ -68,10 +69,10 @@ let populateMapSites = (config, user, timeFilterBy) => {
                     "zoomLevel": 2,
                     "scale": 1.0,
                     "title": "<b>" + site.name + "</b>"+
-                                "<br> Utilization :"+kpiDetails.totalUtilization+"%<br>" +
-                                "Latency : "+kpiDetails.totalLatency+"ms <br>"+
-                                "Jitter : "+kpiDetails.totalJitter+"ms <br>"+
-                                "Packet Loss : "+kpiDetails.totalPacketLoss+"%",
+                                "<br> Utilization :"+kpiDetails.totalUtilization+" %<br>" +
+                                "Latency : "+kpiDetails.totalLatency+" ms <br>"+
+                                "Jitter : "+kpiDetails.totalJitter+" ms <br>"+
+                                "Packet Loss : "+kpiDetails.totalPacketLoss+" %",
                     "latitude": site.latitude,
                     "longitude": site.longitude,
                     "color": color
@@ -82,7 +83,7 @@ let populateMapSites = (config, user, timeFilterBy) => {
     }
 }
 
-let getLinkDetails = (routeType) => {
+let getLinkDetails = (routeType, currentTimeFrame) => {
     let response = ""
 
     let lineObject = {}
@@ -171,7 +172,7 @@ class Map extends React.Component {
 
                         let data = {};
                         data["customers"] = metricsData
-
+                        event.mapObject.lines = [];
                         let userDetails = jsonQuery('customers[username=' + user + ']', {
                             data: data
                         }).value
@@ -182,8 +183,9 @@ class Map extends React.Component {
 
                                 for (let [Key, links] of Object.entries(site.linkedWith)) {
 
-                                    let linkObj = getLinkDetails(links.eventType);
+                                    let linkObj = getLinkDetails(links.eventType, currentTimeFrame);
                                     let linkColor = "#2d862d" //Green By default
+                                    let eventType = "App Route"
 
                                     let lineObject = {
                                         "latitudes": [event.mapObject.latitude, links.latitude],
@@ -204,6 +206,7 @@ class Map extends React.Component {
 
                                     if ((currentTimeFrame.toString() === 'MONTH' || currentTimeFrame.toString() === 'YEAR') && parseInt(siteIndex) === 0) {
                                         linkColor = "yellow"
+                                        eventType = "Route change"
                                     }
 
                                     let lineObject2 = {
@@ -214,7 +217,7 @@ class Map extends React.Component {
                                         "arrowAlpha": 2,
                                         "color": linkColor, // change the color
                                         "accessibleLabel": "mpls",
-                                        "balloonText": "<b>Link </b>: MPLS <br>Event:  App Route<br> Latency : 25ms <br> Jitter : 3.65ms <br> Packet Loss : 14%",
+                                        "balloonText": "<b>Link </b>: MPLS <br>Event:  "+ eventType +"<br> Latency : 25 ms <br> Jitter : 3.65 ms <br> Packet Loss : 14 %",
                                         "arc": -0.1,
                                         "thickness": 3,
                                         "bringForwardOnHover": true
@@ -223,11 +226,12 @@ class Map extends React.Component {
                                     event.mapObject.lines.push(lineObject2);
 
                                     event.mapObject.lines.push(lineObject);
+                                    //update the area's color
+                                    event.mapObject.validate();
                                 }
                             }
                         }
-                        //update the area's color
-                        event.mapObject.validate();
+                        
                     }
                 }
             }]
