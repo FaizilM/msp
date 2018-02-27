@@ -135,6 +135,7 @@ class ApplicationMetrics extends React.Component {
                 "bulletBorderThickness": 1,
                 "hideBulletsCount": 30,
                 "title": "Jitter",
+                "balloonText":"[[value]] ms ",
                 "valueField": "jitter",
                 "fillAlphas": 0
             },
@@ -145,6 +146,7 @@ class ApplicationMetrics extends React.Component {
                 "bulletBorderThickness": 1,
                 "hideBulletsCount": 30,
                 "title": "Latency",
+                "balloonText":"[[value]] ms ",
                 "valueField": "latency",
                 "fillAlphas": 0
             }],
