@@ -29,18 +29,19 @@ function generateChartData() {
         packetLoss += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
         outOctets += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
         jitter += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
-        latency += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
-        
+        latency += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);        
+
         // add data item to the array
         chartData.push({
             date: newDate,
-            inOctets: inOctets,
-            packetLoss: packetLoss,
-            latency: latency,
-            jitter: jitter,
-            outOctets: outOctets
+            inOctets: (inOctets < 0) ? 0 : inOctets,
+            packetLoss: (packetLoss < 0) ? 0 : packetLoss,
+            latency: (latency < 0) ? 0 : latency,
+            jitter: (jitter < 0) ? 0 : jitter,
+            outOctets: (outOctets < 0) ? 0 : outOctets
         });
     }
+    console.log(chartData);
     return chartData;
 }
 

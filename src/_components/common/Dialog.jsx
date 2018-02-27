@@ -6,6 +6,7 @@ import {
     Modal, Popover, Tooltip, OverlayTrigger
 } from 'react-bootstrap';
 import { ApplicationMetrics } from '../user/ApplicationMetrics'
+import '../../assets/css/App.css';
 
 class Dialog extends React.Component {
 
@@ -34,7 +35,7 @@ class Dialog extends React.Component {
         return (
             <div>
                 <Modal bsSize="large" show={this.props.isOpen} onHide={this.closeModal}>
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton className='bggray'>
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
