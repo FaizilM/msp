@@ -36,25 +36,37 @@
               "utilization": 44,
               "latency": 290,
               "jitter": 8,
-              "packet_loss": 2
+              "packet_loss": 2,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 92,
               "latency": 200,
               "jitter": 1,
-              "packet_loss": 0.1
+              "packet_loss": 0.1,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 150,
               "jitter": 9,
-              "packet_loss": 2
+              "packet_loss": 2,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 155,
               "jitter": 10,
-              "packet_loss": 2
+              "packet_loss": 2,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
@@ -62,6 +74,58 @@
           {
             "CPE": [
               {
+                "applications_details": [
+                  {
+                    "broadband": {
+                      "app_family": "Media",
+                      "appilcation": "Voice-HD",
+                      "direction": "Incoming",
+                      "sla_class": "Low Latency",
+                      "dscp_value": "EF",
+                      "octets": 480,
+                      "packets": 160,
+                      "mean_latency": 10,
+                      "mean_jitter": 30,
+                      "avg_paket_loss": 20
+                    },
+                    "mpls": {
+                      "app_family": "Office",
+                      "appilcation": "Voice-HD",
+                      "direction": "Outgoing",
+                      "sla_class": "",
+                      "dscp_value": "EF",
+                      "octets": 580,
+                      "packets": 110,
+                      "mean_latency": 10,
+                      "mean_jitter": 5,
+                      "avg_paket_loss": 30
+                    },
+                    "t1_lines": {
+                      "app_family": "Social",
+                      "appilcation": "Voice",
+                      "direction": "",
+                      "sla_class": "",
+                      "dscp_value": "",
+                      "octets": 210,
+                      "packets": 70,
+                      "mean_latency": 8,
+                      "mean_jitter": 27,
+                      "avg_paket_loss": 23
+                    },
+                    "4G": {
+                      "app_family": "Media",
+                      "appilcation": "Video",
+                      "direction": "Incoming",
+                      "sla_class": "Medium Latency",
+                      "dscp_value": "AF41",
+                      "octets": 1200,
+                      "packets": 368,
+                      "mean_latency": 30,
+                      "mean_jitter": 35,
+                      "avg_paket_loss": 10
+                    }
+                  }
+                ],
                 "applications": [
                   {
                     "video-HD": {
@@ -115,6 +179,58 @@
             ],
             "CPE_VES": [
               {
+                "applications_details": [
+                  {
+                    "broadband": {
+                      "app_family": "Media",
+                      "appilcation": "Voice-HD",
+                      "direction": "Incoming",
+                      "sla_class": "Low Latency",
+                      "dscp_value": "EF",
+                      "octets": 480,
+                      "packets": 160,
+                      "mean_latency": 10,
+                      "mean_jitter": 30,
+                      "avg_paket_loss": 20
+                    },
+                    "mpls": {
+                      "app_family": "Office",
+                      "appilcation": "Voice-HD",
+                      "direction": "Outgoing",
+                      "sla_class": "",
+                      "dscp_value": "EF",
+                      "octets": 580,
+                      "packets": 110,
+                      "mean_latency": 10,
+                      "mean_jitter": 5,
+                      "avg_paket_loss": 30
+                    },
+                    "t1_lines": {
+                      "app_family": "Social",
+                      "appilcation": "Voice",
+                      "direction": "",
+                      "sla_class": "",
+                      "dscp_value": "",
+                      "octets": 210,
+                      "packets": 70,
+                      "mean_latency": 8,
+                      "mean_jitter": 27,
+                      "avg_paket_loss": 23
+                    },
+                    "4G": {
+                      "app_family": "Internet",
+                      "appilcation": "Other",
+                      "direction": "",
+                      "sla_class": "Default",
+                      "dscp_value": "Best Effort",
+                      "octets": 480,
+                      "packets": 110,
+                      "mean_latency": 20,
+                      "mean_jitter": 15,
+                      "avg_paket_loss": 20
+                    }
+                  }
+                ],
                 "applications": [
                   {
                     "voice": {
@@ -178,6 +294,58 @@
             ],
             "CPE-Century": [
               {
+                "applications_details": [
+                  {
+                    "broadband": {
+                      "app_family": "Media",
+                      "appilcation": "Voice-HD",
+                      "direction": "Incoming",
+                      "sla_class": "Low Latency",
+                      "dscp_value": "EF",
+                      "octets": 480,
+                      "packets": 160,
+                      "mean_latency": 10,
+                      "mean_jitter": 30,
+                      "avg_paket_loss": 20
+                    },
+                    "mpls": {
+                      "app_family": "Office",
+                      "appilcation": "Webex",
+                      "direction": "Outgoing",
+                      "sla_class": "Default",
+                      "dscp_value": "AF42",
+                      "octets": 2780,
+                      "packets": 890,
+                      "mean_latency": 14,
+                      "mean_jitter": 51,
+                      "avg_paket_loss": 32
+                    },
+                    "t1_lines": {
+                      "app_family": "Social",
+                      "appilcation": "Voice",
+                      "direction": "",
+                      "sla_class": "",
+                      "dscp_value": "",
+                      "octets": 210,
+                      "packets": 70,
+                      "mean_latency": 8,
+                      "mean_jitter": 27,
+                      "avg_paket_loss": 23
+                    },
+                    "4G": {
+                      "app_family": "Media",
+                      "appilcation": "Video",
+                      "direction": "Incoming",
+                      "sla_class": "Medium Latency",
+                      "dscp_value": "AF41",
+                      "octets": 1200,
+                      "packets": 368,
+                      "mean_latency": 30,
+                      "mean_jitter": 35,
+                      "avg_paket_loss": 10
+                    }
+                  }
+                ],
                 "applications": [
                   {
                     "Webex": {
@@ -366,25 +534,37 @@
               "utilization": 76,
               "latency": 10,
               "jitter": 48,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 20,
               "latency": 10,
               "jitter": 21,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 33,
               "jitter": 27,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 30,
               "jitter": 9,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
@@ -481,25 +661,37 @@
               "utilization": 93,
               "latency": 40,
               "jitter": 0.8,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 97,
               "latency": 22,
               "jitter": 0.1,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 86,
               "latency": 15,
               "jitter": 0.9,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 23,
               "jitter": 0.9,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
@@ -584,25 +776,37 @@
               "utilization": 87,
               "latency": 102,
               "jitter": 80,
-              "packet_loss": 0.9
+              "packet_loss": 0.9,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 62,
               "latency": 30,
               "jitter": 10,
-              "packet_loss": 1.2
+              "packet_loss": 1.2,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 98,
               "jitter": 9,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 30,
               "jitter": 40,
-              "packet_loss": 1.7
+              "packet_loss": 1.7,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
@@ -682,25 +886,37 @@
               "utilization": 89,
               "latency": 18,
               "jitter": 0.1,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 69,
               "latency": 6,
               "jitter": 0.1,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 10,
               "jitter": 0.9,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 18,
               "jitter": 0.9,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
@@ -780,25 +996,37 @@
               "utilization": 21,
               "latency": 40,
               "jitter": 0.8,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 71,
               "latency": 5,
               "jitter": 0.1,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 10,
               "jitter": 0.9,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 30,
               "jitter": 0.9,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
@@ -883,25 +1111,37 @@
               "utilization": 92,
               "latency": 7,
               "jitter": 0.8,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 77,
               "latency": 30,
               "jitter": 0.1,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 20,
               "jitter": 1.9,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 15,
               "jitter": 1.9,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
@@ -981,25 +1221,37 @@
               "utilization": 22,
               "latency": 40,
               "jitter": 7.1,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 28,
               "latency": 12,
               "jitter": 5.8,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 18,
               "jitter": 1.9,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 30,
               "jitter": 6.8,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
@@ -1079,25 +1331,37 @@
               "utilization": 55,
               "latency": 40,
               "jitter": 6.7,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 33,
               "latency": 10,
               "jitter": 5.2,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 56,
               "jitter": 5.3,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 10,
               "jitter": 5.8,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
@@ -1182,25 +1446,37 @@
               "utilization": 58,
               "latency": 30,
               "jitter": 5.2,
-              "packet_loss": 0.1
+              "packet_loss": 0.1,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 85,
               "latency": 30,
               "jitter": 7.2,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 56,
               "jitter": 7.1,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 30,
               "jitter": 6,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
@@ -1280,25 +1556,37 @@
               "utilization": 62,
               "latency": 30,
               "jitter": 7.1,
-              "packet_loss": 0.1
+              "packet_loss": 0.1,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 93,
               "latency": 30,
               "jitter": 0.1,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 56,
               "jitter": 5.2,
-              "packet_loss": 9
+              "packet_loss": 9,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 30,
               "jitter": 4.5,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
@@ -1378,25 +1666,37 @@
               "utilization": 54,
               "latency": 30,
               "jitter": 6.7,
-              "packet_loss": 0.1
+              "packet_loss": 0.1,
+              "app_family": [
+                "Network Management"
+              ]
             },
             "mpls": {
               "utilization": 74,
               "latency": 30,
               "jitter": 0.1,
-              "packet_loss": 0
+              "packet_loss": 0,
+              "app_family": [
+                "Office"
+              ]
             },
             "t1_lines": {
               "utilization": 52,
               "latency": 56,
               "jitter": 1.6,
-              "packet_loss": 0.3
+              "packet_loss": 0.3,
+              "app_family": [
+                "Social"
+              ]
             },
             "4G": {
               "utilization": 46,
               "latency": 30,
               "jitter": 5.5,
-              "packet_loss": 4.3
+              "packet_loss": 4.3,
+              "app_family": [
+                "Media"
+              ]
             }
           }
         ],
