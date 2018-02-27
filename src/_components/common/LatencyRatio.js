@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { userConstants } from '../../_constants';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
-import { getKPIData } from '../../_helpers/shared';
+import { getKPIDataByPercentage } from '../../_helpers/shared';
 
 let latencyRatioData = (filter, user, type) => {
   let metrics = [];
@@ -110,25 +110,11 @@ let latencyRatioData = (filter, user, type) => {
       if (filter != undefined && filter.duration != undefined) {
         duration = filter.duration;
       }
-      latency[0] = getKPIData(parseInt((latency[0] / totalSite) * 100), duration);
-      latency[1] = getKPIData(parseInt((latency[1] / totalSite) * 100), duration);
-      latency[2] = getKPIData(parseInt((latency[2] / totalSite) * 100), duration);
+      latency[0] = getKPIDataByPercentage(parseInt((latency[0] / totalSite) * 100), duration);
+      latency[1] = getKPIDataByPercentage(parseInt((latency[1] / totalSite) * 100), duration);
+      latency[2] = getKPIDataByPercentage(parseInt((latency[2] / totalSite) * 100), duration);
       return latency;
     } else {
-      if (filter.duration != undefined) {
-        if (latencyData.broadband) {
-          latencyData.broadband = getKPIData(latencyData.broadband, filter.duration);
-        }
-        if (latencyData.mpls) {
-          latencyData.mpls = getKPIData(latencyData.mpls, filter.duration);
-        }
-        if (latencyData.t1_lines) {
-          latencyData.t1_lines = getKPIData(latencyData.t1_lines, filter.duration);
-        }
-        if (latencyData['4G']) {
-          latencyData['4G'] = getKPIData(latencyData['4G'], filter.duration);
-        }
-      }
       return latencyData;
     }
   }

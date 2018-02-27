@@ -58,7 +58,7 @@ export function getSiteByTime(
     return response;
 }
 
-export function getKPIData(
+export function getKPIDataByPercentage(
     value,
     typeBy
 ) {

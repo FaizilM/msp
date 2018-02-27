@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { userConstants } from '../../_constants';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
-import { getKPIData } from '../../_helpers/shared';
+import { getKPIDataByPercentage } from '../../_helpers/shared';
 
 let jitterRatioData = (filter, user, type) => {
   let metrics = [];
@@ -109,9 +109,9 @@ let jitterRatioData = (filter, user, type) => {
     if (filter != undefined && filter.duration != undefined) {
       duration = filter.duration;
     }
-    jitter[0] = getKPIData(parseInt((jitter[0] / totalSite) * 100), duration);
-    jitter[1] = getKPIData(parseInt((jitter[1] / totalSite) * 100), duration);
-    jitter[2] = getKPIData(parseInt((jitter[2] / totalSite) * 100), duration);
+    jitter[0] = getKPIDataByPercentage(parseInt((jitter[0] / totalSite) * 100), duration);
+    jitter[1] = getKPIDataByPercentage(parseInt((jitter[1] / totalSite) * 100), duration);
+    jitter[2] = getKPIDataByPercentage(parseInt((jitter[2] / totalSite) * 100), duration);
     return jitter;
   }  else {
     return jitterData;

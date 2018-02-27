@@ -7,7 +7,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { userConstants } from '../../_constants';
 import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
-import { getKPIData } from '../../_helpers/shared';
+import { getKPIDataByPercentage } from '../../_helpers/shared';
 
 
 let packetLossData = (filter, user, type) => {
@@ -129,9 +129,9 @@ let packetLossData = (filter, user, type) => {
     if(filter != undefined && filter.duration != undefined) {
       duration = filter.duration;
     }
-    loss[0] = getKPIData(parseInt((loss[0] / totalSite) * 100), duration);
-    loss[1] = getKPIData(parseInt((loss[1] / totalSite) * 100), duration);
-    loss[2] = getKPIData(parseInt((loss[2] / totalSite) * 100), duration);
+    loss[0] = getKPIDataByPercentage(parseInt((loss[0] / totalSite) * 100), duration);
+    loss[1] = getKPIDataByPercentage(parseInt((loss[1] / totalSite) * 100), duration);
+    loss[2] = getKPIDataByPercentage(parseInt((loss[2] / totalSite) * 100), duration);
     return loss;
   } else {
     return packetLoss;
