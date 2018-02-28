@@ -6,6 +6,7 @@ import {
     Modal, Popover, Tooltip, OverlayTrigger
 } from 'react-bootstrap';
 import { ApplicationMetrics } from '../user/ApplicationMetrics'
+import { EventMetrics } from '../user/EventMetrics'
 import '../../assets/css/App.css';
 
 class Dialog extends React.Component {
@@ -31,7 +32,12 @@ class Dialog extends React.Component {
           </Popover>
         );
         const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-
+        let eventData = <ApplicationMetrics />
+        if (this.props.eventType == "No Route") {
+            eventData = <EventMetrics />
+        } else if(this.props.eventType == "Route Change") {
+            eventData = <EventMetrics />
+        }
         return (
             <div>
                 <Modal bsSize="large" show={this.props.isOpen} onHide={this.closeModal}>
@@ -40,11 +46,11 @@ class Dialog extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                        <ApplicationMetrics />
-                    </Row>
+                        <EventMetrics />
+                        </Row>
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button color="danger" className='pull-right' onClick={this.closeModal}>Close</Button>{' '}
+                        <Button color="danger" className='pull-right' onClick={this.closeModal}>Close</Button>{' '}
                     </Modal.Footer>
                 </Modal>
             </div>
