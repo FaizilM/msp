@@ -24,7 +24,8 @@ class Filter extends Component {
       applicationName: "",
       duration: "HOUR",
       toFilter: "",
-      destinationSite: ""
+      destinationSite: "",
+      appFamilies: ""
     }
 
     this.siteGroup = this.siteGroup.bind(this);
@@ -45,6 +46,9 @@ class Filter extends Component {
     this.allDestinationSite = this.allDestinationSite.bind(this);
     this.changeDestination = this.changeDestination.bind(this);
     this.applicationLink = this.applicationLink.bind(this);
+    this.application = this.application.bind(this);
+    this.changeAppFamily = this.changeAppFamily.bind(this);
+    this.applicationDetailsFilter = this.applicationDetailsFilter.bind(this);
   }
 
   componentDidMount() {
@@ -182,9 +186,9 @@ class Filter extends Component {
     let deviceQuery;
 
     if (cpe == undefined || cpe == "" || cpe == "All CPE") {
-      deviceQuery = 'deviceList[**][0][**].applications';
+      deviceQuery = 'deviceList[**][0][**].applications_details';
     } else {
-      deviceQuery = 'deviceList[**][0][' + cpe + '].applications';
+      deviceQuery = 'deviceList[**][0][' + cpe + '].applications_details';
     }
 
     data = {};
@@ -195,7 +199,7 @@ class Filter extends Component {
     metrics = [];
     metrics = data["deviceList"]
 
-    for (let index = 0; index < metrics.length; index++) {
+    for (let index = 0; metrics != undefined && index < metrics.length; index++) {
       let sitename;
 
       data = {};
@@ -229,8 +233,6 @@ class Filter extends Component {
     } else {
       metrics.push(metricsData);
     }
-
-
     if (selectedSite != undefined) {
       this.setState({ siteGroup: selectedSite.target.value });
       siteGroup = selectedSite.target.value;
@@ -263,8 +265,11 @@ class Filter extends Component {
   }
 
   applicationLink() {
-    
+
+    let linkName = [];
     let metrics = [];
+    let link = [];
+    let data = {};
     let user = this.props.authentication.user;
     if (user.role == userConstants.ROLE_USER) {
       data["customers"] = metricsData
@@ -273,7 +278,59 @@ class Filter extends Component {
       }).value;
       metrics.push(data["customers"]);
     }
+    data = {};
+    data["deviceData"] = metrics;
+    let query;
+    let source = this.state.siteName;
+    if (source == undefined || source == "" || source == "All Source") {
+      query = "deviceData[sites].devices";
+    } else {
+      query = 'deviceData[sites][**][name=' + source + '].devices'
+    }
+    data["deviceData"] = jsonQuery(query, {
+      data: data
+    }).value;
+    metrics = [];
+    metrics = data["deviceData"]
+    let deviceQuery;
+    let cpe = this.state.cpe;
+    data["deviceList"] = metrics;
+    if (cpe == undefined || cpe == "" || cpe == "All CPE") {
+      deviceQuery = 'deviceList[**][0][**].applications_details';
+    } else {
+      deviceQuery = 'deviceList[**][0][' + cpe + '].applications_details';
+    }
+    data["deviceList"] = jsonQuery(deviceQuery, {
+      data: data
+    }).value;
+    metrics = [];
+    metrics = data["deviceList"]
 
+    if (cpe == undefined || cpe == "" || cpe == "All Sites") {
+      metrics = data["deviceList"]
+    } else {
+      metrics.push(data["deviceList"]);
+    }
+    let destination = this.state.destinationSite;
+    for (let index = 0; index < metrics.length; index++) {
+      let sitename;
+      for (let [linkKey, linkValue] of Object.entries(metrics[index])) {
+        if (destination == undefined || destination == "" || destination == "All Sites") {
+          if (linkKey != undefined && link.indexOf(linkKey) == -1) {
+            link.push(linkKey);
+            linkName.push(<option key={linkKey}>{linkKey}</option>);
+          }
+        } else {
+          if (linkValue["destination"] == destination) {
+            if (linkKey != undefined && link.indexOf(linkKey) == -1) {
+              link.push(linkKey);
+              linkName.push(<option key={linkKey}>{linkKey}</option>);
+            }
+          }
+        }
+      }
+    }
+    return linkName;
   }
 
   linksData(selectedSite) {
@@ -324,9 +381,11 @@ class Filter extends Component {
   }
 
   applicationFamily() {
-    let data = {};
+
+    let linkName = [];
     let metrics = [];
-    let sitekey = [];
+    let data = {};
+    let appFamilies = [];
     let user = this.props.authentication.user;
     if (user.role == userConstants.ROLE_USER) {
       data["customers"] = metricsData
@@ -335,53 +394,176 @@ class Filter extends Component {
       }).value;
       metrics.push(data["customers"]);
     }
-
     data = {};
-    data["links"] = metrics;
+    data["deviceData"] = metrics;
     let query;
-    let source = this.state.sourceSite;
-    if (source == "" || source == undefined || source == "All Source") {
-      query = "links[sites][**].links";
+    let source = this.state.siteName;
+    if (source == undefined || source == "" || source == "All Source") {
+      query = "deviceData[sites].devices";
+    } else {
+      query = 'deviceData[sites][**][name=' + source + '].devices'
     }
-    else {
-      query = 'links[sites][**][name=' + source + '].links'
-    }
-    data["links"] = jsonQuery(query, {
+    data["deviceData"] = jsonQuery(query, {
       data: data
     }).value;
-    metrics = data;
+    metrics = [];
+    metrics = data["deviceData"]
+    let deviceQuery;
+    let cpe = this.state.cpe;
+    if (cpe == undefined || cpe == "" || cpe == "All CPE") {
+      deviceQuery = 'deviceList[**][0][**].applications_details';
+    } else {
+      deviceQuery = 'deviceList[**][0][' + cpe + '].applications_details';
+    }
 
-    let appFamily = metrics.links;
-    let appFamilies = [];
-    for (let index = 0; index < appFamily.length; index++) {
-      data = {};
-      data["app_family"] = appFamily[index];
-      let query;
-      let link = this.state.linkName;
-      if (link == "" || link == undefined || link == "All Site Group") {
-        query = "app_family[**].app_family";
+    data = {};
+    data["deviceList"] = metrics;
+    data["deviceList"] = jsonQuery(deviceQuery, {
+      data: data
+    }).value;
+    metrics = [];
+    if (cpe == undefined || cpe == "" || cpe == "All CPE") {
+      metrics = data["deviceList"];
+    } else {
+      metrics.push(data["deviceList"]);
+    }
+    let link = this.state.linkName;
+    deviceQuery = {};
+    data = {};
+    data["appFamily"] = metrics;
+    if (link == undefined || link == "" || link == "All Links") {
+      deviceQuery = 'appFamily[0][**].app_family'
+    } else {
+      deviceQuery = 'appFamily[0][' + link + '].app_family'
+    }
+
+    data["appFamily"] = jsonQuery(deviceQuery, {
+      data: data
+    }).value;
+    metrics = [];
+
+    if (link == undefined || link == "" || link == "All Links") {
+      metrics = data["appFamily"];
+    } else {
+      metrics.push(data["appFamily"]);
+    }
+    for (let index = 0; index < metrics.length; index++) {
+      if (metrics[index] != undefined && linkName.indexOf(metrics[index]) == -1) {
+        linkName.push(metrics[index]);
+        appFamilies.push(<option key={metrics[index]}>{metrics[index]}</option>);
       }
-      else {
-        query = 'app_family[' + link + '].app_family'
-      }
-      data["app_family"] = jsonQuery('app_family[**].app_family', {
+    }
+    return appFamilies;
+  }
+  application() {
+    console.log("this", this.state.duration,
+      this.state.sourceSite,
+      this.state.cpeValue,
+      this.state.destinationSite,
+      this.state.linkName,
+      this.state.appFamilies,
+      this.state.applicationName);
+
+    let appFamily = [];
+    let metrics = [];
+    let data = {};
+    let application = [];
+    let user = this.props.authentication.user;
+    if (user.role == userConstants.ROLE_USER) {
+      data["customers"] = metricsData
+      data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
         data: data
       }).value;
+      metrics.push(data["customers"]);
+    }
+    data = {};
+    data["deviceData"] = metrics;
+    let query;
+    let source = this.state.siteName;
+    if (source == undefined || source == "" || source == "All Source") {
+      query = "deviceData[sites].devices";
+    } else {
+      query = 'deviceData[sites][**][name=' + source + '].devices'
+    }
+    data["deviceData"] = jsonQuery(query, {
+      data: data
+    }).value;
+    metrics = [];
+    metrics = data["deviceData"]
+    let deviceQuery;
+    let cpe = this.state.cpe;
+    if (cpe == undefined || cpe == "" || cpe == "All CPE") {
+      deviceQuery = 'deviceList[**][0][**].applications_details';
+    } else {
+      deviceQuery = 'deviceList[**][0][' + cpe + '].applications_details';
+    }
 
-      for (let index = 0; index < data.app_family.length; index++) {
+    data = {};
+    data["deviceList"] = metrics;
+    data["deviceList"] = jsonQuery(deviceQuery, {
+      data: data
+    }).value;
+    metrics = [];
+    if (cpe == undefined || cpe == "" || cpe == "All CPE") {
+      metrics = data["deviceList"];
+    } else {
+      metrics.push(data["deviceList"]);
+    }
+    let link = this.state.linkName;
+    deviceQuery = {};
+    let deviceData = [];
+    for (let index = 0; index < metrics.length; index++) {
+      data = {};
+      data["appFamily"] = metrics[index];
+      if (link == undefined || link == "" || link == "All Links") {
+        deviceQuery = 'appFamily[**]'
+      } else {
+        deviceQuery = 'appFamily[' + link + ']'
+      }
 
-        if (data.app_family[index] != undefined && sitekey.indexOf(data.app_family[index]) == -1) {
-          sitekey.push(data.app_family[index]);
-          appFamilies.push(<option key={data.app_family[index]}>{data.app_family[index]}</option>);
+      data["appFamily"] = jsonQuery(deviceQuery, {
+        data: data
+      }).value;
+      if (link == undefined || link == "" || link == "All Links") {
+        for (let i = 0; i < data["appFamily"].length; i++) {
+          deviceData.push(data["appFamily"][i]);
         }
+      } else {
+        deviceData.push(data["appFamily"]);
       }
 
     }
-    return appFamilies;
+    metrics = deviceData;
+    let appFamilies = this.state.appFamilies;
+    deviceQuery = {};
+    data = {};
+    data["applicationData"] = metrics;
+    
+    let destination = this.state.destinationSite;
+    if ((appFamilies == undefined || appFamilies == "" || appFamilies == "All Application Family") && (destination == undefined || destination == "" || destination == "All Sites")) {
+      deviceQuery = 'applicationData.application'
+    } else if ((appFamilies != undefined && appFamilies != "" && appFamilies != "All Application Family") && (destination != undefined && destination != "" && destination != "All Sites")) {
+      deviceQuery = 'applicationData[*app_family=' + appFamilies + '][*destination=' + destination + '].application';
+    } else if ((appFamilies != undefined && appFamilies != "" && appFamilies != "All Application Family")) {
+      deviceQuery = 'applicationData[*app_family=' + appFamilies + '].application';
+    } else if (destination != undefined && destination != "" && destination != "All Sites") {
+      deviceQuery = 'applicationData[*destination=' + destination + '].application';
+    }
+    data["applicationData"] = jsonQuery(deviceQuery, {
+      data: data
+    }).value;
+    metrics = [];
+    metrics = data["applicationData"];
 
+    for (let index = 0; index < metrics.length; index++) {
+      if (metrics[index] != undefined && appFamily.indexOf(metrics[index]) == -1) {
+        appFamily.push(metrics[index]);
+        application.push(<option key={metrics[index]}>{metrics[index]}</option>);
+      }
+    }
+    return application;
 
   }
-
   applicationsData(selectedSite) {
 
     let applicationName = [];
@@ -455,7 +637,9 @@ class Filter extends Component {
   changeDestination(selectedSite) {
     this.setState({ destinationSite: selectedSite.target.value });
   }
-
+  changeAppFamily(selectedSite) {
+    this.setState({ appFamilies: selectedSite.target.value });
+  }
   handlePrint() {
     let filter = {
       "duration": this.state.duration,
@@ -478,9 +662,20 @@ class Filter extends Component {
 
     }
     this.setState({ toFilter: filter });
-
   }
 
+  applicationDetailsFilter() {
+    let filter = {
+      "duration": this.state.duration,
+      "sourceSite": this.state.sourceSite,
+      "cpeValue": this.state.cpeValue,
+      "destinationSite": this.state.destinationSite,
+      "linkName": this.state.linkName,
+      "appFamilies": this.state.appFamilies,
+      "application": this.state.applicationName
+    }
+    this.setState({ toFilter: filter });
+  }
   render() {
     let user = this.props.authentication.user;
     if (userConstants.ROLE_USER == user.role && this.props.type != "visualization" && this.props.type != "applicationDetails") {
@@ -658,13 +853,13 @@ class Filter extends Component {
                     <Col xs="6" sm="6" md="2" lg="1" xl="1">
                       <h5>Source Site</h5>
                     </Col>
-                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                    <Col xs="6" sm="6" md="2" lg="1" xl="1">
                       <h5>CPE</h5>
                     </Col>
                     <Col xs="6" sm="6" md="2" lg="2" xl="2">
                       <h5>Destination Site</h5>
                     </Col>
-                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                    <Col xs="6" sm="6" md="1" lg="1" xl="1">
                       <h5>Links</h5>
                     </Col>
                     <Col xs="6" sm="6" md="2" lg="2" xl="2">
@@ -694,7 +889,7 @@ class Filter extends Component {
                         </select>
                       </div>
                     </Col>
-                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                    <Col xs="6" sm="6" md="2" lg="1" xl="1">
                       <div className="form-group">
                         <select className="form-control" id="cpe" onChange={this.changeCpe}>
                           <option>All CPE</option>
@@ -710,17 +905,17 @@ class Filter extends Component {
                         </select>
                       </div>
                     </Col>
-                    <Col xs="6" sm="6" md="2" lg="2" xl="2">
+                    <Col xs="6" sm="6" md="2" lg="1" xl="1">
                       <div className="form-group">
                         <select className="form-control" id="link" onChange={this.changeLink}>
                           <option>All Links</option>
-                          {this.state.all_link}
+                          {this.applicationLink()}
                         </select>
                       </div>
                     </Col>
                     <Col xs="6" sm="6" md="2" lg="2" xl="2">
                       <div className="form-group">
-                        <select className="form-control" id="application" onChange={this.changeApplication}>
+                        <select className="form-control" id="application" onChange={this.changeAppFamily}>
                           <option>All Application Family</option>
                           {this.applicationFamily()}
                         </select>
@@ -731,14 +926,14 @@ class Filter extends Component {
                       <div className="form-group">
                         <select className="form-control" id="application" onChange={this.changeApplication}>
                           <option>All Applications</option>
-                          {this.state.all_application}
+                          {this.application()}
                         </select>
 
                       </div>
                     </Col>
                     <Col lg="2">
                       <button className="btn btn-primary btn-block"
-                        onClick={this.handleDashBoardData}> Filter </button>
+                        onClick={this.applicationDetailsFilter}> Filter </button>
                     </Col>
                   </Row>
                 </div>

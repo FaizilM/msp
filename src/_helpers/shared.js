@@ -78,7 +78,7 @@ export function getKPIDataByPercentage(
                 response = (((((value * 24) * 7) / 100) * 30) / 100);
                 break;
             case "YEAR":
-                response = ((((((value * 24) * 7) / 100) * 30) / 100) * 365) / 100 - 24;
+                response =(((value * 24) / 100) * 365) / 100;
                 break;
             default:
                 response = (value * 24) / 100;

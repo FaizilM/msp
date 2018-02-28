@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import jsonQuery from 'json-query';
 import { getValueByTime } from '../../_helpers/shared';
 
-let customerClassMetrics = (filter, user) => {
+let customerClassMetrics = (filter, user) => {    
     let metrics = [];
     let classMetrics = [];
     let customerClassMetricsData = [];
