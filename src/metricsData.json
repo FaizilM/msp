@@ -77,8 +77,9 @@
                 "applications_details": [
                   {
                     "broadband": {
+                      "destination":"Boston",
                       "app_family": "Media",
-                      "appilcation": "Voice-HD",
+                      "application": "Voice-HD",
                       "direction": "Incoming",
                       "sla_class": "Low Latency",
                       "dscp_value": "EF",
@@ -86,11 +87,12 @@
                       "packets": 160,
                       "mean_latency": 10,
                       "mean_jitter": 30,
-                      "avg_paket_loss": 20
+                      "avg_packet_loss": 20
                     },
                     "mpls": {
+                      "destination":"Paris",
                       "app_family": "Office",
-                      "appilcation": "Voice-HD",
+                      "application": "Voice-HD",
                       "direction": "Outgoing",
                       "sla_class": "",
                       "dscp_value": "EF",
@@ -98,11 +100,12 @@
                       "packets": 110,
                       "mean_latency": 10,
                       "mean_jitter": 5,
-                      "avg_paket_loss": 30
+                      "avg_packet_loss": 30
                     },
                     "t1_lines": {
+                      "destination":"Boston",
                       "app_family": "Social",
-                      "appilcation": "Voice",
+                      "application": "Voice",
                       "direction": "",
                       "sla_class": "",
                       "dscp_value": "",
@@ -110,19 +113,20 @@
                       "packets": 70,
                       "mean_latency": 8,
                       "mean_jitter": 27,
-                      "avg_paket_loss": 23
+                      "avg_packet_loss": 23
                     },
                     "4G": {
-                      "app_family": "Media",
-                      "appilcation": "Video",
-                      "direction": "Incoming",
-                      "sla_class": "Medium Latency",
-                      "dscp_value": "AF41",
+                      "destination":"Boston",
+                      "app_family": "Internet",
+                      "application": "Other",
+                      "direction": "",
+                      "sla_class": "Default",
+                      "dscp_value": "Best Effort",
                       "octets": 1200,
                       "packets": 368,
                       "mean_latency": 30,
                       "mean_jitter": 35,
-                      "avg_paket_loss": 10
+                      "avg_packet_loss": 10
                     }
                   }
                 ],
@@ -154,7 +158,7 @@
                           "utilization": 50,
                           "latency": 10,
                           "jitter": 5,
-                          "packet_loss": 0,
+                          "packet_loss": 2,
                           "status": "UP"
                         },
                         {
@@ -182,8 +186,9 @@
                 "applications_details": [
                   {
                     "broadband": {
+                      "destination": "Paris",
                       "app_family": "Media",
-                      "appilcation": "Voice-HD",
+                      "application": "Voice-HD",
                       "direction": "Incoming",
                       "sla_class": "Low Latency",
                       "dscp_value": "EF",
@@ -191,11 +196,12 @@
                       "packets": 160,
                       "mean_latency": 10,
                       "mean_jitter": 30,
-                      "avg_paket_loss": 20
+                      "avg_packet_loss": 20
                     },
                     "mpls": {
+                      "destination": "Boston",
                       "app_family": "Office",
-                      "appilcation": "Voice-HD",
+                      "application": "Voice-HD",
                       "direction": "Outgoing",
                       "sla_class": "",
                       "dscp_value": "EF",
@@ -203,11 +209,12 @@
                       "packets": 110,
                       "mean_latency": 10,
                       "mean_jitter": 5,
-                      "avg_paket_loss": 30
+                      "avg_packet_loss": 30
                     },
                     "t1_lines": {
+                      "destination": "Boston",
                       "app_family": "Social",
-                      "appilcation": "Voice",
+                      "application": "Voice",
                       "direction": "",
                       "sla_class": "",
                       "dscp_value": "",
@@ -215,11 +222,12 @@
                       "packets": 70,
                       "mean_latency": 8,
                       "mean_jitter": 27,
-                      "avg_paket_loss": 23
+                      "avg_packet_loss": 23
                     },
                     "4G": {
+                      "destination": "Paris",
                       "app_family": "Internet",
-                      "appilcation": "Other",
+                      "application": "Other",
                       "direction": "",
                       "sla_class": "Default",
                       "dscp_value": "Best Effort",
@@ -227,7 +235,7 @@
                       "packets": 110,
                       "mean_latency": 20,
                       "mean_jitter": 15,
-                      "avg_paket_loss": 20
+                      "avg_packet_loss": 20
                     }
                   }
                 ],
@@ -297,8 +305,9 @@
                 "applications_details": [
                   {
                     "broadband": {
+                      "destination": "Boston",
                       "app_family": "Media",
-                      "appilcation": "Voice-HD",
+                      "application": "Voice-HD",
                       "direction": "Incoming",
                       "sla_class": "Low Latency",
                       "dscp_value": "EF",
@@ -306,11 +315,12 @@
                       "packets": 160,
                       "mean_latency": 10,
                       "mean_jitter": 30,
-                      "avg_paket_loss": 20
+                      "avg_packet_loss": 20
                     },
                     "mpls": {
+                      "destination": "Paris",
                       "app_family": "Office",
-                      "appilcation": "Webex",
+                      "application": "Webex",
                       "direction": "Outgoing",
                       "sla_class": "Default",
                       "dscp_value": "AF42",
@@ -318,11 +328,12 @@
                       "packets": 890,
                       "mean_latency": 14,
                       "mean_jitter": 51,
-                      "avg_paket_loss": 32
+                      "avg_packet_loss": 32
                     },
                     "t1_lines": {
+                      "destination": "Boston",
                       "app_family": "Social",
-                      "appilcation": "Voice",
+                      "application": "Voice",
                       "direction": "",
                       "sla_class": "",
                       "dscp_value": "",
@@ -330,19 +341,20 @@
                       "packets": 70,
                       "mean_latency": 8,
                       "mean_jitter": 27,
-                      "avg_paket_loss": 23
+                      "avg_packet_loss": 23
                     },
                     "4G": {
-                      "app_family": "Media",
-                      "appilcation": "Video",
-                      "direction": "Incoming",
-                      "sla_class": "Medium Latency",
-                      "dscp_value": "AF41",
+                      "destination": "Paris",
+                      "app_family": "Internet",
+                      "application": "Other",
+                      "direction": "",
+                      "sla_class": "Default",
+                      "dscp_value": "Best Effort",
                       "octets": 1200,
                       "packets": 368,
                       "mean_latency": 30,
                       "mean_jitter": 35,
-                      "avg_paket_loss": 10
+                      "avg_packet_loss": 10
                     }
                   }
                 ],

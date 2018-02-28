@@ -25,140 +25,159 @@ const customStyles = {
 };
 
 
-let getApplicationDetails = (user) => {
-    let customerMetricsData = [];
+let getApplicationDetails = (user, filter) => {
+    console.log("filter", filter);
+    let metrics = [];
+    let data = {};
+    let applicationDetails = [];
+    let appDetails = [];
     if (user.role == userConstants.ROLE_ADMIN) {
-        customerMetricsData.push(metricsData);
+        metrics.push(metricsData);
     } else if (user.role == userConstants.ROLE_USER) {
-        let data = {};
+        data = {};
         data["customers"] = metricsData
         data["customers"] = jsonQuery('customers[username=' + user.username + ']', {
             data: data
         }).value;
-        customerMetricsData.push(data["customers"]);
+        metrics.push(data["customers"]);
     }
-
     let tableMetricsData = [];
     let sourceSite;
-    if (customerMetricsData != null && customerMetricsData != undefined) {
+    if (metrics != null && metrics != undefined) {
 
-        for (let [metricsDataKey, metricsDataValue] of Object.entries(customerMetricsData)) {
-            let count = 0;
-            if (metricsDataValue.sites != null && metricsDataValue.sites != undefined) {
-                let sites = metricsDataValue.sites;
-                for (let site = 0; site < 1; site++) {
-                    sourceSite = sites[site].name;
-                    let devices = sites[site].devices;
-                    for (let device = 0; device < devices.length; device++) {
-                        for (let [deviceKey, deviceValue] of Object.entries(devices[device])) {
-                            for (let cpe = 0; cpe < 1; cpe++) {
+        data = {};
+        data["deviceData"] = metrics;
+        let query;
+        let source = filter.sourceSite;
 
-                                for (let [cpeKey, cpeValue] of Object.entries(deviceValue[cpe])) {
-                                    for (let application = 0; application < cpeValue.length; application++) {
-                                        for (let [applicationKey, applicationValue] of Object.entries(cpeValue[application])) {
-                                            let deviceData = {};
-                                            deviceData["is_no_route"] = 0;
-                                            for (let [key, value] of Object.entries(applicationValue)) {
-                                                deviceData["CPE"] = deviceKey;
-                                                deviceData["application"] = applicationKey;
-                                                if (key == "is_no_route") {
-                                                    if (value) {
-                                                        deviceData["is_no_route"] = 1;
-                                                    }
-                                                } else if (key == "route_change") {
-                                                    if (value.length > 1) {
-                                                        deviceData["route_change"] = value.length;
-                                                    } else {
-                                                        deviceData["route_change"] = value.length - 1;
-                                                    }
-                                                    for (let [k, v] of Object.entries(value)) {
-                                                        for (let [routeChangeKey, routeChangeValue] of Object.entries(v)) {
+        if (source == undefined || source == "" || source == "All Source") {
+            query = "deviceData[sites].devices";
+        } else {
+            query = 'deviceData[sites][**][name=' + source + '].devices'
+        }
+        data["deviceData"] = jsonQuery(query, {
+            data: data
+        }).value;
+        metrics = [];
+        metrics = data["deviceData"]
+        let deviceQuery;
+        let cpe = filter.cpeValue;
+        if (cpe == undefined || cpe == "" || cpe == "All CPE") {
+            deviceQuery = 'deviceList[**][0][**].applications_details';
+        } else {
+            deviceQuery = 'deviceList[**][0][' + cpe + '].applications_details';
+        }
 
-                                                            if ((routeChangeKey == "utilization" || routeChangeKey == "latency"
-                                                                || routeChangeKey == "jitter" || routeChangeKey == "packet_loss") && deviceData[routeChangeKey] != undefined) {
+        data = {};
+        data["deviceList"] = metrics;
+        data["deviceList"] = jsonQuery(deviceQuery, {
+            data: data
+        }).value;
+        metrics = [];
+        if (cpe == undefined || cpe == "" || cpe == "All CPE") {
+            metrics = data["deviceList"];
+        } else {
+            metrics = data["deviceList"];
+        }
+        let link = filter.linkName;
+        deviceQuery = {};
+        let deviceData = [];
+        for (let index = 0; index < metrics.length; index++) {
+            data = {};
+            data["appFamily"] = metrics[index];
+            if (link == undefined || link == "" || link == "All Links") {
+                deviceQuery = 'appFamily[**]'
+            } else {
+                deviceQuery = 'appFamily[' + link + ']'
+            }
 
-                                                                if (deviceData[routeChangeKey] > 0 && routeChangeValue > 0) {
-
-                                                                    deviceData[routeChangeKey] = (deviceData[routeChangeKey] + routeChangeValue) / 2;
-                                                                } else {
-                                                                    deviceData[routeChangeKey] = routeChangeValue;
-                                                                }
-                                                            } else {
-                                                                deviceData[routeChangeKey] = routeChangeValue;
-                                                            }
-                                                        }
-                                                    }
-                                                } else {
-                                                    deviceData[key] = value;
-                                                }
-                                            }
-                                            tableMetricsData.push(deviceData);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+            data["appFamily"] = jsonQuery(deviceQuery, {
+                data: data
+            }).value;
+            if (link == undefined || link == "" || link == "All Links") {
+                for (let i = 0; i < data["appFamily"].length; i++) {
+                    deviceData.push(data["appFamily"][i]);
                 }
+            } else {
+                deviceData.push(data["appFamily"]);
             }
 
         }
+
+        let appFamilies = filter.appFamilies;
+        deviceQuery = {};
+        data = {};
+        data["applicationData"] = deviceData;
+        if (appFamilies == undefined || appFamilies == "" || appFamilies == "All Application Family") {
+            deviceQuery = 'applicationData'
+        } else {
+            deviceQuery = 'applicationData[app_family=' + appFamilies + ']';
+        }
+
+        data["applicationData"] = jsonQuery(deviceQuery, {
+            data: data
+        }).value;
+        metrics = [];
+
+        if (appFamilies == undefined || appFamilies == "" || appFamilies == "All Application Family") {
+            metrics = data["applicationData"];
+        } else {
+            metrics.push("appFamily", data["applicationData"]);
+        }
+        let destination = filter.destinationSite;
+        for (let index = 0; index < metrics.length; index++) {
+            let sitename;
+            if (destination == undefined || destination == "" || destination == "All Sites") {
+                applicationDetails.push(metrics[index]);
+            } else {
+                if (metrics[index]["destination"] == destination) {
+                    applicationDetails.push(metrics[index]);
+                }
+            }
+        }
+        appDetails = [];
+        let application = filter.application;
+        for (let index = 0; index < applicationDetails.length; index++) {
+            let sitename;
+            if (application == undefined || application == "" || application == "All Applications") {
+                appDetails.push(applicationDetails[index]);
+            } else {
+                if (applicationDetails[index]["application"] === application) {
+                    appDetails.push(applicationDetails[index]);
+                }
+            }
+        }
     }
-
-    return [tableMetricsData, sourceSite];
+    return appDetails;
 };
-
-
 let col = [
-
+    "app_family",
     "application",
-    "destination",
-    "CPE",
-    "link",
+    "direction",
+    "sla_class",
+    "dscp_value",
     "octets",
     "packets",
-    "route_change",
-    "is_no_route"
+    "mean_latency",
+    "mean_jitter",
+    "avg_packet_loss"
 ];
-let tHead = [
 
+let head = [
+    "Application Family",
     "Application",
-    "Destination Site",
-    "CPE",
-    "Link",
-    "Octets (K)",
-    "Packets (K)",
-    "Route Change",
-    "No Route"
+    "Direction",
+    "SLA class",
+    "DSCP value",
+    "Octets",
+    "Packets",
+    "Mean Latency",
+    "Mean Jitter",
+    "Average Packet Loss",
+    "Plot"
 ];
 
-let eventCol = [
 
-    "event",
-    "application",
-    "destination",
-    "CPE",
-    "link",
-    "utilization",
-    "latency",
-    "jitter",
-    "packet_loss"
-
-];
-
-let eventHead = [
-
-    "Event",
-    "Application",
-    "Destination Site",
-    "CPE",
-    "Link",
-    "Link Utilization (%)",
-    "Latency (ms)",
-    "Jitter (ms)",
-    "Packet Loss (%)",
-    "Action"
-];
 
 class ApplicationDetails extends React.Component {
     constructor() {
@@ -191,129 +210,49 @@ class ApplicationDetails extends React.Component {
 
     render() {
         let user = this.props.authentication.user;
-        let applicationDetail = getApplicationDetails(user);
+        let filter = this.props.filter;
+        let applicationDetail = getApplicationDetails(user, filter);
         let applicationDetails = applicationDetail[0];
-        let index = 0;
-        let tableData = [];
-        let headerData = [];
-        let eventHeaderData = [];
-        let eventData = [];
-        let event = 1;
-        let routeEvent;
-        let site = [];
         let siteOption = [];
-        siteOption.push(<option key={"source"}>{applicationDetail[1]}</option>);
-        eventHeaderData.push(<th key={0}>ID</th>)
-        for (let index = 0; index < eventHead.length; index++) {
-            eventHeaderData.push(<th key={index + 1}>{eventHead[index]}</th>);
-        }
-        eventData.push(<tr className="appdetailsTH" key={"eventHeader"}>{eventHeaderData}</tr>)
+        let tableData = [];
+        let appDetailsData = [];
+        let appDetails = [];
 
-        headerData.push(<th key={0}>ID</th>)
-        for (let index = 0; index < tHead.length; index++) {
-            headerData.push(<th key={index + 1}>{tHead[index]}</th>);
+        let headerData = [];
+        for (let index = 0; index < head.length; index++) {
+            headerData.push(<th key={head[index]}>{head[index]}</th>);
         }
-        tableData.push(<tr className="appdetailsTH" key={"header"}>{headerData}</tr>)
-        for (let applicationIndex = 0; applicationIndex < applicationDetails.length; applicationIndex++) {
-            let rowData = [];
-            let rowEventData = [];
-            if (site.indexOf(applicationDetails[applicationIndex]["destination"]) == -1) {
-                site.push(applicationDetails[applicationIndex]["destination"]);
-                siteOption.push(<option key={applicationIndex}>{applicationDetails[applicationIndex]["destination"]}</option>);
-            }
-            rowData.push(<td key={"id"}>{applicationIndex + 1}</td>);
+        appDetailsData.push(<tr className="appdetailsTH" key={"head"}>{headerData}</tr>);
+
+        for (let i = 0; i < applicationDetail.length; i++) {
+            let data = [];
             for (let index = 0; index < col.length; index++) {
-                rowData.push(<td key={col[index]}>{applicationDetails[applicationIndex][col[index]]}</td>);
+                data.push(<td key={col[index]}>{applicationDetail[i][col[index]]}</td>);
             }
-
-            if (applicationDetails[applicationIndex].is_no_route == true || applicationDetails[applicationIndex].route_change > 0) {
-                rowEventData.push(<td key={"id"}>{event}</td>);
-                event++;
-                for (let index = 0; index < eventCol.length; index++) {
-                    if (eventCol[index] == "event") {
-                        if (applicationDetails[applicationIndex].is_no_route == true) {
-                            routeEvent = "is_no_route";
-                            rowEventData.push(<td key={eventCol[index]}>{"No Route"}</td>);
-                        } else {
-                            routeEvent = "route_change";
-                            rowEventData.push(<td key={eventCol[index]}>{"Route Change"}</td>);
-                        }
-                    } else {
-                        rowEventData.push(<td key={eventCol[index]}>{applicationDetails[applicationIndex][eventCol[index]]}</td>);
-                    }
-                }
-
-                rowEventData.push(<td key={"button"}>
+            if (applicationDetail.length > 0) {
+                data.push(<td key={"button"}>
                     <button className="btn btn-primary" type="button" id={routeEvent} onClick={this.openModal}>
                         More
-                      </button>
+              </button>
                 </td>);
-
-
+                appDetailsData.push(<tr key={"applicationDetail" + i}>{data}</tr>);
             }
-            eventData.push(<tr key={applicationIndex}>{rowEventData}</tr>);
-            tableData.push(<tr key={applicationIndex}>{rowData}</tr>);
-        }
-        if (event == 1) {
-            eventData = [];
-            eventHeaderData = [];
-        }
 
+        }
 
         return (
             <div>
                 <Col xs="12>" sm="12" md="12" lg="12" xl="12">
-
                     <div className="panel panel-default">
                         <div className="panel-heading">
-                            <Row>
-                                <Col xs="7" sm="7" md="7" lg="8" xl="8">
-
-                                    <h3> Application Routing Details : {applicationDetail[1]} </h3>
-                                </Col>
-
-                                <Col xs="2" sm="2" md="2" lg="1" xl="1">
-                                    <div>
-                                        <h5 style={{ marginTop: "10px" }}> Source Site </h5>
-                                    </div>
-                                </Col>
-
-                                <Col xs="3" sm="4" md="3" lg="3" xl="3">
-                                    <div className="form-group">
-                                        <select className="form-control">
-                                            {siteOption}
-                                        </select>
-                                    </div>
-                                </Col>
-                            </Row>
-                        </div>
-
-
-                        <div className="panel-body">
-                            <div className="list-group">
-                                <div className="table-responsive">
-                                    <table className="table table-bordered">
-                                        <tbody>
-                                            {tableData}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Col>
-                <Col xs="12" sm="12" md="12" lg="12" xl="12">
-                    <div className="panel panel-default">
-                        <div className="panel-heading">
-                            <i className=""></i>
-                            <h3> Event Details </h3>
+                            <h3> Application Routing Details </h3>
                         </div>
                         <div className="panel-body">
                             <div className="list-group">
                                 <div className="table-responsive">
                                     <table className="table table-bordered">
                                         <tbody>
-                                            {eventData}
+                                            {appDetailsData}
                                         </tbody>
                                     </table>
                                 </div>
