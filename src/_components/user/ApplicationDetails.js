@@ -184,16 +184,18 @@ class ApplicationDetails extends React.Component {
         super();
 
         this.state = {
-            modalIsOpen: false
+            modalIsOpen: false,
+            eventType : ""
         };
 
+    
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
 
-    openModal() {
-        this.setState({ modalIsOpen: true });
+    openModal(e) {
+        this.setState({ modalIsOpen: true, eventType: e.target.id });
     }
 
     afterOpenModal() {
@@ -202,7 +204,7 @@ class ApplicationDetails extends React.Component {
     }
 
     closeModal() {
-        console.log("Prent close model ")
+        
         this.setState({ modalIsOpen: false });
     }
 
@@ -229,7 +231,7 @@ class ApplicationDetails extends React.Component {
             }
             if (applicationDetail.length > 0) {
                 data.push(<td key={"button"}>
-                    <button className="btn btn-primary" type="button" onClick={this.openModal}>
+                    <button className="btn btn-primary" type="button" id={routeEvent} onClick={this.openModal}>
                         More
               </button>
                 </td>);
@@ -258,7 +260,7 @@ class ApplicationDetails extends React.Component {
                         </div>
                     </div>
                 </Col>
-                <Dialog isOpen={this.state.modalIsOpen} closeModal={this.closeModal} />
+                <Dialog isOpen={this.state.modalIsOpen} closeModal={this.closeModal} eventType={this.state.eventType}/>
             </div>
         );
 
