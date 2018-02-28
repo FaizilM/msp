@@ -35,7 +35,7 @@ let getKPIDetails = (links, timeFilterBy) => {
 
 let populateMapSites = (config, user, timeFilterBy) => {
 
-    var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
+    var targetSVG = "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123";
     
     let data = {};
     data["customers"] = metricsData
@@ -94,6 +94,7 @@ let getLinkDetails = (routeType, currentTimeFrame) => {
                 "color": "red",
                 "arc": -0.54,
                 "accessibleLabel": "No Route",
+                "arrowColor":"red"
             }
             break;
         case "APP_ROUTE":
@@ -101,6 +102,7 @@ let getLinkDetails = (routeType, currentTimeFrame) => {
                 "balloonText": "<b>Link </b>: Broad band <br>Event: App Route<br> Latency : 5ms <br> Jitter : 0.65ms <br> Packet Loss : 4%",
                 "color": "#2d862d",
                 "accessibleLabel": "Broad band",
+                "arrowColor":"#2d862d"
             }
             break;
         default:
@@ -109,6 +111,8 @@ let getLinkDetails = (routeType, currentTimeFrame) => {
                 "accessibleLabel": "mpls",
                 "balloonText": "<b>Link </b>: MPLS <br>Event:  Route Change<br> Latency : 18ms <br> Jitter : 1.65ms <br> Packet Loss : 14%",
                 "arc": -0.1,
+                "arrowColor":"#FFDE24"
+                
             }
     }
     return lineObject;
@@ -141,8 +145,8 @@ class Map extends React.Component {
             "map": "worldLow",
             "imagesSettings": {
                 "rollOverColor": "#708090",
-                "rollOverScale": 3,
-                "selectedScale": 3,
+                "rollOverScale": 1,
+                "selectedScale": 1,
                 "selectedColor": "#708090",
                 "color": "#13564e",
                 "labelRollOverColor": "#006666"
@@ -170,7 +174,7 @@ class Map extends React.Component {
                 "method": function (event) {
 
                     if (event.mapObject && event.mapObject.lines) {
-                        
+             
                         let data = {};
                         data["customers"] = metricsData
                         event.mapObject.lines = [];
@@ -182,7 +186,7 @@ class Map extends React.Component {
                         for (let [siteIndex, site] of Object.entries(userDetails.sites)) {
 
                             if (site.name == event.mapObject.label) {
-
+                                
                                 for (let [Key, links] of Object.entries(site.linkedWith)) {
 
                                     let linkObj = getLinkDetails(links.eventType, currentTimeFrame);
@@ -192,7 +196,7 @@ class Map extends React.Component {
                                     let lineObject = {
                                         "latitudes": [event.mapObject.latitude, links.latitude],
                                         "longitudes": [event.mapObject.longitude, links.longitude],
-                                        "arrowColor": "#2d862d",
+                                        "arrowColor": linkObj.arrowColor,
                                         "arrowSize": 9,
                                         "balloonText": linkObj.balloonText,
                                         "color": linkObj.color,
@@ -209,7 +213,7 @@ class Map extends React.Component {
                                     if ((currentTimeFrame.toString() === 'MONTH' || currentTimeFrame.toString() === 'YEAR') && parseInt(siteIndex) === 0) {
                                         linkColor = "yellow"
                                         eventType = "Route change"
-                                    }
+                                    }   
 
                                     let lineObject2 = {
                                         "latitudes": [event.mapObject.latitude, links.latitude],
@@ -225,6 +229,7 @@ class Map extends React.Component {
                                         "bringForwardOnHover": true
                                     }
 
+                                    
                                     event.mapObject.lines.push(lineObject2);
 
                                     event.mapObject.lines.push(lineObject);
@@ -233,7 +238,7 @@ class Map extends React.Component {
                             }
                         }
                         //update the area's color
-                        event.mapObject.validate();
+                        event.mapObject.update();
                     }
                 }
             }]
@@ -261,11 +266,11 @@ class Map extends React.Component {
                             <Col lg={{ size: 3 }} className="pull-right">
                                 <div className="form-group">
                                     <select className="form-control" onChange={this.changeDuration}>
-                                        <option value="HOUR">Hour</option>
-                                        <option value="DAY">Day</option>
-                                        <option value="WEEK">Week</option>
-                                        <option value="MONTH">Month</option>
-                                        <option value="YEAR">Year</option>
+                                        <option value="HOUR">1Hour</option>
+                                        <option value="DAY">1Day</option>
+                                        <option value="WEEK">1Week</option>
+                                        <option value="MONTH">1Month</option>
+                                        <option value="YEAR">1Year</option>
                                     </select>
                                 </div>
                             </Col>
