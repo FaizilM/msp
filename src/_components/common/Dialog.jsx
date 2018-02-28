@@ -33,20 +33,26 @@ class Dialog extends React.Component {
         );
         const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
         let eventData = <ApplicationMetrics />
+        let heading = "Application Details";
         if (this.props.eventType == "No Route") {
+            heading = "No Route Details";
             eventData = <EventMetrics />
         } else if(this.props.eventType == "Route Change") {
+            heading = "Route Change Details";
             eventData = <EventMetrics />
         }
         return (
             <div>
+                
                 <Modal bsSize="large" show={this.props.isOpen} onHide={this.closeModal}>
                     <Modal.Header closeButton className='bggray'>
-                        <Modal.Title>Modal heading</Modal.Title>
+                        <Modal.Title>{heading}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                        <EventMetrics />
+                        <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                        {eventData}
+                        </Col>
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>

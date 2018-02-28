@@ -296,6 +296,12 @@ class ApplicationDetails extends React.Component {
         for (let i = 0; i < eventDetails.length; i++) {
             let data = [];
             for (let index = 0; index < eventCol.length; index++) {
+                if (eventCol[index] == "timestamp") {
+                    let firstDate = new Date();
+                    // now set 500 minutes back
+                    firstDate.setMinutes(firstDate.getDate() - 200);
+                    eventDetails[i][eventCol[index]] = firstDate + "";
+                }
                 data.push(<td key={eventCol[index]}>{eventDetails[i][eventCol[index]]}</td>);
             }
             if (eventDetails.length > 0) {

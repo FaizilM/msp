@@ -11,7 +11,8 @@ function generateChartData() {
     console.log(firstDate)
     // now set 500 minutes back
     firstDate.setMinutes(firstDate.getDate() - 500);
-
+    
+    
     // and generate 500 data items
  
     var inOctets = 160;
