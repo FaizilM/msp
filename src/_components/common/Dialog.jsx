@@ -7,6 +7,7 @@ import {
 } from 'react-bootstrap';
 import { ApplicationMetrics } from '../user/ApplicationMetrics'
 import { EventMetrics } from '../user/EventMetrics'
+import { RouteChangeMetrics } from '../user/RouteChangeMetrics'
 import '../../assets/css/App.css';
 
 class Dialog extends React.Component {
@@ -39,7 +40,7 @@ class Dialog extends React.Component {
             eventData = <EventMetrics />
         } else if(this.props.eventType == "Route Change") {
             heading = "Route Change Details";
-            eventData = <EventMetrics />
+            eventData = <RouteChangeMetrics />
         }
         return (
             <div>
