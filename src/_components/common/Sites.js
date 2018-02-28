@@ -141,11 +141,11 @@ class Sites extends Component {
                     <Col lg={{ size: 3 }} className="pull-right">
                         <div className="form-group">
                             <select className="form-control" onChange={this.changeDuration}>
-                                <option key={"Hour"} value={"HOUR"}>Hour</option>
-                                <option key={"Day"} value={"DAY"}>Day</option>
-                                <option key={"Week"} value={"WEEK"}>Week</option>
-                                <option key={"Month"} value={"MONTH"}>Month</option>
-                                <option key={"Year"} value={"YEAR"}>Year</option>
+                                <option key={"Hour"} value={"HOUR"}>1 Hour</option>
+                                <option key={"Day"} value={"DAY"}>1 Day</option>
+                                <option key={"Week"} value={"WEEK"}>1 Week</option>
+                                <option key={"Month"} value={"MONTH"}>1 Month</option>
+                                <option key={"Year"} value={"YEAR"}>1 Year</option>
                             </select>
                         </div>
                     </Col>
