@@ -184,7 +184,14 @@ class Filter extends Component {
     metrics = [];
     metrics = data["deviceData"]
     let deviceQuery;
-
+    let cpedata = {};
+    for (let index = 0; index < metrics.length; index++) {
+      for (let [key, value] of Object.entries(metrics[index])) {
+        cpedata[key] = value;
+      }
+    }
+    metrics = [];
+    metrics.push(cpedata);
     if (cpe == undefined || cpe == "" || cpe == "All CPE") {
       deviceQuery = 'deviceList[**][0][**].applications_details';
     } else {
@@ -193,25 +200,29 @@ class Filter extends Component {
 
     data = {};
     data["deviceList"] = metrics;
+
     data["deviceList"] = jsonQuery(deviceQuery, {
       data: data
     }).value;
     metrics = [];
     metrics = data["deviceList"]
-
     for (let index = 0; metrics != undefined && index < metrics.length; index++) {
       let sitename;
 
       data = {};
       data["device"] = metrics[index];
-      data["device"] = jsonQuery('device[**][0].destination', {
+      data["device"] = jsonQuery('device[**].destination', {
         data: data
       }).value;
+      let destination = data.device;
+      for (let i = 0; destination != undefined && i < destination.length; i++) {
 
-      if (data.device != undefined && sitekey.indexOf(data.device) == -1) {
-        sitekey.push(data.device);
-        siteName.push(<option key={data.device}>{data.device}</option>);
+        if (destination[i] != undefined && sitekey.indexOf(destination[i]) == -1) {
+          sitekey.push(destination[i]);
+          siteName.push(<option key={destination[i]}>{destination[i]}</option>);
+        }
       }
+
 
     }
     return siteName;
@@ -295,6 +306,14 @@ class Filter extends Component {
     let deviceQuery;
     let cpe = this.state.cpe;
     data["deviceList"] = metrics;
+    let cpedata = {};
+    for (let index = 0; index < metrics.length; index++) {
+      for (let [key, value] of Object.entries(metrics[index])) {
+        cpedata[key] = value;
+      }
+    }
+    metrics = [];
+    metrics.push(cpedata);
     if (cpe == undefined || cpe == "" || cpe == "All CPE") {
       deviceQuery = 'deviceList[**][0][**].applications_details';
     } else {
@@ -311,6 +330,7 @@ class Filter extends Component {
     } else {
       metrics.push(data["deviceList"]);
     }
+
     let destination = this.state.destinationSite;
     for (let index = 0; index < metrics.length; index++) {
       let sitename;
@@ -408,6 +428,14 @@ class Filter extends Component {
     }).value;
     metrics = [];
     metrics = data["deviceData"]
+    let cpedata = {};
+    for (let index = 0; index < metrics.length; index++) {
+      for (let [key, value] of Object.entries(metrics[index])) {
+        cpedata[key] = value;
+      }
+    }
+    metrics = [];
+    metrics.push(cpedata);
     let deviceQuery;
     let cpe = this.state.cpe;
     if (cpe == undefined || cpe == "" || cpe == "All CPE") {
@@ -456,13 +484,6 @@ class Filter extends Component {
     return appFamilies;
   }
   application() {
-    console.log("this", this.state.duration,
-      this.state.sourceSite,
-      this.state.cpeValue,
-      this.state.destinationSite,
-      this.state.linkName,
-      this.state.appFamilies,
-      this.state.applicationName);
 
     let appFamily = [];
     let metrics = [];
@@ -490,6 +511,14 @@ class Filter extends Component {
     }).value;
     metrics = [];
     metrics = data["deviceData"]
+    let cpedata = {};
+    for (let index = 0; index < metrics.length; index++) {
+      for (let [key, value] of Object.entries(metrics[index])) {
+        cpedata[key] = value;
+      }
+    }
+    metrics = [];
+    metrics.push(cpedata);
     let deviceQuery;
     let cpe = this.state.cpe;
     if (cpe == undefined || cpe == "" || cpe == "All CPE") {
@@ -538,7 +567,7 @@ class Filter extends Component {
     deviceQuery = {};
     data = {};
     data["applicationData"] = metrics;
-    
+
     let destination = this.state.destinationSite;
     if ((appFamilies == undefined || appFamilies == "" || appFamilies == "All Application Family") && (destination == undefined || destination == "" || destination == "All Sites")) {
       deviceQuery = 'applicationData.application'

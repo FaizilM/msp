@@ -26,10 +26,10 @@ const customStyles = {
 
 
 let getApplicationDetails = (user, filter) => {
-    console.log("filter", filter);
     let metrics = [];
     let data = {};
     let applicationDetails = [];
+    let eventDetails = [];
     let appDetails = [];
     if (user.role == userConstants.ROLE_ADMIN) {
         metrics.push(metricsData);
@@ -60,6 +60,14 @@ let getApplicationDetails = (user, filter) => {
         }).value;
         metrics = [];
         metrics = data["deviceData"]
+        let cpedata = {};
+        for (let index = 0; index < metrics.length; index++) {
+            for (let [key, value] of Object.entries(metrics[index])) {
+                cpedata[key] = value;
+            }
+        }
+        metrics = [];
+        metrics.push(cpedata);
         let deviceQuery;
         let cpe = filter.cpeValue;
         if (cpe == undefined || cpe == "" || cpe == "All CPE") {
@@ -136,19 +144,26 @@ let getApplicationDetails = (user, filter) => {
             }
         }
         appDetails = [];
+        eventDetails = [];
         let application = filter.application;
         for (let index = 0; index < applicationDetails.length; index++) {
             let sitename;
             if (application == undefined || application == "" || application == "All Applications") {
                 appDetails.push(applicationDetails[index]);
+                if (applicationDetails[index]["event"] != "app_route") {
+                    eventDetails.push(applicationDetails[index]);
+                }
             } else {
-                if (applicationDetails[index]["application"] === application) {
+                if (applicationDetails[index]["application"] == application) {
                     appDetails.push(applicationDetails[index]);
+                    if (applicationDetails[index]["event"] != "app_route") {
+                        eventDetails.push(applicationDetails[index]);
+                    }
                 }
             }
         }
     }
-    return appDetails;
+    return [appDetails, eventDetails];
 };
 let col = [
     "app_family",
@@ -177,6 +192,33 @@ let head = [
     "Plot"
 ];
 
+let eventCol = [
+    "event",
+    "timestamp",
+    "app_family",
+    "application",
+    "sla_class",
+    "dscp_value",
+    "utilization",
+    "jitter",
+    "latency",
+    "packet_loss"
+];
+
+let eventHead = [
+    "Event",
+    "Timestamp",
+    "Application Family",
+    "Application",
+    "SLA class",
+    "DSCP value",
+    "Link Utilization",
+    "Jitter",
+    "Latency",
+    "Packet Loss",
+    "Plot"
+];
+
 
 
 class ApplicationDetails extends React.Component {
@@ -185,10 +227,10 @@ class ApplicationDetails extends React.Component {
 
         this.state = {
             modalIsOpen: false,
-            eventType : ""
+            eventType: ""
         };
 
-    
+
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -204,21 +246,24 @@ class ApplicationDetails extends React.Component {
     }
 
     closeModal() {
-        
+
         this.setState({ modalIsOpen: false });
     }
 
     render() {
         let user = this.props.authentication.user;
         let filter = this.props.filter;
-        let applicationDetail = getApplicationDetails(user, filter);
-        let applicationDetails = applicationDetail[0];
+        let applicationDetails = getApplicationDetails(user, filter);
+        let applicationDetail = applicationDetails[0];
+        let eventDetails = applicationDetails[1];
         let siteOption = [];
-        let tableData = [];
         let appDetailsData = [];
-        let appDetails = [];
-
         let headerData = [];
+        let eventData = [];
+        let headerEvent = [];
+        let checkEventData = [];
+        let checkAppData = [];
+
         for (let index = 0; index < head.length; index++) {
             headerData.push(<th key={head[index]}>{head[index]}</th>);
         }
@@ -231,13 +276,42 @@ class ApplicationDetails extends React.Component {
             }
             if (applicationDetail.length > 0) {
                 data.push(<td key={"button"}>
-                    <button className="btn btn-primary" type="button" id={routeEvent} onClick={this.openModal}>
+                    <button className="btn btn-primary" type="button" id={"app_route"} onClick={this.openModal}>
                         More
               </button>
                 </td>);
                 appDetailsData.push(<tr key={"applicationDetail" + i}>{data}</tr>);
             }
+        }
+        if (applicationDetail.length == 0) {
+            checkAppData.push(
+                <h3 style={{ "fontWeight": "bold", "textAlign": "center" }} key={"noData"}> No Data Available </h3>
+            );
+        }
 
+        for (let index = 0; index < eventHead.length; index++) {
+            headerEvent.push(<th key={eventHead[index]}>{eventHead[index]}</th>);
+        }
+        eventData.push(<tr className="appdetailsTH" key={"head"}>{headerEvent}</tr>);
+        for (let i = 0; i < eventDetails.length; i++) {
+            let data = [];
+            for (let index = 0; index < eventCol.length; index++) {
+                data.push(<td key={eventCol[index]}>{eventDetails[i][eventCol[index]]}</td>);
+            }
+            if (eventDetails.length > 0) {
+                data.push(<td key={"button"}>
+                    <button className="btn btn-primary" type="button" id={eventDetails[i]["event"]} onClick={this.openModal}>
+                        More
+              </button>
+                </td>);
+                eventData.push(<tr key={"eventDetails" + i}>{data}</tr>);
+            }
+
+        }
+        if (eventDetails.length == 0) {
+            checkEventData.push(
+                <h3 style={{ "fontWeight": "bold", "textAlign": "center" }} key={"noData"}> No Data Available </h3>
+            );
         }
 
         return (
@@ -245,7 +319,7 @@ class ApplicationDetails extends React.Component {
                 <Col xs="12>" sm="12" md="12" lg="12" xl="12">
                     <div className="panel panel-default">
                         <div className="panel-heading">
-                            <h3> Application Routing Details </h3>
+                            <h4> Application Routing Details </h4>
                         </div>
                         <div className="panel-body">
                             <div className="list-group">
@@ -255,15 +329,35 @@ class ApplicationDetails extends React.Component {
                                             {appDetailsData}
                                         </tbody>
                                     </table>
+                                    {checkAppData}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </Col>
-                <Dialog isOpen={this.state.modalIsOpen} closeModal={this.closeModal} eventType={this.state.eventType}/>
+                <Col xs="12>" sm="12" md="12" lg="12" xl="12">
+                    <div className="panel panel-default">
+                        <div className="panel-heading">
+                            <h4> Routing Details </h4>
+                        </div>
+                        <div className="panel-body">
+                            <div className="list-group">
+                                <div className="table-responsive">
+                                    <table className="table table-bordered">
+                                        <tbody>
+                                            {eventData}
+                                        </tbody>
+                                    </table>
+                                    {checkEventData}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Col>
+                <Dialog isOpen={this.state.modalIsOpen} closeModal={this.closeModal} eventType={this.state.eventType} />
             </div>
         );
-
     }
 }
 

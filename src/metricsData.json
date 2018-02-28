@@ -77,7 +77,7 @@
                 "applications_details": [
                   {
                     "broadband": {
-                      "destination":"Boston",
+                      "destination": "Boston",
                       "app_family": "Media",
                       "application": "Voice-HD",
                       "direction": "Incoming",
@@ -87,10 +87,11 @@
                       "packets": 160,
                       "mean_latency": 10,
                       "mean_jitter": 30,
-                      "avg_packet_loss": 20
+                      "avg_packet_loss": 20,
+                      "event": "app_route"
                     },
                     "mpls": {
-                      "destination":"Paris",
+                      "destination": "Paris",
                       "app_family": "Office",
                       "application": "Voice-HD",
                       "direction": "Outgoing",
@@ -100,10 +101,11 @@
                       "packets": 110,
                       "mean_latency": 10,
                       "mean_jitter": 5,
-                      "avg_packet_loss": 30
+                      "avg_packet_loss": 30,
+                      "event": "app_route"
                     },
                     "t1_lines": {
-                      "destination":"Boston",
+                      "destination": "Boston",
                       "app_family": "Social",
                       "application": "Voice",
                       "direction": "",
@@ -113,10 +115,11 @@
                       "packets": 70,
                       "mean_latency": 8,
                       "mean_jitter": 27,
-                      "avg_packet_loss": 23
+                      "avg_packet_loss": 23,
+                      "event": "app_route"
                     },
                     "4G": {
-                      "destination":"Boston",
+                      "destination": "Boston",
                       "app_family": "Internet",
                       "application": "Other",
                       "direction": "",
@@ -126,7 +129,13 @@
                       "packets": 368,
                       "mean_latency": 30,
                       "mean_jitter": 35,
-                      "avg_packet_loss": 10
+                      "avg_packet_loss": 10,
+                      "event": "No Route",
+                      "timestamp": "15:32:33",
+                      "utilization": 92,
+                      "latency": 259,
+                      "jitter": 60,
+                      "packet_loss": 2.9
                     }
                   }
                 ],
@@ -173,239 +182,6 @@
                           "latency": 18,
                           "jitter": 0.6,
                           "packet_loss": 1,
-                          "status": "UP"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ],
-            "CPE_VES": [
-              {
-                "applications_details": [
-                  {
-                    "broadband": {
-                      "destination": "Paris",
-                      "app_family": "Media",
-                      "application": "Voice-HD",
-                      "direction": "Incoming",
-                      "sla_class": "Low Latency",
-                      "dscp_value": "EF",
-                      "octets": 480,
-                      "packets": 160,
-                      "mean_latency": 10,
-                      "mean_jitter": 30,
-                      "avg_packet_loss": 20
-                    },
-                    "mpls": {
-                      "destination": "Boston",
-                      "app_family": "Office",
-                      "application": "Voice-HD",
-                      "direction": "Outgoing",
-                      "sla_class": "",
-                      "dscp_value": "EF",
-                      "octets": 580,
-                      "packets": 110,
-                      "mean_latency": 10,
-                      "mean_jitter": 5,
-                      "avg_packet_loss": 30
-                    },
-                    "t1_lines": {
-                      "destination": "Boston",
-                      "app_family": "Social",
-                      "application": "Voice",
-                      "direction": "",
-                      "sla_class": "",
-                      "dscp_value": "",
-                      "octets": 210,
-                      "packets": 70,
-                      "mean_latency": 8,
-                      "mean_jitter": 27,
-                      "avg_packet_loss": 23
-                    },
-                    "4G": {
-                      "destination": "Paris",
-                      "app_family": "Internet",
-                      "application": "Other",
-                      "direction": "",
-                      "sla_class": "Default",
-                      "dscp_value": "Best Effort",
-                      "octets": 480,
-                      "packets": 110,
-                      "mean_latency": 20,
-                      "mean_jitter": 15,
-                      "avg_packet_loss": 20
-                    }
-                  }
-                ],
-                "applications": [
-                  {
-                    "voice": {
-                      "destination": "Paris",
-                      "source_ip": "172.17.0.3",
-                      "destination_ip": "172.17.0.102",
-                      "link": "Broadband",
-                      "octets": 580,
-                      "packets": 110,
-                      "is_no_route": true,
-                      "alternate_path": "None",
-                      "link_taken": "None",
-                      "protocol": "TCP",
-                      "time": "15:32:33",
-                      "SLA_latency": 49,
-                      "policy": "voip-policy",
-                      "route_change": [
-                        {
-                          "component_name": "R1",
-                          "src_ip": "10.10.2.3",
-                          "dst_ip": "10.10.2.101",
-                          "timestamp": "15:32:33",
-                          "protocol": "TCP",
-                          "policy": "voip-policy",
-                          "SLA_latency": 49,
-                          "utilization": 40,
-                          "latency": 20,
-                          "jitter": 3,
-                          "packet_loss": 2,
-                          "status": "UP",
-                          "mpls_label": 100048,
-                          "TTL": 1,
-                          "label_stack": 1,
-                          "latency2": 0.861,
-                          "latency3": 0.761
-                        },
-                        {
-                          "component_name": "R2",
-                          "src_ip": "10.10.2.101",
-                          "dst_ip": "10.10.2.102",
-                          "timestamp": "15:32:40",
-                          "protocol": "TCP",
-                          "policy": "voip-policy",
-                          "SLA_latency": 30,
-                          "utilization": 0,
-                          "latency": 40,
-                          "jitter": 0,
-                          "packet_loss": 100,
-                          "status": "DOWN",
-                          "mpls_label": 100049,
-                          "TTL": 1,
-                          "label_stack": 1,
-                          "latency2": 0.861,
-                          "latency3": 0.761
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ],
-            "CPE-Century": [
-              {
-                "applications_details": [
-                  {
-                    "broadband": {
-                      "destination": "Boston",
-                      "app_family": "Media",
-                      "application": "Voice-HD",
-                      "direction": "Incoming",
-                      "sla_class": "Low Latency",
-                      "dscp_value": "EF",
-                      "octets": 480,
-                      "packets": 160,
-                      "mean_latency": 10,
-                      "mean_jitter": 30,
-                      "avg_packet_loss": 20
-                    },
-                    "mpls": {
-                      "destination": "Paris",
-                      "app_family": "Office",
-                      "application": "Webex",
-                      "direction": "Outgoing",
-                      "sla_class": "Default",
-                      "dscp_value": "AF42",
-                      "octets": 2780,
-                      "packets": 890,
-                      "mean_latency": 14,
-                      "mean_jitter": 51,
-                      "avg_packet_loss": 32
-                    },
-                    "t1_lines": {
-                      "destination": "Boston",
-                      "app_family": "Social",
-                      "application": "Voice",
-                      "direction": "",
-                      "sla_class": "",
-                      "dscp_value": "",
-                      "octets": 210,
-                      "packets": 70,
-                      "mean_latency": 8,
-                      "mean_jitter": 27,
-                      "avg_packet_loss": 23
-                    },
-                    "4G": {
-                      "destination": "Paris",
-                      "app_family": "Internet",
-                      "application": "Other",
-                      "direction": "",
-                      "sla_class": "Default",
-                      "dscp_value": "Best Effort",
-                      "octets": 1200,
-                      "packets": 368,
-                      "mean_latency": 30,
-                      "mean_jitter": 35,
-                      "avg_packet_loss": 10
-                    }
-                  }
-                ],
-                "applications": [
-                  {
-                    "Webex": {
-                      "destination": "Paris",
-                      "source_ip": "192.168.20.1",
-                      "destination_ip": "192.168.30.1",
-                      "link": "Broadband",
-                      "octets": 2780,
-                      "packets": 890,
-                      "is_no_route": false,
-                      "route_change": [
-                        {
-                          "src_ip": "192.168.11.10",
-                          "dst_ip": "192.168.13.10",
-                          "timestamp": "15:32:33",
-                          "protocol": "TCP",
-                          "policy": "voip-policy",
-                          "SLA_latency": 30,
-                          "utilization": 50,
-                          "latency": 10,
-                          "jitter": 5,
-                          "packet_loss": 0,
-                          "status": "UP"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "Skype": {
-                      "destination": "Boston",
-                      "source_ip": "192.168.20.1",
-                      "destination_ip": "192.168.30.1",
-                      "link": "MPLS-VES",
-                      "octets": 1200,
-                      "packets": 368,
-                      "is_no_route": false,
-                      "route_change": [
-                        {
-                          "src_ip": "192.168.11.10",
-                          "dst_ip": "192.168.13.10",
-                          "timestamp": "15:32:33",
-                          "protocol": "TCP",
-                          "policy": "voip-policy",
-                          "SLA_latency": 30,
-                          "utilization": 50,
-                          "latency": 10,
-                          "jitter": 5,
-                          "packet_loss": 0,
                           "status": "UP"
                         }
                       ]
@@ -580,6 +356,139 @@
             }
           }
         ],
+        "devices": [
+          {
+           
+            "CPE_VES": [
+              {
+                "applications_details": [
+                  {
+                    "broadband": {
+                      "destination": "India",
+                      "app_family": "Media",
+                      "application": "Voice-HD",
+                      "direction": "Incoming",
+                      "sla_class": "Low Latency",
+                      "dscp_value": "EF",
+                      "octets": 480,
+                      "packets": 160,
+                      "mean_latency": 10,
+                      "mean_jitter": 30,
+                      "avg_packet_loss": 20,
+                      "event": "Route Change",
+                      "timestamp": "11:09:03",
+                      "utilization": 82,
+                      "latency": 28,
+                      "jitter": 5.6,
+                      "packet_loss": 1
+                    },
+                    "mpls": {
+                      "destination": "Boston",
+                      "app_family": "Office",
+                      "application": "Voice-HD",
+                      "direction": "Outgoing",
+                      "sla_class": "",
+                      "dscp_value": "EF",
+                      "octets": 580,
+                      "packets": 110,
+                      "mean_latency": 10,
+                      "mean_jitter": 5,
+                      "avg_packet_loss": 30,
+                      "event": "app_route"
+                    },
+                    "t1_lines": {
+                      "destination": "Boston",
+                      "app_family": "Social",
+                      "application": "Voice",
+                      "direction": "",
+                      "sla_class": "",
+                      "dscp_value": "",
+                      "octets": 210,
+                      "packets": 70,
+                      "mean_latency": 8,
+                      "mean_jitter": 27,
+                      "avg_packet_loss": 23,
+                      "event": "app_route"
+                    },
+                    "4G": {
+                      "destination": "India",
+                      "app_family": "Internet",
+                      "application": "Other",
+                      "direction": "",
+                      "sla_class": "Default",
+                      "dscp_value": "Best Effort",
+                      "octets": 480,
+                      "packets": 110,
+                      "mean_latency": 20,
+                      "mean_jitter": 15,
+                      "avg_packet_loss": 20,
+                      "event": "app_route"
+                    }
+                  }
+                ],
+                "applications": [
+                  {
+                    "voice": {
+                      "destination": "Paris",
+                      "source_ip": "172.17.0.3",
+                      "destination_ip": "172.17.0.102",
+                      "link": "Broadband",
+                      "octets": 580,
+                      "packets": 110,
+                      "is_no_route": true,
+                      "alternate_path": "None",
+                      "link_taken": "None",
+                      "protocol": "TCP",
+                      "time": "15:32:33",
+                      "SLA_latency": 49,
+                      "policy": "voip-policy",
+                      "route_change": [
+                        {
+                          "component_name": "R1",
+                          "src_ip": "10.10.2.3",
+                          "dst_ip": "10.10.2.101",
+                          "timestamp": "15:32:33",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": 49,
+                          "utilization": 40,
+                          "latency": 20,
+                          "jitter": 3,
+                          "packet_loss": 2,
+                          "status": "UP",
+                          "mpls_label": 100048,
+                          "TTL": 1,
+                          "label_stack": 1,
+                          "latency2": 0.861,
+                          "latency3": 0.761
+                        },
+                        {
+                          "component_name": "R2",
+                          "src_ip": "10.10.2.101",
+                          "dst_ip": "10.10.2.102",
+                          "timestamp": "15:32:40",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": 30,
+                          "utilization": 0,
+                          "latency": 40,
+                          "jitter": 0,
+                          "packet_loss": 100,
+                          "status": "DOWN",
+                          "mpls_label": 100049,
+                          "TTL": 1,
+                          "label_stack": 1,
+                          "latency2": 0.861,
+                          "latency3": 0.761
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
         "application": [
           {
             "voice": [
@@ -705,6 +614,129 @@
                 "Media"
               ]
             }
+          }
+        ],
+
+        "devices": [
+          {
+            "CPE-Century": [
+              {
+                "applications_details": [
+                  {
+                    "broadband": {
+                      "destination": "India",
+                      "app_family": "Media",
+                      "application": "Voice-HD",
+                      "direction": "Incoming",
+                      "sla_class": "Low Latency",
+                      "dscp_value": "EF",
+                      "octets": 480,
+                      "packets": 160,
+                      "mean_latency": 10,
+                      "mean_jitter": 30,
+                      "avg_packet_loss": 20,
+                      "event": "app_route"
+                    },
+                    "mpls": {
+                      "destination": "Paris",
+                      "app_family": "Office",
+                      "application": "Webex",
+                      "direction": "Outgoing",
+                      "sla_class": "Default",
+                      "dscp_value": "AF42",
+                      "octets": 2780,
+                      "packets": 890,
+                      "mean_latency": 14,
+                      "mean_jitter": 51,
+                      "avg_packet_loss": 32,
+                      "event": "app_route"
+                    },
+                    "t1_lines": {
+                      "destination": "India",
+                      "app_family": "Social",
+                      "application": "Voice",
+                      "direction": "",
+                      "sla_class": "",
+                      "dscp_value": "",
+                      "octets": 210,
+                      "packets": 70,
+                      "mean_latency": 8,
+                      "mean_jitter": 27,
+                      "avg_packet_loss": 23,
+                      "event": "app_route"
+                    },
+                    "4G": {
+                      "destination": "Paris",
+                      "app_family": "Internet",
+                      "application": "Other",
+                      "direction": "",
+                      "sla_class": "Default",
+                      "dscp_value": "Best Effort",
+                      "octets": 1200,
+                      "packets": 368,
+                      "mean_latency": 30,
+                      "mean_jitter": 35,
+                      "avg_packet_loss": 10,
+                      "event": "app_route"
+                    }
+                  }
+                ],
+                "applications": [
+                  {
+                    "Webex": {
+                      "destination": "Paris",
+                      "source_ip": "192.168.20.1",
+                      "destination_ip": "192.168.30.1",
+                      "link": "Broadband",
+                      "octets": 2780,
+                      "packets": 890,
+                      "is_no_route": false,
+                      "route_change": [
+                        {
+                          "src_ip": "192.168.11.10",
+                          "dst_ip": "192.168.13.10",
+                          "timestamp": "15:32:33",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": 30,
+                          "utilization": 50,
+                          "latency": 10,
+                          "jitter": 5,
+                          "packet_loss": 0,
+                          "status": "UP"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Skype": {
+                      "destination": "Boston",
+                      "source_ip": "192.168.20.1",
+                      "destination_ip": "192.168.30.1",
+                      "link": "MPLS-VES",
+                      "octets": 1200,
+                      "packets": 368,
+                      "is_no_route": false,
+                      "route_change": [
+                        {
+                          "src_ip": "192.168.11.10",
+                          "dst_ip": "192.168.13.10",
+                          "timestamp": "15:32:33",
+                          "protocol": "TCP",
+                          "policy": "voip-policy",
+                          "SLA_latency": 30,
+                          "utilization": 50,
+                          "latency": 10,
+                          "jitter": 5,
+                          "packet_loss": 0,
+                          "status": "UP"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
           }
         ],
         "application": [
