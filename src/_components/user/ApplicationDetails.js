@@ -27,7 +27,7 @@ const customStyles = {
 };
 
 
-let getApplicationDetails = (user, filter) => {   
+let getApplicationDetails = (user, filter) => {
     let metrics = [];
     let data = {};
     let applicationDetails = [];
@@ -50,7 +50,7 @@ let getApplicationDetails = (user, filter) => {
 
         let source = filter.sourceSite;
         let query;
-        if (filter.duration == "WEEK" || filter.duration == "YEAR") {
+        if (filter.duration == "MONTH" || filter.duration == "YEAR") {
             metrics[0]["sites"][0]["devices"][0]["CPE"][0]["applications_details"][0]["mpls"]["event"] = "Route Change";
             metrics[0]["sites"][0]["devices"][0]["CPE"][0]["applications_details"][0]["broadband"]["event"] = "Route Change";
         }
@@ -94,7 +94,7 @@ let getApplicationDetails = (user, filter) => {
         } else {
             metrics = data["deviceList"];
         }
-       
+
         let link = filter.linkName;
         deviceQuery = {};
         let deviceData = [];
@@ -151,8 +151,8 @@ let getApplicationDetails = (user, filter) => {
                 }
             }
         }
-       
-        
+
+
         appDetails = [];
         eventDetails = [];
         let application = filter.application;
@@ -160,13 +160,19 @@ let getApplicationDetails = (user, filter) => {
             let sitename;
             if (application == undefined || application == "" || application == "All Applications") {
                 appDetails.push(applicationDetails[index]);
-                if (applicationDetails[index]["event"] != "app_route") {
+                if (applicationDetails[index]["event"] != "app_route" &&
+                    ((applicationDetails[index]["event"] == "Route Change" &&
+                        filter.duration == "MONTH" || filter.duration == "YEAR") ||
+                        (applicationDetails[index]["event"] == "No Route"))) {
                     eventDetails.push(applicationDetails[index]);
                 }
             } else {
                 if (applicationDetails[index]["application"] == application) {
                     appDetails.push(applicationDetails[index]);
-                    if (applicationDetails[index]["event"] != "app_route") {
+                    if (applicationDetails[index]["event"] != "app_route" &&
+                        ((applicationDetails[index]["event"] == "Route Change" &&
+                            filter.duration == "MONTH" || filter.duration == "YEAR") ||
+                            (applicationDetails[index]["event"] == "No Route"))) {
                         eventDetails.push(applicationDetails[index]);
                     }
                 }
