@@ -87,7 +87,8 @@
                       "packets": 160,
                       "mean_latency": 10,
                       "mean_jitter": 30,
-                      "avg_packet_loss": 20
+                      "avg_packet_loss": 20,
+                      "event": "app_route"
                     },
                     "mpls": {
                       "destination": "Paris",
@@ -129,12 +130,7 @@
                       "mean_latency": 30,
                       "mean_jitter": 35,
                       "avg_packet_loss": 10,
-                      "event": "Route Change",
-                      "timestamp": "11:09:03",
-                      "utilization": 74,
-                      "latency": 8,
-                      "jitter": 1.2,
-                      "packet_loss": 20
+                      "event": "app_route"
                     }
                   }
                 ],

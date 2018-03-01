@@ -323,7 +323,7 @@ class Filter extends Component {
     metrics = [];
     metrics = data["deviceData"]
     let deviceQuery;
-    let cpe = this.state.cpe;
+    let cpe = this.state.cpeValue;
     let cpedata = {};
     for (let index = 0; index < metrics.length; index++) {
       for (let [key, value] of Object.entries(metrics[index])) {
@@ -333,6 +333,7 @@ class Filter extends Component {
     metrics = [];
     metrics.push(cpedata);
     data["deviceList"] = metrics;
+    
     if (cpe == undefined || cpe == "" || cpe == "All CPE") {
       deviceQuery = 'deviceList[**][0][**].applications_details';
     } else {
