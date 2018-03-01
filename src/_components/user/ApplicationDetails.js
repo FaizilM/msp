@@ -27,7 +27,7 @@ const customStyles = {
 };
 
 
-let getApplicationDetails = (user, filter) => {
+let getApplicationDetails = (user, filter) => {   
     let metrics = [];
     let data = {};
     let applicationDetails = [];
@@ -47,10 +47,15 @@ let getApplicationDetails = (user, filter) => {
     let sourceSite;
     if (metrics != null && metrics != undefined) {
 
+
+        let source = filter.sourceSite;
+        let query;
+        if (filter.duration == "WEEK" || filter.duration == "YEAR") {
+            metrics[0]["sites"][0]["devices"][0]["CPE"][0]["applications_details"][0]["mpls"]["event"] = "Route Change";
+            metrics[0]["sites"][0]["devices"][0]["CPE"][0]["applications_details"][0]["broadband"]["event"] = "Route Change";
+        }
         data = {};
         data["deviceData"] = metrics;
-        let query;
-        let source = filter.sourceSite;
 
         if (source == undefined || source == "" || source == "All Source") {
             query = "deviceData[sites].devices";
@@ -89,6 +94,7 @@ let getApplicationDetails = (user, filter) => {
         } else {
             metrics = data["deviceList"];
         }
+       
         let link = filter.linkName;
         deviceQuery = {};
         let deviceData = [];
@@ -145,6 +151,8 @@ let getApplicationDetails = (user, filter) => {
                 }
             }
         }
+       
+        
         appDetails = [];
         eventDetails = [];
         let application = filter.application;
@@ -311,9 +319,9 @@ class ApplicationDetails extends React.Component {
                     eventCol[index] == "utilization" ||
                     eventCol[index] == "packet_loss")) {
                     timeFrameValue = getKPIDataByPercentage(applicationDetail[i][col[index]], filter.duration);
-                        if(timeFrameValue > 100) {
-                            timeFrameValue = 95;
-                        }
+                    if (timeFrameValue > 100) {
+                        timeFrameValue = 95;
+                    }
                 }
                 if ((filter.duration != undefined && filter.duration != "") && (
                     eventCol[index] == "jitter" ||
