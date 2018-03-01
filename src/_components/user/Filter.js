@@ -19,8 +19,8 @@ class Filter extends Component {
       siteGroup: "",
       siteName: "",
       linkName: "",
-      cpeValue: "",
-      sourceSite: "",
+      cpeValue: "CPE_VES",
+      sourceSite: "Paris",
       applicationName: "",
       duration: "HOUR",
       toFilter: "",
@@ -64,11 +64,14 @@ class Filter extends Component {
     if (this.state.all_application.length == 0) {
       this.applicationsData();
     }
-
+    if(this.props.type == "applicationDetails") {
+      this.applicationDetailsFilter();
+    }
   }
 
   sourceSite() {
     let user = this.props.authentication.user;
+    let type = this.props.type;
     let data = {};
     let metrics = [];
     let source = [];
@@ -81,7 +84,11 @@ class Filter extends Component {
     }
     for (let index = 0; index < metrics.length; index++) {
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-        source.push(<option key={metricsDataValue.name}>{metricsDataValue.name}</option>);
+        if (type == "applicationDetails" && metricsDataValue.name == "Paris") {
+          source.push(<option key={metricsDataValue.name} value={metricsDataValue.name} selected>{metricsDataValue.name}</option>);
+        } else {
+          source.push(<option key={metricsDataValue.name} value={metricsDataValue.name}>{metricsDataValue.name}</option>);
+        }
       }
     }
     return source;
@@ -91,6 +98,7 @@ class Filter extends Component {
     let sourceSite;
     let cpe = [];
     let user = this.props.authentication.user;
+    let type = this.props.type;
     let data = {};
     let metrics = [];
     if (user.role == userConstants.ROLE_USER) {
@@ -123,7 +131,11 @@ class Filter extends Component {
     for (let device = 0; device < metrics.length; device++) {
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics[device])) {
         for (let [key, value] of Object.entries(metricsDataValue)) {
-          cpe.push(<option key={key}>{key}</option>);
+          if (type == "applicationDetails" && key == "CPE_VES") {
+            cpe.push(<option key={key} value={key} selected>{key}</option>);
+          } else {
+            cpe.push(<option key={key} value={key}>{key}</option>);
+          }
         }
       }
     }
@@ -156,6 +168,7 @@ class Filter extends Component {
     let sitekey = [];
     let metrics = [];
     let data = {};
+    let type = this.props.type;
     let cpe = this.state.cpeValue;
     let source = this.state.sourceSite;
 
@@ -219,7 +232,11 @@ class Filter extends Component {
 
         if (destination[i] != undefined && sitekey.indexOf(destination[i]) == -1) {
           sitekey.push(destination[i]);
-          siteName.push(<option key={destination[i]}>{destination[i]}</option>);
+          if (type == "applicationDetails" && destination[i] == "Boston") {
+            siteName.push(<option key={destination[i]} value={destination[i]} selected>{destination[i]}</option>);
+          } else {
+            siteName.push(<option key={destination[i]} value={destination[i]}>{destination[i]}</option>);
+          }
         }
       }
 
@@ -281,6 +298,7 @@ class Filter extends Component {
     let metrics = [];
     let link = [];
     let data = {};
+    let type = this.props.type;
     let user = this.props.authentication.user;
     if (user.role == userConstants.ROLE_USER) {
       data["customers"] = metricsData
@@ -338,13 +356,22 @@ class Filter extends Component {
         if (destination == undefined || destination == "" || destination == "All Sites") {
           if (linkKey != undefined && link.indexOf(linkKey) == -1) {
             link.push(linkKey);
-            linkName.push(<option key={linkKey}>{linkKey}</option>);
+            if (type == "applicationDetails" && linkKey == "mpls") {
+              linkName.push(<option key={linkKey} value={linkKey} selected>{linkKey}</option>);
+            } else {
+              linkName.push(<option key={linkKey} value={linkKey}>{linkKey}</option>);
+            }
           }
         } else {
           if (linkValue["destination"] == destination) {
             if (linkKey != undefined && link.indexOf(linkKey) == -1) {
               link.push(linkKey);
-              linkName.push(<option key={linkKey}>{linkKey}</option>);
+              if (type == "applicationDetails" && linkKey == "mpls") {
+                linkName.push(<option key={linkKey} value={linkKey} selected>{linkKey}</option>);
+              } else {
+                linkName.push(<option key={linkKey} value={linkKey} >{linkKey}</option>);
+              }
+              
             }
           }
         }
@@ -902,7 +929,7 @@ class Filter extends Component {
                     <Col xs="6" sm="6" md="2" lg="1" xl="1">
                       <div className="form-group">
                         <select className="form-control" id="time" onChange={this.changeDuration}>
-                          <option value={"HOUR"}>1 Hour</option>
+                          <option value={"HOUR"} selected>1 Hour</option>
                           <option value={"DAY"}>1 Day</option>
                           <option value={"WEEK"}>1 Week</option>
                           <option value={"MONTH"}>1 Month</option>

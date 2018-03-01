@@ -119,7 +119,7 @@
                       "event": "app_route"
                     },
                     "4G": {
-                      "destination": "Boston",
+                      "destination": "Paris",
                       "app_family": "Internet",
                       "application": "Other",
                       "direction": "",
@@ -375,7 +375,7 @@
                       "mean_latency": 10,
                       "mean_jitter": 30,
                       "avg_packet_loss": 20,
-                      "event": "Route Change",
+                      "event": "No Route",
                       "timestamp": "11:09:03",
                       "utilization": 82,
                       "latency": 28,

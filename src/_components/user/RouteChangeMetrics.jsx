@@ -106,20 +106,9 @@ class RouteChangeMetrics extends React.Component {
                 "autoGridCount": true,
                 "color": "#AAAAAA"
             },
-            "valueScrollbar": {
-                "oppositeAxis": false,
-                "offset": 50,
-                "scrollbarHeight": 10
-            },
             "chartCursor": {
-                "pan": true,
-                "valueLineEnabled": true,
-                "valueLineBalloonEnabled": true,
-                "cursorAlpha": 1,
-                "cursorColor": "#258cbb",
-                "limitToGraph": "g1",
-                "valueLineAlpha": 0.2,
-                "valueZoomable": true
+                "categoryBalloonDateFormat": "JJ:NN, DD MMMM",
+                "cursorPosition": "mouse"
             },
             "categoryField": "date",
             "categoryAxis": {
