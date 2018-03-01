@@ -296,6 +296,18 @@ class ApplicationDetails extends React.Component {
         for (let i = 0; i < eventDetails.length; i++) {
             let data = [];
             for (let index = 0; index < eventCol.length; index++) {
+                if (eventCol[index] == "timestamp" && eventDetails[i]["event"] == "No Route") {
+                    let firstDate = new Date();
+                    // now set 500 minutes back
+                    firstDate.setMinutes(firstDate.getDate() - 200);
+                    eventDetails[i][eventCol[index]] = firstDate + "";
+                }
+                if (eventCol[index] == "timestamp" && eventDetails[i]["event"] == "Route Change") {
+                    let firstDate = new Date();
+                    // now set 500 minutes back
+                    firstDate.setMinutes(firstDate.getDate() - 300);
+                    eventDetails[i][eventCol[index]] = firstDate + "";
+                }
                 data.push(<td key={eventCol[index]}>{eventDetails[i][eventCol[index]]}</td>);
             }
             if (eventDetails.length > 0) {

@@ -266,11 +266,11 @@ class Map extends React.Component {
                             <Col lg={{ size: 3 }} className="pull-right">
                                 <div className="form-group">
                                     <select className="form-control" onChange={this.changeDuration}>
-                                        <option value="HOUR">1Hour</option>
-                                        <option value="DAY">1Day</option>
-                                        <option value="WEEK">1Week</option>
-                                        <option value="MONTH">1Month</option>
-                                        <option value="YEAR">1Year</option>
+                                        <option value="HOUR">1 Hour</option>
+                                        <option value="DAY">1 Day</option>
+                                        <option value="WEEK">1 Week</option>
+                                        <option value="MONTH">1 Month</option>
+                                        <option value="YEAR">1 Year</option>
                                     </select>
                                 </div>
                             </Col>

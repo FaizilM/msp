@@ -721,11 +721,11 @@ class Filter extends Component {
                   <Col xs="6" sm="6" md="2" lg="2" xl="2">
                     <div className="form-group">
                       <select className="form-control" id="time" onChange={this.changeDuration}>
-                        <option value={"HOUR"}>Hour</option>
-                        <option value={"DAY"}>Day</option>
-                        <option value={"WEEK"}>Week</option>
-                        <option value={"MONTH"}>Month</option>
-                        <option value={"YEAR"}>Year</option>
+                        <option value={"HOUR"}>1 Hour</option>
+                        <option value={"DAY"}>1 Day</option>
+                        <option value={"WEEK"}>1 Week</option>
+                        <option value={"MONTH"}>1 Month</option>
+                        <option value={"YEAR"}>1 Year</option>
                       </select>
                     </div>
                   </Col>
@@ -800,11 +800,11 @@ class Filter extends Component {
                   <Col xs="6" sm="6" md="2" lg="2" xl="2">
                     <div className="form-group">
                       <select className="form-control" id="time" onChange={this.changeDuration}>
-                        <option value={"HOUR"}>Hour</option>
-                        <option value={"DAY"}>Day</option>
-                        <option value={"WEEK"}>Week</option>
-                        <option value={"MONTH"}>Month</option>
-                        <option value={"YEAR"}>Year</option>
+                        <option value={"HOUR"}>1 Hour</option>
+                        <option value={"DAY"}>1 Day</option>
+                        <option value={"WEEK"}>1 Week</option>
+                        <option value={"MONTH"}>1 Month</option>
+                        <option value={"YEAR"}>1 Year</option>
                       </select>
                     </div>
                   </Col>
@@ -902,11 +902,11 @@ class Filter extends Component {
                     <Col xs="6" sm="6" md="2" lg="1" xl="1">
                       <div className="form-group">
                         <select className="form-control" id="time" onChange={this.changeDuration}>
-                          <option value={"HOUR"}>Hour</option>
-                          <option value={"DAY"}>Day</option>
-                          <option value={"WEEK"}>Week</option>
-                          <option value={"MONTH"}>Month</option>
-                          <option value={"YEAR"}>Year</option>
+                          <option value={"HOUR"}>1 Hour</option>
+                          <option value={"DAY"}>1 Day</option>
+                          <option value={"WEEK"}>1 Week</option>
+                          <option value={"MONTH"}>1 Month</option>
+                          <option value={"YEAR"}>1 Year</option>
                         </select>
                       </div>
                     </Col>
