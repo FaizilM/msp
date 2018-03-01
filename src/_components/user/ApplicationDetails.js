@@ -12,6 +12,8 @@ import { Route, Redirect, Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import { Dialog } from './../common/Dialog';
 import { Filter } from '../';
+import { getValueByTime } from '../../_helpers/shared';
+import { getKPIDataByPercentage } from '../../_helpers/shared';
 
 const customStyles = {
     content: {
@@ -184,11 +186,11 @@ let head = [
     "Direction",
     "SLA class",
     "DSCP value",
-    "Octets",
-    "Packets",
-    "Mean Latency",
-    "Mean Jitter",
-    "Average Packet Loss",
+    "Octets(k)",
+    "Packets(k)",
+    "Mean Latency(ms)",
+    "Mean Jitter(ms)",
+    "Average Packet Loss(%)",
     "Plot"
 ];
 
@@ -212,10 +214,10 @@ let eventHead = [
     "Application",
     "SLA class",
     "DSCP value",
-    "Link Utilization",
-    "Jitter",
-    "Latency",
-    "Packet Loss",
+    "Link Utilization(%)",
+    "Jitter(ms)",
+    "Latency(ms)",
+    "Packet Loss(%)",
     "Plot"
 ];
 
@@ -272,7 +274,15 @@ class ApplicationDetails extends React.Component {
         for (let i = 0; i < applicationDetail.length; i++) {
             let data = [];
             for (let index = 0; index < col.length; index++) {
-                data.push(<td key={col[index]}>{applicationDetail[i][col[index]]}</td>);
+                let timeFrameValue = applicationDetail[i][col[index]];
+                if ((filter.duration != undefined && filter.duration != "") && (col[index] == "octets" || col[index] == "packets" ||
+                    col[index] == "mean_latency" || col[index] == "mean_jitter")) {
+                    timeFrameValue = getValueByTime(applicationDetail[i][col[index]], filter.duration);
+                }
+                if (col[index] == "avg_packet_loss") {
+                    timeFrameValue = getKPIDataByPercentage(applicationDetail[i][col[index]], filter.duration);
+                }
+                data.push(<td key={col[index]}>{timeFrameValue}</td>);
             }
             if (applicationDetail.length > 0) {
                 data.push(<td key={"button"}>
@@ -296,6 +306,20 @@ class ApplicationDetails extends React.Component {
         for (let i = 0; i < eventDetails.length; i++) {
             let data = [];
             for (let index = 0; index < eventCol.length; index++) {
+                let timeFrameValue = eventDetails[i][eventCol[index]];
+                if ((filter.duration != undefined && filter.duration != "") && (
+                    eventCol[index] == "utilization" ||
+                    eventCol[index] == "packet_loss")) {
+                    timeFrameValue = getKPIDataByPercentage(applicationDetail[i][col[index]], filter.duration);
+                        if(timeFrameValue > 100) {
+                            timeFrameValue = 95;
+                        }
+                }
+                if ((filter.duration != undefined && filter.duration != "") && (
+                    eventCol[index] == "jitter" ||
+                    eventCol[index] == "latency")) {
+                    timeFrameValue = getValueByTime(applicationDetail[i][col[index]], filter.duration);
+                }
                 if (eventCol[index] == "timestamp" && eventDetails[i]["event"] == "No Route") {
                     let firstDate = new Date();
                     // now set 500 minutes back
@@ -308,7 +332,7 @@ class ApplicationDetails extends React.Component {
                     firstDate.setMinutes(firstDate.getDate() - 300);
                     eventDetails[i][eventCol[index]] = firstDate + "";
                 }
-                data.push(<td key={eventCol[index]}>{eventDetails[i][eventCol[index]]}</td>);
+                data.push(<td key={timeFrameValue}>{timeFrameValue}</td>);
             }
             if (eventDetails.length > 0) {
                 data.push(<td key={"button"}>
