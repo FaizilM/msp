@@ -87,8 +87,7 @@
                       "packets": 160,
                       "mean_latency": 10,
                       "mean_jitter": 30,
-                      "avg_packet_loss": 20,
-                      "event": "app_route"
+                      "avg_packet_loss": 20
                     },
                     "mpls": {
                       "destination": "Paris",
@@ -130,12 +129,12 @@
                       "mean_latency": 30,
                       "mean_jitter": 35,
                       "avg_packet_loss": 10,
-                      "event": "No Route",
-                      "timestamp": "15:00:00",
-                      "utilization": 92,
-                      "latency": 259,
-                      "jitter": 60,
-                      "packet_loss": 2.9
+                      "event": "Route Change",
+                      "timestamp": "11:09:03",
+                      "utilization": 74,
+                      "latency": 8,
+                      "jitter": 1.2,
+                      "packet_loss": 20
                     }
                   }
                 ],
@@ -375,12 +374,7 @@
                       "mean_latency": 10,
                       "mean_jitter": 30,
                       "avg_packet_loss": 20,
-                      "event": "No Route",
-                      "timestamp": "11:09:03",
-                      "utilization": 82,
-                      "latency": 28,
-                      "jitter": 5.6,
-                      "packet_loss": 1
+                      "event": "app_route"
                     },
                     "mpls": {
                       "destination": "Boston",
@@ -394,7 +388,12 @@
                       "mean_latency": 10,
                       "mean_jitter": 5,
                       "avg_packet_loss": 30,
-                      "event": "app_route"
+                      "event": "No Route",
+                      "timestamp": "11:09:03",
+                      "utilization": 82,
+                      "latency": 28,
+                      "jitter": 5.6,
+                      "packet_loss": 1
                     },
                     "t1_lines": {
                       "destination": "Boston",

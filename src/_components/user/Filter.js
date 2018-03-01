@@ -18,13 +18,13 @@ class Filter extends Component {
       all_application: [],
       siteGroup: "",
       siteName: "",
-      linkName: "",
+      linkName: "mpls",
       cpeValue: "CPE_VES",
       sourceSite: "Paris",
       applicationName: "",
       duration: "HOUR",
       toFilter: "",
-      destinationSite: "",
+      destinationSite: "Boston",
       appFamilies: ""
     }
 
@@ -64,9 +64,10 @@ class Filter extends Component {
     if (this.state.all_application.length == 0) {
       this.applicationsData();
     }
-    if(this.props.type == "applicationDetails") {
+    if (this.props.type == "applicationDetails") {
       this.applicationDetailsFilter();
     }
+    
   }
 
   sourceSite() {
@@ -84,7 +85,7 @@ class Filter extends Component {
     }
     for (let index = 0; index < metrics.length; index++) {
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metricsData[index].sites)) {
-        if (type == "applicationDetails" && metricsDataValue.name == "Paris") {
+        if (type == "applicationDetails" && metricsDataValue.name == this.state.sourceSite) {
           source.push(<option key={metricsDataValue.name} value={metricsDataValue.name} selected>{metricsDataValue.name}</option>);
         } else {
           source.push(<option key={metricsDataValue.name} value={metricsDataValue.name}>{metricsDataValue.name}</option>);
@@ -131,7 +132,7 @@ class Filter extends Component {
     for (let device = 0; device < metrics.length; device++) {
       for (let [metricsDataKey, metricsDataValue] of Object.entries(metrics[device])) {
         for (let [key, value] of Object.entries(metricsDataValue)) {
-          if (type == "applicationDetails" && key == "CPE_VES") {
+          if (type == "applicationDetails" && key == this.state.cpeValue) {
             cpe.push(<option key={key} value={key} selected>{key}</option>);
           } else {
             cpe.push(<option key={key} value={key}>{key}</option>);
@@ -232,7 +233,7 @@ class Filter extends Component {
 
         if (destination[i] != undefined && sitekey.indexOf(destination[i]) == -1) {
           sitekey.push(destination[i]);
-          if (type == "applicationDetails" && destination[i] == "Boston") {
+          if (type == "applicationDetails" && destination[i] == this.state.destinationSite) {
             siteName.push(<option key={destination[i]} value={destination[i]} selected>{destination[i]}</option>);
           } else {
             siteName.push(<option key={destination[i]} value={destination[i]}>{destination[i]}</option>);
@@ -323,7 +324,6 @@ class Filter extends Component {
     metrics = data["deviceData"]
     let deviceQuery;
     let cpe = this.state.cpe;
-    data["deviceList"] = metrics;
     let cpedata = {};
     for (let index = 0; index < metrics.length; index++) {
       for (let [key, value] of Object.entries(metrics[index])) {
@@ -332,6 +332,7 @@ class Filter extends Component {
     }
     metrics = [];
     metrics.push(cpedata);
+    data["deviceList"] = metrics;
     if (cpe == undefined || cpe == "" || cpe == "All CPE") {
       deviceQuery = 'deviceList[**][0][**].applications_details';
     } else {
@@ -342,7 +343,6 @@ class Filter extends Component {
     }).value;
     metrics = [];
     metrics = data["deviceList"]
-
     if (cpe == undefined || cpe == "" || cpe == "All Sites") {
       metrics = data["deviceList"]
     } else {
@@ -351,12 +351,13 @@ class Filter extends Component {
 
     let destination = this.state.destinationSite;
     for (let index = 0; index < metrics.length; index++) {
+      
       let sitename;
       for (let [linkKey, linkValue] of Object.entries(metrics[index])) {
         if (destination == undefined || destination == "" || destination == "All Sites") {
           if (linkKey != undefined && link.indexOf(linkKey) == -1) {
             link.push(linkKey);
-            if (type == "applicationDetails" && linkKey == "mpls") {
+            if (type == "applicationDetails" && linkKey == this.state.linkName) {
               linkName.push(<option key={linkKey} value={linkKey} selected>{linkKey}</option>);
             } else {
               linkName.push(<option key={linkKey} value={linkKey}>{linkKey}</option>);
@@ -366,12 +367,12 @@ class Filter extends Component {
           if (linkValue["destination"] == destination) {
             if (linkKey != undefined && link.indexOf(linkKey) == -1) {
               link.push(linkKey);
-              if (type == "applicationDetails" && linkKey == "mpls") {
+              if (type == "applicationDetails" && linkKey == this.state.linkName) {
                 linkName.push(<option key={linkKey} value={linkKey} selected>{linkKey}</option>);
               } else {
                 linkName.push(<option key={linkKey} value={linkKey} >{linkKey}</option>);
               }
-              
+
             }
           }
         }
@@ -687,6 +688,10 @@ class Filter extends Component {
   }
 
   changeSource(selectedSite) {
+    this.setState({ cpeValue: "All CPE" });
+    this.setState({ destinationSite: "All Sites" });
+    this.setState({ linkName: "All Links" });
+    this.setState({ sourceSite: "All Source" });
     this.setState({ sourceSite: selectedSite.target.value });
   }
 
