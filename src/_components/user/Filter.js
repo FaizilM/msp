@@ -18,13 +18,13 @@ class Filter extends Component {
       all_application: [],
       siteGroup: "",
       siteName: "",
-      linkName: "mpls",
-      cpeValue: "CPE_VES",
-      sourceSite: "Paris",
+      linkName: "",
+      cpeValue: "",
+      sourceSite: "",
       applicationName: "",
       duration: "HOUR",
       toFilter: "",
-      destinationSite: "Boston",
+      destinationSite: "",
       appFamilies: ""
     }
 
@@ -50,7 +50,6 @@ class Filter extends Component {
     this.changeAppFamily = this.changeAppFamily.bind(this);
     this.applicationDetailsFilter = this.applicationDetailsFilter.bind(this);
   }
-
   componentDidMount() {
 
     if (this.state.all_site.length == 0) {
@@ -65,6 +64,10 @@ class Filter extends Component {
       this.applicationsData();
     }
     if (this.props.type == "applicationDetails") {
+      this.setState({linkName: "mpls"});
+      this.setState({cpeValue: "CPE_VES"});
+      this.setState({sourceSite: "Paris"});
+      this.setState({destinationSite: "Boston"});
       this.applicationDetailsFilter();
     }
     
