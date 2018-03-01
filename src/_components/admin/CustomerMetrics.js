@@ -150,6 +150,13 @@ class CustomerMetrics extends Component {
     let content = document.querySelector("#customer_metrics_table > div > div > div.form-group > div.desc.col-sm-5.col-xs-12 > div").textContent;
     content = replace(content, new RegExp("totlas", "g"), "total");
     document.querySelector("#customer_metrics_table > div > div > div.form-group > div.desc.col-sm-5.col-xs-12 > div").textContent = content;
+
+    // let btn = document.querySelector("#customer_metrics_table > div > div > div >  div > input");
+    
+    let btns = document.querySelectorAll('#customer_metrics_table > div > div > div >  div > input')
+    for (var i=0;i<btns.length;i++) {
+      btns[i].setAttribute('class', "btn btn-primary")
+    }
   }
   render() {
     let time = this.props.currentTimeFrame;
