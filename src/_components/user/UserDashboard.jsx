@@ -70,9 +70,9 @@ class UserDashboard extends React.Component {
           </Row>
         </Tab>
         <Tab eventKey={3} title="Application Details">
-          <Row>
+      
             <Filter type="applicationDetails" />
-          </Row>
+        
         </Tab>
       </Tabs>
     );
